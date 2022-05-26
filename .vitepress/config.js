@@ -39,7 +39,17 @@ module.exports = {
 
     sidebar: {
       "/html/": "auto",
-      "/css": "auto",
+      "/css": [
+        {
+          text: "居中",
+          children: [
+            {
+              text: "水平居中",
+              link: "/css/center/horizontal-center",
+            },
+          ],
+        },
+      ],
       // catch-all fallback
       "/": [
         {

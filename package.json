@@ -10,8 +10,8 @@
     "chalk": "^4.1.0",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
-    "vitepress": "^0.22.3",
     "vite": "^2.9.1",
+    "vitepress": "^0.22.3",
     "vue": "^3.2.25",
     "yorkie": "^2.0.0"
   },
@@ -22,5 +22,8 @@
   },
   "gitHooks": {
     "commit-msg": "node scripts/verifyCommit.js"
+  },
+  "dependencies": {
+    "sass": "^1.52.1"
   }
 }
