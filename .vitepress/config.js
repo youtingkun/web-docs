@@ -24,11 +24,8 @@ module.exports = {
     editLinkText: "为此页提供修改建议",
 
     algolia: {
-      apiKey: "b573aa848fd57fb47d693b531297403c",
-      indexName: "vitejs",
-      searchParameters: {
-        facetFilters: ["tags:cn"],
-      },
+      apiKey: "d293244e6c37dfe8b5772dcd3bd10f6b",
+      indexName: "web-docs",
     },
 
     nav: [
