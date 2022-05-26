@@ -24,6 +24,7 @@ module.exports = {
     editLinkText: "为此页提供修改建议",
 
     algolia: {
+      appId: "LBJ38HU71U",
       apiKey: "d293244e6c37dfe8b5772dcd3bd10f6b",
       indexName: "web-docs",
     },
