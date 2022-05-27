@@ -9,10 +9,7 @@ module.exports = {
   title: "前端技术文档",
   lang: "zh-CN",
   description: "一些平时记的笔记",
-  head: [
-    ["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }],
-    ["script", { src: "https://cdn.wwads.cn/js/makemoney.js", async: "" }],
-  ],
+  head: [["link", { rel: "icon", type: "image/svg+xml", href: "/logo.svg" }]],
   vue: {
     reactivityTransform: true,
   },
