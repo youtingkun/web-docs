@@ -15,3 +15,4 @@ $ npm run dev
 ## todoList
 
 - [ ] 能够编辑代码并展现效果，可以使用自定义组件，传入代码字符串，参考:<https://github.com/mojs/mojs.github.io>和<https://github.com/andurils/vue-code-view/>。
+- [ ] 项目的 github-page 子目录配置

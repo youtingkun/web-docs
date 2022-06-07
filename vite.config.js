@@ -1,3 +1,3 @@
 export default {
-  hmr: { overlay: false }
-}
+  hmr: { overlay: false },
+};
