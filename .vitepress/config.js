@@ -42,10 +42,78 @@ module.exports = {
               text: "水平居中",
               link: "/css/center/horizontal-center",
             },
+            {
+              text: "垂直居中",
+              link: "/css/center/vertical-center",
+            },
+            {
+              text: "水平垂直居中",
+              link: "/css/center/horizontal-vertical-center",
+            },
+          ],
+        },
+        {
+          text: "display",
+          children: [
+            {
+              text: "行内元素与块元素",
+              link: "/css/display/block-inline",
+            },
+          ],
+        },
+        {
+          text: "postion",
+          children: [
+            {
+              text: "定位",
+              link: "/css/postion/postion",
+            },
+            {
+              text: "z-index",
+              link: "/css/postion/z-index",
+            },
+          ],
+        },
+        {
+          text: "select",
+          children: [
+            {
+              text: "选择器",
+              link: "/css/select/select",
+            },
+          ],
+        },
+        {
+          text: "动画",
+          children: [
+            {
+              text: "animation",
+              link: "/css/animation/animation",
+            },
+            {
+              text: "transition",
+              link: "/css/animation/transition",
+            },
+            {
+              text: "transform",
+              link: "/css/animation/transform",
+            },
+            {
+              text: "example",
+              link: "/css/animation/example",
+            },
+          ],
+        },
+        {
+          text: "canvas",
+          children: [
+            {
+              text: "canvas",
+              link: "/css/canvas/canvas",
+            },
           ],
         },
       ],
-      // catch-all fallback
       "/": [
         {
           text: "指引",
