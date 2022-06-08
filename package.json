@@ -24,6 +24,8 @@
     "commit-msg": "node scripts/verifyCommit.js"
   },
   "dependencies": {
-    "sass": "^1.52.1"
+    "@vue/repl": "^1.2.4",
+    "sass": "^1.52.1",
+    "vue-prism-editor": "^2.0.0-alpha.2"
   }
 }

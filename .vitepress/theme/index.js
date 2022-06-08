@@ -1,14 +1,11 @@
 import Theme from "vitepress/theme";
-import { h } from "vue";
-import SponsorsSidebar from "./SponsorsSidebar.vue";
+import VueCodeView from "./VueCodeView.vue";
 import "./custom.css";
 
 export default {
   ...Theme,
-  Layout() {
-    return h(Theme.Layout, null, {
-      "sidebar-bottom": () =>
-        h("div", { class: "sponsors sidebar" }, [h(SponsorsSidebar)]),
-    });
+  enhanceApp({ app }) {
+    // 注册全局组件
+    app.component("VueCodeView", VueCodeView);
   },
 };

@@ -59,6 +59,10 @@ module.exports = {
               text: "行内元素与块元素",
               link: "/css/display/block-inline",
             },
+            {
+              text: "flex",
+              link: "/css/display/flex",
+            },
           ],
         },
         {
