@@ -1,56 +1,56 @@
 <script lang="ts">
 // shared data across instances so we load only once
-let data = $ref<SponsorData>()
+let data = $ref<SponsorData>();
 
-const base = `https://sponsors.vuejs.org`
-const dataUrl = `${base}/vite.json`
+const base = `https://sponsors.vuejs.org`;
+const dataUrl = `${base}/vite.json`;
 </script>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted } from "vue";
 
 interface Sponsor {
-  url: string
-  img: string
-  name: string
+  url: string;
+  img: string;
+  name: string;
 }
 
 interface SponsorData {
-  special: Sponsor[]
-  platinum: Sponsor[]
-  platinum_china: Sponsor[]
-  gold: Sponsor[]
-  silver: Sponsor[]
-  bronze: Sponsor[]
+  special: Sponsor[];
+  platinum: Sponsor[];
+  platinum_china: Sponsor[];
+  gold: Sponsor[];
+  silver: Sponsor[];
+  bronze: Sponsor[];
 }
 
-const { tier, placement = 'aside' } = defineProps<{
-  tier: keyof SponsorData
-  placement?: 'aside' | 'page' | 'landing'
-}>()
+const { tier, placement = "aside" } = defineProps<{
+  tier: keyof SponsorData;
+  placement?: "aside" | "page" | "landing";
+}>();
 
-let container = $ref<HTMLElement>()
-let visible = $ref(false)
+let container = $ref<HTMLElement>();
+let visible = $ref(false);
 
 onMounted(async () => {
   // only render when entering view
   const observer = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
-        visible = true
-        observer.disconnect()
+        visible = true;
+        observer.disconnect();
       }
     },
-    { rootMargin: '0px 0px 300px 0px' }
-  )
-  observer.observe(container)
-  onUnmounted(() => observer.disconnect())
+    { rootMargin: "0px 0px 300px 0px" }
+  );
+  observer.observe(container);
+  onUnmounted(() => observer.disconnect());
 
   // load data
   if (!data) {
-    data = await (await fetch(dataUrl)).json()
+    data = await (await fetch(dataUrl)).json();
   }
-})
+});
 </script>
 
 <template>

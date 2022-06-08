@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a,a as n}from"./app.a3f54d8c.js";const m='{"title":"web docs","description":"","frontmatter":{},"headers":[{"level":2,"title":"todoList","slug":"todolist"}],"relativePath":"README.md"}',o={},s=n("",5),r=[s];function i(c,d,l,p,h,_){return t(),a("div",null,r)}var b=e(o,[["render",i]]);export{m as __pageData,b as default};

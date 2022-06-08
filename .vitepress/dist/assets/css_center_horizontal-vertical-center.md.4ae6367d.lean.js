@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as r}from"./app.a3f54d8c.js";const d='{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"css/center/horizontal-vertical-center.md"}',a={};function o(c,n,s,i,_,l){return t(),r("div")}var f=e(a,[["render",o]]);export{d as __pageData,f as default};

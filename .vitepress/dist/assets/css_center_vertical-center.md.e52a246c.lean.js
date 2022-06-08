@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as r,b as a}from"./app.a3f54d8c.js";const u='{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"css/center/vertical-center.md"}',c={},s=a("p",null,"\u5782\u76F4\u5C45\u4E2D",-1),o=[s];function n(_,i,l,d,p,f){return t(),r("div",null,o)}var h=e(c,[["render",n]]);export{u as __pageData,h as default};
