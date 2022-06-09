@@ -102,10 +102,6 @@ module.exports = {
               text: "transform",
               link: "/css/animation/transform",
             },
-            {
-              text: "example",
-              link: "/css/animation/example",
-            },
           ],
         },
         {

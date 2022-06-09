@@ -24,7 +24,10 @@
     "commit-msg": "node scripts/verifyCommit.js"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.5",
     "@vue/repl": "^1.2.4",
+    "element-plus": "^2.2.5",
+    "prismjs": "^1.28.0",
     "sass": "^1.52.1",
     "vue-prism-editor": "^2.0.0-alpha.2"
   }
