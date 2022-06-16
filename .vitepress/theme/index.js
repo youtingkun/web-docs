@@ -1,5 +1,6 @@
 import Theme from "vitepress/theme";
 import VueCodeView from "./VueCodeView.vue";
+import VpDemo from "./demo/vp-demo.vue";
 import "./custom.css";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
@@ -15,5 +16,6 @@ export default {
     }
     // 注册全局自定义组件
     app.component("VueCodeView", VueCodeView);
+    app.component("VpDemo", VpDemo);
   },
 };
