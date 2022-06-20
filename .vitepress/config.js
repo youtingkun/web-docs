@@ -122,23 +122,6 @@ module.exports = {
               text: "开始",
               link: "/javascript/",
             },
-            {
-              text: "为什么选 Vite",
-              link: "/javascript/why",
-            },
-            {
-              text: "功能",
-              link: "/javascript/features",
-            },
-          ],
-        },
-        {
-          text: "API",
-          children: [
-            {
-              text: "插件 API",
-              link: "/javascript/api-plugin",
-            },
           ],
         },
       ],
@@ -146,9 +129,9 @@ module.exports = {
   },
 
   markdown: {
-    anchor: {
-      renderPermalink: require("./render-perma-link"),
-    },
+    // anchor: {
+    //   renderPermalink: require("./render-perma-link"),
+    // },
     config: (md) => {
       md.use(require("./markdown-it-custom-anchor"));
     },
