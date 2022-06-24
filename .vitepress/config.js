@@ -30,7 +30,7 @@ module.exports = {
 
     nav: [
       { text: "javascript", link: "/javascript/" },
-      { text: "html", link: "/html/" },
+      { text: "html", link: "/html/element" },
       { text: "css", link: "/css/" },
     ],
     socialLinks: [{ icon: "github", link: pkg.repository }],
@@ -38,7 +38,7 @@ module.exports = {
     sidebar: {
       "/html": [
         {
-          text: "元素",
+          text: "基础",
           items: [
             {
               text: "基本元素",
@@ -48,23 +48,23 @@ module.exports = {
         },
       ],
       "/css": [
-        {
-          text: "居中",
-          items: [
-            {
-              text: "水平居中",
-              link: "/css/center/horizontal-center",
-            },
-            {
-              text: "垂直居中",
-              link: "/css/center/vertical-center",
-            },
-            {
-              text: "水平垂直居中",
-              link: "/css/center/horizontal-vertical-center",
-            },
-          ],
-        },
+        // {
+        //   text: "居中",
+        //   items: [
+        //     {
+        //       text: "水平居中",
+        //       link: "/css/center/horizontal-center",
+        //     },
+        //     {
+        //       text: "垂直居中",
+        //       link: "/css/center/vertical-center",
+        //     },
+        //     {
+        //       text: "水平垂直居中",
+        //       link: "/css/center/horizontal-vertical-center",
+        //     },
+        //   ],
+        // },
         {
           text: "display",
           items: [
@@ -82,28 +82,28 @@ module.exports = {
             },
           ],
         },
-        {
-          text: "postion",
-          items: [
-            {
-              text: "定位",
-              link: "/css/postion/postion",
-            },
-            {
-              text: "z-index",
-              link: "/css/postion/z-index",
-            },
-          ],
-        },
-        {
-          text: "select",
-          items: [
-            {
-              text: "选择器",
-              link: "/css/select/select",
-            },
-          ],
-        },
+        // {
+        //   text: "postion",
+        //   items: [
+        //     {
+        //       text: "定位",
+        //       link: "/css/postion/postion",
+        //     },
+        //     {
+        //       text: "z-index",
+        //       link: "/css/postion/z-index",
+        //     },
+        //   ],
+        // },
+        // {
+        //   text: "select",
+        //   items: [
+        //     {
+        //       text: "选择器",
+        //       link: "/css/select/select",
+        //     },
+        //   ],
+        // },
         {
           text: "动画",
           items: [
@@ -121,15 +121,15 @@ module.exports = {
             },
           ],
         },
-        {
-          text: "canvas",
-          items: [
-            {
-              text: "canvas",
-              link: "/css/canvas/canvas",
-            },
-          ],
-        },
+        // {
+        //   text: "canvas",
+        //   items: [
+        //     {
+        //       text: "canvas",
+        //       link: "/css/canvas/canvas",
+        //     },
+        //   ],
+        // },
       ],
       "/": [
         {
