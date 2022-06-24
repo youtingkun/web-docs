@@ -31,7 +31,7 @@ module.exports = {
     nav: [
       { text: "javascript", link: "/javascript/" },
       { text: "html", link: "/html/element" },
-      { text: "css", link: "/css/" },
+      { text: "css", link: "/css/display/block-inline" },
     ],
     socialLinks: [{ icon: "github", link: pkg.repository }],
 
