@@ -17,8 +17,10 @@ module.exports = {
     repo: pkg.repository,
     logo: "/logo.svg",
     docsBranch: "main",
-    editLinks: true,
-    editLinkText: "为此页提供修改建议",
+    editLink: {
+      pattern: `${pkg.repository}/edit/main/:path`,
+      text: "为此页提供修改建议",
+    },
 
     algolia: {
       appId: "LBJ38HU71U",
@@ -31,13 +33,24 @@ module.exports = {
       { text: "html", link: "/html/" },
       { text: "css", link: "/css/" },
     ],
+    socialLinks: [{ icon: "github", link: pkg.repository }],
 
     sidebar: {
-      "/html/": "auto",
+      "/html": [
+        {
+          text: "元素",
+          items: [
+            {
+              text: "基本元素",
+              link: "/html/element",
+            },
+          ],
+        },
+      ],
       "/css": [
         {
           text: "居中",
-          children: [
+          items: [
             {
               text: "水平居中",
               link: "/css/center/horizontal-center",
@@ -54,7 +67,7 @@ module.exports = {
         },
         {
           text: "display",
-          children: [
+          items: [
             {
               text: "行内元素与块元素",
               link: "/css/display/block-inline",
@@ -67,7 +80,7 @@ module.exports = {
         },
         {
           text: "postion",
-          children: [
+          items: [
             {
               text: "定位",
               link: "/css/postion/postion",
@@ -80,7 +93,7 @@ module.exports = {
         },
         {
           text: "select",
-          children: [
+          items: [
             {
               text: "选择器",
               link: "/css/select/select",
@@ -89,7 +102,7 @@ module.exports = {
         },
         {
           text: "动画",
-          children: [
+          items: [
             {
               text: "animation",
               link: "/css/animation/animation",
@@ -106,7 +119,7 @@ module.exports = {
         },
         {
           text: "canvas",
-          children: [
+          items: [
             {
               text: "canvas",
               link: "/css/canvas/canvas",
@@ -117,7 +130,7 @@ module.exports = {
       "/": [
         {
           text: "指引",
-          children: [
+          items: [
             {
               text: "开始",
               link: "/javascript/",
@@ -129,11 +142,8 @@ module.exports = {
   },
 
   markdown: {
-    // anchor: {
-    //   renderPermalink: require("./render-perma-link"),
+    // config: (md) => {
+    //   md.use(require("./markdown-it-custom-anchor"));
     // },
-    config: (md) => {
-      md.use(require("./markdown-it-custom-anchor"));
-    },
   },
 };

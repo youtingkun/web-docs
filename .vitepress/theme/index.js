@@ -1,5 +1,5 @@
 import Theme from "vitepress/theme";
-import VueCodeView from "./VueCodeView.vue";
+import VueCodeView from "./components/vue-code-view/index.vue";
 import "./custom.css";
 import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";

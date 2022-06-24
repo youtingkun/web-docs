@@ -1,8 +1,17 @@
 ---
-home: true
-heroImage: /logo.svg
-actionText: 开始
-actionLink: /javascript/
+layout: home
+
+title: web-docs
+titleTemplate: 前端技术的一些文档
+
+hero:
+  name: web-docs
+  text: 前端技术的一些文档
+  tagline: 包括javascript、html和css
+  actions:
+    - theme: brand
+      text: 开始
+      link: /javascript/
 
 features:
   - title: javascript
