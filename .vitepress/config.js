@@ -76,6 +76,10 @@ module.exports = {
               text: "flex",
               link: "/css/display/flex",
             },
+            {
+              text: "grid",
+              link: "/css/display/grid",
+            },
           ],
         },
         {
