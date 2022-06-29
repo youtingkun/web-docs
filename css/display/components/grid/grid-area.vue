@@ -23,12 +23,12 @@ export default {
       </div>
     </div>
     <div>
-      <span>从第二行,并跨越三行；从第二列开始，并跨越二列：</span>
+      <span>从第二行开始, 并跨越三行；从第一列开始，并跨越二列：</span>
       <pre>
-        <code >grid-area: 2 / 2 / span 3 / span 2;</code>
+        <code >grid-area: 2 / 1 / span 3 / span 2;</code>
       </pre>
       <div class="wrap">
-        <div class="item1">1</div>
+        <div class="item2">1</div>
         <div>2</div>
         <div>3</div>
         <div>4</div>
@@ -44,7 +44,7 @@ export default {
   grid-area: 2 / 2 / 5 /4;
 }
 .item2 {
-  grid-area: 2 / 2 / span 3 / span 2;
+  grid-area: 2 / 1 / span 3 / span 2;
 }
 .container {
   .wrap {
