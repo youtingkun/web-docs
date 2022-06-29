@@ -141,9 +141,5 @@ module.exports = {
     },
   },
 
-  markdown: {
-    // config: (md) => {
-    //   md.use(require("./markdown-it-custom-anchor"));
-    // },
-  },
+  markdown: {},
 };
