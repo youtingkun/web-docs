@@ -225,11 +225,6 @@ align-items: start | end | center | stretch(默认);
 
 `grid-row-start + grid-column-start + grid-row-end + grid-column-end` 的缩写
 
-```css
-/* 从第 2 行和第 1 列开始，并跨越 2 行 3列 */
-grid-area: 2 / 1 / span 2 / span 3;
-```
-
 <GridArea></GridArea>
 
 **grid-row:**
