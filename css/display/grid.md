@@ -216,7 +216,7 @@ align-items: start | end | center | stretch(默认);
 
 ## 子元素属性
 
-父元素属性主要分为两个个方面：
+子元素属性主要分为两个个方面：
 
 - 定义子元素的大小：grid-area：grid-row-start、grid-column-start、grid-row-end 和 grid-column-end。
 - 定义子元素的位置：justify-self 和 align-self。
