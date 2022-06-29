@@ -10,6 +10,9 @@ import GridJustifyContent from './components/grid/grid-justify-content.vue';
 import GridAlignContent from './components/grid/grid-align-content.vue';
 import GridJustifyItems from './components/grid/grid-justify-items.vue';
 import GridAlignItems from './components/grid/grid-align-items.vue';
+import GridAutoRows from './components/grid/grid-auto-rows.vue';
+import GridAutoColumns from './components/grid/grid-auto-columns.vue';
+import GridAutoFlow from './components/grid/grid-auto-flow.vue';
 </script>
 
 # Grid 布局
@@ -47,13 +50,14 @@ display: subgrid;
 
 ## 父元素属性
 
-父元素属性主要分为三方面：
+父元素属性主要分为四个方面：
 
 - 定义网格大小： grid-template: grid-template-rows、grid-template-columns 和 grid-template-areas。
-- 定义网格间距： grid-gap: column-gap(旧 grid-column-gap) 和 row-gap(旧 grid-row-gap)。
+- 定义网格间距： grid-gap: grid-row-gap 和 grid-column-gap。
 - 定义隐式网格的大小： grid-auto-rows、grid-auto-columns 和 grid-auto-flow。
+- 定义横纵方向的对齐方式：justify-content、align-content、justify-items 和 align-items。
 
-### 定义网格大小
+### 1. 定义网格大小
 
 **grid-template：**
 
@@ -121,7 +125,7 @@ HTML：
 
 <GridTemplateAreas></GridTemplateAreas>
 
-### 定义网格间距
+### 2. 定义网格间距
 
 **grid-gap:**
 
@@ -137,38 +141,33 @@ HTML：
 
 设置列间隔
 
-### 定义隐式网格的大小
+### 3. 定义隐式网格的大小
 
 隐式网格是指没有被声明的网格。
-
-**grid-auto-columns:**
-
-设置隐式网格列的大小
 
 **grid-auto-rows:**
 
 设置隐式网格行的大小
 
+<GridAutoRows></GridAutoRows>
+
+**grid-auto-columns:**
+
+设置隐式网格列的大小
+
+<GridAutoColumns></GridAutoColumns>
+
 **grid-auto-flow:**
 
-设置没有明确放置在网格上的元素的自动放置方法
+设置没有被声明在网格网格上的元素的自动放置方向
 
-```css
-/* 水平依次排列放置 */
-grid-auto-flow:row
-/* 垂直依次排列 */
-grid-auto-flow:column
-```
+<GridAutoFlow></GridAutoFlow>
 
-### 声明横纵方向的对齐方式
+### 4. 定义横纵方向的对齐方式
 
 **place-content:**
 
 `align-content + justify-content` 的缩写
-
-```css
-place-content: <align-content> <justify-content>;
-```
 
 **justify-content：**
 
@@ -193,11 +192,7 @@ start | center | end | space-between | space-evenly| space-around;
 
 **place-items:**
 
-align-items 和 justify-items 的简写
-
-```css
-place-items: <align-items> <justify-items>;
-```
+`align-items + justify-items`的缩写
 
 **justify-items：**
 
@@ -221,6 +216,13 @@ align-items: start | end | center | stretch(默认);
 
 ## 子元素属性
 
+父元素属性主要分为两个个方面：
+
+- 定义子元素的大小：grid-area：grid-row-start、grid-column-start、grid-row-end 和 grid-column-end。
+- 定义子元素的位置：justify-self 和 align-self。
+
+### 1. 定义子元素的大小
+
 **grid-area:**
 
 `grid-row-start + grid-column-start + grid-row-end + grid-column-end` 的缩写
@@ -239,9 +241,11 @@ align-items: start | end | center | stretch(默认);
 
 <GridColumn></GridColumn>
 
+### 2. 定义子元素的位置
+
 **justify-self:**
 
-设置当前元素在内部网格的水平位置
+单独设置当前元素在内部网格的水平位置
 
 ```css
 justify-self: start | end | center | stretch(默认);
@@ -249,7 +253,7 @@ justify-self: start | end | center | stretch(默认);
 
 **align-self:**
 
-设置当前元素在内部网格的垂直方向上的位置
+单独设置当前元素在内部网格的垂直方向上的位置
 
 ```css
 align-self: start | end | center | stretch(默认);
