@@ -1,15 +1,15 @@
 <script setup>
-import Flex from "./components/flex.vue";
-import FlexDirection from "./components/flex-direction.vue";
-import FlexWrap from './components/flex-wrap.vue';
-import FlexJustifyContent from './components/flex-justify-content.vue';
-import FlexAlignItems from './components/flex-align-items.vue';
-import FlexAlignContent from './components/flex-align-content.vue';
-import FlexGrow from './components/flex-grow.vue';
-import FlexShrink from './components/flex-shrink.vue';
-import FlexBasis from './components/flex-basis.vue';
-import FlexOrder from './components/flex-order.vue';
-import FlexAlignSelf from './components/flex-align-self.vue';
+import Flex from "./components/flex/flex.vue";
+import FlexDirection from "./components/flex/flex-direction.vue";
+import FlexWrap from './components/flex/flex-wrap.vue';
+import FlexJustifyContent from './components/flex/flex-justify-content.vue';
+import FlexAlignItems from './components/flex/flex-align-items.vue';
+import FlexAlignContent from './components/flex/flex-align-content.vue';
+import FlexGrow from './components/flex/flex-grow.vue';
+import FlexShrink from './components/flex/flex-shrink.vue';
+import FlexBasis from './components/flex/flex-basis.vue';
+import FlexOrder from './components/flex/flex-order.vue';
+import FlexAlignSelf from './components/flex/flex-align-self.vue';
 </script>
 
 # flex 布局

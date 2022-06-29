@@ -31,7 +31,7 @@ module.exports = {
     nav: [
       { text: "javascript", link: "/javascript/" },
       { text: "html", link: "/html/element" },
-      { text: "css", link: "/css/display/block-inline" },
+      { text: "css", link: "/css/display/flex" },
     ],
     socialLinks: [{ icon: "github", link: pkg.repository }],
 
@@ -68,10 +68,6 @@ module.exports = {
         {
           text: "display",
           items: [
-            {
-              text: "行内元素与块元素",
-              link: "/css/display/block-inline",
-            },
             {
               text: "flex",
               link: "/css/display/flex",
