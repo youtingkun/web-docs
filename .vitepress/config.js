@@ -23,9 +23,9 @@ module.exports = {
     },
 
     algolia: {
-      appId: "LBJ38HU71U",
-      apiKey: "d293244e6c37dfe8b5772dcd3bd10f6b",
-      indexName: "web-docs",
+      appId: "L21JB7PV84",
+      apiKey: "74fe6f48889f04d089bface916a4d50f",
+      indexName: "youtingkun",
     },
 
     nav: [
