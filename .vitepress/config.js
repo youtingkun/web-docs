@@ -91,15 +91,15 @@ module.exports = {
         //     },
         //   ],
         // },
-        // {
-        //   text: "select",
-        //   items: [
-        //     {
-        //       text: "选择器",
-        //       link: "/css/select/select",
-        //     },
-        //   ],
-        // },
+        {
+          text: "select",
+          items: [
+            {
+              text: "选择器",
+              link: "/css/select/select",
+            },
+          ],
+        },
         {
           text: "动画",
           items: [

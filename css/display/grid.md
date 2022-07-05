@@ -1,7 +1,7 @@
 <script setup>
 import GridTemplateRows from "./components/grid/grid-template-rows.vue"
 import GridTemplateColumns from "./components/grid/grid-template-columns.vue"
-import GridTemplateAreas from "./components/grid/grid-template-areas.vue"
+
 import GridColumn from './components/grid/grid-column.vue'
 import GridRow from './components/grid/grid-row.vue'
 import GridArea from './components/grid/grid-area.vue'
@@ -79,51 +79,11 @@ display: subgrid;
 
 网格区块 (grid areas) 和网格项 (grid item) 沒有关联，但是它们可以和一些网格定位属性关联起来，比如 grid-row-start， grid-row-end， grid-column-start 和 grid-column-end；
 
-父元素：
-
-```css
-grid-template-areas:
-  "header header header header header header"
-  "menu main main main right right"
-  "menu footer footer footer footer footer";
-/* 如果不占据某个位置可以用“ . ”代替。" . "表示没有设置名称的网格项 */
-```
-
-子元素：
-
-```css
-.item1 {
-  grid-area: header;
-}
-.item2 {
-  grid-area: menu;
-}
-.item3 {
-  grid-area: main;
-}
-.item4 {
-  grid-area: right;
-}
-.item5 {
-  grid-area: footer;
-}
-```
-
-HTML：
-
-```html
-<div class="grid-container">
-  <div class="item1">Header</div>
-  <div class="item2">Menu</div>
-  <div class="item3">Main</div>
-  <div class="item4">Right</div>
-  <div class="item5">Footer</div>
-</div>
-```
-
-效果为：
-
-<GridTemplateAreas></GridTemplateAreas>
+<iframe height="300" style="width: 100%;" scrolling="no" title="Untitled" src="https://codepen.io/youtingkun/embed/oNqgQzP?default-tab=html%2Cresult" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/youtingkun/pen/oNqgQzP">
+  Untitled</a> by youtingkun (<a href="https://codepen.io/youtingkun">@youtingkun</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
 
 ### 2. 定义网格间距
 
