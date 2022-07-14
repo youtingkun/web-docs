@@ -5,6 +5,7 @@ import htmlConfig from "./sidebar-config/html.js";
 import linuxConfig from "./sidebar-config/linux.js";
 import javaScriptConfig from "./sidebar-config/javascript.js";
 import cssConfig from "./sidebar-config/css.js";
+import reactConfig from "./sidebar-config/react.js";
 
 /**
  * @type {import('vitepress').UserConfig}
@@ -37,6 +38,7 @@ module.exports = {
       { text: "html", link: "/html/element" },
       { text: "css", link: "/css/display/flex" },
       { text: "linux", link: "/linux/" },
+      { text: "react", link: "/react/hooks/" },
     ],
     socialLinks: [{ icon: "github", link: pkg.repository }],
 
@@ -45,6 +47,7 @@ module.exports = {
       "/html": htmlConfig,
       "/css": cssConfig,
       "/javascript": javaScriptConfig,
+      "/react": reactConfig,
     },
   },
 
