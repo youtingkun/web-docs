@@ -19,21 +19,21 @@ react hook 是 React 16.8 的新增特性，让我们可以在不编写 class �
 
 **额外的有 10 个：**
 
-useReducer
-useCallback
-useMemo
-useRef
-useImperativeHandle
-useLayoutEffect
-useDebugValue
-useDeferredValue
-useTransition
-useId
+- useReducer
+- useCallback
+- useMemo
+- useRef
+- useImperativeHandle
+- useLayoutEffect
+- useDebugValue
+- useDeferredValue
+- useTransition
+- useId
 
 **Library Hooks 有两个：**
 
-useSyncExternalStore
-useInsertionEffect
+- useSyncExternalStore
+- useInsertionEffect
 
 ## hook 的使用规则
 
