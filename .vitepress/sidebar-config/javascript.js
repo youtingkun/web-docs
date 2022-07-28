@@ -14,6 +14,10 @@ const javascriptConfig = [
         text: "let和const",
         link: "/javascript/let-const",
       },
+      {
+        text: "解构赋值",
+        link: "/javascript/destructuring-assignment",
+      },
     ],
   },
 ];
