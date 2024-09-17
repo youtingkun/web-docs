@@ -29,7 +29,7 @@ export default {
 
     algolia: {
       appId: "L21JB7PV84",
-      apiKey: "74fe6f48889f04d089bface916a4d50f",
+      apiKey: "9f2d4a712485fa7ea26044037ba3d823",
       indexName: "youtingkun",
     },
 
