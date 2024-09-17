@@ -44,7 +44,7 @@ import {
   warning_filled_default,
   zoom_in_default,
   zoom_out_default
-} from "./chunk-V6V3FH2N.js";
+} from "./chunk-ISPC7H25.js";
 import {
   Comment,
   Fragment,
@@ -53,13 +53,10 @@ import {
   Text,
   Transition,
   TransitionGroup,
-  __commonJS,
-  __toESM,
   camelize,
   capitalize,
   cloneVNode,
   computed,
-  computed2,
   createApp,
   createBaseVNode,
   createBlock,
@@ -68,6 +65,7 @@ import {
   createSlots,
   createTextVNode,
   createVNode,
+  customRef,
   defineComponent,
   effectScope,
   getCurrentInstance,
@@ -92,6 +90,7 @@ import {
   normalizeClass,
   normalizeProps,
   normalizeStyle,
+  onActivated,
   onBeforeMount,
   onBeforeUnmount,
   onBeforeUpdate,
@@ -114,6 +113,7 @@ import {
   shallowReactive,
   shallowRef,
   toDisplayString,
+  toHandlerKey,
   toHandlers,
   toRaw,
   toRawType,
@@ -133,7 +133,11 @@ import {
   withDirectives,
   withKeys,
   withModifiers
-} from "./chunk-YW3LK4GH.js";
+} from "./chunk-E5E37HQ5.js";
+import {
+  __commonJS,
+  __toESM
+} from "./chunk-5WRI5ZAA.js";
 
 // node_modules/dayjs/dayjs.min.js
 var require_dayjs_min = __commonJS({
@@ -149,8 +153,7 @@ var require_dayjs_min = __commonJS({
         var e2 = -t2.utcOffset(), n2 = Math.abs(e2), r2 = Math.floor(n2 / 60), i2 = n2 % 60;
         return (e2 <= 0 ? "+" : "-") + m2(r2, 2, "0") + ":" + m2(i2, 2, "0");
       }, m: function t2(e2, n2) {
-        if (e2.date() < n2.date())
-          return -t2(n2, e2);
+        if (e2.date() < n2.date()) return -t2(n2, e2);
         var r2 = 12 * (n2.year() - e2.year()) + (n2.month() - e2.month()), i2 = e2.clone().add(r2, f2), s3 = n2 - i2 < 0, u3 = e2.clone().add(r2 + (s3 ? -1 : 1), f2);
         return +(-(r2 + (n2 - i2) / (s3 ? i2 - u3 : u3 - i2)) || 0);
       }, a: function(t2) {
@@ -165,22 +168,19 @@ var require_dayjs_min = __commonJS({
         return t2 instanceof _2;
       }, S2 = function t2(e2, n2, r2) {
         var i2;
-        if (!e2)
-          return v2;
+        if (!e2) return v2;
         if ("string" == typeof e2) {
           var s3 = e2.toLowerCase();
           D2[s3] && (i2 = s3), n2 && (D2[s3] = n2, i2 = s3);
           var u3 = e2.split("-");
-          if (!i2 && u3.length > 1)
-            return t2(u3[0]);
+          if (!i2 && u3.length > 1) return t2(u3[0]);
         } else {
           var a3 = e2.name;
           D2[a3] = e2, i2 = a3;
         }
         return !r2 && i2 && (v2 = i2), i2 || !r2 && v2;
       }, w2 = function(t2, e2) {
-        if (p2(t2))
-          return t2.clone();
+        if (p2(t2)) return t2.clone();
         var n2 = "object" == typeof e2 ? e2 : {};
         return n2.date = t2, n2.args = arguments, new _2(n2);
       }, O2 = g;
@@ -195,12 +195,9 @@ var require_dayjs_min = __commonJS({
         return m3.parse = function(t2) {
           this.$d = function(t3) {
             var e2 = t3.date, n2 = t3.utc;
-            if (null === e2)
-              return /* @__PURE__ */ new Date(NaN);
-            if (O2.u(e2))
-              return /* @__PURE__ */ new Date();
-            if (e2 instanceof Date)
-              return new Date(e2);
+            if (null === e2) return /* @__PURE__ */ new Date(NaN);
+            if (O2.u(e2)) return /* @__PURE__ */ new Date();
+            if (e2 instanceof Date) return new Date(e2);
             if ("string" == typeof e2 && !/Z$/i.test(e2)) {
               var r2 = e2.match(l2);
               if (r2) {
@@ -264,8 +261,7 @@ var require_dayjs_min = __commonJS({
           if (o3 === f2 || o3 === c2) {
             var y2 = this.clone().set(d2, 1);
             y2.$d[$2](l3), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
-          } else
-            $2 && this.$d[$2](l3);
+          } else $2 && this.$d[$2](l3);
           return this.init(), this;
         }, m3.set = function(t2, e2) {
           return this.clone().$set(t2, e2);
@@ -278,22 +274,17 @@ var require_dayjs_min = __commonJS({
             var e2 = w2($2);
             return O2.w(e2.date(e2.date() + Math.round(t2 * r2)), $2);
           };
-          if (l3 === f2)
-            return this.set(f2, this.$M + r2);
-          if (l3 === c2)
-            return this.set(c2, this.$y + r2);
-          if (l3 === a2)
-            return y2(1);
-          if (l3 === o2)
-            return y2(7);
+          if (l3 === f2) return this.set(f2, this.$M + r2);
+          if (l3 === c2) return this.set(c2, this.$y + r2);
+          if (l3 === a2) return y2(1);
+          if (l3 === o2) return y2(7);
           var M4 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i] = t, d3)[l3] || 1, m4 = this.$d.getTime() + r2 * M4;
           return O2.w(m4, this);
         }, m3.subtract = function(t2, e2) {
           return this.add(-1 * t2, e2);
         }, m3.format = function(t2) {
           var e2 = this, n2 = this.$locale();
-          if (!this.isValid())
-            return n2.invalidDate || $;
+          if (!this.isValid()) return n2.invalidDate || $;
           var r2 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i2 = O2.z(this), s3 = this.$H, u3 = this.$m, a3 = this.$M, o3 = n2.weekdays, f3 = n2.months, h4 = function(t3, n3, i3, s4) {
             return t3 && (t3[n3] || t3(e2, r2)) || i3[n3].slice(0, s4);
           }, c3 = function(t3) {
@@ -315,8 +306,7 @@ var require_dayjs_min = __commonJS({
         }, m3.$locale = function() {
           return D2[this.$L];
         }, m3.locale = function(t2, e2) {
-          if (!t2)
-            return this.$L;
+          if (!t2) return this.$L;
           var n2 = this.clone(), r2 = S2(t2, e2, true);
           return r2 && (n2.$L = r2), n2;
         }, m3.clone = function() {
@@ -360,10 +350,8 @@ var require_customParseFormat = __commonJS({
         };
       }, f2 = [/[+-]\d\d:?(\d\d)?|Z/, function(e2) {
         (this.zone || (this.zone = {})).offset = function(e3) {
-          if (!e3)
-            return 0;
-          if ("Z" === e3)
-            return 0;
+          if (!e3) return 0;
+          if ("Z" === e3) return 0;
           var t2 = e3.match(/([+-]|\d\d)/g), n2 = 60 * t2[1] + (+t2[2] || 0);
           return 0 === n2 ? 0 : "+" === t2[0] ? -n2 : n2;
         }(e2);
@@ -373,13 +361,11 @@ var require_customParseFormat = __commonJS({
       }, u2 = function(e2, t2) {
         var n2, r2 = o2.meridiem;
         if (r2) {
-          for (var i2 = 1; i2 <= 24; i2 += 1)
-            if (e2.indexOf(r2(i2, 0, t2)) > -1) {
-              n2 = i2 > 12;
-              break;
-            }
-        } else
-          n2 = e2 === (t2 ? "pm" : "PM");
+          for (var i2 = 1; i2 <= 24; i2 += 1) if (e2.indexOf(r2(i2, 0, t2)) > -1) {
+            n2 = i2 > 12;
+            break;
+          }
+        } else n2 = e2 === (t2 ? "pm" : "PM");
         return n2;
       }, d2 = { A: [i, function(e2) {
         this.afternoon = u2(e2, false);
@@ -393,20 +379,16 @@ var require_customParseFormat = __commonJS({
         this.milliseconds = +e2;
       }], s: [r, a2("seconds")], ss: [r, a2("seconds")], m: [r, a2("minutes")], mm: [r, a2("minutes")], H: [r, a2("hours")], h: [r, a2("hours")], HH: [r, a2("hours")], hh: [r, a2("hours")], D: [r, a2("day")], DD: [n, a2("day")], Do: [i, function(e2) {
         var t2 = o2.ordinal, n2 = e2.match(/\d+/);
-        if (this.day = n2[0], t2)
-          for (var r2 = 1; r2 <= 31; r2 += 1)
-            t2(r2).replace(/\[|\]/g, "") === e2 && (this.day = r2);
+        if (this.day = n2[0], t2) for (var r2 = 1; r2 <= 31; r2 += 1) t2(r2).replace(/\[|\]/g, "") === e2 && (this.day = r2);
       }], M: [r, a2("month")], MM: [n, a2("month")], MMM: [i, function(e2) {
         var t2 = h3("months"), n2 = (h3("monthsShort") || t2.map(function(e3) {
           return e3.slice(0, 3);
         })).indexOf(e2) + 1;
-        if (n2 < 1)
-          throw new Error();
+        if (n2 < 1) throw new Error();
         this.month = n2 % 12 || n2;
       }], MMMM: [i, function(e2) {
         var t2 = h3("months").indexOf(e2) + 1;
-        if (t2 < 1)
-          throw new Error();
+        if (t2 < 1) throw new Error();
         this.month = t2 % 12 || t2;
       }], Y: [/[+-]?\d+/, a2("year")], YY: [n, function(e2) {
         this.year = s2(e2);
@@ -426,8 +408,7 @@ var require_customParseFormat = __commonJS({
         return function(e2) {
           for (var t2 = {}, n3 = 0, r3 = 0; n3 < a3; n3 += 1) {
             var i3 = s3[n3];
-            if ("string" == typeof i3)
-              r3 += i3.length;
+            if ("string" == typeof i3) r3 += i3.length;
             else {
               var o3 = i3.regex, f4 = i3.parser, h5 = e2.slice(r3), u4 = o3.exec(h5)[0];
               f4.call(t2, u4), e2 = e2.replace(u4, "");
@@ -453,8 +434,7 @@ var require_customParseFormat = __commonJS({
             var f3 = true === s3[2], h4 = true === s3[3], u3 = f3 || h4, d3 = s3[2];
             h4 && (d3 = s3[2]), o2 = this.$locale(), !f3 && d3 && (o2 = n2.Ls[d3]), this.$d = function(e4, t4, n3) {
               try {
-                if (["x", "X"].indexOf(t4) > -1)
-                  return new Date(("X" === t4 ? 1e3 : 1) * e4);
+                if (["x", "X"].indexOf(t4) > -1) return new Date(("X" === t4 ? 1e3 : 1) * e4);
                 var r4 = c2(t4)(e4), i3 = r4.year, o3 = r4.month, s4 = r4.day, a4 = r4.hours, f4 = r4.minutes, h5 = r4.seconds, u4 = r4.milliseconds, d4 = r4.zone, l3 = /* @__PURE__ */ new Date(), m3 = s4 || (i3 || o3 ? 1 : l3.getDate()), M3 = i3 || l3.getFullYear(), Y2 = 0;
                 i3 && !o3 || (Y2 = o3 > 0 ? o3 - 1 : l3.getMonth());
                 var p2 = a4 || 0, v2 = f4 || 0, D2 = h5 || 0, g = u4 || 0;
@@ -463,18 +443,16 @@ var require_customParseFormat = __commonJS({
                 return /* @__PURE__ */ new Date("");
               }
             }(t3, a3, r3), this.init(), d3 && true !== d3 && (this.$L = this.locale(d3).$L), u3 && t3 != this.format(a3) && (this.$d = /* @__PURE__ */ new Date("")), o2 = {};
-          } else if (a3 instanceof Array)
-            for (var l2 = a3.length, m2 = 1; m2 <= l2; m2 += 1) {
-              s3[1] = a3[m2 - 1];
-              var M2 = n2.apply(this, s3);
-              if (M2.isValid()) {
-                this.$d = M2.$d, this.$L = M2.$L, this.init();
-                break;
-              }
-              m2 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
+          } else if (a3 instanceof Array) for (var l2 = a3.length, m2 = 1; m2 <= l2; m2 += 1) {
+            s3[1] = a3[m2 - 1];
+            var M2 = n2.apply(this, s3);
+            if (M2.isValid()) {
+              this.$d = M2.$d, this.$L = M2.$L, this.init();
+              break;
             }
-          else
-            i2.call(this, e3);
+            m2 === l2 && (this.$d = /* @__PURE__ */ new Date(""));
+          }
+          else i2.call(this, e3);
         };
       };
     });
@@ -495,8 +473,7 @@ var require_localeData = __commonJS({
           var i2 = n2.name ? n2 : n2.$locale(), a3 = o2(i2[e2]), s3 = o2(i2[t2]), f2 = a3 || s3.map(function(n3) {
             return n3.slice(0, r2);
           });
-          if (!u3)
-            return f2;
+          if (!u3) return f2;
           var d2 = i2.weekStart;
           return f2.map(function(n3, e3) {
             return f2[(e3 + (d2 || 0)) % 7];
@@ -576,8 +553,7 @@ var require_advancedFormat = __commonJS({
           return "[" + e2 + (t2[(r2 - 20) % 10] || t2[r2] || t2[0]) + "]";
         }, n.format = function(e2) {
           var t2 = this, r2 = this.$locale();
-          if (!this.isValid())
-            return s2.bind(this)(e2);
+          if (!this.isValid()) return s2.bind(this)(e2);
           var n2 = this.$utils(), a2 = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
             switch (e3) {
               case "Q":
@@ -629,13 +605,11 @@ var require_weekOfYear = __commonJS({
       return function(i, n, r) {
         var f2 = n.prototype;
         f2.week = function(i2) {
-          if (void 0 === i2 && (i2 = null), null !== i2)
-            return this.add(7 * (i2 - this.week()), "day");
+          if (void 0 === i2 && (i2 = null), null !== i2) return this.add(7 * (i2 - this.week()), "day");
           var n2 = this.$locale().yearStart || 1;
           if (11 === this.month() && this.date() > 25) {
             var f3 = r(this).startOf(t).add(1, t).date(n2), s2 = r(this).endOf(e);
-            if (f3.isBefore(s2))
-              return 1;
+            if (f3.isBefore(s2)) return 1;
           }
           var a2 = r(this).startOf(t).date(n2).startOf(e).subtract(1, "millisecond"), o2 = this.diff(a2, e, true);
           return o2 < 0 ? r(this).startOf("week").week() : Math.ceil(o2);
@@ -718,8 +692,8 @@ var FOCUSABLE_ELEMENT_SELECTORS = `a[href],button:not([disabled]),button:not([hi
 var isVisible = (element) => {
   if (false)
     return true;
-  const computed3 = getComputedStyle(element);
-  return computed3.position === "fixed" ? false : element.offsetParent !== null;
+  const computed2 = getComputedStyle(element);
+  return computed2.position === "fixed" ? false : element.offsetParent !== null;
 };
 var obtainAllFocusableElements = (element) => {
   return Array.from(element.querySelectorAll(FOCUSABLE_ELEMENT_SELECTORS)).filter((item) => isFocusable(item) && isVisible(item));
@@ -931,6 +905,39 @@ function throttleFilter(ms, trailing = true, leading = true, rejectOnCancel = fa
 function identity(arg) {
   return arg;
 }
+function computedWithControl(source, fn2) {
+  let v2 = void 0;
+  let track;
+  let trigger;
+  const dirty = ref(true);
+  const update2 = () => {
+    dirty.value = true;
+    trigger();
+  };
+  watch(source, update2, { flush: "sync" });
+  const get2 = isFunction2(fn2) ? fn2 : fn2.get;
+  const set3 = isFunction2(fn2) ? void 0 : fn2.set;
+  const result2 = customRef((_track, _trigger) => {
+    track = _track;
+    trigger = _trigger;
+    return {
+      get() {
+        if (dirty.value) {
+          v2 = get2();
+          dirty.value = false;
+        }
+        track();
+        return v2;
+      },
+      set(v22) {
+        set3 == null ? void 0 : set3(v22);
+      }
+    };
+  });
+  if (Object.isExtensible(result2))
+    result2.trigger = update2;
+  return result2;
+}
 function tryOnScopeDispose(fn2) {
   if (getCurrentScope()) {
     onScopeDispose(fn2);
@@ -1098,6 +1105,21 @@ function onClickOutside(target2, handler, options = {}) {
   const stop = () => cleanup.forEach((fn2) => fn2());
   return stop;
 }
+function useActiveElement(options = {}) {
+  var _a2;
+  const { window: window2 = defaultWindow } = options;
+  const document2 = (_a2 = options.document) != null ? _a2 : window2 == null ? void 0 : window2.document;
+  const activeElement = computedWithControl(() => null, () => document2 == null ? void 0 : document2.activeElement);
+  if (window2) {
+    useEventListener(window2, "blur", (event) => {
+      if (event.relatedTarget !== null)
+        return;
+      activeElement.trigger();
+    }, true);
+    useEventListener(window2, "focus", activeElement.trigger, true);
+  }
+  return activeElement;
+}
 function useSupported(callback, sync = false) {
   const isSupported = ref();
   const update2 = () => isSupported.value = Boolean(callback());
@@ -1114,7 +1136,7 @@ _global[globalKey] = _global[globalKey] || {};
 var handlers = _global[globalKey];
 function useCssVar(prop, target2, { window: window2 = defaultWindow, initialValue = "" } = {}) {
   const variable = ref(initialValue);
-  const elRef = computed2(() => {
+  const elRef = computed(() => {
     var _a2;
     return unrefElement(target2) || ((_a2 = window2 == null ? void 0 : window2.document) == null ? void 0 : _a2.documentElement);
   });
@@ -1388,7 +1410,7 @@ function useVModel(props, key, emit, options = {}) {
     }, { deep });
     return proxy;
   } else {
-    return computed2({
+    return computed({
       get() {
         return getValue3();
       },
@@ -5384,17 +5406,17 @@ function baseDifference(array4, values2, iteratee2, comparator) {
   }
   outer:
     while (++index < length) {
-      var value = array4[index], computed3 = iteratee2 == null ? value : iteratee2(value);
+      var value = array4[index], computed2 = iteratee2 == null ? value : iteratee2(value);
       value = comparator || value !== 0 ? value : 0;
-      if (isCommon && computed3 === computed3) {
+      if (isCommon && computed2 === computed2) {
         var valuesIndex = valuesLength;
         while (valuesIndex--) {
-          if (values2[valuesIndex] === computed3) {
+          if (values2[valuesIndex] === computed2) {
             continue outer;
           }
         }
         result2.push(value);
-      } else if (!includes2(values2, computed3, comparator)) {
+      } else if (!includes2(values2, computed2, comparator)) {
         result2.push(value);
       }
     }
@@ -6119,18 +6141,18 @@ function baseIntersection(arrays, iteratee2, comparator) {
   var index = -1, seen = caches[0];
   outer:
     while (++index < length && result2.length < maxLength) {
-      var value = array4[index], computed3 = iteratee2 ? iteratee2(value) : value;
+      var value = array4[index], computed2 = iteratee2 ? iteratee2(value) : value;
       value = comparator || value !== 0 ? value : 0;
-      if (!(seen ? cacheHas_default(seen, computed3) : includes2(result2, computed3, comparator))) {
+      if (!(seen ? cacheHas_default(seen, computed2) : includes2(result2, computed2, comparator))) {
         othIndex = othLength;
         while (--othIndex) {
           var cache2 = caches[othIndex];
-          if (!(cache2 ? cacheHas_default(cache2, computed3) : includes2(arrays[othIndex], computed3, comparator))) {
+          if (!(cache2 ? cacheHas_default(cache2, computed2) : includes2(arrays[othIndex], computed2, comparator))) {
             continue outer;
           }
         }
         if (seen) {
-          seen.push(computed3);
+          seen.push(computed2);
         }
         result2.push(value);
       }
@@ -6554,8 +6576,8 @@ function baseExtremum(array4, iteratee2, comparator) {
   var index = -1, length = array4.length;
   while (++index < length) {
     var value = array4[index], current = iteratee2(value);
-    if (current != null && (computed3 === void 0 ? current === current && !isSymbol_default(current) : comparator(current, computed3))) {
-      var computed3 = current, result2 = value;
+    if (current != null && (computed2 === void 0 ? current === current && !isSymbol_default(current) : comparator(current, computed2))) {
+      var computed2 = current, result2 = value;
     }
   }
   return result2;
@@ -7211,8 +7233,8 @@ function basePullAll(array4, values2, iteratee2, comparator) {
     seen = arrayMap_default(array4, baseUnary_default(iteratee2));
   }
   while (++index < length) {
-    var fromIndex = 0, value = values2[index], computed3 = iteratee2 ? iteratee2(value) : value;
-    while ((fromIndex = indexOf2(seen, computed3, fromIndex, comparator)) > -1) {
+    var fromIndex = 0, value = values2[index], computed2 = iteratee2 ? iteratee2(value) : value;
+    while ((fromIndex = indexOf2(seen, computed2, fromIndex, comparator)) > -1) {
       if (seen !== array4) {
         splice2.call(seen, fromIndex, 1);
       }
@@ -7677,7 +7699,7 @@ function baseSortedIndexBy(array4, value, iteratee2, retHighest) {
   value = iteratee2(value);
   var valIsNaN = value !== value, valIsNull = value === null, valIsSymbol = isSymbol_default(value), valIsUndefined = value === void 0;
   while (low < high) {
-    var mid = nativeFloor4((low + high) / 2), computed3 = iteratee2(array4[mid]), othIsDefined = computed3 !== void 0, othIsNull = computed3 === null, othIsReflexive = computed3 === computed3, othIsSymbol = isSymbol_default(computed3);
+    var mid = nativeFloor4((low + high) / 2), computed2 = iteratee2(array4[mid]), othIsDefined = computed2 !== void 0, othIsNull = computed2 === null, othIsReflexive = computed2 === computed2, othIsSymbol = isSymbol_default(computed2);
     if (valIsNaN) {
       var setLow = retHighest || othIsReflexive;
     } else if (valIsUndefined) {
@@ -7689,7 +7711,7 @@ function baseSortedIndexBy(array4, value, iteratee2, retHighest) {
     } else if (othIsNull || othIsSymbol) {
       setLow = false;
     } else {
-      setLow = retHighest ? computed3 <= value : computed3 < value;
+      setLow = retHighest ? computed2 <= value : computed2 < value;
     }
     if (setLow) {
       low = mid + 1;
@@ -7708,8 +7730,8 @@ function baseSortedIndex(array4, value, retHighest) {
   var low = 0, high = array4 == null ? low : array4.length;
   if (typeof value == "number" && value === value && high <= HALF_MAX_ARRAY_LENGTH) {
     while (low < high) {
-      var mid = low + high >>> 1, computed3 = array4[mid];
-      if (computed3 !== null && !isSymbol_default(computed3) && (retHighest ? computed3 <= value : computed3 < value)) {
+      var mid = low + high >>> 1, computed2 = array4[mid];
+      if (computed2 !== null && !isSymbol_default(computed2) && (retHighest ? computed2 <= value : computed2 < value)) {
         low = mid + 1;
       } else {
         high = mid;
@@ -7775,9 +7797,9 @@ var sortedLastIndexOf_default = sortedLastIndexOf;
 function baseSortedUniq(array4, iteratee2) {
   var index = -1, length = array4.length, resIndex = 0, result2 = [];
   while (++index < length) {
-    var value = array4[index], computed3 = iteratee2 ? iteratee2(value) : value;
-    if (!index || !eq_default(computed3, seen)) {
-      var seen = computed3;
+    var value = array4[index], computed2 = iteratee2 ? iteratee2(value) : value;
+    if (!index || !eq_default(computed2, seen)) {
+      var seen = computed2;
       result2[resIndex++] = value === 0 ? 0 : value;
     }
   }
@@ -8367,22 +8389,22 @@ function baseUniq(array4, iteratee2, comparator) {
   }
   outer:
     while (++index < length) {
-      var value = array4[index], computed3 = iteratee2 ? iteratee2(value) : value;
+      var value = array4[index], computed2 = iteratee2 ? iteratee2(value) : value;
       value = comparator || value !== 0 ? value : 0;
-      if (isCommon && computed3 === computed3) {
+      if (isCommon && computed2 === computed2) {
         var seenIndex = seen.length;
         while (seenIndex--) {
-          if (seen[seenIndex] === computed3) {
+          if (seen[seenIndex] === computed2) {
             continue outer;
           }
         }
         if (iteratee2) {
-          seen.push(computed3);
+          seen.push(computed2);
         }
         result2.push(value);
-      } else if (!includes2(seen, computed3, comparator)) {
+      } else if (!includes2(seen, computed2, comparator)) {
         if (seen !== result2) {
-          seen.push(computed3);
+          seen.push(computed2);
         }
         result2.push(value);
       }
@@ -9079,10 +9101,10 @@ function lazyValue() {
       index += dir;
       var iterIndex = -1, value = array4[index];
       while (++iterIndex < iterLength) {
-        var data = iteratees[iterIndex], iteratee2 = data.iteratee, type4 = data.type, computed3 = iteratee2(value);
+        var data = iteratees[iterIndex], iteratee2 = data.iteratee, type4 = data.type, computed2 = iteratee2(value);
         if (type4 == LAZY_MAP_FLAG) {
-          value = computed3;
-        } else if (!computed3) {
+          value = computed2;
+        } else if (!computed2) {
           if (type4 == LAZY_FILTER_FLAG) {
             continue outer;
           } else {
@@ -9687,8 +9709,8 @@ var getStyle = (element, styleName) => {
     const style = element.style[key];
     if (style)
       return style;
-    const computed3 = (_a2 = document.defaultView) == null ? void 0 : _a2.getComputedStyle(element, "");
-    return computed3 ? computed3[key] : "";
+    const computed2 = (_a2 = document.defaultView) == null ? void 0 : _a2.getComputedStyle(element, "");
+    return computed2 ? computed2[key] : "";
   } catch (e) {
     return element.style[key];
   }
@@ -9834,8 +9856,10 @@ function createGlobalNode(id) {
   if (id !== void 0) {
     el.setAttribute("id", id);
   }
-  target.appendChild(el);
-  globalNodes.push(el);
+  if (target) {
+    target.appendChild(el);
+    globalNodes.push(el);
+  }
   return el;
 }
 function removeGlobalNode(el) {
@@ -9987,13 +10011,15 @@ var datePickTypes = [
   "year",
   "years",
   "month",
+  "months",
   "date",
   "dates",
   "week",
   "datetime",
   "datetimerange",
   "daterange",
-  "monthrange"
+  "monthrange",
+  "yearrange"
 ];
 var WEEK_DAYS = [
   "sun",
@@ -10132,15 +10158,15 @@ var DEFAULT_EXCLUDE_KEYS = ["class", "style"];
 var LISTENER_PREFIX = /^on[A-Z]/;
 var useAttrs2 = (params = {}) => {
   const { excludeListeners = false, excludeKeys } = params;
-  const allExcludeKeys = computed2(() => {
+  const allExcludeKeys = computed(() => {
     return ((excludeKeys == null ? void 0 : excludeKeys.value) || []).concat(DEFAULT_EXCLUDE_KEYS);
   });
   const instance = getCurrentInstance();
   if (!instance) {
     debugWarn("use-attrs", "getCurrentInstance() returned null. useAttrs() must be called at the top of a setup function");
-    return computed2(() => ({}));
+    return computed(() => ({}));
   }
-  return computed2(() => {
+  return computed(() => {
     var _a2;
     return fromPairs_default(Object.entries((_a2 = instance.proxy) == null ? void 0 : _a2.$attrs).filter(([key]) => !allExcludeKeys.value.includes(key) && !(excludeListeners && LISTENER_PREFIX.test(key))));
   });
@@ -10212,6 +10238,15 @@ var useDraggable = (targetRef, dragRef, draggable2, overflow) => {
       dragRef.value.removeEventListener("mousedown", onMousedown);
     }
   };
+  const resetPosition = () => {
+    transform2 = {
+      offsetX: 0,
+      offsetY: 0
+    };
+    if (targetRef.value) {
+      targetRef.value.style.transform = "none";
+    }
+  };
   onMounted(() => {
     watchEffect(() => {
       if (draggable2.value) {
@@ -10224,6 +10259,9 @@ var useDraggable = (targetRef, dragRef, draggable2, overflow) => {
   onBeforeUnmount(() => {
     offDraggable();
   });
+  return {
+    resetPosition
+  };
 };
 
 // node_modules/element-plus/es/hooks/use-focus/index.mjs
@@ -10247,7 +10285,8 @@ var English = {
       confirm: "OK",
       clear: "Clear",
       defaultLabel: "color picker",
-      description: "current color is {color}. press enter to select a new color."
+      description: "current color is {color}. press enter to select a new color.",
+      alphaLabel: "pick alpha value"
     },
     datepicker: {
       now: "Now",
@@ -10325,6 +10364,9 @@ var English = {
       noMatch: "No matching data",
       noData: "No data",
       placeholder: "Select"
+    },
+    mention: {
+      loading: "Loading"
     },
     dropdown: {
       toggleDropdown: "Toggle Dropdown"
@@ -10420,7 +10462,7 @@ var translate = (path, option, locale) => get_default(locale, path, path).replac
   return `${(_a2 = option == null ? void 0 : option[key]) != null ? _a2 : `{${key}}`}`;
 });
 var buildLocaleContext = (locale) => {
-  const lang = computed2(() => unref(locale).name);
+  const lang = computed(() => unref(locale).name);
   const localeRef = isRef(locale) ? locale : ref(locale);
   return {
     lang,
@@ -10431,7 +10473,7 @@ var buildLocaleContext = (locale) => {
 var localeContextKey = Symbol("localeContextKey");
 var useLocale = (localeOverrides) => {
   const locale = localeOverrides || inject(localeContextKey, ref());
-  return buildLocaleContext(computed2(() => locale.value || English));
+  return buildLocaleContext(computed(() => locale.value || English));
 };
 
 // node_modules/element-plus/es/hooks/use-namespace/index.mjs
@@ -10453,7 +10495,7 @@ var _bem = (namespace, block, blockSuffix, element, modifier) => {
 var namespaceContextKey = Symbol("namespaceContextKey");
 var useGetDerivedNamespace = (namespaceOverrides) => {
   const derivedNamespace = namespaceOverrides || (getCurrentInstance() ? inject(namespaceContextKey, ref(defaultNamespace)) : ref(defaultNamespace));
-  const namespace = computed2(() => {
+  const namespace = computed(() => {
     return unref(derivedNamespace) || defaultNamespace;
   });
   return namespace;
@@ -10599,8 +10641,8 @@ var createModelToggleComposable = (name) => {
     const instance = getCurrentInstance();
     const { emit } = instance;
     const props = instance.props;
-    const hasUpdateHandler = computed2(() => isFunction(props[updateEventKeyRaw2]));
-    const isModelBindingAbsent = computed2(() => props[name] === null);
+    const hasUpdateHandler = computed(() => isFunction(props[updateEventKeyRaw2]));
+    const isModelBindingAbsent = computed(() => props[name] === null);
     const doShow = (event) => {
       if (indicator.value === true) {
         return;
@@ -10716,7 +10758,7 @@ var usePreventGlobal = (indicator, evt, cb) => {
 // node_modules/element-plus/es/hooks/use-prop/index.mjs
 var useProp = (name) => {
   const vm = getCurrentInstance();
-  return computed2(() => {
+  return computed(() => {
     var _a2, _b;
     return (_b = (_a2 = vm == null ? void 0 : vm.proxy) == null ? void 0 : _a2.$props) == null ? void 0 : _b[name];
   });
@@ -10755,8 +10797,7 @@ function C(t) {
   return t ? (t.nodeName || "").toLowerCase() : null;
 }
 function H(t) {
-  if (t == null)
-    return window;
+  if (t == null) return window;
   if (t.toString() !== "[object Window]") {
     var e = t.ownerDocument;
     return e && e.defaultView || window;
@@ -10772,8 +10813,7 @@ function B(t) {
   return t instanceof e || t instanceof HTMLElement;
 }
 function Pe(t) {
-  if (typeof ShadowRoot == "undefined")
-    return false;
+  if (typeof ShadowRoot == "undefined") return false;
   var e = H(t).ShadowRoot;
   return t instanceof e || t instanceof ShadowRoot;
 }
@@ -10822,13 +10862,11 @@ function ke(t) {
 }
 function it(t, e) {
   var n = e.getRootNode && e.getRootNode();
-  if (t.contains(e))
-    return true;
+  if (t.contains(e)) return true;
   if (n && Pe(n)) {
     var r = e;
     do {
-      if (r && t.isSameNode(r))
-        return true;
+      if (r && t.isSameNode(r)) return true;
       r = r.parentNode || r.host;
     } while (r);
   }
@@ -10853,21 +10891,18 @@ function Bt(t) {
   var e = navigator.userAgent.toLowerCase().indexOf("firefox") !== -1, n = navigator.userAgent.indexOf("Trident") !== -1;
   if (n && B(t)) {
     var r = N(t);
-    if (r.position === "fixed")
-      return null;
+    if (r.position === "fixed") return null;
   }
   var o2 = ge(t);
   for (Pe(o2) && (o2 = o2.host); B(o2) && ["html", "body"].indexOf(C(o2)) < 0; ) {
     var i = N(o2);
-    if (i.transform !== "none" || i.perspective !== "none" || i.contain === "paint" || ["transform", "perspective"].indexOf(i.willChange) !== -1 || e && i.willChange === "filter" || e && i.filter && i.filter !== "none")
-      return o2;
+    if (i.transform !== "none" || i.perspective !== "none" || i.contain === "paint" || ["transform", "perspective"].indexOf(i.willChange) !== -1 || e && i.willChange === "filter" || e && i.filter && i.filter !== "none") return o2;
     o2 = o2.parentNode;
   }
   return null;
 }
 function se(t) {
-  for (var e = H(t), n = at2(t); n && Wt(n) && N(n).position === "static"; )
-    n = at2(n);
+  for (var e = H(t), n = at2(t); n && Wt(n) && N(n).position === "static"; ) n = at2(n);
   return n && (C(n) === "html" || C(n) === "body" && N(n).position === "static") ? e : n || Bt(t) || e;
 }
 function Le(t) {
@@ -11079,8 +11114,7 @@ function Jt(t, e) {
   });
 }
 function Kt(t) {
-  if (q(t) === me)
-    return [];
+  if (q(t) === me) return [];
   var e = be(t);
   return [lt2(t), e, lt2(e)];
 }
@@ -11101,22 +11135,18 @@ function Qt(t) {
       }
       O2.set(D2, _2);
     }
-    if (j)
-      for (var ue = h3 ? 3 : 1, xe = function(z) {
-        var V = d2.find(function(de) {
-          var ae = O2.get(de);
-          if (ae)
-            return ae.slice(0, z).every(function(Y2) {
-              return Y2;
-            });
+    if (j) for (var ue = h3 ? 3 : 1, xe = function(z) {
+      var V = d2.find(function(de) {
+        var ae = O2.get(de);
+        if (ae) return ae.slice(0, z).every(function(Y2) {
+          return Y2;
         });
-        if (V)
-          return A2 = V, "break";
-      }, ie = ue; ie > 0; ie--) {
-        var le = xe(ie);
-        if (le === "break")
-          break;
-      }
+      });
+      if (V) return A2 = V, "break";
+    }, ie = ue; ie > 0; ie--) {
+      var le = xe(ie);
+      if (le === "break") break;
+    }
     e.placement !== A2 && (e.modifiersData[r]._skip = true, e.placement = A2, e.reset = true);
   }
 }
@@ -11231,8 +11261,7 @@ function dn(t) {
 }
 var Ot = { placement: "bottom", modifiers: [], strategy: "absolute" };
 function $t() {
-  for (var t = arguments.length, e = new Array(t), n = 0; n < t; n++)
-    e[n] = arguments[n];
+  for (var t = arguments.length, e = new Array(t), n = 0; n < t; n++) e[n] = arguments[n];
   return !e.some(function(r) {
     return !(r && typeof r.getBoundingClientRect == "function");
   });
@@ -11273,8 +11302,7 @@ function we(t) {
     }), destroy: function() {
       h3(), m2 = true;
     } };
-    if (!$t(a2, s2))
-      return v2;
+    if (!$t(a2, s2)) return v2;
     v2.setOptions(f2).then(function(p2) {
       !m2 && f2.onFirstUpdate && f2.onFirstUpdate(p2);
     });
@@ -11314,7 +11342,7 @@ var usePopper = (referenceElementRef, popperElementRef, opts = {}) => {
     },
     requires: ["computeStyles"]
   };
-  const options = computed2(() => {
+  const options = computed(() => {
     const { onFirstUpdate, placement, strategy, modifiers } = unref(opts);
     return {
       onFirstUpdate,
@@ -11365,12 +11393,12 @@ var usePopper = (referenceElementRef, popperElementRef, opts = {}) => {
     destroy();
   });
   return {
-    state: computed2(() => {
+    state: computed(() => {
       var _a2;
       return { ...((_a2 = unref(instanceRef)) == null ? void 0 : _a2.state) || {} };
     }),
-    styles: computed2(() => unref(states).styles),
-    attributes: computed2(() => unref(states).attributes),
+    styles: computed(() => unref(states).styles),
+    attributes: computed(() => unref(states).attributes),
     update: () => {
       var _a2;
       return (_a2 = unref(instanceRef)) == null ? void 0 : _a2.update();
@@ -11379,7 +11407,7 @@ var usePopper = (referenceElementRef, popperElementRef, opts = {}) => {
       var _a2;
       return (_a2 = unref(instanceRef)) == null ? void 0 : _a2.forceUpdate();
     },
-    instanceRef: computed2(() => unref(instanceRef))
+    instanceRef: computed(() => unref(instanceRef))
   };
 };
 function deriveState(state) {
@@ -11456,12 +11484,12 @@ var useThrottleRender = (loading, throttle2 = 0) => {
   if (throttle2 === 0)
     return loading;
   const throttled = ref(false);
-  let timeoutHandle = 0;
+  let timeoutHandle = null;
   const dispatchThrottling = () => {
     if (timeoutHandle) {
       clearTimeout(timeoutHandle);
     }
-    timeoutHandle = window.setTimeout(() => {
+    timeoutHandle = setTimeout(() => {
       throttled.value = loading.value;
     }, throttle2);
   };
@@ -11571,7 +11599,7 @@ usage: app.provide(ID_INJECTION_KEY, {
 })`);
   }
   const namespace = useGetDerivedNamespace();
-  const idRef = computed2(() => unref(deterministicId) || `${namespace.value}-id-${idInjection.prefix}-${idInjection.current++}`);
+  const idRef = computed(() => unref(deterministicId) || `${namespace.value}-id-${idInjection.prefix}-${idInjection.current++}`);
   return idRef;
 };
 
@@ -11605,10 +11633,10 @@ var cachedContainer;
 var usePopperContainerId = () => {
   const namespace = useGetDerivedNamespace();
   const idInjection = useIdInjection();
-  const id = computed2(() => {
+  const id = computed(() => {
     return `${namespace.value}-popper-container-${idInjection.prefix}`;
   });
-  const selector = computed2(() => `#${id.value}`);
+  const selector = computed(() => `#${id.value}`);
   return {
     id,
     selector
@@ -11625,7 +11653,7 @@ var usePopperContainer = () => {
   onBeforeMount(() => {
     if (!isClient)
       return;
-    if (!cachedContainer && !document.body.querySelector(selector.value)) {
+    if (!cachedContainer || !document.body.querySelector(selector.value)) {
       cachedContainer = createContainer(id.value);
     }
   });
@@ -11760,11 +11788,11 @@ var zIndexContextKey = Symbol("zIndexContextKey");
 var useZIndex = (zIndexOverrides) => {
   const increasingInjection = getCurrentInstance() ? inject(ZINDEX_INJECTION_KEY, initial2) : initial2;
   const zIndexInjection = zIndexOverrides || (getCurrentInstance() ? inject(zIndexContextKey, void 0) : void 0);
-  const initialZIndex = computed2(() => {
+  const initialZIndex = computed(() => {
     const zIndexFromInjection = unref(zIndexInjection);
     return isNumber3(zIndexFromInjection) ? zIndexFromInjection : defaultInitialZIndex;
   });
-  const currentZIndex = computed2(() => initialZIndex.value + zIndex.value);
+  const currentZIndex = computed(() => initialZIndex.value + zIndex.value);
   const nextZIndex = () => {
     increasingInjection.current++;
     zIndex.value = increasingInjection.current;
@@ -11855,8 +11883,7 @@ function getSideList(side, isStart, rtl) {
   switch (side) {
     case "top":
     case "bottom":
-      if (rtl)
-        return isStart ? rl : lr;
+      if (rtl) return isStart ? rl : lr;
       return isStart ? lr : rl;
     case "left":
     case "right":
@@ -12452,8 +12479,7 @@ function getContainingBlock(element) {
   return null;
 }
 function isWebKit() {
-  if (typeof CSS === "undefined" || !CSS.supports)
-    return false;
+  if (typeof CSS === "undefined" || !CSS.supports) return false;
   return CSS.supports("-webkit-backdrop-filter", "none");
 }
 function isLastTraversableNode(node) {
@@ -13153,7 +13179,7 @@ var arrowMiddleware = ({
 
 // node_modules/element-plus/es/hooks/use-cursor/index.mjs
 function useCursor(input) {
-  const selectionRef = ref();
+  let selectionInfo;
   function recordCursor() {
     if (input.value == void 0)
       return;
@@ -13162,7 +13188,7 @@ function useCursor(input) {
       return;
     const beforeTxt = value.slice(0, Math.max(0, selectionStart));
     const afterTxt = value.slice(Math.max(0, selectionEnd));
-    selectionRef.value = {
+    selectionInfo = {
       selectionStart,
       selectionEnd,
       value,
@@ -13171,10 +13197,10 @@ function useCursor(input) {
     };
   }
   function setCursor() {
-    if (input.value == void 0 || selectionRef.value == void 0)
+    if (input.value == void 0 || selectionInfo == void 0)
       return;
     const { value } = input.value;
-    const { beforeTxt, afterTxt, selectionStart } = selectionRef.value;
+    const { beforeTxt, afterTxt, selectionStart } = selectionInfo;
     if (beforeTxt == void 0 || afterTxt == void 0 || selectionStart == void 0)
       return;
     let startPos = value.length;
@@ -13233,19 +13259,25 @@ var useSizeProps = {
 var SIZE_INJECTION_KEY = Symbol("size");
 var useGlobalSize = () => {
   const injectedSize = inject(SIZE_INJECTION_KEY, {});
-  return computed2(() => {
+  return computed(() => {
     return unref(injectedSize.size) || "";
   });
 };
 
 // node_modules/element-plus/es/hooks/use-focus-controller/index.mjs
-function useFocusController(target2, { afterFocus, beforeBlur, afterBlur } = {}) {
+function useFocusController(target2, {
+  beforeFocus,
+  afterFocus,
+  beforeBlur,
+  afterBlur
+} = {}) {
   const instance = getCurrentInstance();
   const { emit } = instance;
   const wrapperRef = shallowRef();
   const isFocused = ref(false);
   const handleFocus = (event) => {
-    if (isFocused.value)
+    const cancelFocus = isFunction(beforeFocus) ? beforeFocus(event) : false;
+    if (cancelFocus || isFocused.value)
       return;
     isFocused.value = true;
     emit("focus", event);
@@ -13261,22 +13293,125 @@ function useFocusController(target2, { afterFocus, beforeBlur, afterBlur } = {})
     afterBlur == null ? void 0 : afterBlur();
   };
   const handleClick = () => {
-    var _a2;
-    (_a2 = target2.value) == null ? void 0 : _a2.focus();
+    var _a2, _b;
+    if (((_a2 = wrapperRef.value) == null ? void 0 : _a2.contains(document.activeElement)) && wrapperRef.value !== document.activeElement)
+      return;
+    (_b = target2.value) == null ? void 0 : _b.focus();
   };
   watch(wrapperRef, (el) => {
     if (el) {
       el.setAttribute("tabindex", "-1");
     }
   });
-  useEventListener(wrapperRef, "click", handleClick);
+  useEventListener(wrapperRef, "focus", handleFocus, true);
+  useEventListener(wrapperRef, "blur", handleBlur, true);
+  useEventListener(wrapperRef, "click", handleClick, true);
+  if (false) {
+    onMounted(() => {
+      const targetEl = isElement2(target2.value) ? target2.value : document.querySelector("input,textarea");
+      if (targetEl) {
+        useEventListener(targetEl, "focus", handleFocus, true);
+        useEventListener(targetEl, "blur", handleBlur, true);
+      }
+    });
+  }
   return {
-    wrapperRef,
     isFocused,
+    wrapperRef,
     handleFocus,
     handleBlur
   };
 }
+
+// node_modules/element-plus/es/hooks/use-composition/index.mjs
+function useComposition({
+  afterComposition,
+  emit
+}) {
+  const isComposing = ref(false);
+  const handleCompositionStart = (event) => {
+    emit == null ? void 0 : emit("compositionstart", event);
+    isComposing.value = true;
+  };
+  const handleCompositionUpdate = (event) => {
+    var _a2;
+    emit == null ? void 0 : emit("compositionupdate", event);
+    const text = (_a2 = event.target) == null ? void 0 : _a2.value;
+    const lastCharacter = text[text.length - 1] || "";
+    isComposing.value = !isKorean(lastCharacter);
+  };
+  const handleCompositionEnd = (event) => {
+    emit == null ? void 0 : emit("compositionend", event);
+    if (isComposing.value) {
+      isComposing.value = false;
+      nextTick(() => afterComposition(event));
+    }
+  };
+  const handleComposition = (event) => {
+    event.type === "compositionend" ? handleCompositionEnd(event) : handleCompositionUpdate(event);
+  };
+  return {
+    isComposing,
+    handleComposition,
+    handleCompositionStart,
+    handleCompositionUpdate,
+    handleCompositionEnd
+  };
+}
+
+// node_modules/element-plus/es/hooks/use-empty-values/index.mjs
+var emptyValuesContextKey = Symbol("emptyValuesContextKey");
+var SCOPE3 = "use-empty-values";
+var DEFAULT_EMPTY_VALUES = ["", void 0, null];
+var DEFAULT_VALUE_ON_CLEAR = void 0;
+var useEmptyValuesProps = buildProps({
+  emptyValues: Array,
+  valueOnClear: {
+    type: [String, Number, Boolean, Function],
+    default: void 0,
+    validator: (val) => isFunction(val) ? !val() : !val
+  }
+});
+var useEmptyValues = (props, defaultValue) => {
+  const config = getCurrentInstance() ? inject(emptyValuesContextKey, ref({})) : ref({});
+  const emptyValues = computed(() => props.emptyValues || config.value.emptyValues || DEFAULT_EMPTY_VALUES);
+  const valueOnClear = computed(() => {
+    if (isFunction(props.valueOnClear)) {
+      return props.valueOnClear();
+    } else if (props.valueOnClear !== void 0) {
+      return props.valueOnClear;
+    } else if (isFunction(config.value.valueOnClear)) {
+      return config.value.valueOnClear();
+    } else if (config.value.valueOnClear !== void 0) {
+      return config.value.valueOnClear;
+    }
+    return defaultValue !== void 0 ? defaultValue : DEFAULT_VALUE_ON_CLEAR;
+  });
+  const isEmptyValue2 = (value) => {
+    return emptyValues.value.includes(value);
+  };
+  if (!emptyValues.value.includes(valueOnClear.value)) {
+    debugWarn(SCOPE3, "value-on-clear should be a value of empty-values");
+  }
+  return {
+    emptyValues,
+    valueOnClear,
+    isEmptyValue: isEmptyValue2
+  };
+};
+
+// node_modules/element-plus/es/hooks/use-aria/index.mjs
+var ariaProps = buildProps({
+  ariaLabel: String,
+  ariaOrientation: {
+    type: String,
+    values: ["horizontal", "vertical", "undefined"]
+  },
+  ariaControls: String
+});
+var useAriaProps = (arias) => {
+  return pick_default(ariaProps, arias);
+};
 
 // node_modules/element-plus/es/components/config-provider/src/constants.mjs
 var configProviderContextKey = Symbol();
@@ -13286,7 +13421,7 @@ var globalConfig = ref();
 function useGlobalConfig(key, defaultValue = void 0) {
   const config = getCurrentInstance() ? inject(configProviderContextKey, globalConfig) : globalConfig;
   if (key) {
-    return computed2(() => {
+    return computed(() => {
       var _a2, _b;
       return (_b = (_a2 = config.value) == null ? void 0 : _a2[key]) != null ? _b : defaultValue;
     });
@@ -13296,23 +13431,23 @@ function useGlobalConfig(key, defaultValue = void 0) {
 }
 function useGlobalComponentSettings(block, sizeFallback) {
   const config = useGlobalConfig();
-  const ns = useNamespace(block, computed2(() => {
+  const ns = useNamespace(block, computed(() => {
     var _a2;
     return ((_a2 = config.value) == null ? void 0 : _a2.namespace) || defaultNamespace;
   }));
-  const locale = useLocale(computed2(() => {
+  const locale = useLocale(computed(() => {
     var _a2;
     return (_a2 = config.value) == null ? void 0 : _a2.locale;
   }));
-  const zIndex2 = useZIndex(computed2(() => {
+  const zIndex2 = useZIndex(computed(() => {
     var _a2;
     return ((_a2 = config.value) == null ? void 0 : _a2.zIndex) || defaultInitialZIndex;
   }));
-  const size3 = computed2(() => {
+  const size3 = computed(() => {
     var _a2;
     return unref(sizeFallback) || ((_a2 = config.value) == null ? void 0 : _a2.size) || "";
   });
-  provideGlobalConfig(computed2(() => unref(config) || {}));
+  provideGlobalConfig(computed(() => unref(config) || {}));
   return {
     ns,
     locale,
@@ -13329,30 +13464,33 @@ var provideGlobalConfig = (config, app, global2 = false) => {
     debugWarn("provideGlobalConfig", "provideGlobalConfig() can only be used inside setup().");
     return;
   }
-  const context = computed2(() => {
+  const context = computed(() => {
     const cfg = unref(config);
     if (!(oldConfig == null ? void 0 : oldConfig.value))
       return cfg;
     return mergeConfig(oldConfig.value, cfg);
   });
   provideFn(configProviderContextKey, context);
-  provideFn(localeContextKey, computed2(() => context.value.locale));
-  provideFn(namespaceContextKey, computed2(() => context.value.namespace));
-  provideFn(zIndexContextKey, computed2(() => context.value.zIndex));
+  provideFn(localeContextKey, computed(() => context.value.locale));
+  provideFn(namespaceContextKey, computed(() => context.value.namespace));
+  provideFn(zIndexContextKey, computed(() => context.value.zIndex));
   provideFn(SIZE_INJECTION_KEY, {
-    size: computed2(() => context.value.size || "")
+    size: computed(() => context.value.size || "")
   });
+  provideFn(emptyValuesContextKey, computed(() => ({
+    emptyValues: context.value.emptyValues,
+    valueOnClear: context.value.valueOnClear
+  })));
   if (global2 || !globalConfig.value) {
     globalConfig.value = context.value;
   }
   return context;
 };
 var mergeConfig = (a2, b2) => {
-  var _a2;
   const keys3 = [.../* @__PURE__ */ new Set([...keysOf(a2), ...keysOf(b2)])];
   const obj = {};
   for (const key of keys3) {
-    obj[key] = (_a2 = b2[key]) != null ? _a2 : a2[key];
+    obj[key] = b2[key] !== void 0 ? b2[key] : a2[key];
   }
   return obj;
 };
@@ -13384,7 +13522,8 @@ var configProviderProps = buildProps({
   namespace: {
     type: String,
     default: "el"
-  }
+  },
+  ...useEmptyValuesProps
 });
 
 // node_modules/element-plus/es/components/config-provider/src/config-provider.mjs
@@ -13405,7 +13544,7 @@ var ConfigProvider = defineComponent({
 var ElConfigProvider = withInstall(ConfigProvider);
 
 // node_modules/element-plus/es/version.mjs
-var version2 = "2.6.2";
+var version2 = "2.8.3";
 
 // node_modules/element-plus/es/make-installer.mjs
 var makeInstaller = (components = []) => {
@@ -13484,13 +13623,13 @@ var _sfc_main = defineComponent({
     const fixed = ref(false);
     const scrollTop = ref(0);
     const transform2 = ref(0);
-    const rootStyle = computed2(() => {
+    const rootStyle = computed(() => {
       return {
         height: fixed.value ? `${rootHeight.value}px` : "",
         width: fixed.value ? `${rootWidth.value}px` : ""
       };
     });
-    const affixStyle = computed2(() => {
+    const affixStyle = computed(() => {
       if (!fixed.value)
         return {};
       const offset2 = props.offset ? addUnit(props.offset) : 0;
@@ -13507,20 +13646,22 @@ var _sfc_main = defineComponent({
       if (!scrollContainer.value)
         return;
       scrollTop.value = scrollContainer.value instanceof Window ? document.documentElement.scrollTop : scrollContainer.value.scrollTop || 0;
-      if (props.position === "top") {
-        if (props.target) {
-          const difference2 = targetRect.bottom.value - props.offset - rootHeight.value;
-          fixed.value = props.offset > rootTop.value && targetRect.bottom.value > 0;
+      const { position, target: target22, offset: offset2 } = props;
+      const rootHeightOffset = offset2 + rootHeight.value;
+      if (position === "top") {
+        if (target22) {
+          const difference2 = targetRect.bottom.value - rootHeightOffset;
+          fixed.value = offset2 > rootTop.value && targetRect.bottom.value > 0;
           transform2.value = difference2 < 0 ? difference2 : 0;
         } else {
-          fixed.value = props.offset > rootTop.value;
+          fixed.value = offset2 > rootTop.value;
         }
-      } else if (props.target) {
-        const difference2 = windowHeight.value - targetRect.top.value - props.offset - rootHeight.value;
-        fixed.value = windowHeight.value - props.offset < rootBottom.value && windowHeight.value > targetRect.top.value;
+      } else if (target22) {
+        const difference2 = windowHeight.value - targetRect.top.value - rootHeightOffset;
+        fixed.value = windowHeight.value - offset2 < rootBottom.value && windowHeight.value > targetRect.top.value;
         transform2.value = difference2 < 0 ? -difference2 : 0;
       } else {
-        fixed.value = windowHeight.value - props.offset < rootBottom.value;
+        fixed.value = windowHeight.value - offset2 < rootBottom.value;
       }
     };
     const handleScroll2 = () => {
@@ -13536,7 +13677,7 @@ var _sfc_main = defineComponent({
       if (props.target) {
         target2.value = (_a2 = document.querySelector(props.target)) != null ? _a2 : void 0;
         if (!target2.value)
-          throwError(COMPONENT_NAME, `Target is not existed: ${props.target}`);
+          throwError(COMPONENT_NAME, `Target does not exist: ${props.target}`);
       } else {
         target2.value = document.documentElement;
       }
@@ -13592,7 +13733,7 @@ var _sfc_main2 = defineComponent({
   setup(__props) {
     const props = __props;
     const ns = useNamespace("icon");
-    const style = computed2(() => {
+    const style = computed(() => {
       const { size: size3, color } = props;
       if (!size3 && !color)
         return {};
@@ -13666,12 +13807,12 @@ var _sfc_main3 = defineComponent({
     const slots = useSlots();
     const ns = useNamespace("alert");
     const visible = ref(true);
-    const iconComponent = computed2(() => TypeComponentsMap[props.type]);
-    const iconClass = computed2(() => [
+    const iconComponent = computed(() => TypeComponentsMap[props.type]);
+    const iconClass = computed(() => [
       ns.e("icon"),
       { [ns.is("big")]: !!props.description || !!slots.default }
     ]);
-    const withDescription = computed2(() => {
+    const withDescription = computed(() => {
       return { "with-description": props.description || slots.default };
     });
     const close2 = (evt) => {
@@ -13758,12 +13899,12 @@ var useFormSize = (fallback, ignore = {}) => {
   const globalConfig2 = ignore.global ? emptyRef : useGlobalSize();
   const form = ignore.form ? { size: void 0 } : inject(formContextKey, void 0);
   const formItem = ignore.formItem ? { size: void 0 } : inject(formItemContextKey, void 0);
-  return computed2(() => size3.value || unref(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
+  return computed(() => size3.value || unref(fallback) || (formItem == null ? void 0 : formItem.size) || (form == null ? void 0 : form.size) || globalConfig2.value || "");
 };
 var useFormDisabled = (fallback) => {
   const disabled = useProp("disabled");
   const form = inject(formContextKey, void 0);
-  return computed2(() => disabled.value || unref(fallback) || (form == null ? void 0 : form.disabled) || false);
+  return computed(() => disabled.value || unref(fallback) || (form == null ? void 0 : form.disabled) || false);
 };
 var useSize = useFormSize;
 var useDisabled = useFormDisabled;
@@ -13790,9 +13931,9 @@ var useFormItemInputId = (props, {
   }
   const inputId = ref();
   let idUnwatch = void 0;
-  const isLabeledByFormItem = computed2(() => {
+  const isLabeledByFormItem = computed(() => {
     var _a2;
-    return !!(!props.label && formItemContext && formItemContext.inputIds && ((_a2 = formItemContext.inputIds) == null ? void 0 : _a2.length) <= 1);
+    return !!(!(props.label || props.ariaLabel) && formItemContext && formItemContext.inputIds && ((_a2 = formItemContext.inputIds) == null ? void 0 : _a2.length) <= 1);
   });
   onMounted(() => {
     idUnwatch = watch([toRef(props, "id"), disableIdGeneration], ([id, disableIdGeneration2]) => {
@@ -13874,10 +14015,10 @@ var formEmits = {
 };
 
 // node_modules/element-plus/es/components/form/src/utils.mjs
-var SCOPE3 = "ElForm";
+var SCOPE4 = "ElForm";
 function useFormLabelWidth() {
   const potentialLabelWidthArr = ref([]);
-  const autoLabelWidth = computed2(() => {
+  const autoLabelWidth = computed(() => {
     if (!potentialLabelWidthArr.value.length)
       return "0";
     const max4 = Math.max(...potentialLabelWidthArr.value);
@@ -13886,7 +14027,7 @@ function useFormLabelWidth() {
   function getLabelWidthIndex(width) {
     const index = potentialLabelWidthArr.value.indexOf(width);
     if (index === -1 && autoLabelWidth.value === "0") {
-      debugWarn(SCOPE3, `unexpected width ${width}`);
+      debugWarn(SCOPE4, `unexpected width ${width}`);
     }
     return index;
   }
@@ -13929,7 +14070,7 @@ var _sfc_main4 = defineComponent({
     const fields = [];
     const formSize = useFormSize();
     const ns = useNamespace("form");
-    const formClasses = computed2(() => {
+    const formClasses = computed(() => {
       const { labelPosition, inline: inline2 } = props;
       return [
         ns.b(),
@@ -13961,7 +14102,7 @@ var _sfc_main4 = defineComponent({
     const clearValidate = (props2 = []) => {
       filterFields(fields, props2).forEach((field) => field.clearValidate());
     };
-    const isValidatable = computed2(() => {
+    const isValidatable = computed(() => {
       const hasModel = !!props.model;
       if (!hasModel) {
         debugWarn(COMPONENT_NAME2, "model is required for validate to work.");
@@ -14005,7 +14146,7 @@ var _sfc_main4 = defineComponent({
       try {
         const result2 = await doValidateField(modelProps);
         if (result2 === true) {
-          callback == null ? void 0 : callback(result2);
+          await (callback == null ? void 0 : callback(result2));
         }
         return result2;
       } catch (e) {
@@ -14015,7 +14156,7 @@ var _sfc_main4 = defineComponent({
         if (props.scrollToError) {
           scrollToField(Object.keys(invalidFields)[0]);
         }
-        callback == null ? void 0 : callback(false, invalidFields);
+        await (callback == null ? void 0 : callback(false, invalidFields));
         return shouldThrow && Promise.reject(invalidFields);
       }
     };
@@ -14047,7 +14188,8 @@ var _sfc_main4 = defineComponent({
       validateField,
       resetFields,
       clearValidate,
-      scrollToField
+      scrollToField,
+      fields
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("form", {
@@ -14094,12 +14236,9 @@ function _setPrototypeOf(o2, p2) {
   return _setPrototypeOf(o2, p2);
 }
 function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct)
-    return false;
-  if (Reflect.construct.sham)
-    return false;
-  if (typeof Proxy === "function")
-    return true;
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
   try {
     Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
     }));
@@ -14117,8 +14256,7 @@ function _construct(Parent, args, Class) {
       a2.push.apply(a2, args2);
       var Constructor = Function.bind.apply(Parent2, a2);
       var instance = new Constructor();
-      if (Class2)
-        _setPrototypeOf(instance, Class2.prototype);
+      if (Class2) _setPrototypeOf(instance, Class2.prototype);
       return instance;
     };
   }
@@ -14130,14 +14268,12 @@ function _isNativeFunction(fn2) {
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? /* @__PURE__ */ new Map() : void 0;
   _wrapNativeSuper = function _wrapNativeSuper2(Class2) {
-    if (Class2 === null || !_isNativeFunction(Class2))
-      return Class2;
+    if (Class2 === null || !_isNativeFunction(Class2)) return Class2;
     if (typeof Class2 !== "function") {
       throw new TypeError("Super expression must either be null or a function");
     }
     if (typeof _cache !== "undefined") {
-      if (_cache.has(Class2))
-        return _cache.get(Class2);
+      if (_cache.has(Class2)) return _cache.get(Class2);
       _cache.set(Class2, Wrapper);
     }
     function Wrapper() {
@@ -14170,8 +14306,7 @@ if (typeof process !== "undefined" && process.env && true && typeof window !== "
   };
 }
 function convertFieldsError(errors) {
-  if (!errors || !errors.length)
-    return null;
+  if (!errors || !errors.length) return null;
   var fields = {};
   errors.forEach(function(error) {
     var field = error.field;
@@ -15128,6 +15263,11 @@ var formItemProps = buildProps({
     type: [String, Number],
     default: ""
   },
+  labelPosition: {
+    type: String,
+    values: ["left", "right", "top", ""],
+    default: ""
+  },
   prop: {
     type: definePropType([String, Array])
   },
@@ -15209,7 +15349,7 @@ var FormLabelWrap = defineComponent({
         formContext == null ? void 0 : formContext.registerLabelWidth(val, oldVal);
       }
     });
-    useResizeObserver(computed2(() => {
+    useResizeObserver(computed(() => {
       var _a2, _b;
       return (_b = (_a2 = el.value) == null ? void 0 : _a2.firstElementChild) != null ? _b : null;
     }), updateLabelWidthFn);
@@ -15226,7 +15366,8 @@ var FormLabelWrap = defineComponent({
         const style = {};
         if (hasLabel && autoLabelWidth && autoLabelWidth !== "auto") {
           const marginWidth = Math.max(0, Number.parseInt(autoLabelWidth, 10) - computedWidth.value);
-          const marginPosition = formContext.labelPosition === "left" ? "marginRight" : "marginLeft";
+          const labelPosition = formItemContext.labelPosition || formContext.labelPosition;
+          const marginPosition = labelPosition === "left" ? "marginRight" : "marginLeft";
           if (marginWidth) {
             style[marginPosition] = `${marginWidth}px`;
           }
@@ -15246,7 +15387,6 @@ var FormLabelWrap = defineComponent({
 });
 
 // node_modules/element-plus/es/components/form/src/form-item2.mjs
-var _hoisted_1 = ["role", "aria-labelledby"];
 var __default__5 = defineComponent({
   name: "ElFormItem"
 });
@@ -15268,8 +15408,9 @@ var _sfc_main5 = defineComponent({
     const formItemRef = ref();
     let initialValue = void 0;
     let isResettingField = false;
-    const labelStyle = computed2(() => {
-      if ((formContext == null ? void 0 : formContext.labelPosition) === "top") {
+    const labelPosition = computed(() => props.labelPosition || (formContext == null ? void 0 : formContext.labelPosition));
+    const labelStyle = computed(() => {
+      if (labelPosition.value === "top") {
         return {};
       }
       const labelWidth = addUnit(props.labelWidth || (formContext == null ? void 0 : formContext.labelWidth) || "");
@@ -15277,8 +15418,8 @@ var _sfc_main5 = defineComponent({
         return { width: labelWidth };
       return {};
     });
-    const contentStyle = computed2(() => {
-      if ((formContext == null ? void 0 : formContext.labelPosition) === "top" || (formContext == null ? void 0 : formContext.inline)) {
+    const contentStyle = computed(() => {
+      if (labelPosition.value === "top" || (formContext == null ? void 0 : formContext.inline)) {
         return {};
       }
       if (!props.label && !props.labelWidth && isNested) {
@@ -15290,7 +15431,7 @@ var _sfc_main5 = defineComponent({
       }
       return {};
     });
-    const formItemClasses = computed2(() => [
+    const formItemClasses = computed(() => [
       ns.b(),
       ns.m(_size.value),
       ns.is("error", validateState.value === "error"),
@@ -15299,36 +15440,39 @@ var _sfc_main5 = defineComponent({
       ns.is("required", isRequired.value || props.required),
       ns.is("no-asterisk", formContext == null ? void 0 : formContext.hideRequiredAsterisk),
       (formContext == null ? void 0 : formContext.requireAsteriskPosition) === "right" ? "asterisk-right" : "asterisk-left",
-      { [ns.m("feedback")]: formContext == null ? void 0 : formContext.statusIcon }
+      {
+        [ns.m("feedback")]: formContext == null ? void 0 : formContext.statusIcon,
+        [ns.m(`label-${labelPosition.value}`)]: labelPosition.value
+      }
     ]);
-    const _inlineMessage = computed2(() => isBoolean2(props.inlineMessage) ? props.inlineMessage : (formContext == null ? void 0 : formContext.inlineMessage) || false);
-    const validateClasses = computed2(() => [
+    const _inlineMessage = computed(() => isBoolean2(props.inlineMessage) ? props.inlineMessage : (formContext == null ? void 0 : formContext.inlineMessage) || false);
+    const validateClasses = computed(() => [
       ns.e("error"),
       { [ns.em("error", "inline")]: _inlineMessage.value }
     ]);
-    const propString = computed2(() => {
+    const propString = computed(() => {
       if (!props.prop)
         return "";
       return isString(props.prop) ? props.prop : props.prop.join(".");
     });
-    const hasLabel = computed2(() => {
+    const hasLabel = computed(() => {
       return !!(props.label || slots.label);
     });
-    const labelFor = computed2(() => {
+    const labelFor = computed(() => {
       return props.for || (inputIds.value.length === 1 ? inputIds.value[0] : void 0);
     });
-    const isGroup = computed2(() => {
+    const isGroup = computed(() => {
       return !labelFor.value && hasLabel.value;
     });
     const isNested = !!parentFormItemContext;
-    const fieldValue = computed2(() => {
+    const fieldValue = computed(() => {
       const model = formContext == null ? void 0 : formContext.model;
       if (!model || !props.prop) {
         return;
       }
       return getProp(model, props.prop).value;
     });
-    const normalizedRules = computed2(() => {
+    const normalizedRules = computed(() => {
       const { required: required4 } = props;
       const rules2 = [];
       if (props.rules) {
@@ -15355,7 +15499,7 @@ var _sfc_main5 = defineComponent({
       }
       return rules2;
     });
-    const validateEnabled = computed2(() => normalizedRules.value.length > 0);
+    const validateEnabled = computed(() => normalizedRules.value.length > 0);
     const getFilteredRule = (trigger) => {
       const rules2 = normalizedRules.value;
       return rules2.filter((rule) => {
@@ -15368,12 +15512,12 @@ var _sfc_main5 = defineComponent({
         }
       }).map(({ trigger: trigger2, ...rule }) => rule);
     };
-    const isRequired = computed2(() => normalizedRules.value.some((rule) => rule.required));
-    const shouldShowError = computed2(() => {
+    const isRequired = computed(() => normalizedRules.value.some((rule) => rule.required));
+    const shouldShowError = computed(() => {
       var _a2;
       return validateStateDebounced.value === "error" && props.showMessage && ((_a2 = formContext == null ? void 0 : formContext.showMessage) != null ? _a2 : true);
     });
-    const currentLabel = computed2(() => `${props.label || ""}${(formContext == null ? void 0 : formContext.labelSuffix) || ""}`);
+    const currentLabel = computed(() => `${props.label || ""}${(formContext == null ? void 0 : formContext.labelSuffix) || ""}`);
     const setValidationState = (state) => {
       validateState.value = state;
     };
@@ -15543,7 +15687,7 @@ var _sfc_main5 = defineComponent({
             _: 3
           }, 8, ["name"])
         ], 6)
-      ], 10, _hoisted_1);
+      ], 10, ["role", "aria-labelledby"]);
     };
   }
 });
@@ -15680,22 +15824,10 @@ var inputProps = buildProps({
   form: {
     type: String
   },
-  readonly: {
-    type: Boolean,
-    default: false
-  },
-  clearable: {
-    type: Boolean,
-    default: false
-  },
-  showPassword: {
-    type: Boolean,
-    default: false
-  },
-  showWordLimit: {
-    type: Boolean,
-    default: false
-  },
+  readonly: Boolean,
+  clearable: Boolean,
+  showPassword: Boolean,
+  showWordLimit: Boolean,
   suffixIcon: {
     type: iconPropType
   },
@@ -15703,10 +15835,6 @@ var inputProps = buildProps({
     type: iconPropType
   },
   containerRole: {
-    type: String,
-    default: void 0
-  },
-  label: {
     type: String,
     default: void 0
   },
@@ -15722,10 +15850,12 @@ var inputProps = buildProps({
     type: definePropType([Object, Array, String]),
     default: () => mutable({})
   },
-  autofocus: {
-    type: Boolean,
-    default: false
-  }
+  autofocus: Boolean,
+  rows: {
+    type: Number,
+    default: 2
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var inputEmits = {
   [UPDATE_MODEL_EVENT]: (value) => isString(value),
@@ -15743,9 +15873,6 @@ var inputEmits = {
 };
 
 // node_modules/element-plus/es/components/input/src/input2.mjs
-var _hoisted_12 = ["role"];
-var _hoisted_2 = ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus"];
-var _hoisted_3 = ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus"];
 var __default__6 = defineComponent({
   name: "ElInput",
   inheritAttrs: false
@@ -15758,7 +15885,7 @@ var _sfc_main6 = defineComponent({
     const props = __props;
     const rawAttrs = useAttrs();
     const slots = useSlots();
-    const containerAttrs = computed2(() => {
+    const containerAttrs = computed(() => {
       const comboBoxAttrs = {};
       if (props.containerRole === "combobox") {
         comboBoxAttrs["aria-haspopup"] = rawAttrs["aria-haspopup"];
@@ -15767,15 +15894,13 @@ var _sfc_main6 = defineComponent({
       }
       return comboBoxAttrs;
     });
-    const containerKls = computed2(() => [
+    const containerKls = computed(() => [
       props.type === "textarea" ? nsTextarea.b() : nsInput.b(),
       nsInput.m(inputSize.value),
       nsInput.is("disabled", inputDisabled.value),
       nsInput.is("exceed", inputExceed.value),
       {
         [nsInput.b("group")]: slots.prepend || slots.append,
-        [nsInput.bm("group", "append")]: slots.append,
-        [nsInput.bm("group", "prepend")]: slots.prepend,
         [nsInput.m("prefix")]: slots.prefix || props.prefixIcon,
         [nsInput.m("suffix")]: slots.suffix || props.suffixIcon || props.clearable || props.showPassword,
         [nsInput.bm("suffix", "password-clear")]: showClear.value && showPwdVisible.value,
@@ -15783,12 +15908,12 @@ var _sfc_main6 = defineComponent({
       },
       rawAttrs.class
     ]);
-    const wrapperKls = computed2(() => [
+    const wrapperKls = computed(() => [
       nsInput.e("wrapper"),
       nsInput.is("focus", isFocused.value)
     ]);
     const attrs = useAttrs2({
-      excludeKeys: computed2(() => {
+      excludeKeys: computed(() => {
         return Object.keys(containerAttrs.value);
       })
     });
@@ -15803,12 +15928,14 @@ var _sfc_main6 = defineComponent({
     const input = shallowRef();
     const textarea = shallowRef();
     const hovering = ref(false);
-    const isComposing = ref(false);
     const passwordVisible = ref(false);
     const countStyle = ref();
     const textareaCalcStyle = shallowRef(props.inputStyle);
-    const _ref = computed2(() => input.value || textarea.value);
+    const _ref = computed(() => input.value || textarea.value);
     const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(_ref, {
+      beforeFocus() {
+        return inputDisabled.value;
+      },
       afterBlur() {
         var _a2;
         if (props.validateEvent) {
@@ -15816,28 +15943,28 @@ var _sfc_main6 = defineComponent({
         }
       }
     });
-    const needStatusIcon = computed2(() => {
+    const needStatusIcon = computed(() => {
       var _a2;
       return (_a2 = elForm == null ? void 0 : elForm.statusIcon) != null ? _a2 : false;
     });
-    const validateState = computed2(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
-    const validateIcon = computed2(() => validateState.value && ValidateComponentsMap[validateState.value]);
-    const passwordIcon = computed2(() => passwordVisible.value ? view_default : hide_default);
-    const containerStyle = computed2(() => [
+    const validateState = computed(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
+    const validateIcon = computed(() => validateState.value && ValidateComponentsMap[validateState.value]);
+    const passwordIcon = computed(() => passwordVisible.value ? view_default : hide_default);
+    const containerStyle = computed(() => [
       rawAttrs.style
     ]);
-    const textareaStyle = computed2(() => [
+    const textareaStyle = computed(() => [
       props.inputStyle,
       textareaCalcStyle.value,
       { resize: props.resize }
     ]);
-    const nativeInputValue = computed2(() => isNil_default(props.modelValue) ? "" : String(props.modelValue));
-    const showClear = computed2(() => props.clearable && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (isFocused.value || hovering.value));
-    const showPwdVisible = computed2(() => props.showPassword && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (!!nativeInputValue.value || isFocused.value));
-    const isWordLimitVisible = computed2(() => props.showWordLimit && !!props.maxlength && (props.type === "text" || props.type === "textarea") && !inputDisabled.value && !props.readonly && !props.showPassword);
-    const textLength = computed2(() => nativeInputValue.value.length);
-    const inputExceed = computed2(() => !!isWordLimitVisible.value && textLength.value > Number(props.maxlength));
-    const suffixVisible = computed2(() => !!slots.suffix || !!props.suffixIcon || showClear.value || props.showPassword || isWordLimitVisible.value || !!validateState.value && needStatusIcon.value);
+    const nativeInputValue = computed(() => isNil_default(props.modelValue) ? "" : String(props.modelValue));
+    const showClear = computed(() => props.clearable && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (isFocused.value || hovering.value));
+    const showPwdVisible = computed(() => props.showPassword && !inputDisabled.value && !props.readonly && !!nativeInputValue.value && (!!nativeInputValue.value || isFocused.value));
+    const isWordLimitVisible = computed(() => props.showWordLimit && !!props.maxlength && (props.type === "text" || props.type === "textarea") && !inputDisabled.value && !props.readonly && !props.showPassword);
+    const textLength = computed(() => nativeInputValue.value.length);
+    const inputExceed = computed(() => !!isWordLimitVisible.value && textLength.value > Number(props.maxlength));
+    const suffixVisible = computed(() => !!slots.suffix || !!props.suffixIcon || showClear.value || props.showPassword || isWordLimitVisible.value || !!validateState.value && needStatusIcon.value);
     const [recordCursor, setCursor] = useCursor(input);
     useResizeObserver(textarea, (entries) => {
       onceInitSizeTextarea();
@@ -15913,24 +16040,12 @@ var _sfc_main6 = defineComponent({
     const handleChange = (event) => {
       emit("change", event.target.value);
     };
-    const handleCompositionStart = (event) => {
-      emit("compositionstart", event);
-      isComposing.value = true;
-    };
-    const handleCompositionUpdate = (event) => {
-      var _a2;
-      emit("compositionupdate", event);
-      const text = (_a2 = event.target) == null ? void 0 : _a2.value;
-      const lastCharacter = text[text.length - 1] || "";
-      isComposing.value = !isKorean(lastCharacter);
-    };
-    const handleCompositionEnd = (event) => {
-      emit("compositionend", event);
-      if (isComposing.value) {
-        isComposing.value = false;
-        handleInput(event);
-      }
-    };
+    const {
+      isComposing,
+      handleCompositionStart,
+      handleCompositionUpdate,
+      handleCompositionEnd
+    } = useComposition({ emit, afterComposition: handleInput });
     const handlePasswordVisible = () => {
       passwordVisible.value = !passwordVisible.value;
       focus();
@@ -15991,6 +16106,7 @@ var _sfc_main6 = defineComponent({
       ref: _ref,
       textareaStyle,
       autosize: toRef(props, "autosize"),
+      isComposing,
       focus,
       blur,
       select,
@@ -15999,7 +16115,13 @@ var _sfc_main6 = defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", mergeProps(unref(containerAttrs), {
-        class: unref(containerKls),
+        class: [
+          unref(containerKls),
+          {
+            [unref(nsInput).bm("group", "append")]: _ctx.$slots.append,
+            [unref(nsInput).bm("group", "prepend")]: _ctx.$slots.prepend
+          }
+        ],
         style: unref(containerStyle),
         role: _ctx.containerRole,
         onMouseenter: handleMouseEnter,
@@ -16052,20 +16174,18 @@ var _sfc_main6 = defineComponent({
               readonly: _ctx.readonly,
               autocomplete: _ctx.autocomplete,
               tabindex: _ctx.tabindex,
-              "aria-label": _ctx.label,
+              "aria-label": _ctx.ariaLabel,
               placeholder: _ctx.placeholder,
               style: _ctx.inputStyle,
               form: _ctx.form,
               autofocus: _ctx.autofocus,
-              onCompositionstart: handleCompositionStart,
-              onCompositionupdate: handleCompositionUpdate,
-              onCompositionend: handleCompositionEnd,
+              onCompositionstart: unref(handleCompositionStart),
+              onCompositionupdate: unref(handleCompositionUpdate),
+              onCompositionend: unref(handleCompositionEnd),
               onInput: handleInput,
-              onFocus: _cache[0] || (_cache[0] = (...args) => unref(handleFocus) && unref(handleFocus)(...args)),
-              onBlur: _cache[1] || (_cache[1] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
               onChange: handleChange,
               onKeydown: handleKeydown
-            }), null, 16, _hoisted_2),
+            }), null, 16, ["id", "minlength", "maxlength", "type", "disabled", "readonly", "autocomplete", "tabindex", "aria-label", "placeholder", "form", "autofocus", "onCompositionstart", "onCompositionupdate", "onCompositionend"]),
             createCommentVNode(" suffix slot "),
             unref(suffixVisible) ? (openBlock(), createElementBlock("span", {
               key: 1,
@@ -16144,7 +16264,7 @@ var _sfc_main6 = defineComponent({
             id: unref(inputId),
             ref_key: "textarea",
             ref: textarea,
-            class: unref(nsTextarea).e("inner")
+            class: [unref(nsTextarea).e("inner"), unref(nsInput).is("focus", unref(isFocused))]
           }, unref(attrs), {
             minlength: _ctx.minlength,
             maxlength: _ctx.maxlength,
@@ -16153,26 +16273,27 @@ var _sfc_main6 = defineComponent({
             readonly: _ctx.readonly,
             autocomplete: _ctx.autocomplete,
             style: unref(textareaStyle),
-            "aria-label": _ctx.label,
+            "aria-label": _ctx.ariaLabel,
             placeholder: _ctx.placeholder,
             form: _ctx.form,
             autofocus: _ctx.autofocus,
-            onCompositionstart: handleCompositionStart,
-            onCompositionupdate: handleCompositionUpdate,
-            onCompositionend: handleCompositionEnd,
+            rows: _ctx.rows,
+            onCompositionstart: unref(handleCompositionStart),
+            onCompositionupdate: unref(handleCompositionUpdate),
+            onCompositionend: unref(handleCompositionEnd),
             onInput: handleInput,
-            onFocus: _cache[2] || (_cache[2] = (...args) => unref(handleFocus) && unref(handleFocus)(...args)),
-            onBlur: _cache[3] || (_cache[3] = (...args) => unref(handleBlur) && unref(handleBlur)(...args)),
+            onFocus: unref(handleFocus),
+            onBlur: unref(handleBlur),
             onChange: handleChange,
             onKeydown: handleKeydown
-          }), null, 16, _hoisted_3),
+          }), null, 16, ["id", "minlength", "maxlength", "tabindex", "disabled", "readonly", "autocomplete", "aria-label", "placeholder", "form", "autofocus", "rows", "onCompositionstart", "onCompositionupdate", "onCompositionend", "onFocus", "onBlur"]),
           unref(isWordLimitVisible) ? (openBlock(), createElementBlock("span", {
             key: 0,
             style: normalizeStyle(countStyle.value),
             class: normalizeClass(unref(nsInput).e("count"))
           }, toDisplayString(unref(textLength)) + " / " + toDisplayString(_ctx.maxlength), 7)) : createCommentVNode("v-if", true)
         ], 64))
-      ], 16, _hoisted_12);
+      ], 16, ["role"]);
     };
   }
 });
@@ -16247,13 +16368,13 @@ var _sfc_main7 = defineComponent({
     let cursorDown = false;
     let cursorLeave = false;
     let originalOnSelectStart = isClient ? document.onselectstart : null;
-    const bar = computed2(() => BAR_MAP[props.vertical ? "vertical" : "horizontal"]);
-    const thumbStyle = computed2(() => renderThumbStyle({
+    const bar = computed(() => BAR_MAP[props.vertical ? "vertical" : "horizontal"]);
+    const thumbStyle = computed(() => renderThumbStyle({
       size: props.size,
       move: props.move,
       bar: bar.value
     }));
-    const offsetRatio = computed2(() => instance.value[bar.value.offset] ** 2 / scrollbar.wrapElement[bar.value.scrollSize] / props.ratio / thumb.value[bar.value.offset]);
+    const offsetRatio = computed(() => instance.value[bar.value.offset] ** 2 / scrollbar.wrapElement[bar.value.scrollSize] / props.ratio / thumb.value[bar.value.offset]);
     const clickThumbHandler = (e) => {
       var _a2;
       e.stopPropagation();
@@ -16465,13 +16586,13 @@ var scrollbarProps = buildProps({
     type: Number,
     default: 20
   },
+  tabindex: {
+    type: [String, Number],
+    default: void 0
+  },
   id: String,
   role: String,
-  ariaLabel: String,
-  ariaOrientation: {
-    type: String,
-    values: ["horizontal", "vertical"]
-  }
+  ...useAriaProps(["ariaLabel", "ariaOrientation"])
 });
 var scrollbarEmits = {
   scroll: ({
@@ -16494,11 +16615,13 @@ var _sfc_main9 = defineComponent({
     const ns = useNamespace("scrollbar");
     let stopResizeObserver = void 0;
     let stopResizeListener = void 0;
+    let wrapScrollTop = 0;
+    let wrapScrollLeft = 0;
     const scrollbarRef = ref();
     const wrapRef = ref();
     const resizeRef = ref();
     const barRef = ref();
-    const wrapStyle = computed2(() => {
+    const wrapStyle = computed(() => {
       const style = {};
       if (props.height)
         style.height = addUnit(props.height);
@@ -16506,20 +16629,22 @@ var _sfc_main9 = defineComponent({
         style.maxHeight = addUnit(props.maxHeight);
       return [props.wrapStyle, style];
     });
-    const wrapKls = computed2(() => {
+    const wrapKls = computed(() => {
       return [
         props.wrapClass,
         ns.e("wrap"),
         { [ns.em("wrap", "hidden-default")]: !props.native }
       ];
     });
-    const resizeKls = computed2(() => {
+    const resizeKls = computed(() => {
       return [ns.e("view"), props.viewClass];
     });
     const handleScroll2 = () => {
       var _a2;
       if (wrapRef.value) {
         (_a2 = barRef.value) == null ? void 0 : _a2.handleScroll(wrapRef.value);
+        wrapScrollTop = wrapRef.value.scrollTop;
+        wrapScrollLeft = wrapRef.value.scrollLeft;
         emit("scroll", {
           scrollTop: wrapRef.value.scrollTop,
           scrollLeft: wrapRef.value.scrollLeft
@@ -16575,6 +16700,10 @@ var _sfc_main9 = defineComponent({
       scrollbarElement: scrollbarRef,
       wrapElement: wrapRef
     }));
+    onActivated(() => {
+      wrapRef.value.scrollTop = wrapScrollTop;
+      wrapRef.value.scrollLeft = wrapScrollLeft;
+    });
     onMounted(() => {
       if (!props.native)
         nextTick(() => {
@@ -16601,6 +16730,7 @@ var _sfc_main9 = defineComponent({
           ref: wrapRef,
           class: normalizeClass(unref(wrapKls)),
           style: normalizeStyle(unref(wrapStyle)),
+          tabindex: _ctx.tabindex,
           onScroll: handleScroll2
         }, [
           (openBlock(), createBlock(resolveDynamicComponent(_ctx.tag), {
@@ -16618,7 +16748,7 @@ var _sfc_main9 = defineComponent({
             ]),
             _: 3
           }, 8, ["id", "class", "style", "role", "aria-label", "aria-orientation"]))
-        ], 38),
+        ], 46, ["tabindex"]),
         !_ctx.native ? (openBlock(), createBlock(Bar, {
           key: 0,
           ref_key: "barRef",
@@ -16677,7 +16807,7 @@ var _sfc_main10 = defineComponent({
     const popperInstanceRef = ref();
     const contentRef = ref();
     const referenceRef = ref();
-    const role = computed2(() => props.role);
+    const role = computed(() => props.role);
     const popperProvides = {
       triggerRef,
       popperInstanceRef,
@@ -16839,25 +16969,34 @@ var _sfc_main12 = defineComponent({
     const props = __props;
     const { role, triggerRef } = inject(POPPER_INJECTION_KEY, void 0);
     useForwardRef(triggerRef);
-    const ariaControls = computed2(() => {
+    const ariaControls = computed(() => {
       return ariaHaspopup.value ? props.id : void 0;
     });
-    const ariaDescribedby = computed2(() => {
+    const ariaDescribedby = computed(() => {
       if (role && role.value === "tooltip") {
         return props.open && props.id ? props.id : void 0;
       }
       return void 0;
     });
-    const ariaHaspopup = computed2(() => {
+    const ariaHaspopup = computed(() => {
       if (role && role.value !== "tooltip") {
         return role.value;
       }
       return void 0;
     });
-    const ariaExpanded = computed2(() => {
+    const ariaExpanded = computed(() => {
       return ariaHaspopup.value ? `${props.open}` : void 0;
     });
     let virtualTriggerAriaStopWatch = void 0;
+    const TRIGGER_ELE_EVENTS = [
+      "onMouseenter",
+      "onMouseleave",
+      "onClick",
+      "onKeydown",
+      "onFocus",
+      "onBlur",
+      "onContextmenu"
+    ];
     onMounted(() => {
       watch(() => props.virtualRef, (virtualEl) => {
         if (virtualEl) {
@@ -16870,16 +17009,7 @@ var _sfc_main12 = defineComponent({
         virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
         virtualTriggerAriaStopWatch = void 0;
         if (isElement2(el)) {
-          ;
-          [
-            "onMouseenter",
-            "onMouseleave",
-            "onClick",
-            "onKeydown",
-            "onFocus",
-            "onBlur",
-            "onContextmenu"
-          ].forEach((eventName) => {
+          TRIGGER_ELE_EVENTS.forEach((eventName) => {
             var _a2;
             const handler = props[eventName];
             if (handler) {
@@ -16916,6 +17046,16 @@ var _sfc_main12 = defineComponent({
     onBeforeUnmount(() => {
       virtualTriggerAriaStopWatch == null ? void 0 : virtualTriggerAriaStopWatch();
       virtualTriggerAriaStopWatch = void 0;
+      if (triggerRef.value && isElement2(triggerRef.value)) {
+        const el = triggerRef.value;
+        TRIGGER_ELE_EVENTS.forEach((eventName) => {
+          const handler = props[eventName];
+          if (handler) {
+            el.removeEventListener(eventName.slice(2).toLowerCase(), handler);
+          }
+        });
+        triggerRef.value = void 0;
+      }
     });
     expose({
       triggerRef
@@ -17320,6 +17460,12 @@ var _sfc_main13 = defineComponent({
       if (props.trapped) {
         stopTrap();
       }
+      if (forwardRef.value) {
+        forwardRef.value.removeEventListener("keydown", onKeydown);
+        forwardRef.value.removeEventListener("focusin", onFocusIn);
+        forwardRef.value.removeEventListener("focusout", onFocusOut);
+        forwardRef.value = void 0;
+      }
     });
     return {
       onKeydown
@@ -17375,7 +17521,7 @@ var popperContentProps = buildProps({
     type: definePropType([String, Array, Object])
   },
   effect: {
-    type: String,
+    type: definePropType(String),
     default: "dark"
   },
   visible: Boolean,
@@ -17408,12 +17554,9 @@ var popperContentProps = buildProps({
     type: Boolean,
     default: true
   },
-  ariaLabel: {
-    type: String,
-    default: void 0
-  },
   virtualTriggering: Boolean,
-  zIndex: Number
+  zIndex: Number,
+  ...useAriaProps(["ariaLabel"])
 });
 var popperContentEmits = {
   mouseenter: (evt) => evt instanceof MouseEvent,
@@ -17490,13 +17633,13 @@ var usePopperContent = (props) => {
   const { popperInstanceRef, contentRef, triggerRef, role } = inject(POPPER_INJECTION_KEY, void 0);
   const arrowRef = ref();
   const arrowOffset = ref();
-  const eventListenerModifier = computed2(() => {
+  const eventListenerModifier = computed(() => {
     return {
       name: "eventListeners",
       enabled: !!props.visible
     };
   });
-  const arrowModifier = computed2(() => {
+  const arrowModifier = computed(() => {
     var _a2;
     const arrowEl = unref(arrowRef);
     const offset2 = (_a2 = unref(arrowOffset)) != null ? _a2 : DEFAULT_ARROW_OFFSET;
@@ -17509,7 +17652,7 @@ var usePopperContent = (props) => {
       }
     };
   });
-  const options = computed2(() => {
+  const options = computed(() => {
     return {
       onFirstUpdate: () => {
         update2();
@@ -17520,7 +17663,7 @@ var usePopperContent = (props) => {
       ])
     };
   });
-  const computedReference = computed2(() => unwrapMeasurableEl(props.referenceEl) || unref(triggerRef));
+  const computedReference = computed(() => unwrapMeasurableEl(props.referenceEl) || unref(triggerRef));
   const { attributes: attributes2, state, styles, update: update2, forceUpdate, instanceRef } = usePopper(computedReference, contentRef, options);
   watch(instanceRef, (instance) => popperInstanceRef.value = instance);
   onMounted(() => {
@@ -17552,23 +17695,23 @@ var usePopperContentDOM = (props, {
 }) => {
   const { nextZIndex } = useZIndex();
   const ns = useNamespace("popper");
-  const contentAttrs = computed2(() => unref(attributes2).popper);
+  const contentAttrs = computed(() => unref(attributes2).popper);
   const contentZIndex = ref(isNumber3(props.zIndex) ? props.zIndex : nextZIndex());
-  const contentClass = computed2(() => [
+  const contentClass = computed(() => [
     ns.b(),
     ns.is("pure", props.pure),
     ns.is(props.effect),
     props.popperClass
   ]);
-  const contentStyle = computed2(() => {
+  const contentStyle = computed(() => {
     return [
       { zIndex: unref(contentZIndex) },
       unref(styles).popper,
       props.popperStyle || {}
     ];
   });
-  const ariaModal = computed2(() => role.value === "dialog" ? "false" : void 0);
-  const arrowStyle = computed2(() => unref(styles).arrow || {});
+  const ariaModal = computed(() => role.value === "dialog" ? "false" : void 0);
+  const arrowStyle = computed(() => unref(styles).arrow || {});
   const updateZIndex = () => {
     contentZIndex.value = isNumber3(props.zIndex) ? props.zIndex : nextZIndex();
   };
@@ -17667,7 +17810,7 @@ var _sfc_main14 = defineComponent({
       arrowRef,
       arrowOffset
     });
-    if (formItemContext && (formItemContext.addInputId || formItemContext.removeInputId)) {
+    if (formItemContext) {
       provide(formItemContextKey, {
         ...formItemContext,
         addInputId: NOOP,
@@ -17728,8 +17871,8 @@ var _sfc_main14 = defineComponent({
         style: unref(contentStyle),
         class: unref(contentClass),
         tabindex: "-1",
-        onMouseenter: _cache[0] || (_cache[0] = (e) => _ctx.$emit("mouseenter", e)),
-        onMouseleave: _cache[1] || (_cache[1] = (e) => _ctx.$emit("mouseleave", e))
+        onMouseenter: (e) => _ctx.$emit("mouseenter", e),
+        onMouseleave: (e) => _ctx.$emit("mouseleave", e)
       }), [
         createVNode(unref(ElFocusTrap), {
           trapped: unref(trapped),
@@ -17747,7 +17890,7 @@ var _sfc_main14 = defineComponent({
           ]),
           _: 3
         }, 8, ["trapped", "focus-trap-el", "focus-start-el", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusin", "onFocusoutPrevented", "onReleaseRequested"])
-      ], 16);
+      ], 16, ["onMouseenter", "onMouseleave"]);
     };
   }
 });
@@ -17770,12 +17913,8 @@ var useTooltipContentProps = buildProps({
     type: String,
     default: ""
   },
-  rawContent: {
-    type: Boolean,
-    default: false
-  },
+  rawContent: Boolean,
   persistent: Boolean,
-  ariaLabel: String,
   visible: {
     type: definePropType(Boolean),
     default: null
@@ -17785,7 +17924,8 @@ var useTooltipContentProps = buildProps({
     type: Boolean,
     default: true
   },
-  disabled: Boolean
+  disabled: Boolean,
+  ...useAriaProps(["ariaLabel"])
 });
 
 // node_modules/element-plus/es/components/tooltip/src/trigger.mjs
@@ -17908,12 +18048,41 @@ var _sfc_main15 = defineComponent({
 });
 var ElTooltipTrigger = _export_sfc(_sfc_main15, [["__file", "trigger.vue"]]);
 
+// node_modules/element-plus/es/components/teleport/src/teleport.mjs
+var teleportProps = buildProps({
+  to: {
+    type: definePropType([String, Object]),
+    required: true
+  },
+  disabled: Boolean
+});
+
+// node_modules/element-plus/es/components/teleport/src/teleport2.mjs
+var _sfc_main16 = defineComponent({
+  __name: "teleport",
+  props: teleportProps,
+  setup(__props) {
+    return (_ctx, _cache) => {
+      return _ctx.disabled ? renderSlot(_ctx.$slots, "default", { key: 0 }) : (openBlock(), createBlock(Teleport, {
+        key: 1,
+        to: _ctx.to
+      }, [
+        renderSlot(_ctx.$slots, "default")
+      ], 8, ["to"]));
+    };
+  }
+});
+var Teleport2 = _export_sfc(_sfc_main16, [["__file", "teleport.vue"]]);
+
+// node_modules/element-plus/es/components/teleport/index.mjs
+var ElTeleport = withInstall(Teleport2);
+
 // node_modules/element-plus/es/components/tooltip/src/content2.mjs
 var __default__13 = defineComponent({
   name: "ElTooltipContent",
   inheritAttrs: false
 });
-var _sfc_main16 = defineComponent({
+var _sfc_main17 = defineComponent({
   ...__default__13,
   props: useTooltipContentProps,
   setup(__props, { expose }) {
@@ -17921,7 +18090,7 @@ var _sfc_main16 = defineComponent({
     const { selector } = usePopperContainerId();
     const ns = useNamespace("tooltip");
     const contentRef = ref(null);
-    const destroyed = ref(false);
+    let stopHandle;
     const {
       controlled,
       id,
@@ -17934,34 +18103,35 @@ var _sfc_main16 = defineComponent({
       onBeforeShow,
       onBeforeHide
     } = inject(TOOLTIP_INJECTION_KEY, void 0);
-    const transitionClass = computed2(() => {
+    const transitionClass = computed(() => {
       return props.transition || `${ns.namespace.value}-fade-in-linear`;
     });
-    const persistentRef = computed2(() => {
+    const persistentRef = computed(() => {
       if (false) {
         return true;
       }
       return props.persistent;
     });
     onBeforeUnmount(() => {
-      destroyed.value = true;
+      stopHandle == null ? void 0 : stopHandle();
     });
-    const shouldRender = computed2(() => {
+    const shouldRender = computed(() => {
       return unref(persistentRef) ? true : unref(open);
     });
-    const shouldShow = computed2(() => {
+    const shouldShow = computed(() => {
       return props.disabled ? false : unref(open);
     });
-    const appendTo = computed2(() => {
+    const appendTo = computed(() => {
       return props.appendTo || selector.value;
     });
-    const contentStyle = computed2(() => {
+    const contentStyle = computed(() => {
       var _a2;
       return (_a2 = props.style) != null ? _a2 : {};
     });
-    const ariaHidden = computed2(() => !unref(open));
+    const ariaHidden = ref(true);
     const onTransitionLeave = () => {
       onHide();
+      ariaHidden.value = true;
     };
     const stopWhenControlled = () => {
       if (unref(controlled))
@@ -17987,7 +18157,7 @@ var _sfc_main16 = defineComponent({
     };
     const onAfterShow = () => {
       onShow();
-      stopHandle = onClickOutside(computed2(() => {
+      stopHandle = onClickOutside(computed(() => {
         var _a2;
         return (_a2 = contentRef.value) == null ? void 0 : _a2.popperContentRef;
       }), () => {
@@ -18004,10 +18174,11 @@ var _sfc_main16 = defineComponent({
         onClose();
       }
     };
-    let stopHandle;
     watch(() => unref(open), (val) => {
       if (!val) {
         stopHandle == null ? void 0 : stopHandle();
+      } else {
+        ariaHidden.value = false;
       }
     }, {
       flush: "post"
@@ -18020,70 +18191,71 @@ var _sfc_main16 = defineComponent({
       contentRef
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
+      return openBlock(), createBlock(unref(ElTeleport), {
         disabled: !_ctx.teleported,
         to: unref(appendTo)
-      }, [
-        createVNode(Transition, {
-          name: unref(transitionClass),
-          onAfterLeave: onTransitionLeave,
-          onBeforeEnter,
-          onAfterEnter: onAfterShow,
-          onBeforeLeave
-        }, {
-          default: withCtx(() => [
-            unref(shouldRender) ? withDirectives((openBlock(), createBlock(unref(ElPopperContent), mergeProps({
-              key: 0,
-              id: unref(id),
-              ref_key: "contentRef",
-              ref: contentRef
-            }, _ctx.$attrs, {
-              "aria-label": _ctx.ariaLabel,
-              "aria-hidden": unref(ariaHidden),
-              "boundaries-padding": _ctx.boundariesPadding,
-              "fallback-placements": _ctx.fallbackPlacements,
-              "gpu-acceleration": _ctx.gpuAcceleration,
-              offset: _ctx.offset,
-              placement: _ctx.placement,
-              "popper-options": _ctx.popperOptions,
-              strategy: _ctx.strategy,
-              effect: _ctx.effect,
-              enterable: _ctx.enterable,
-              pure: _ctx.pure,
-              "popper-class": _ctx.popperClass,
-              "popper-style": [_ctx.popperStyle, unref(contentStyle)],
-              "reference-el": _ctx.referenceEl,
-              "trigger-target-el": _ctx.triggerTargetEl,
-              visible: unref(shouldShow),
-              "z-index": _ctx.zIndex,
-              onMouseenter: unref(onContentEnter),
-              onMouseleave: unref(onContentLeave),
-              onBlur,
-              onClose: unref(onClose)
-            }), {
-              default: withCtx(() => [
-                !destroyed.value ? renderSlot(_ctx.$slots, "default", { key: 0 }) : createCommentVNode("v-if", true)
-              ]),
-              _: 3
-            }, 16, ["id", "aria-label", "aria-hidden", "boundaries-padding", "fallback-placements", "gpu-acceleration", "offset", "placement", "popper-options", "strategy", "effect", "enterable", "pure", "popper-class", "popper-style", "reference-el", "trigger-target-el", "visible", "z-index", "onMouseenter", "onMouseleave", "onClose"])), [
-              [vShow, unref(shouldShow)]
-            ]) : createCommentVNode("v-if", true)
-          ]),
-          _: 3
-        }, 8, ["name"])
-      ], 8, ["disabled", "to"]);
+      }, {
+        default: withCtx(() => [
+          createVNode(Transition, {
+            name: unref(transitionClass),
+            onAfterLeave: onTransitionLeave,
+            onBeforeEnter,
+            onAfterEnter: onAfterShow,
+            onBeforeLeave
+          }, {
+            default: withCtx(() => [
+              unref(shouldRender) ? withDirectives((openBlock(), createBlock(unref(ElPopperContent), mergeProps({
+                key: 0,
+                id: unref(id),
+                ref_key: "contentRef",
+                ref: contentRef
+              }, _ctx.$attrs, {
+                "aria-label": _ctx.ariaLabel,
+                "aria-hidden": ariaHidden.value,
+                "boundaries-padding": _ctx.boundariesPadding,
+                "fallback-placements": _ctx.fallbackPlacements,
+                "gpu-acceleration": _ctx.gpuAcceleration,
+                offset: _ctx.offset,
+                placement: _ctx.placement,
+                "popper-options": _ctx.popperOptions,
+                strategy: _ctx.strategy,
+                effect: _ctx.effect,
+                enterable: _ctx.enterable,
+                pure: _ctx.pure,
+                "popper-class": _ctx.popperClass,
+                "popper-style": [_ctx.popperStyle, unref(contentStyle)],
+                "reference-el": _ctx.referenceEl,
+                "trigger-target-el": _ctx.triggerTargetEl,
+                visible: unref(shouldShow),
+                "z-index": _ctx.zIndex,
+                onMouseenter: unref(onContentEnter),
+                onMouseleave: unref(onContentLeave),
+                onBlur,
+                onClose: unref(onClose)
+              }), {
+                default: withCtx(() => [
+                  renderSlot(_ctx.$slots, "default")
+                ]),
+                _: 3
+              }, 16, ["id", "aria-label", "aria-hidden", "boundaries-padding", "fallback-placements", "gpu-acceleration", "offset", "placement", "popper-options", "strategy", "effect", "enterable", "pure", "popper-class", "popper-style", "reference-el", "trigger-target-el", "visible", "z-index", "onMouseenter", "onMouseleave", "onClose"])), [
+                [vShow, unref(shouldShow)]
+              ]) : createCommentVNode("v-if", true)
+            ]),
+            _: 3
+          }, 8, ["name"])
+        ]),
+        _: 3
+      }, 8, ["disabled", "to"]);
     };
   }
 });
-var ElTooltipContent = _export_sfc(_sfc_main16, [["__file", "content.vue"]]);
+var ElTooltipContent = _export_sfc(_sfc_main17, [["__file", "content.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip/src/tooltip2.mjs
-var _hoisted_13 = ["innerHTML"];
-var _hoisted_22 = { key: 1 };
 var __default__14 = defineComponent({
   name: "ElTooltip"
 });
-var _sfc_main17 = defineComponent({
+var _sfc_main18 = defineComponent({
   ...__default__14,
   props: useTooltipProps,
   emits: tooltipEmits,
@@ -18113,7 +18285,7 @@ var _sfc_main17 = defineComponent({
       open: show,
       close: hide2
     });
-    const controlled = computed2(() => isBoolean2(props.visible) && !hasUpdateHandler.value);
+    const controlled = computed(() => isBoolean2(props.visible) && !hasUpdateHandler.value);
     provide(TOOLTIP_INJECTION_KEY, {
       controlled,
       id,
@@ -18221,7 +18393,7 @@ var _sfc_main17 = defineComponent({
                 _ctx.rawContent ? (openBlock(), createElementBlock("span", {
                   key: 0,
                   innerHTML: _ctx.content
-                }, null, 8, _hoisted_13)) : (openBlock(), createElementBlock("span", _hoisted_22, toDisplayString(_ctx.content), 1))
+                }, null, 8, ["innerHTML"])) : (openBlock(), createElementBlock("span", { key: 1 }, toDisplayString(_ctx.content), 1))
               ]),
               _ctx.showArrow ? (openBlock(), createBlock(unref(ElPopperArrow), {
                 key: 0,
@@ -18236,7 +18408,7 @@ var _sfc_main17 = defineComponent({
     };
   }
 });
-var Tooltip = _export_sfc(_sfc_main17, [["__file", "tooltip.vue"]]);
+var Tooltip = _export_sfc(_sfc_main18, [["__file", "tooltip.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip/index.mjs
 var ElTooltip = withInstall(Tooltip);
@@ -18287,9 +18459,6 @@ var autocompleteProps = buildProps({
     type: Boolean,
     default: false
   },
-  label: {
-    type: String
-  },
   teleported: useTooltipContentProps.teleported,
   highlightFirstItem: {
     type: Boolean,
@@ -18307,7 +18476,8 @@ var autocompleteProps = buildProps({
     type: Boolean,
     default: false
   },
-  name: String
+  name: String,
+  ...useAriaProps(["ariaLabel"])
 });
 var autocompleteEmits = {
   [UPDATE_MODEL_EVENT]: (value) => isString(value),
@@ -18320,15 +18490,12 @@ var autocompleteEmits = {
 };
 
 // node_modules/element-plus/es/components/autocomplete/src/autocomplete2.mjs
-var _hoisted_14 = ["aria-expanded", "aria-owns"];
-var _hoisted_23 = { key: 0 };
-var _hoisted_32 = ["id", "aria-selected", "onClick"];
 var COMPONENT_NAME6 = "ElAutocomplete";
 var __default__15 = defineComponent({
   name: COMPONENT_NAME6,
   inheritAttrs: false
 });
-var _sfc_main18 = defineComponent({
+var _sfc_main19 = defineComponent({
   ...__default__15,
   props: autocompleteProps,
   emits: autocompleteEmits,
@@ -18351,13 +18518,13 @@ var _sfc_main18 = defineComponent({
     const suggestionDisabled = ref(false);
     const loading = ref(false);
     const listboxId = useId();
-    const styles = computed2(() => rawAttrs.style);
-    const suggestionVisible = computed2(() => {
+    const styles = computed(() => rawAttrs.style);
+    const suggestionVisible = computed(() => {
       const isValidData = suggestions.value.length > 0;
       return (isValidData || loading.value) && activated.value;
     });
-    const suggestionLoading = computed2(() => !props.hideLoading && loading.value);
-    const refInput = computed2(() => {
+    const suggestionLoading = computed(() => !props.hideLoading && loading.value);
+    const refInput = computed(() => {
       if (inputRef.value) {
         return Array.from(inputRef.value.$el.querySelectorAll("input"));
       }
@@ -18504,8 +18671,11 @@ var _sfc_main18 = defineComponent({
       highlightedIndex.value = index;
       inputRef.value.ref.setAttribute("aria-activedescendant", `${listboxId.value}-item-${highlightedIndex.value}`);
     };
-    onClickOutside(listboxRef, () => {
+    const stopHandle = onClickOutside(listboxRef, () => {
       suggestionVisible.value && close2();
+    });
+    onBeforeUnmount(() => {
+      stopHandle == null ? void 0 : stopHandle();
     });
     onMounted(() => {
       ;
@@ -18568,7 +18738,7 @@ var _sfc_main18 = defineComponent({
               role: "listbox"
             }, {
               default: withCtx(() => [
-                unref(suggestionLoading) ? (openBlock(), createElementBlock("li", _hoisted_23, [
+                unref(suggestionLoading) ? (openBlock(), createElementBlock("li", { key: 0 }, [
                   renderSlot(_ctx.$slots, "loading", {}, () => [
                     createVNode(unref(ElIcon), {
                       class: normalizeClass(unref(ns).is("loading"))
@@ -18591,7 +18761,7 @@ var _sfc_main18 = defineComponent({
                     renderSlot(_ctx.$slots, "default", { item }, () => [
                       createTextVNode(toDisplayString(item[_ctx.valueKey]), 1)
                     ])
-                  ], 10, _hoisted_32);
+                  ], 10, ["id", "aria-selected", "onClick"]);
                 }), 128))
               ]),
               _: 3
@@ -18617,14 +18787,15 @@ var _sfc_main18 = defineComponent({
               disabled: unref(disabled),
               name: _ctx.name,
               "model-value": _ctx.modelValue,
+              "aria-label": _ctx.ariaLabel,
               onInput: handleInput,
               onChange: handleChange,
               onFocus: handleFocus,
               onBlur: handleBlur,
               onClear: handleClear,
               onKeydown: [
-                _cache[0] || (_cache[0] = withKeys(withModifiers(($event) => highlight(highlightedIndex.value - 1), ["prevent"]), ["up"])),
-                _cache[1] || (_cache[1] = withKeys(withModifiers(($event) => highlight(highlightedIndex.value + 1), ["prevent"]), ["down"])),
+                withKeys(withModifiers(($event) => highlight(highlightedIndex.value - 1), ["prevent"]), ["up"]),
+                withKeys(withModifiers(($event) => highlight(highlightedIndex.value + 1), ["prevent"]), ["down"]),
                 withKeys(handleKeyEnter, ["enter"]),
                 withKeys(close2, ["tab"]),
                 withKeys(handleKeyEscape, ["esc"])
@@ -18655,15 +18826,15 @@ var _sfc_main18 = defineComponent({
                   renderSlot(_ctx.$slots, "suffix")
                 ])
               } : void 0
-            ]), 1040, ["clearable", "disabled", "name", "model-value", "onKeydown"])
-          ], 14, _hoisted_14)
+            ]), 1040, ["clearable", "disabled", "name", "model-value", "aria-label", "onKeydown"])
+          ], 14, ["aria-expanded", "aria-owns"])
         ]),
         _: 3
       }, 8, ["visible", "placement", "popper-class", "teleported", "transition"]);
     };
   }
 });
-var Autocomplete = _export_sfc(_sfc_main18, [["__file", "autocomplete.vue"]]);
+var Autocomplete = _export_sfc(_sfc_main19, [["__file", "autocomplete.vue"]]);
 
 // node_modules/element-plus/es/components/autocomplete/index.mjs
 var ElAutocomplete = withInstall(Autocomplete);
@@ -18700,11 +18871,10 @@ var avatarEmits = {
 };
 
 // node_modules/element-plus/es/components/avatar/src/avatar2.mjs
-var _hoisted_15 = ["src", "alt", "srcset"];
 var __default__16 = defineComponent({
   name: "ElAvatar"
 });
-var _sfc_main19 = defineComponent({
+var _sfc_main20 = defineComponent({
   ...__default__16,
   props: avatarProps,
   emits: avatarEmits,
@@ -18712,7 +18882,7 @@ var _sfc_main19 = defineComponent({
     const props = __props;
     const ns = useNamespace("avatar");
     const hasLoadError = ref(false);
-    const avatarClass = computed2(() => {
+    const avatarClass = computed(() => {
       const { size: size3, icon, shape } = props;
       const classList = [ns.b()];
       if (isString(size3))
@@ -18723,13 +18893,13 @@ var _sfc_main19 = defineComponent({
         classList.push(ns.m(shape));
       return classList;
     });
-    const sizeStyle = computed2(() => {
+    const sizeStyle = computed(() => {
       const { size: size3 } = props;
       return isNumber3(size3) ? ns.cssVarBlock({
         size: addUnit(size3) || ""
       }) : void 0;
     });
-    const fitStyle = computed2(() => ({
+    const fitStyle = computed(() => ({
       objectFit: props.fit
     }));
     watch(() => props.src, () => hasLoadError.value = false);
@@ -18749,7 +18919,7 @@ var _sfc_main19 = defineComponent({
           srcset: _ctx.srcSet,
           style: normalizeStyle(unref(fitStyle)),
           onError: handleError
-        }, null, 44, _hoisted_15)) : _ctx.icon ? (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
+        }, null, 44, ["src", "alt", "srcset"])) : _ctx.icon ? (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
           default: withCtx(() => [
             (openBlock(), createBlock(resolveDynamicComponent(_ctx.icon)))
           ]),
@@ -18759,7 +18929,7 @@ var _sfc_main19 = defineComponent({
     };
   }
 });
-var Avatar = _export_sfc(_sfc_main19, [["__file", "avatar.vue"]]);
+var Avatar = _export_sfc(_sfc_main20, [["__file", "avatar.vue"]]);
 
 // node_modules/element-plus/es/components/avatar/index.mjs
 var ElAvatar = withInstall(Avatar);
@@ -18827,7 +18997,7 @@ var COMPONENT_NAME7 = "ElBacktop";
 var __default__17 = defineComponent({
   name: COMPONENT_NAME7
 });
-var _sfc_main20 = defineComponent({
+var _sfc_main21 = defineComponent({
   ...__default__17,
   props: backtopProps,
   emits: backtopEmits,
@@ -18835,7 +19005,7 @@ var _sfc_main20 = defineComponent({
     const props = __props;
     const ns = useNamespace("backtop");
     const { handleClick, visible } = useBackTop(props, emit, COMPONENT_NAME7);
-    const backTopStyle = computed2(() => ({
+    const backTopStyle = computed(() => ({
       right: `${props.right}px`,
       bottom: `${props.bottom}px`
     }));
@@ -18848,7 +19018,7 @@ var _sfc_main20 = defineComponent({
             key: 0,
             style: normalizeStyle(unref(backTopStyle)),
             class: normalizeClass(unref(ns).b()),
-            onClick: _cache[0] || (_cache[0] = withModifiers((...args) => unref(handleClick) && unref(handleClick)(...args), ["stop"]))
+            onClick: withModifiers(unref(handleClick), ["stop"])
           }, [
             renderSlot(_ctx.$slots, "default", {}, () => [
               createVNode(unref(ElIcon), {
@@ -18860,14 +19030,14 @@ var _sfc_main20 = defineComponent({
                 _: 1
               }, 8, ["class"])
             ])
-          ], 6)) : createCommentVNode("v-if", true)
+          ], 14, ["onClick"])) : createCommentVNode("v-if", true)
         ]),
         _: 3
       }, 8, ["name"]);
     };
   }
 });
-var Backtop = _export_sfc(_sfc_main20, [["__file", "backtop.vue"]]);
+var Backtop = _export_sfc(_sfc_main21, [["__file", "backtop.vue"]]);
 
 // node_modules/element-plus/es/components/backtop/index.mjs
 var ElBacktop = withInstall(Backtop);
@@ -18892,21 +19062,31 @@ var badgeProps = buildProps({
   showZero: {
     type: Boolean,
     default: true
+  },
+  color: String,
+  badgeStyle: {
+    type: definePropType([String, Object, Array])
+  },
+  offset: {
+    type: definePropType(Array),
+    default: [0, 0]
+  },
+  badgeClass: {
+    type: String
   }
 });
 
 // node_modules/element-plus/es/components/badge/src/badge2.mjs
-var _hoisted_16 = ["textContent"];
 var __default__18 = defineComponent({
   name: "ElBadge"
 });
-var _sfc_main21 = defineComponent({
+var _sfc_main22 = defineComponent({
   ...__default__18,
   props: badgeProps,
   setup(__props, { expose }) {
     const props = __props;
     const ns = useNamespace("badge");
-    const content = computed2(() => {
+    const content = computed(() => {
       if (props.isDot)
         return "";
       if (isNumber3(props.value) && isNumber3(props.max)) {
@@ -18916,6 +19096,17 @@ var _sfc_main21 = defineComponent({
         return props.value === 0 && !props.showZero ? "" : `${props.value}`;
       }
       return `${props.value}`;
+    });
+    const style = computed(() => {
+      var _a2, _b, _c, _d, _e;
+      return [
+        {
+          backgroundColor: props.color,
+          marginRight: addUnit(-((_b = (_a2 = props.offset) == null ? void 0 : _a2[0]) != null ? _b : 0)),
+          marginTop: addUnit((_d = (_c = props.offset) == null ? void 0 : _c[1]) != null ? _d : 0)
+        },
+        (_e = props.badgeStyle) != null ? _e : {}
+      ];
     });
     expose({
       content
@@ -18935,10 +19126,12 @@ var _sfc_main21 = defineComponent({
                 unref(ns).e("content"),
                 unref(ns).em("content", _ctx.type),
                 unref(ns).is("fixed", !!_ctx.$slots.default),
-                unref(ns).is("dot", _ctx.isDot)
+                unref(ns).is("dot", _ctx.isDot),
+                _ctx.badgeClass
               ]),
+              style: normalizeStyle(unref(style)),
               textContent: toDisplayString(unref(content))
-            }, null, 10, _hoisted_16), [
+            }, null, 14, ["textContent"]), [
               [vShow, !_ctx.hidden && (unref(content) || _ctx.isDot)]
             ])
           ]),
@@ -18948,7 +19141,7 @@ var _sfc_main21 = defineComponent({
     };
   }
 });
-var Badge = _export_sfc(_sfc_main21, [["__file", "badge.vue"]]);
+var Badge = _export_sfc(_sfc_main22, [["__file", "badge.vue"]]);
 
 // node_modules/element-plus/es/components/badge/index.mjs
 var ElBadge = withInstall(Badge);
@@ -18968,11 +19161,10 @@ var breadcrumbProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/breadcrumb/src/breadcrumb2.mjs
-var _hoisted_17 = ["aria-label"];
 var __default__19 = defineComponent({
   name: "ElBreadcrumb"
 });
-var _sfc_main22 = defineComponent({
+var _sfc_main23 = defineComponent({
   ...__default__19,
   props: breadcrumbProps,
   setup(__props) {
@@ -18996,11 +19188,11 @@ var _sfc_main22 = defineComponent({
         role: "navigation"
       }, [
         renderSlot(_ctx.$slots, "default")
-      ], 10, _hoisted_17);
+      ], 10, ["aria-label"]);
     };
   }
 });
-var Breadcrumb = _export_sfc(_sfc_main22, [["__file", "breadcrumb.vue"]]);
+var Breadcrumb = _export_sfc(_sfc_main23, [["__file", "breadcrumb.vue"]]);
 
 // node_modules/element-plus/es/components/breadcrumb/src/breadcrumb-item.mjs
 var breadcrumbItemProps = buildProps({
@@ -19008,17 +19200,14 @@ var breadcrumbItemProps = buildProps({
     type: definePropType([String, Object]),
     default: ""
   },
-  replace: {
-    type: Boolean,
-    default: false
-  }
+  replace: Boolean
 });
 
 // node_modules/element-plus/es/components/breadcrumb/src/breadcrumb-item2.mjs
 var __default__20 = defineComponent({
   name: "ElBreadcrumbItem"
 });
-var _sfc_main23 = defineComponent({
+var _sfc_main24 = defineComponent({
   ...__default__20,
   props: breadcrumbItemProps,
   setup(__props) {
@@ -19064,7 +19253,7 @@ var _sfc_main23 = defineComponent({
     };
   }
 });
-var BreadcrumbItem = _export_sfc(_sfc_main23, [["__file", "breadcrumb-item.vue"]]);
+var BreadcrumbItem = _export_sfc(_sfc_main24, [["__file", "breadcrumb-item.vue"]]);
 
 // node_modules/element-plus/es/components/breadcrumb/index.mjs
 var ElBreadcrumb = withInstall(Breadcrumb, {
@@ -19083,20 +19272,20 @@ var useButton = (props, emit) => {
     version: "3.0.0",
     scope: "props",
     ref: "https://element-plus.org/en-US/component/button.html#button-attributes"
-  }, computed2(() => props.type === "text"));
+  }, computed(() => props.type === "text"));
   const buttonGroupContext = inject(buttonGroupContextKey, void 0);
   const globalConfig2 = useGlobalConfig("button");
   const { form } = useFormItem();
-  const _size = useFormSize(computed2(() => buttonGroupContext == null ? void 0 : buttonGroupContext.size));
+  const _size = useFormSize(computed(() => buttonGroupContext == null ? void 0 : buttonGroupContext.size));
   const _disabled = useFormDisabled();
   const _ref = ref();
   const slots = useSlots();
-  const _type = computed2(() => props.type || (buttonGroupContext == null ? void 0 : buttonGroupContext.type) || "");
-  const autoInsertSpace = computed2(() => {
+  const _type = computed(() => props.type || (buttonGroupContext == null ? void 0 : buttonGroupContext.type) || "");
+  const autoInsertSpace = computed(() => {
     var _a2, _b, _c;
     return (_c = (_b = props.autoInsertSpace) != null ? _b : (_a2 = globalConfig2.value) == null ? void 0 : _a2.autoInsertSpace) != null ? _c : false;
   });
-  const _props = computed2(() => {
+  const _props = computed(() => {
     if (props.tag === "button") {
       return {
         ariaDisabled: _disabled.value || props.loading,
@@ -19107,7 +19296,7 @@ var useButton = (props, emit) => {
     }
     return {};
   });
-  const shouldAddSpace = computed2(() => {
+  const shouldAddSpace = computed(() => {
     var _a2;
     const defaultSlot = (_a2 = slots.default) == null ? void 0 : _a2.call(slots);
     if (autoInsertSpace.value && (defaultSlot == null ? void 0 : defaultSlot.length) === 1) {
@@ -19120,6 +19309,10 @@ var useButton = (props, emit) => {
     return false;
   });
   const handleClick = (evt) => {
+    if (_disabled.value || props.loading) {
+      evt.stopPropagation();
+      return;
+    }
     if (props.nativeType === "reset") {
       form == null ? void 0 : form.resetFields();
     }
@@ -20083,10 +20276,14 @@ function darken(color, amount = 20) {
 function useButtonCustomStyle(props) {
   const _disabled = useFormDisabled();
   const ns = useNamespace("button");
-  return computed2(() => {
+  return computed(() => {
     let styles = {};
-    const buttonColor = props.color;
+    let buttonColor = props.color;
     if (buttonColor) {
+      const match = buttonColor.match(/var\((.*?)\)/);
+      if (match) {
+        buttonColor = window.getComputedStyle(window.document.documentElement).getPropertyValue(match[1]);
+      }
       const color = new TinyColor(buttonColor);
       const activeBgColor = props.dark ? color.tint(20).toString() : darken(color, 20);
       if (props.plain) {
@@ -20135,7 +20332,7 @@ function useButtonCustomStyle(props) {
 var __default__21 = defineComponent({
   name: "ElButton"
 });
-var _sfc_main24 = defineComponent({
+var _sfc_main25 = defineComponent({
   ...__default__21,
   props: buttonProps,
   emits: buttonEmits,
@@ -20144,6 +20341,19 @@ var _sfc_main24 = defineComponent({
     const buttonStyle = useButtonCustomStyle(props);
     const ns = useNamespace("button");
     const { _ref, _size, _type, _disabled, _props, shouldAddSpace, handleClick } = useButton(props, emit);
+    const buttonKls = computed(() => [
+      ns.b(),
+      ns.m(_type.value),
+      ns.m(_size.value),
+      ns.is("disabled", _disabled.value),
+      ns.is("loading", props.loading),
+      ns.is("plain", props.plain),
+      ns.is("round", props.round),
+      ns.is("circle", props.circle),
+      ns.is("text", props.text),
+      ns.is("link", props.link),
+      ns.is("has-bg", props.bg)
+    ]);
     expose({
       ref: _ref,
       size: _size,
@@ -20156,19 +20366,7 @@ var _sfc_main24 = defineComponent({
         ref_key: "_ref",
         ref: _ref
       }, unref(_props), {
-        class: [
-          unref(ns).b(),
-          unref(ns).m(unref(_type)),
-          unref(ns).m(unref(_size)),
-          unref(ns).is("disabled", unref(_disabled)),
-          unref(ns).is("loading", _ctx.loading),
-          unref(ns).is("plain", _ctx.plain),
-          unref(ns).is("round", _ctx.round),
-          unref(ns).is("circle", _ctx.circle),
-          unref(ns).is("text", _ctx.text),
-          unref(ns).is("link", _ctx.link),
-          unref(ns).is("has-bg", _ctx.bg)
-        ],
+        class: unref(buttonKls),
         style: unref(buttonStyle),
         onClick: unref(handleClick)
       }), {
@@ -20201,7 +20399,7 @@ var _sfc_main24 = defineComponent({
     };
   }
 });
-var Button = _export_sfc(_sfc_main24, [["__file", "button.vue"]]);
+var Button = _export_sfc(_sfc_main25, [["__file", "button.vue"]]);
 
 // node_modules/element-plus/es/components/button/src/button-group.mjs
 var buttonGroupProps = {
@@ -20213,7 +20411,7 @@ var buttonGroupProps = {
 var __default__22 = defineComponent({
   name: "ElButtonGroup"
 });
-var _sfc_main25 = defineComponent({
+var _sfc_main26 = defineComponent({
   ...__default__22,
   props: buttonGroupProps,
   setup(__props) {
@@ -20225,14 +20423,14 @@ var _sfc_main25 = defineComponent({
     const ns = useNamespace("button");
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass(`${unref(ns).b("group")}`)
+        class: normalizeClass(unref(ns).b("group"))
       }, [
         renderSlot(_ctx.$slots, "default")
       ], 2);
     };
   }
 });
-var ButtonGroup = _export_sfc(_sfc_main25, [["__file", "button-group.vue"]]);
+var ButtonGroup = _export_sfc(_sfc_main26, [["__file", "button-group.vue"]]);
 
 // node_modules/element-plus/es/components/button/index.mjs
 var ElButton = withInstall(Button, {
@@ -20255,8 +20453,10 @@ var DEFAULT_FORMATS_DATEPICKER = {
   year: "YYYY",
   years: "YYYY",
   month: "YYYY-MM",
+  months: "YYYY-MM",
   datetime: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`,
   monthrange: "YYYY-MM",
+  yearrange: "YYYY",
   daterange: DEFAULT_FORMATS_DATE,
   datetimerange: `${DEFAULT_FORMATS_DATE} ${DEFAULT_FORMATS_TIME}`
 };
@@ -20302,16 +20502,16 @@ var valueEquals = function(a2, b2) {
   }
   return false;
 };
-var parseDate = function(date5, format2, lang) {
-  const day = isEmpty2(format2) || format2 === "x" ? (0, import_dayjs.default)(date5).locale(lang) : (0, import_dayjs.default)(date5, format2).locale(lang);
+var parseDate = function(date4, format2, lang) {
+  const day = isEmpty2(format2) || format2 === "x" ? (0, import_dayjs.default)(date4).locale(lang) : (0, import_dayjs.default)(date4, format2).locale(lang);
   return day.isValid() ? day : void 0;
 };
-var formatter = function(date5, format2, lang) {
+var formatter = function(date4, format2, lang) {
   if (isEmpty2(format2))
-    return date5;
+    return date4;
   if (format2 === "x")
-    return +date5;
-  return (0, import_dayjs.default)(date5).locale(lang).format(format2);
+    return +date4;
+  return (0, import_dayjs.default)(date4).locale(lang).format(format2);
 };
 var makeList = (total2, method5) => {
   var _a2;
@@ -20424,10 +20624,6 @@ var timePickerDefaultProps = buildProps({
     default: () => []
   },
   arrowControl: Boolean,
-  label: {
-    type: String,
-    default: void 0
-  },
   tabindex: {
     type: definePropType([String, Number]),
     default: 0
@@ -20436,16 +20632,16 @@ var timePickerDefaultProps = buildProps({
     type: Boolean,
     default: true
   },
-  unlinkPanels: Boolean
+  unlinkPanels: Boolean,
+  ...useEmptyValuesProps,
+  ...useAriaProps(["ariaLabel"])
 });
 
 // node_modules/element-plus/es/components/time-picker/src/common/picker.mjs
-var _hoisted_18 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
-var _hoisted_24 = ["id", "name", "placeholder", "value", "disabled", "readonly"];
 var __default__23 = defineComponent({
   name: "Picker"
 });
-var _sfc_main26 = defineComponent({
+var _sfc_main27 = defineComponent({
   ...__default__23,
   props: timePickerDefaultProps,
   emits: [
@@ -20453,6 +20649,7 @@ var _sfc_main26 = defineComponent({
     "change",
     "focus",
     "blur",
+    "clear",
     "calendar-change",
     "panel-change",
     "visible-change",
@@ -20467,6 +20664,7 @@ var _sfc_main26 = defineComponent({
     const nsRange = useNamespace("range");
     const { form, formItem } = useFormItem();
     const elPopperOptions = inject("ElPopperOptions", {});
+    const { valueOnClear } = useEmptyValues(props, null);
     const refPopper = ref();
     const inputRef = ref();
     const pickerVisible = ref(false);
@@ -20474,7 +20672,7 @@ var _sfc_main26 = defineComponent({
     const valueOnOpen = ref(null);
     let hasJustTabExitedInput = false;
     let ignoreFocusEvent = false;
-    const rangeInputKls = computed2(() => [
+    const rangeInputKls = computed(() => [
       nsDate.b("editor"),
       nsDate.bm("editor", props.type),
       nsInput.e("wrapper"),
@@ -20484,7 +20682,7 @@ var _sfc_main26 = defineComponent({
       pickerSize ? nsRange.bm("editor", pickerSize.value) : "",
       attrs.class
     ]);
-    const clearIconKls = computed2(() => [
+    const clearIconKls = computed(() => [
       nsInput.e("icon"),
       nsRange.e("close-icon"),
       !showClose.value ? nsRange.e("close-icon--hidden") : ""
@@ -20523,7 +20721,7 @@ var _sfc_main26 = defineComponent({
     const emitKeydown = (e) => {
       emit("keydown", e);
     };
-    const refInput = computed2(() => {
+    const refInput = computed(() => {
       if (inputRef.value) {
         const _r = isRangeInput.value ? inputRef.value : inputRef.value.$el;
         return Array.from(_r.querySelectorAll("input"));
@@ -20548,16 +20746,16 @@ var _sfc_main26 = defineComponent({
         ignoreFocusEvent = false;
       });
     };
-    const onPick = (date5 = "", visible = false) => {
+    const onPick = (date4 = "", visible = false) => {
       if (!visible) {
         ignoreFocusEvent = true;
       }
       pickerVisible.value = visible;
       let result2;
-      if (isArray(date5)) {
-        result2 = date5.map((_2) => _2.toDate());
+      if (isArray(date4)) {
+        result2 = date4.map((_2) => _2.toDate());
       } else {
-        result2 = date5 ? date5.toDate() : date5;
+        result2 = date4 ? date4.toDate() : date4;
       }
       userInput.value = null;
       emitInput(result2);
@@ -20624,10 +20822,10 @@ var _sfc_main26 = defineComponent({
       currentHandleBlurDeferCallback = handleBlurDefer;
       handleBlurDefer();
     };
-    const pickerDisabled = computed2(() => {
+    const pickerDisabled = computed(() => {
       return props.disabled || (form == null ? void 0 : form.disabled);
     });
-    const parsedValue2 = computed2(() => {
+    const parsedValue = computed(() => {
       let dayOrDays;
       if (valueIsEmpty.value) {
         if (pickerOptions.value.getDefaultValue) {
@@ -20644,7 +20842,9 @@ var _sfc_main26 = defineComponent({
         const availableResult = pickerOptions.value.getRangeAvailableTime(dayOrDays);
         if (!isEqual_default(availableResult, dayOrDays)) {
           dayOrDays = availableResult;
-          emitInput(isArray(dayOrDays) ? dayOrDays.map((_2) => _2.toDate()) : dayOrDays.toDate());
+          if (!valueIsEmpty.value) {
+            emitInput(isArray(dayOrDays) ? dayOrDays.map((_2) => _2.toDate()) : dayOrDays.toDate());
+          }
         }
       }
       if (isArray(dayOrDays) && dayOrDays.some((day) => !day)) {
@@ -20652,10 +20852,10 @@ var _sfc_main26 = defineComponent({
       }
       return dayOrDays;
     });
-    const displayValue = computed2(() => {
+    const displayValue = computed(() => {
       if (!pickerOptions.value.panelReady)
         return "";
-      const formattedValue = formatDayjsToString(parsedValue2.value);
+      const formattedValue = formatDayjsToString(parsedValue.value);
       if (isArray(userInput.value)) {
         return [
           userInput.value[0] || formattedValue && formattedValue[0] || "",
@@ -20669,15 +20869,16 @@ var _sfc_main26 = defineComponent({
       if (!pickerVisible.value && valueIsEmpty.value)
         return "";
       if (formattedValue) {
-        return isDatesPicker.value || isYearsPicker.value ? formattedValue.join(", ") : formattedValue;
+        return isDatesPicker.value || isMonthsPicker.value || isYearsPicker.value ? formattedValue.join(", ") : formattedValue;
       }
       return "";
     });
-    const isTimeLikePicker = computed2(() => props.type.includes("time"));
-    const isTimePicker = computed2(() => props.type.startsWith("time"));
-    const isDatesPicker = computed2(() => props.type === "dates");
-    const isYearsPicker = computed2(() => props.type === "years");
-    const triggerIcon = computed2(() => props.prefixIcon || (isTimeLikePicker.value ? clock_default : calendar_default));
+    const isTimeLikePicker = computed(() => props.type.includes("time"));
+    const isTimePicker = computed(() => props.type.startsWith("time"));
+    const isDatesPicker = computed(() => props.type === "dates");
+    const isMonthsPicker = computed(() => props.type === "months");
+    const isYearsPicker = computed(() => props.type === "years");
+    const triggerIcon = computed(() => props.prefixIcon || (isTimeLikePicker.value ? clock_default : calendar_default));
     const showClose = ref(false);
     const onClearIconClick = (event) => {
       if (props.readonly || pickerDisabled.value)
@@ -20685,14 +20886,18 @@ var _sfc_main26 = defineComponent({
       if (showClose.value) {
         event.stopPropagation();
         focusOnInputBox();
-        emitInput(null);
-        emitChange(null, true);
+        if (pickerOptions.value.handleClear) {
+          pickerOptions.value.handleClear();
+        } else {
+          emitInput(valueOnClear.value);
+        }
+        emitChange(valueOnClear.value, true);
         showClose.value = false;
-        pickerVisible.value = false;
-        pickerOptions.value.handleClear && pickerOptions.value.handleClear();
+        onHide();
       }
+      emit("clear");
     };
-    const valueIsEmpty = computed2(() => {
+    const valueIsEmpty = computed(() => {
       const { modelValue } = props;
       return !modelValue || isArray(modelValue) && !modelValue.filter(Boolean).length;
     });
@@ -20722,27 +20927,30 @@ var _sfc_main26 = defineComponent({
         pickerVisible.value = true;
       }
     };
-    const isRangeInput = computed2(() => {
+    const isRangeInput = computed(() => {
       return props.type.includes("range");
     });
     const pickerSize = useFormSize();
-    const popperEl = computed2(() => {
+    const popperEl = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = unref(refPopper)) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
     });
-    const actualInputRef = computed2(() => {
+    const actualInputRef = computed(() => {
       var _a2;
       if (unref(isRangeInput)) {
         return unref(inputRef);
       }
       return (_a2 = unref(inputRef)) == null ? void 0 : _a2.$el;
     });
-    onClickOutside(actualInputRef, (e) => {
+    const stophandle = onClickOutside(actualInputRef, (e) => {
       const unrefedPopperEl = unref(popperEl);
       const inputEl = unref(actualInputRef);
       if (unrefedPopperEl && (e.target === unrefedPopperEl || e.composedPath().includes(unrefedPopperEl)) || e.target === inputEl || e.composedPath().includes(inputEl))
         return;
       pickerVisible.value = false;
+    });
+    onBeforeUnmount(() => {
+      stophandle == null ? void 0 : stophandle();
     });
     const userInput = ref(null);
     const handleChange = () => {
@@ -20756,8 +20964,8 @@ var _sfc_main26 = defineComponent({
         }
       }
       if (userInput.value === "") {
-        emitInput(null);
-        emitChange(null);
+        emitInput(valueOnClear.value);
+        emitChange(valueOnClear.value);
         userInput.value = null;
       }
     };
@@ -20847,7 +21055,7 @@ var _sfc_main26 = defineComponent({
       var _a2;
       const values2 = userInput.value;
       const value = parseUserInputToDayjs(values2 && values2[0]);
-      const parsedVal = unref(parsedValue2);
+      const parsedVal = unref(parsedValue);
       if (value && value.isValid()) {
         userInput.value = [
           formatDayjsToString(value),
@@ -20864,7 +21072,7 @@ var _sfc_main26 = defineComponent({
       var _a2;
       const values2 = unref(userInput);
       const value = parseUserInputToDayjs(values2 && values2[1]);
-      const parsedVal = unref(parsedValue2);
+      const parsedVal = unref(parsedValue);
       if (value && value.isValid()) {
         userInput.value = [
           ((_a2 = unref(displayValue)) == null ? void 0 : _a2[0]) || null,
@@ -20936,8 +21144,8 @@ var _sfc_main26 = defineComponent({
             placeholder: _ctx.placeholder,
             class: normalizeClass([unref(nsDate).b("editor"), unref(nsDate).bm("editor", _ctx.type), _ctx.$attrs.class]),
             style: normalizeStyle(_ctx.$attrs.style),
-            readonly: !_ctx.editable || _ctx.readonly || unref(isDatesPicker) || unref(isYearsPicker) || _ctx.type === "week",
-            label: _ctx.label,
+            readonly: !_ctx.editable || _ctx.readonly || unref(isDatesPicker) || unref(isMonthsPicker) || unref(isYearsPicker) || _ctx.type === "week",
+            "aria-label": _ctx.ariaLabel,
             tabindex: _ctx.tabindex,
             "validate-event": false,
             onInput: onUserInput,
@@ -20948,16 +21156,16 @@ var _sfc_main26 = defineComponent({
             onMousedown: onMouseDownInput,
             onMouseenter: onMouseEnter,
             onMouseleave: onMouseLeave,
-            onTouchstart: onTouchStartInput,
-            onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-            }, ["stop"]))
+            onTouchstartPassive: onTouchStartInput,
+            onClick: withModifiers(() => {
+            }, ["stop"])
           }, {
             prefix: withCtx(() => [
               unref(triggerIcon) ? (openBlock(), createBlock(unref(ElIcon), {
                 key: 0,
                 class: normalizeClass(unref(nsInput).e("icon")),
                 onMousedown: withModifiers(onMouseDownInput, ["prevent"]),
-                onTouchstart: onTouchStartInput
+                onTouchstartPassive: onTouchStartInput
               }, {
                 default: withCtx(() => [
                   (openBlock(), createBlock(resolveDynamicComponent(unref(triggerIcon))))
@@ -20978,7 +21186,7 @@ var _sfc_main26 = defineComponent({
               }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
             ]),
             _: 1
-          }, 8, ["id", "model-value", "name", "size", "disabled", "placeholder", "class", "style", "readonly", "label", "tabindex", "onKeydown"])) : (openBlock(), createElementBlock("div", {
+          }, 8, ["id", "model-value", "name", "size", "disabled", "placeholder", "class", "style", "readonly", "aria-label", "tabindex", "onKeydown", "onClick"])) : (openBlock(), createElementBlock("div", {
             key: 1,
             ref_key: "inputRef",
             ref: inputRef,
@@ -20987,14 +21195,14 @@ var _sfc_main26 = defineComponent({
             onClick: handleFocusInput,
             onMouseenter: onMouseEnter,
             onMouseleave: onMouseLeave,
-            onTouchstart: onTouchStartInput,
+            onTouchstartPassive: onTouchStartInput,
             onKeydown: handleKeydownInput
           }, [
             unref(triggerIcon) ? (openBlock(), createBlock(unref(ElIcon), {
               key: 0,
               class: normalizeClass([unref(nsInput).e("icon"), unref(nsRange).e("icon")]),
               onMousedown: withModifiers(onMouseDownInput, ["prevent"]),
-              onTouchstart: onTouchStartInput
+              onTouchstartPassive: onTouchStartInput
             }, {
               default: withCtx(() => [
                 (openBlock(), createBlock(resolveDynamicComponent(unref(triggerIcon))))
@@ -21015,7 +21223,7 @@ var _sfc_main26 = defineComponent({
               onChange: handleStartChange,
               onFocus: handleFocusInput,
               onBlur: handleBlurInput
-            }, null, 42, _hoisted_18),
+            }, null, 42, ["id", "name", "placeholder", "value", "disabled", "readonly"]),
             renderSlot(_ctx.$slots, "range-separator", {}, () => [
               createBaseVNode("span", {
                 class: normalizeClass(unref(nsRange).b("separator"))
@@ -21035,7 +21243,7 @@ var _sfc_main26 = defineComponent({
               onBlur: handleBlurInput,
               onInput: handleEndInput,
               onChange: handleEndChange
-            }, null, 42, _hoisted_24),
+            }, null, 42, ["id", "name", "placeholder", "value", "disabled", "readonly"]),
             _ctx.clearIcon ? (openBlock(), createBlock(unref(ElIcon), {
               key: 1,
               class: normalizeClass(unref(clearIconKls)),
@@ -21052,7 +21260,7 @@ var _sfc_main26 = defineComponent({
           renderSlot(_ctx.$slots, "default", {
             visible: pickerVisible.value,
             actualVisible: pickerActualVisible.value,
-            parsedValue: unref(parsedValue2),
+            parsedValue: unref(parsedValue),
             format: _ctx.format,
             dateFormat: _ctx.dateFormat,
             timeFormat: _ctx.timeFormat,
@@ -21065,8 +21273,8 @@ var _sfc_main26 = defineComponent({
             onCalendarChange,
             onPanelChange,
             onKeydown: onKeydownPopperContent,
-            onMousedown: _cache[1] || (_cache[1] = withModifiers(() => {
-            }, ["stop"]))
+            onMousedown: withModifiers(() => {
+            }, ["stop"])
           })
         ]),
         _: 3
@@ -21074,7 +21282,7 @@ var _sfc_main26 = defineComponent({
     };
   }
 });
-var CommonPicker = _export_sfc(_sfc_main26, [["__file", "picker.vue"]]);
+var CommonPicker = _export_sfc(_sfc_main27, [["__file", "picker.vue"]]);
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-pick.mjs
 var import_dayjs2 = __toESM(require_dayjs_min(), 1);
@@ -21094,13 +21302,13 @@ var useTimePanel = ({
   getAvailableMinutes,
   getAvailableSeconds
 }) => {
-  const getAvailableTime = (date5, role, first, compareDate) => {
+  const getAvailableTime = (date4, role, first, compareDate) => {
     const availableTimeGetters = {
       hour: getAvailableHours,
       minute: getAvailableMinutes,
       second: getAvailableSeconds
     };
-    let result2 = date5;
+    let result2 = date4;
     ["hour", "minute", "second"].forEach((type4) => {
       if (availableTimeGetters[type4]) {
         let availableTimeSlots;
@@ -21189,14 +21397,17 @@ var useOldValue = (props) => {
 
 // node_modules/element-plus/es/directives/click-outside/index.mjs
 var nodeList = /* @__PURE__ */ new Map();
-var startClick;
 if (isClient) {
+  let startClick;
   document.addEventListener("mousedown", (e) => startClick = e);
   document.addEventListener("mouseup", (e) => {
-    for (const handlers2 of nodeList.values()) {
-      for (const { documentHandler } of handlers2) {
-        documentHandler(e, startClick);
+    if (startClick) {
+      for (const handlers2 of nodeList.values()) {
+        for (const { documentHandler } of handlers2) {
+          documentHandler(e, startClick);
+        }
       }
+      startClick = void 0;
     }
   });
 }
@@ -21372,17 +21583,14 @@ function a() {
       o = n[1] ? parseFloat(n[1]) : n[5] ? parseFloat(n[5]) : NaN, o && document && document.documentMode && (o = document.documentMode);
       var r = /(?:Trident\/(\d+.\d+))/.exec(e);
       N2 = r ? parseFloat(r[1]) + 4 : o, f = n[2] ? parseFloat(n[2]) : NaN, s = n[3] ? parseFloat(n[3]) : NaN, u = n[4] ? parseFloat(n[4]) : NaN, u ? (n = /(?:Chrome\/(\d+\.\d+))/.exec(e), d = n && n[1] ? parseFloat(n[1]) : NaN) : d = NaN;
-    } else
-      o = f = s = d = u = NaN;
+    } else o = f = s = d = u = NaN;
     if (i) {
       if (i[1]) {
         var t = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(e);
         l = t ? parseFloat(t[1].replace("_", ".")) : true;
-      } else
-        l = false;
+      } else l = false;
       p = !!i[2], m = !!i[3];
-    } else
-      l = p = m = false;
+    } else l = p = m = false;
   }
 }
 var _ = { ie: function() {
@@ -21425,8 +21633,7 @@ var h2 = U2;
 var X2;
 h2.canUseDOM && (X2 = document.implementation && document.implementation.hasFeature && document.implementation.hasFeature("", "") !== true);
 function S(e, n) {
-  if (!h2.canUseDOM || n && !("addEventListener" in document))
-    return false;
+  if (!h2.canUseDOM || n && !("addEventListener" in document)) return false;
   var i = "on" + e, r = i in document;
   if (!r) {
     var t = document.createElement("div");
@@ -21486,9 +21693,7 @@ var basicTimeSpinnerProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker-com/basic-time-spinner.mjs
-var _hoisted_19 = ["onClick"];
-var _hoisted_25 = ["onMouseenter"];
-var _sfc_main27 = defineComponent({
+var _sfc_main28 = defineComponent({
   __name: "basic-time-spinner",
   props: basicTimeSpinnerProps,
   emits: ["change", "select-range", "set-option"],
@@ -21506,17 +21711,17 @@ var _sfc_main27 = defineComponent({
       minutes: listMinutesRef,
       seconds: listSecondsRef
     };
-    const spinnerItems = computed2(() => {
+    const spinnerItems = computed(() => {
       return props.showSeconds ? timeUnits : timeUnits.slice(0, 2);
     });
-    const timePartials = computed2(() => {
+    const timePartials = computed(() => {
       const { spinnerDate } = props;
       const hours = spinnerDate.hour();
       const minutes = spinnerDate.minute();
       const seconds = spinnerDate.second();
       return { hours, minutes, seconds };
     });
-    const timeList = computed2(() => {
+    const timeList = computed(() => {
       const { hours, minutes } = unref(timePartials);
       return {
         hours: getHoursList(props.role),
@@ -21524,7 +21729,7 @@ var _sfc_main27 = defineComponent({
         seconds: getSecondsList(hours, minutes, props.role)
       };
     });
-    const arrowControlTimeList = computed2(() => {
+    const arrowControlTimeList = computed(() => {
       const { hours, minutes, seconds } = unref(timePartials);
       return {
         hours: buildTimeList(hours, 23),
@@ -21714,7 +21919,7 @@ var _sfc_main27 = defineComponent({
                   ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
                     createTextVNode(toDisplayString(("0" + key).slice(-2)), 1)
                   ], 64))
-                ], 10, _hoisted_19);
+                ], 10, ["onClick"]);
               }), 128))
             ]),
             _: 2
@@ -21768,16 +21973,16 @@ var _sfc_main27 = defineComponent({
                 ], 2);
               }), 128))
             ], 2)
-          ], 42, _hoisted_25);
+          ], 42, ["onMouseenter"]);
         }), 128)) : createCommentVNode("v-if", true)
       ], 2);
     };
   }
 });
-var TimeSpinner = _export_sfc(_sfc_main27, [["__file", "basic-time-spinner.vue"]]);
+var TimeSpinner = _export_sfc(_sfc_main28, [["__file", "basic-time-spinner.vue"]]);
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-pick.mjs
-var _sfc_main28 = defineComponent({
+var _sfc_main29 = defineComponent({
   __name: "panel-time-pick",
   props: panelTimePickerProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -21796,13 +22001,13 @@ var _sfc_main28 = defineComponent({
     const { t, lang } = useLocale();
     const selectionRange = ref([0, 2]);
     const oldValue = useOldValue(props);
-    const transitionName = computed2(() => {
+    const transitionName = computed(() => {
       return isUndefined2(props.actualVisible) ? `${ns.namespace.value}-zoom-in-top` : "";
     });
-    const showSeconds = computed2(() => {
+    const showSeconds = computed(() => {
       return props.format.includes("ss");
     });
-    const amPmMode = computed2(() => {
+    const amPmMode = computed(() => {
       if (props.format.includes("A"))
         return "A";
       if (props.format.includes("a"))
@@ -21861,8 +22066,8 @@ var _sfc_main28 = defineComponent({
       getAvailableMinutes,
       getAvailableSeconds
     });
-    const getRangeAvailableTime = (date5) => {
-      return getAvailableTime(date5, props.datetimeRole || "", true);
+    const getRangeAvailableTime = (date4) => {
+      return getAvailableTime(date4, props.datetimeRole || "", true);
     };
     const parseUserInput = (value) => {
       if (!value)
@@ -21919,8 +22124,8 @@ var _sfc_main28 = defineComponent({
               createBaseVNode("button", {
                 type: "button",
                 class: normalizeClass([unref(ns).be("panel", "btn"), "confirm"]),
-                onClick: _cache[0] || (_cache[0] = ($event) => handleConfirm())
-              }, toDisplayString(unref(t)("el.datepicker.confirm")), 3)
+                onClick: ($event) => handleConfirm()
+              }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, ["onClick"])
             ], 2)
           ], 2)) : createCommentVNode("v-if", true)
         ]),
@@ -21929,7 +22134,7 @@ var _sfc_main28 = defineComponent({
     };
   }
 });
-var TimePickPanel = _export_sfc(_sfc_main28, [["__file", "panel-time-pick.vue"]]);
+var TimePickPanel = _export_sfc(_sfc_main29, [["__file", "panel-time-pick.vue"]]);
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-range.mjs
 var import_dayjs3 = __toESM(require_dayjs_min(), 1);
@@ -21943,8 +22148,7 @@ var panelTimeRangeProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker-com/panel-time-range.mjs
-var _hoisted_110 = ["disabled"];
-var _sfc_main29 = defineComponent({
+var _sfc_main30 = defineComponent({
   __name: "panel-time-range",
   props: panelTimeRangeProps,
   emits: ["pick", "select-range", "set-picker-option"],
@@ -21968,28 +22172,28 @@ var _sfc_main29 = defineComponent({
       disabledSeconds,
       defaultValue
     } = pickerBase.props;
-    const startContainerKls = computed2(() => [
+    const startContainerKls = computed(() => [
       nsTime.be("range-picker", "body"),
       nsTime.be("panel", "content"),
       nsTime.is("arrow", arrowControl),
       showSeconds.value ? "has-seconds" : ""
     ]);
-    const endContainerKls = computed2(() => [
+    const endContainerKls = computed(() => [
       nsTime.be("range-picker", "body"),
       nsTime.be("panel", "content"),
       nsTime.is("arrow", arrowControl),
       showSeconds.value ? "has-seconds" : ""
     ]);
-    const startTime = computed2(() => props.parsedValue[0]);
-    const endTime = computed2(() => props.parsedValue[1]);
+    const startTime = computed(() => props.parsedValue[0]);
+    const endTime = computed(() => props.parsedValue[1]);
     const oldValue = useOldValue(props);
     const handleCancel = () => {
       emit("pick", oldValue.value, false);
     };
-    const showSeconds = computed2(() => {
+    const showSeconds = computed(() => {
       return props.format.includes("ss");
     });
-    const amPmMode = computed2(() => {
+    const amPmMode = computed(() => {
       if (props.format.includes("A"))
         return "A";
       if (props.format.includes("a"))
@@ -21999,11 +22203,11 @@ var _sfc_main29 = defineComponent({
     const handleConfirm = (visible = false) => {
       emit("pick", [startTime.value, endTime.value], visible);
     };
-    const handleMinChange = (date5) => {
-      handleChange(date5.millisecond(0), endTime.value);
+    const handleMinChange = (date4) => {
+      handleChange(date4.millisecond(0), endTime.value);
     };
-    const handleMaxChange = (date5) => {
-      handleChange(startTime.value, date5.millisecond(0));
+    const handleMaxChange = (date4) => {
+      handleChange(startTime.value, date4.millisecond(0));
     };
     const isValidValue3 = (_date) => {
       const parsedDate = _date.map((_2) => (0, import_dayjs3.default)(_2).locale(lang.value));
@@ -22013,7 +22217,7 @@ var _sfc_main29 = defineComponent({
     const handleChange = (start, end2) => {
       emit("pick", [start, end2], true);
     };
-    const btnConfirmDisabled = computed2(() => {
+    const btnConfirmDisabled = computed(() => {
       return startTime.value > endTime.value;
     });
     const selectionRange = ref([0, 2]);
@@ -22021,7 +22225,7 @@ var _sfc_main29 = defineComponent({
       emit("select-range", start, end2, "min");
       selectionRange.value = [start, end2];
     };
-    const offset2 = computed2(() => showSeconds.value ? 11 : 8);
+    const offset2 = computed(() => showSeconds.value ? 11 : 8);
     const setMaxSelectionRange = (start, end2) => {
       emit("select-range", start, end2, "max");
       const _offset = unref(offset2);
@@ -22199,20 +22403,20 @@ var _sfc_main29 = defineComponent({
           createBaseVNode("button", {
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "cancel"]),
-            onClick: _cache[0] || (_cache[0] = ($event) => handleCancel())
-          }, toDisplayString(unref(t)("el.datepicker.cancel")), 3),
+            onClick: ($event) => handleCancel()
+          }, toDisplayString(unref(t)("el.datepicker.cancel")), 11, ["onClick"]),
           createBaseVNode("button", {
             type: "button",
             class: normalizeClass([unref(nsTime).be("panel", "btn"), "confirm"]),
             disabled: unref(btnConfirmDisabled),
-            onClick: _cache[1] || (_cache[1] = ($event) => handleConfirm())
-          }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, _hoisted_110)
+            onClick: ($event) => handleConfirm()
+          }, toDisplayString(unref(t)("el.datepicker.confirm")), 11, ["disabled", "onClick"])
         ], 2)
       ], 2)) : createCommentVNode("v-if", true);
     };
   }
 });
-var TimeRangePanel = _export_sfc(_sfc_main29, [["__file", "panel-time-range.vue"]]);
+var TimeRangePanel = _export_sfc(_sfc_main30, [["__file", "panel-time-range.vue"]]);
 
 // node_modules/element-plus/es/components/time-picker/src/time-picker.mjs
 import_dayjs4.default.extend(import_customParseFormat.default);
@@ -22266,19 +22470,15 @@ var TimePicker = defineComponent({
 });
 
 // node_modules/element-plus/es/components/time-picker/index.mjs
-var _TimePicker = TimePicker;
-_TimePicker.install = (app) => {
-  app.component(_TimePicker.name, _TimePicker);
-};
-var ElTimePicker = _TimePicker;
+var ElTimePicker = withInstall(TimePicker);
 
 // node_modules/element-plus/es/components/calendar/src/date-table.mjs
-var getPrevMonthLastDays = (date5, count) => {
-  const lastDay = date5.subtract(1, "month").endOf("month").date();
+var getPrevMonthLastDays = (date4, count) => {
+  const lastDay = date4.subtract(1, "month").endOf("month").date();
   return rangeArr(count).map((_2, index) => lastDay - (count - index - 1));
 };
-var getMonthDays = (date5) => {
-  const days = date5.daysInMonth();
+var getMonthDays = (date4) => {
+  const days = date4.daysInMonth();
   return rangeArr(days).map((_2, index) => index + 1);
 };
 var toNestedArr = (days) => rangeArr(days.length / 7).map((index) => {
@@ -22312,8 +22512,8 @@ var useDateTable = (props, emit) => {
   const firstDayOfWeek = import_dayjs5.default.localeData().firstDayOfWeek();
   const { t, lang } = useLocale();
   const now2 = (0, import_dayjs5.default)().locale(lang.value);
-  const isInRange = computed2(() => !!props.range && !!props.range.length);
-  const rows = computed2(() => {
+  const isInRange = computed(() => !!props.range && !!props.range.length);
+  const rows = computed(() => {
     let days = [];
     if (isInRange.value) {
       const [start, end2] = props.range;
@@ -22348,7 +22548,7 @@ var useDateTable = (props, emit) => {
     }
     return toNestedArr(days);
   });
-  const weekDays = computed2(() => {
+  const weekDays = computed(() => {
     const start = firstDayOfWeek;
     if (start === 0) {
       return WEEK_DAYS.map((_2) => t(`el.datepicker.weeks.${_2}`));
@@ -22367,8 +22567,8 @@ var useDateTable = (props, emit) => {
     }
   };
   const handlePickDay = ({ text, type: type4 }) => {
-    const date5 = getFormattedDate(text, type4);
-    emit("pick", date5);
+    const date4 = getFormattedDate(text, type4);
+    emit("pick", date4);
   };
   const getSlotData = ({ text, type: type4 }) => {
     const day = getFormattedDate(text, type4);
@@ -22391,12 +22591,10 @@ var useDateTable = (props, emit) => {
 };
 
 // node_modules/element-plus/es/components/calendar/src/date-table2.mjs
-var _hoisted_111 = { key: 0 };
-var _hoisted_26 = ["onClick"];
 var __default__24 = defineComponent({
   name: "DateTable"
 });
-var _sfc_main30 = defineComponent({
+var _sfc_main31 = defineComponent({
   ...__default__24,
   props: dateTableProps,
   emits: dateTableEmits,
@@ -22416,11 +22614,11 @@ var _sfc_main30 = defineComponent({
     const getCellClass = ({ text, type: type4 }) => {
       const classes = [type4];
       if (type4 === "current") {
-        const date5 = getFormattedDate(text, type4);
-        if (date5.isSame(props.selectedDay, "day")) {
+        const date4 = getFormattedDate(text, type4);
+        if (date4.isSame(props.selectedDay, "day")) {
           classes.push(nsDay.is("selected"));
         }
-        if (date5.isSame(now2, "day")) {
+        if (date4.isSame(now2, "day")) {
           classes.push(nsDay.is("today"));
         }
       }
@@ -22435,7 +22633,7 @@ var _sfc_main30 = defineComponent({
         cellspacing: "0",
         cellpadding: "0"
       }, [
-        !_ctx.hideHeader ? (openBlock(), createElementBlock("thead", _hoisted_111, [
+        !_ctx.hideHeader ? (openBlock(), createElementBlock("thead", { key: 0 }, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(weekDays), (day) => {
             return openBlock(), createElementBlock("th", { key: day }, toDisplayString(day), 1);
           }), 128))
@@ -22464,7 +22662,7 @@ var _sfc_main30 = defineComponent({
                       createBaseVNode("span", null, toDisplayString(cell.text), 1)
                     ])
                   ], 2)
-                ], 10, _hoisted_26);
+                ], 10, ["onClick"]);
               }), 128))
             ], 2);
           }), 128))
@@ -22473,7 +22671,7 @@ var _sfc_main30 = defineComponent({
     };
   }
 });
-var DateTable = _export_sfc(_sfc_main30, [["__file", "date-table.vue"]]);
+var DateTable = _export_sfc(_sfc_main31, [["__file", "date-table.vue"]]);
 
 // node_modules/element-plus/es/components/calendar/src/use-calendar.mjs
 var import_dayjs6 = __toESM(require_dayjs_min(), 1);
@@ -22504,11 +22702,11 @@ var useCalendar = (props, emit, componentName2) => {
   const { lang } = useLocale();
   const selectedDay = ref();
   const now2 = (0, import_dayjs6.default)().locale(lang.value);
-  const realSelectedDay = computed2({
+  const realSelectedDay = computed({
     get() {
       if (!props.modelValue)
         return selectedDay.value;
-      return date5.value;
+      return date4.value;
     },
     set(val) {
       if (!val)
@@ -22519,8 +22717,8 @@ var useCalendar = (props, emit, componentName2) => {
       emit(UPDATE_MODEL_EVENT, result2);
     }
   });
-  const validatedRange = computed2(() => {
-    if (!props.range)
+  const validatedRange = computed(() => {
+    if (!props.range || !isArray(props.range) || props.range.length !== 2 || props.range.some((item) => !isDate(item)))
       return [];
     const rangeArrDayjs = props.range.map((_2) => (0, import_dayjs6.default)(_2).locale(lang.value));
     const [startDayjs, endDayjs] = rangeArrDayjs;
@@ -22538,17 +22736,17 @@ var useCalendar = (props, emit, componentName2) => {
       return calculateValidatedDateRange(startDayjs, endDayjs);
     }
   });
-  const date5 = computed2(() => {
+  const date4 = computed(() => {
     if (!props.modelValue) {
       return realSelectedDay.value || (validatedRange.value.length ? validatedRange.value[0][0] : now2);
     } else {
       return (0, import_dayjs6.default)(props.modelValue).locale(lang.value);
     }
   });
-  const prevMonthDayjs = computed2(() => date5.value.subtract(1, "month").date(1));
-  const nextMonthDayjs = computed2(() => date5.value.add(1, "month").date(1));
-  const prevYearDayjs = computed2(() => date5.value.subtract(1, "year").date(1));
-  const nextYearDayjs = computed2(() => date5.value.add(1, "year").date(1));
+  const prevMonthDayjs = computed(() => date4.value.subtract(1, "month").date(1));
+  const nextMonthDayjs = computed(() => date4.value.add(1, "month").date(1));
+  const prevYearDayjs = computed(() => date4.value.subtract(1, "year").date(1));
+  const nextYearDayjs = computed(() => date4.value.add(1, "year").date(1));
   const calculateValidatedDateRange = (startDayjs, endDayjs) => {
     const firstDay = startDayjs.startOf("week");
     const lastDay = endDayjs.endOf("week");
@@ -22577,13 +22775,13 @@ var useCalendar = (props, emit, componentName2) => {
       today: now2
     };
     const day = dateMap[type4];
-    if (!day.isSame(date5.value, "day")) {
+    if (!day.isSame(date4.value, "day")) {
       pickDay(day);
     }
   };
   return {
     calculateValidatedDateRange,
-    date: date5,
+    date: date4,
     realSelectedDay,
     pickDay,
     selectDate,
@@ -22612,7 +22810,7 @@ var COMPONENT_NAME8 = "ElCalendar";
 var __default__25 = defineComponent({
   name: COMPONENT_NAME8
 });
-var _sfc_main31 = defineComponent({
+var _sfc_main32 = defineComponent({
   ...__default__25,
   props: calendarProps,
   emits: calendarEmits,
@@ -22621,16 +22819,16 @@ var _sfc_main31 = defineComponent({
     const ns = useNamespace("calendar");
     const {
       calculateValidatedDateRange,
-      date: date5,
+      date: date4,
       pickDay,
       realSelectedDay,
       selectDate,
       validatedRange
     } = useCalendar(props, emit, COMPONENT_NAME8);
     const { t } = useLocale();
-    const i18nDate = computed2(() => {
-      const pickedMonth = `el.datepicker.month${date5.value.format("M")}`;
-      return `${date5.value.year()} ${t("el.datepicker.year")} ${t(pickedMonth)}`;
+    const i18nDate = computed(() => {
+      const pickedMonth = `el.datepicker.month${date4.value.format("M")}`;
+      return `${date4.value.year()} ${t("el.datepicker.year")} ${t(pickedMonth)}`;
     });
     expose({
       selectedDay: realSelectedDay,
@@ -22657,31 +22855,31 @@ var _sfc_main31 = defineComponent({
                 default: withCtx(() => [
                   createVNode(unref(ElButton), {
                     size: "small",
-                    onClick: _cache[0] || (_cache[0] = ($event) => unref(selectDate)("prev-month"))
+                    onClick: ($event) => unref(selectDate)("prev-month")
                   }, {
                     default: withCtx(() => [
                       createTextVNode(toDisplayString(unref(t)("el.datepicker.prevMonth")), 1)
                     ]),
                     _: 1
-                  }),
+                  }, 8, ["onClick"]),
                   createVNode(unref(ElButton), {
                     size: "small",
-                    onClick: _cache[1] || (_cache[1] = ($event) => unref(selectDate)("today"))
+                    onClick: ($event) => unref(selectDate)("today")
                   }, {
                     default: withCtx(() => [
                       createTextVNode(toDisplayString(unref(t)("el.datepicker.today")), 1)
                     ]),
                     _: 1
-                  }),
+                  }, 8, ["onClick"]),
                   createVNode(unref(ElButton), {
                     size: "small",
-                    onClick: _cache[2] || (_cache[2] = ($event) => unref(selectDate)("next-month"))
+                    onClick: ($event) => unref(selectDate)("next-month")
                   }, {
                     default: withCtx(() => [
                       createTextVNode(toDisplayString(unref(t)("el.datepicker.nextMonth")), 1)
                     ]),
                     _: 1
-                  })
+                  }, 8, ["onClick"])
                 ]),
                 _: 1
               })
@@ -22693,7 +22891,7 @@ var _sfc_main31 = defineComponent({
           class: normalizeClass(unref(ns).e("body"))
         }, [
           createVNode(DateTable, {
-            date: unref(date5),
+            date: unref(date4),
             "selected-day": unref(realSelectedDay),
             onPick: unref(pickDay)
           }, createSlots({ _: 2 }, [
@@ -22730,7 +22928,7 @@ var _sfc_main31 = defineComponent({
     };
   }
 });
-var Calendar = _export_sfc(_sfc_main31, [["__file", "calendar.vue"]]);
+var Calendar = _export_sfc(_sfc_main32, [["__file", "calendar.vue"]]);
 
 // node_modules/element-plus/es/components/calendar/index.mjs
 var ElCalendar = withInstall(Calendar);
@@ -22761,7 +22959,7 @@ var cardProps = buildProps({
 var __default__26 = defineComponent({
   name: "ElCard"
 });
-var _sfc_main32 = defineComponent({
+var _sfc_main33 = defineComponent({
   ...__default__26,
   props: cardProps,
   setup(__props) {
@@ -22796,7 +22994,7 @@ var _sfc_main32 = defineComponent({
     };
   }
 });
-var Card = _export_sfc(_sfc_main32, [["__file", "card.vue"]]);
+var Card = _export_sfc(_sfc_main33, [["__file", "card.vue"]]);
 
 // node_modules/element-plus/es/components/card/index.mjs
 var ElCard = withInstall(Card);
@@ -22839,6 +23037,10 @@ var carouselProps = buildProps({
     values: ["", "card"],
     default: ""
   },
+  cardScale: {
+    type: Number,
+    default: 0.83
+  },
   loop: {
     type: Boolean,
     default: true
@@ -22852,10 +23054,7 @@ var carouselProps = buildProps({
     type: Boolean,
     default: true
   },
-  motionBlur: {
-    type: Boolean,
-    default: false
-  }
+  motionBlur: Boolean
 });
 var carouselEmits = {
   change: (current, prev) => [current, prev].every(isNumber3)
@@ -22863,6 +23062,7 @@ var carouselEmits = {
 
 // node_modules/element-plus/es/components/carousel/src/constants.mjs
 var carouselContextKey = Symbol("carouselContextKey");
+var CAROUSEL_ITEM_NAME = "ElCarouselItem";
 
 // node_modules/element-plus/es/components/carousel/src/use-carousel.mjs
 var THROTTLE_TIME = 300;
@@ -22871,7 +23071,7 @@ var useCarousel = (props, emit, componentName2) => {
     children: items,
     addChild: addItem,
     removeChild: removeItem
-  } = useOrderedChildren(getCurrentInstance(), "ElCarouselItem");
+  } = useOrderedChildren(getCurrentInstance(), CAROUSEL_ITEM_NAME);
   const slots = useSlots();
   const activeIndex = ref(-1);
   const timer = ref(null);
@@ -22881,13 +23081,13 @@ var useCarousel = (props, emit, componentName2) => {
   const isItemsTwoLength = ref(true);
   const isFirstCall = ref(true);
   const isTransitioning = ref(false);
-  const arrowDisplay = computed2(() => props.arrow !== "never" && !unref(isVertical));
-  const hasLabel = computed2(() => {
+  const arrowDisplay = computed(() => props.arrow !== "never" && !unref(isVertical));
+  const hasLabel = computed(() => {
     return items.value.some((item) => item.props.label.toString().length > 0);
   });
-  const isCardType = computed2(() => props.type === "card");
-  const isVertical = computed2(() => props.direction === "vertical");
-  const containerStyle = computed2(() => {
+  const isCardType = computed(() => props.type === "card");
+  const isVertical = computed(() => props.direction === "vertical");
+  const containerStyle = computed(() => {
     if (props.height !== "auto") {
       return {
         height: props.height
@@ -22929,6 +23129,8 @@ var useCarousel = (props, emit, componentName2) => {
       activeIndex.value = activeIndex.value + 1;
     } else if (props.loop) {
       activeIndex.value = 0;
+    } else {
+      isTransitioning.value = false;
     }
   };
   function setActiveItem(index) {
@@ -23053,9 +23255,8 @@ var useCarousel = (props, emit, componentName2) => {
     if (!defaultSlots)
       return null;
     const flatSlots = flattedChildren(defaultSlots);
-    const carouselItemsName = "ElCarouselItem";
     const normalizeSlots = flatSlots.filter((slot) => {
-      return isVNode(slot) && slot.type.name === carouselItemsName;
+      return isVNode(slot) && slot.type.name === CAROUSEL_ITEM_NAME;
     });
     if ((normalizeSlots == null ? void 0 : normalizeSlots.length) === 2 && props.loop && !isCardType.value) {
       isItemsTwoLength.value = true;
@@ -23107,6 +23308,7 @@ var useCarousel = (props, emit, componentName2) => {
     isVertical,
     items,
     loop: props.loop,
+    cardScale: props.cardScale,
     addItem,
     removeItem,
     setActiveItem,
@@ -23141,39 +23343,11 @@ var useCarousel = (props, emit, componentName2) => {
 };
 
 // node_modules/element-plus/es/components/carousel/src/carousel2.mjs
-var _hoisted_112 = ["aria-label"];
-var _hoisted_27 = ["aria-label"];
-var _hoisted_33 = ["onMouseenter", "onClick"];
-var _hoisted_4 = ["aria-label"];
-var _hoisted_5 = { key: 0 };
-var _hoisted_6 = {
-  key: 3,
-  xmlns: "http://www.w3.org/2000/svg",
-  version: "1.1",
-  style: { "display": "none" }
-};
-var _hoisted_7 = createBaseVNode("defs", null, [
-  createBaseVNode("filter", { id: "elCarouselHorizontal" }, [
-    createBaseVNode("feGaussianBlur", {
-      in: "SourceGraphic",
-      stdDeviation: "12,0"
-    })
-  ]),
-  createBaseVNode("filter", { id: "elCarouselVertical" }, [
-    createBaseVNode("feGaussianBlur", {
-      in: "SourceGraphic",
-      stdDeviation: "0,10"
-    })
-  ])
-], -1);
-var _hoisted_8 = [
-  _hoisted_7
-];
 var COMPONENT_NAME9 = "ElCarousel";
 var __default__27 = defineComponent({
   name: COMPONENT_NAME9
 });
-var _sfc_main33 = defineComponent({
+var _sfc_main34 = defineComponent({
   ...__default__27,
   props: carouselProps,
   emits: carouselEmits,
@@ -23206,21 +23380,21 @@ var _sfc_main33 = defineComponent({
     } = useCarousel(props, emit, COMPONENT_NAME9);
     const ns = useNamespace("carousel");
     const { t } = useLocale();
-    const carouselClasses = computed2(() => {
+    const carouselClasses = computed(() => {
       const classes = [ns.b(), ns.m(props.direction)];
       if (unref(isCardType)) {
         classes.push(ns.m("card"));
       }
       return classes;
     });
-    const carouselContainer = computed2(() => {
+    const carouselContainer = computed(() => {
       const classes = [ns.e("container")];
       if (props.motionBlur && unref(isTransitioning)) {
         classes.push(unref(isVertical) ? `${ns.namespace.value}-transitioning-vertical` : `${ns.namespace.value}-transitioning`);
       }
       return classes;
     });
-    const indicatorsClasses = computed2(() => {
+    const indicatorsClasses = computed(() => {
       const classes = [ns.e("indicators"), ns.em("indicators", props.direction)];
       if (unref(hasLabel)) {
         classes.push(ns.em("indicators", "labels"));
@@ -23234,6 +23408,7 @@ var _sfc_main33 = defineComponent({
       return classes;
     });
     expose({
+      activeIndex,
       setActiveItem,
       prev,
       next
@@ -23243,8 +23418,8 @@ var _sfc_main33 = defineComponent({
         ref_key: "root",
         ref: root2,
         class: normalizeClass(unref(carouselClasses)),
-        onMouseenter: _cache[7] || (_cache[7] = withModifiers((...args) => unref(handleMouseEnter) && unref(handleMouseEnter)(...args), ["stop"])),
-        onMouseleave: _cache[8] || (_cache[8] = withModifiers((...args) => unref(handleMouseLeave) && unref(handleMouseLeave)(...args), ["stop"]))
+        onMouseenter: withModifiers(unref(handleMouseEnter), ["stop"]),
+        onMouseleave: withModifiers(unref(handleMouseLeave), ["stop"])
       }, [
         unref(arrowDisplay) ? (openBlock(), createBlock(Transition, {
           key: 0,
@@ -23256,9 +23431,9 @@ var _sfc_main33 = defineComponent({
               type: "button",
               class: normalizeClass([unref(ns).e("arrow"), unref(ns).em("arrow", "left")]),
               "aria-label": unref(t)("el.carousel.leftArrow"),
-              onMouseenter: _cache[0] || (_cache[0] = ($event) => unref(handleButtonEnter)("left")),
-              onMouseleave: _cache[1] || (_cache[1] = (...args) => unref(handleButtonLeave) && unref(handleButtonLeave)(...args)),
-              onClick: _cache[2] || (_cache[2] = withModifiers(($event) => unref(throttledArrowClick)(unref(activeIndex) - 1), ["stop"]))
+              onMouseenter: ($event) => unref(handleButtonEnter)("left"),
+              onMouseleave: unref(handleButtonLeave),
+              onClick: withModifiers(($event) => unref(throttledArrowClick)(unref(activeIndex) - 1), ["stop"])
             }, [
               createVNode(unref(ElIcon), null, {
                 default: withCtx(() => [
@@ -23266,7 +23441,7 @@ var _sfc_main33 = defineComponent({
                 ]),
                 _: 1
               })
-            ], 42, _hoisted_112), [
+            ], 42, ["aria-label", "onMouseenter", "onMouseleave", "onClick"]), [
               [
                 vShow,
                 (_ctx.arrow === "always" || unref(hover)) && (props.loop || unref(activeIndex) > 0)
@@ -23285,9 +23460,9 @@ var _sfc_main33 = defineComponent({
               type: "button",
               class: normalizeClass([unref(ns).e("arrow"), unref(ns).em("arrow", "right")]),
               "aria-label": unref(t)("el.carousel.rightArrow"),
-              onMouseenter: _cache[3] || (_cache[3] = ($event) => unref(handleButtonEnter)("right")),
-              onMouseleave: _cache[4] || (_cache[4] = (...args) => unref(handleButtonLeave) && unref(handleButtonLeave)(...args)),
-              onClick: _cache[5] || (_cache[5] = withModifiers(($event) => unref(throttledArrowClick)(unref(activeIndex) + 1), ["stop"]))
+              onMouseenter: ($event) => unref(handleButtonEnter)("right"),
+              onMouseleave: unref(handleButtonLeave),
+              onClick: withModifiers(($event) => unref(throttledArrowClick)(unref(activeIndex) + 1), ["stop"])
             }, [
               createVNode(unref(ElIcon), null, {
                 default: withCtx(() => [
@@ -23295,7 +23470,7 @@ var _sfc_main33 = defineComponent({
                 ]),
                 _: 1
               })
-            ], 42, _hoisted_27), [
+            ], 42, ["aria-label", "onMouseenter", "onMouseleave", "onClick"]), [
               [
                 vShow,
                 (_ctx.arrow === "always" || unref(hover)) && (props.loop || unref(activeIndex) < unref(items).length - 1)
@@ -23307,11 +23482,11 @@ var _sfc_main33 = defineComponent({
         createBaseVNode("div", {
           class: normalizeClass(unref(carouselContainer)),
           style: normalizeStyle(unref(containerStyle)),
-          onTransitionend: _cache[6] || (_cache[6] = (...args) => unref(handleTransitionEnd) && unref(handleTransitionEnd)(...args))
+          onTransitionend: unref(handleTransitionEnd)
         }, [
           createVNode(unref(PlaceholderItem)),
           renderSlot(_ctx.$slots, "default")
-        ], 38),
+        ], 46, ["onTransitionend"]),
         _ctx.indicatorPosition !== "none" ? (openBlock(), createElementBlock("ul", {
           key: 2,
           class: normalizeClass(unref(indicatorsClasses))
@@ -23331,19 +23506,39 @@ var _sfc_main33 = defineComponent({
                 class: normalizeClass(unref(ns).e("button")),
                 "aria-label": unref(t)("el.carousel.indicator", { index: index + 1 })
               }, [
-                unref(hasLabel) ? (openBlock(), createElementBlock("span", _hoisted_5, toDisplayString(item.props.label), 1)) : createCommentVNode("v-if", true)
-              ], 10, _hoisted_4)
-            ], 42, _hoisted_33)), [
+                unref(hasLabel) ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(item.props.label), 1)) : createCommentVNode("v-if", true)
+              ], 10, ["aria-label"])
+            ], 42, ["onMouseenter", "onClick"])), [
               [vShow, unref(isTwoLengthShow)(index)]
             ]);
           }), 128))
         ], 2)) : createCommentVNode("v-if", true),
-        props.motionBlur ? (openBlock(), createElementBlock("svg", _hoisted_6, _hoisted_8)) : createCommentVNode("v-if", true)
-      ], 34);
+        props.motionBlur ? (openBlock(), createElementBlock("svg", {
+          key: 3,
+          xmlns: "http://www.w3.org/2000/svg",
+          version: "1.1",
+          style: { "display": "none" }
+        }, [
+          createBaseVNode("defs", null, [
+            createBaseVNode("filter", { id: "elCarouselHorizontal" }, [
+              createBaseVNode("feGaussianBlur", {
+                in: "SourceGraphic",
+                stdDeviation: "12,0"
+              })
+            ]),
+            createBaseVNode("filter", { id: "elCarouselVertical" }, [
+              createBaseVNode("feGaussianBlur", {
+                in: "SourceGraphic",
+                stdDeviation: "0,10"
+              })
+            ])
+          ])
+        ])) : createCommentVNode("v-if", true)
+      ], 42, ["onMouseenter", "onMouseleave"]);
     };
   }
 });
-var Carousel = _export_sfc(_sfc_main33, [["__file", "carousel.vue"]]);
+var Carousel = _export_sfc(_sfc_main34, [["__file", "carousel.vue"]]);
 
 // node_modules/element-plus/es/components/carousel/src/carousel-item.mjs
 var carouselItemProps = buildProps({
@@ -23355,16 +23550,15 @@ var carouselItemProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/carousel/src/use-carousel-item.mjs
-var useCarouselItem = (props, componentName2) => {
+var useCarouselItem = (props) => {
   const carouselContext = inject(carouselContextKey);
   const instance = getCurrentInstance();
   if (!carouselContext) {
-    debugWarn(componentName2, "usage: <el-carousel></el-carousel-item></el-carousel>");
+    debugWarn(CAROUSEL_ITEM_NAME, "usage: <el-carousel></el-carousel-item></el-carousel>");
   }
   if (!instance) {
-    debugWarn(componentName2, "compositional hook can only be invoked inside setups");
+    debugWarn(CAROUSEL_ITEM_NAME, "compositional hook can only be invoked inside setups");
   }
-  const CARD_SCALE = 0.83;
   const carouselItemRef = ref();
   const hover = ref(false);
   const translate2 = ref(0);
@@ -23373,7 +23567,7 @@ var useCarouselItem = (props, componentName2) => {
   const ready = ref(false);
   const inStage = ref(false);
   const animating = ref(false);
-  const { isCardType, isVertical } = carouselContext;
+  const { isCardType, isVertical, cardScale } = carouselContext;
   function processIndex(index, activeIndex, length) {
     const lastItemIndex = length - 1;
     const prevItemIndex = activeIndex - 1;
@@ -23394,11 +23588,11 @@ var useCarouselItem = (props, componentName2) => {
     var _a2, _b;
     const parentWidth = unref(isVertical) ? ((_a2 = carouselContext.root.value) == null ? void 0 : _a2.offsetHeight) || 0 : ((_b = carouselContext.root.value) == null ? void 0 : _b.offsetWidth) || 0;
     if (inStage.value) {
-      return parentWidth * ((2 - CARD_SCALE) * (index - activeIndex) + 1) / 4;
+      return parentWidth * ((2 - cardScale) * (index - activeIndex) + 1) / 4;
     } else if (index < activeIndex) {
-      return -(1 + CARD_SCALE) * parentWidth / 4;
+      return -(1 + cardScale) * parentWidth / 4;
     } else {
-      return (3 + CARD_SCALE) * parentWidth / 4;
+      return (3 + cardScale) * parentWidth / 4;
     }
   }
   function calcTranslate(index, activeIndex, isVertical2) {
@@ -23424,7 +23618,7 @@ var useCarouselItem = (props, componentName2) => {
     if (_isCardType) {
       inStage.value = Math.round(Math.abs(index - activeIndex)) <= 1;
       translate2.value = calcCardTranslate(index, activeIndex);
-      scale.value = unref(active) ? 1 : CARD_SCALE;
+      scale.value = unref(active) ? 1 : cardScale;
     } else {
       translate2.value = calcTranslate(index, activeIndex, _isVertical);
     }
@@ -23474,11 +23668,10 @@ var useCarouselItem = (props, componentName2) => {
 };
 
 // node_modules/element-plus/es/components/carousel/src/carousel-item2.mjs
-var COMPONENT_NAME10 = "ElCarouselItem";
 var __default__28 = defineComponent({
-  name: "ElCarouselItem"
+  name: CAROUSEL_ITEM_NAME
 });
-var _sfc_main34 = defineComponent({
+var _sfc_main35 = defineComponent({
   ...__default__28,
   props: carouselItemProps,
   setup(__props) {
@@ -23496,8 +23689,8 @@ var _sfc_main34 = defineComponent({
       scale,
       ready,
       handleItemClick
-    } = useCarouselItem(props, COMPONENT_NAME10);
-    const itemKls = computed2(() => [
+    } = useCarouselItem(props);
+    const itemKls = computed(() => [
       ns.e("item"),
       ns.is("active", active.value),
       ns.is("in-stage", inStage.value),
@@ -23508,7 +23701,7 @@ var _sfc_main34 = defineComponent({
         [ns.em("item", "card-vertical")]: isCardType.value && isVertical.value
       }
     ]);
-    const itemStyle = computed2(() => {
+    const itemStyle = computed(() => {
       const translateType = `translate${unref(isVertical) ? "Y" : "X"}`;
       const _translate = `${translateType}(${unref(translate2)}px)`;
       const _scale = `scale(${unref(scale)})`;
@@ -23523,7 +23716,7 @@ var _sfc_main34 = defineComponent({
         ref: carouselItemRef,
         class: normalizeClass(unref(itemKls)),
         style: normalizeStyle(unref(itemStyle)),
-        onClick: _cache[0] || (_cache[0] = (...args) => unref(handleItemClick) && unref(handleItemClick)(...args))
+        onClick: unref(handleItemClick)
       }, [
         unref(isCardType) ? withDirectives((openBlock(), createElementBlock("div", {
           key: 0,
@@ -23532,13 +23725,13 @@ var _sfc_main34 = defineComponent({
           [vShow, !unref(active)]
         ]) : createCommentVNode("v-if", true),
         renderSlot(_ctx.$slots, "default")
-      ], 6)), [
+      ], 14, ["onClick"])), [
         [vShow, unref(ready)]
       ]);
     };
   }
 });
-var CarouselItem = _export_sfc(_sfc_main34, [["__file", "carousel-item.vue"]]);
+var CarouselItem = _export_sfc(_sfc_main35, [["__file", "carousel-item.vue"]]);
 
 // node_modules/element-plus/es/components/carousel/index.mjs
 var ElCarousel = withInstall(Carousel, {
@@ -23587,17 +23780,14 @@ var checkboxProps = {
     type: String,
     default: void 0
   },
-  controls: {
-    type: String,
-    default: void 0
-  },
   border: Boolean,
   size: useSizeProp,
   tabindex: [String, Number],
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaControls"])
 };
 var checkboxEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isString(val) || isNumber3(val) || isBoolean2(val),
@@ -23613,13 +23803,13 @@ var useCheckboxDisabled = ({
   isChecked
 }) => {
   const checkboxGroup = inject(checkboxGroupContextKey, void 0);
-  const isLimitDisabled = computed2(() => {
+  const isLimitDisabled = computed(() => {
     var _a2, _b;
     const max4 = (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.max) == null ? void 0 : _a2.value;
     const min4 = (_b = checkboxGroup == null ? void 0 : checkboxGroup.min) == null ? void 0 : _b.value;
     return !isUndefined2(max4) && model.value.length >= max4 && !isChecked.value || !isUndefined2(min4) && model.value.length <= min4 && isChecked.value;
   });
-  const isDisabled = useFormDisabled(computed2(() => (checkboxGroup == null ? void 0 : checkboxGroup.disabled.value) || isLimitDisabled.value));
+  const isDisabled = useFormDisabled(computed(() => (checkboxGroup == null ? void 0 : checkboxGroup.disabled.value) || isLimitDisabled.value));
   return {
     isDisabled,
     isLimitDisabled
@@ -23663,7 +23853,7 @@ var useCheckboxEvent = (props, {
       }
     }
   }
-  const validateEvent = computed2(() => (checkboxGroup == null ? void 0 : checkboxGroup.validateEvent) || props.validateEvent);
+  const validateEvent = computed(() => (checkboxGroup == null ? void 0 : checkboxGroup.validateEvent) || props.validateEvent);
   watch(() => props.modelValue, () => {
     if (validateEvent.value) {
       formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn(err));
@@ -23680,9 +23870,9 @@ var useCheckboxModel = (props) => {
   const selfModel = ref(false);
   const { emit } = getCurrentInstance();
   const checkboxGroup = inject(checkboxGroupContextKey, void 0);
-  const isGroup = computed2(() => isUndefined2(checkboxGroup) === false);
+  const isGroup = computed(() => isUndefined2(checkboxGroup) === false);
   const isLimitExceeded = ref(false);
-  const model = computed2({
+  const model = computed({
     get() {
       var _a2, _b;
       return isGroup.value ? (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.modelValue) == null ? void 0 : _a2.value : (_b = props.modelValue) != null ? _b : selfModel.value;
@@ -23709,13 +23899,13 @@ var useCheckboxModel = (props) => {
 var useCheckboxStatus = (props, slots, { model }) => {
   const checkboxGroup = inject(checkboxGroupContextKey, void 0);
   const isFocused = ref(false);
-  const actualValue = computed2(() => {
+  const actualValue = computed(() => {
     if (!isPropAbsent(props.value)) {
       return props.value;
     }
     return props.label;
   });
-  const isChecked = computed2(() => {
+  const isChecked = computed(() => {
     const value = model.value;
     if (isBoolean2(value)) {
       return value;
@@ -23731,17 +23921,17 @@ var useCheckboxStatus = (props, slots, { model }) => {
       return !!value;
     }
   });
-  const checkboxButtonSize = useFormSize(computed2(() => {
+  const checkboxButtonSize = useFormSize(computed(() => {
     var _a2;
     return (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a2.value;
   }), {
     prop: true
   });
-  const checkboxSize = useFormSize(computed2(() => {
+  const checkboxSize = useFormSize(computed(() => {
     var _a2;
     return (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.size) == null ? void 0 : _a2.value;
   }));
-  const hasOwnLabel = computed2(() => {
+  const hasOwnLabel = computed(() => {
     return !!slots.default || !isPropAbsent(actualValue.value);
   });
   return {
@@ -23797,21 +23987,21 @@ var useCheckbox = (props, slots) => {
     version: "3.0.0",
     scope: "el-checkbox",
     ref: "https://element-plus.org/en-US/component/checkbox.html"
-  }, computed2(() => isGroup.value && isPropAbsent(props.value)));
+  }, computed(() => isGroup.value && isPropAbsent(props.value)));
   useDeprecated({
     from: "true-label",
     replacement: "true-value",
     version: "3.0.0",
     scope: "el-checkbox",
     ref: "https://element-plus.org/en-US/component/checkbox.html"
-  }, computed2(() => !!props.trueLabel));
+  }, computed(() => !!props.trueLabel));
   useDeprecated({
     from: "false-label",
     replacement: "false-value",
     version: "3.0.0",
     scope: "el-checkbox",
     ref: "https://element-plus.org/en-US/component/checkbox.html"
-  }, computed2(() => !!props.falseLabel));
+  }, computed(() => !!props.falseLabel));
   return {
     inputId,
     isLabeledByFormItem,
@@ -23829,12 +24019,10 @@ var useCheckbox = (props, slots) => {
 };
 
 // node_modules/element-plus/es/components/checkbox/src/checkbox2.mjs
-var _hoisted_113 = ["id", "indeterminate", "name", "tabindex", "disabled", "true-value", "false-value"];
-var _hoisted_28 = ["id", "indeterminate", "disabled", "value", "name", "tabindex"];
 var __default__29 = defineComponent({
   name: "ElCheckbox"
 });
-var _sfc_main35 = defineComponent({
+var _sfc_main36 = defineComponent({
   ...__default__29,
   props: checkboxProps,
   emits: checkboxEmits,
@@ -23855,7 +24043,7 @@ var _sfc_main35 = defineComponent({
       onClickRoot
     } = useCheckbox(props, slots);
     const ns = useNamespace("checkbox");
-    const compKls = computed2(() => {
+    const compKls = computed(() => {
       return [
         ns.b(),
         ns.m(checkboxSize.value),
@@ -23864,7 +24052,7 @@ var _sfc_main35 = defineComponent({
         ns.is("checked", isChecked.value)
       ];
     });
-    const spanKls = computed2(() => {
+    const spanKls = computed(() => {
       return [
         ns.e("input"),
         ns.is("disabled", isDisabled.value),
@@ -23876,7 +24064,7 @@ var _sfc_main35 = defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createBlock(resolveDynamicComponent(!unref(hasOwnLabel) && unref(isLabeledByFormItem) ? "span" : "label"), {
         class: normalizeClass(unref(compKls)),
-        "aria-controls": _ctx.indeterminate ? _ctx.controls : null,
+        "aria-controls": _ctx.indeterminate ? _ctx.ariaControls : null,
         onClick: unref(onClickRoot)
       }, {
         default: withCtx(() => {
@@ -23888,7 +24076,7 @@ var _sfc_main35 = defineComponent({
               _ctx.trueValue || _ctx.falseValue || _ctx.trueLabel || _ctx.falseLabel ? withDirectives((openBlock(), createElementBlock("input", {
                 key: 0,
                 id: unref(inputId),
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(model) ? model.value = $event : null),
+                "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
                 class: normalizeClass(unref(ns).e("original")),
                 type: "checkbox",
                 indeterminate: _ctx.indeterminate,
@@ -23897,17 +24085,17 @@ var _sfc_main35 = defineComponent({
                 disabled: unref(isDisabled),
                 "true-value": (_a2 = _ctx.trueValue) != null ? _a2 : _ctx.trueLabel,
                 "false-value": (_b = _ctx.falseValue) != null ? _b : _ctx.falseLabel,
-                onChange: _cache[1] || (_cache[1] = (...args) => unref(handleChange) && unref(handleChange)(...args)),
-                onFocus: _cache[2] || (_cache[2] = ($event) => isFocused.value = true),
-                onBlur: _cache[3] || (_cache[3] = ($event) => isFocused.value = false),
-                onClick: _cache[4] || (_cache[4] = withModifiers(() => {
-                }, ["stop"]))
-              }, null, 42, _hoisted_113)), [
+                onChange: unref(handleChange),
+                onFocus: ($event) => isFocused.value = true,
+                onBlur: ($event) => isFocused.value = false,
+                onClick: withModifiers(() => {
+                }, ["stop"])
+              }, null, 42, ["id", "onUpdate:modelValue", "indeterminate", "name", "tabindex", "disabled", "true-value", "false-value", "onChange", "onFocus", "onBlur", "onClick"])), [
                 [vModelCheckbox, unref(model)]
               ]) : withDirectives((openBlock(), createElementBlock("input", {
                 key: 1,
                 id: unref(inputId),
-                "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => isRef(model) ? model.value = $event : null),
+                "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
                 class: normalizeClass(unref(ns).e("original")),
                 type: "checkbox",
                 indeterminate: _ctx.indeterminate,
@@ -23915,12 +24103,12 @@ var _sfc_main35 = defineComponent({
                 value: unref(actualValue),
                 name: _ctx.name,
                 tabindex: _ctx.tabindex,
-                onChange: _cache[6] || (_cache[6] = (...args) => unref(handleChange) && unref(handleChange)(...args)),
-                onFocus: _cache[7] || (_cache[7] = ($event) => isFocused.value = true),
-                onBlur: _cache[8] || (_cache[8] = ($event) => isFocused.value = false),
-                onClick: _cache[9] || (_cache[9] = withModifiers(() => {
-                }, ["stop"]))
-              }, null, 42, _hoisted_28)), [
+                onChange: unref(handleChange),
+                onFocus: ($event) => isFocused.value = true,
+                onBlur: ($event) => isFocused.value = false,
+                onClick: withModifiers(() => {
+                }, ["stop"])
+              }, null, 42, ["id", "onUpdate:modelValue", "indeterminate", "disabled", "value", "name", "tabindex", "onChange", "onFocus", "onBlur", "onClick"])), [
                 [vModelCheckbox, unref(model)]
               ]),
               createBaseVNode("span", {
@@ -23943,15 +24131,13 @@ var _sfc_main35 = defineComponent({
     };
   }
 });
-var Checkbox = _export_sfc(_sfc_main35, [["__file", "checkbox.vue"]]);
+var Checkbox = _export_sfc(_sfc_main36, [["__file", "checkbox.vue"]]);
 
 // node_modules/element-plus/es/components/checkbox/src/checkbox-button.mjs
-var _hoisted_114 = ["name", "tabindex", "disabled", "true-value", "false-value"];
-var _hoisted_29 = ["name", "tabindex", "disabled", "value"];
 var __default__30 = defineComponent({
   name: "ElCheckboxButton"
 });
-var _sfc_main36 = defineComponent({
+var _sfc_main37 = defineComponent({
   ...__default__30,
   props: checkboxProps,
   emits: checkboxEmits,
@@ -23969,7 +24155,7 @@ var _sfc_main36 = defineComponent({
     } = useCheckbox(props, slots);
     const checkboxGroup = inject(checkboxGroupContextKey, void 0);
     const ns = useNamespace("checkbox");
-    const activeStyle = computed2(() => {
+    const activeStyle = computed(() => {
       var _a2, _b, _c, _d;
       const fillValue = (_b = (_a2 = checkboxGroup == null ? void 0 : checkboxGroup.fill) == null ? void 0 : _a2.value) != null ? _b : "";
       return {
@@ -23979,7 +24165,7 @@ var _sfc_main36 = defineComponent({
         boxShadow: fillValue ? `-1px 0 0 0 ${fillValue}` : void 0
       };
     });
-    const labelKls = computed2(() => {
+    const labelKls = computed(() => {
       return [
         ns.b("button"),
         ns.bm("button", checkboxButtonSize.value),
@@ -23995,7 +24181,7 @@ var _sfc_main36 = defineComponent({
       }, [
         _ctx.trueValue || _ctx.falseValue || _ctx.trueLabel || _ctx.falseLabel ? withDirectives((openBlock(), createElementBlock("input", {
           key: 0,
-          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(model) ? model.value = $event : null),
+          "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
           class: normalizeClass(unref(ns).be("button", "original")),
           type: "checkbox",
           name: _ctx.name,
@@ -24003,28 +24189,28 @@ var _sfc_main36 = defineComponent({
           disabled: unref(isDisabled),
           "true-value": (_a2 = _ctx.trueValue) != null ? _a2 : _ctx.trueLabel,
           "false-value": (_b = _ctx.falseValue) != null ? _b : _ctx.falseLabel,
-          onChange: _cache[1] || (_cache[1] = (...args) => unref(handleChange) && unref(handleChange)(...args)),
-          onFocus: _cache[2] || (_cache[2] = ($event) => isFocused.value = true),
-          onBlur: _cache[3] || (_cache[3] = ($event) => isFocused.value = false),
-          onClick: _cache[4] || (_cache[4] = withModifiers(() => {
-          }, ["stop"]))
-        }, null, 42, _hoisted_114)), [
+          onChange: unref(handleChange),
+          onFocus: ($event) => isFocused.value = true,
+          onBlur: ($event) => isFocused.value = false,
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["onUpdate:modelValue", "name", "tabindex", "disabled", "true-value", "false-value", "onChange", "onFocus", "onBlur", "onClick"])), [
           [vModelCheckbox, unref(model)]
         ]) : withDirectives((openBlock(), createElementBlock("input", {
           key: 1,
-          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => isRef(model) ? model.value = $event : null),
+          "onUpdate:modelValue": ($event) => isRef(model) ? model.value = $event : null,
           class: normalizeClass(unref(ns).be("button", "original")),
           type: "checkbox",
           name: _ctx.name,
           tabindex: _ctx.tabindex,
           disabled: unref(isDisabled),
           value: unref(actualValue),
-          onChange: _cache[6] || (_cache[6] = (...args) => unref(handleChange) && unref(handleChange)(...args)),
-          onFocus: _cache[7] || (_cache[7] = ($event) => isFocused.value = true),
-          onBlur: _cache[8] || (_cache[8] = ($event) => isFocused.value = false),
-          onClick: _cache[9] || (_cache[9] = withModifiers(() => {
-          }, ["stop"]))
-        }, null, 42, _hoisted_29)), [
+          onChange: unref(handleChange),
+          onFocus: ($event) => isFocused.value = true,
+          onBlur: ($event) => isFocused.value = false,
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["onUpdate:modelValue", "name", "tabindex", "disabled", "value", "onChange", "onFocus", "onBlur", "onClick"])), [
           [vModelCheckbox, unref(model)]
         ]),
         _ctx.$slots.default || _ctx.label ? (openBlock(), createElementBlock("span", {
@@ -24040,7 +24226,7 @@ var _sfc_main36 = defineComponent({
     };
   }
 });
-var CheckboxButton = _export_sfc(_sfc_main36, [["__file", "checkbox-button.vue"]]);
+var CheckboxButton = _export_sfc(_sfc_main37, [["__file", "checkbox-button.vue"]]);
 
 // node_modules/element-plus/es/components/checkbox/src/checkbox-group.mjs
 var checkboxGroupProps = buildProps({
@@ -24052,7 +24238,6 @@ var checkboxGroupProps = buildProps({
   min: Number,
   max: Number,
   size: useSizeProp,
-  label: String,
   fill: String,
   textColor: String,
   tag: {
@@ -24062,7 +24247,8 @@ var checkboxGroupProps = buildProps({
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var checkboxGroupEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isArray(val),
@@ -24073,7 +24259,7 @@ var checkboxGroupEmits = {
 var __default__31 = defineComponent({
   name: "ElCheckboxGroup"
 });
-var _sfc_main37 = defineComponent({
+var _sfc_main38 = defineComponent({
   ...__default__31,
   props: checkboxGroupProps,
   emits: checkboxGroupEmits,
@@ -24089,7 +24275,7 @@ var _sfc_main37 = defineComponent({
       await nextTick();
       emit("change", value);
     };
-    const modelValue = computed2({
+    const modelValue = computed({
       get() {
         return props.modelValue;
       },
@@ -24121,7 +24307,7 @@ var _sfc_main37 = defineComponent({
         id: unref(groupId),
         class: normalizeClass(unref(ns).b("group")),
         role: "group",
-        "aria-label": !unref(isLabeledByFormItem) ? _ctx.label || "checkbox-group" : void 0,
+        "aria-label": !unref(isLabeledByFormItem) ? _ctx.ariaLabel || "checkbox-group" : void 0,
         "aria-labelledby": unref(isLabeledByFormItem) ? (_a2 = unref(formItem)) == null ? void 0 : _a2.labelId : void 0
       }, {
         default: withCtx(() => [
@@ -24132,7 +24318,7 @@ var _sfc_main37 = defineComponent({
     };
   }
 });
-var CheckboxGroup = _export_sfc(_sfc_main37, [["__file", "checkbox-group.vue"]]);
+var CheckboxGroup = _export_sfc(_sfc_main38, [["__file", "checkbox-group.vue"]]);
 
 // node_modules/element-plus/es/components/checkbox/index.mjs
 var ElCheckbox = withInstall(Checkbox, {
@@ -24179,14 +24365,14 @@ var radioGroupKey = Symbol("radioGroupKey");
 var useRadio = (props, emit) => {
   const radioRef = ref();
   const radioGroup = inject(radioGroupKey, void 0);
-  const isGroup = computed2(() => !!radioGroup);
-  const actualValue = computed2(() => {
+  const isGroup = computed(() => !!radioGroup);
+  const actualValue = computed(() => {
     if (!isPropAbsent(props.value)) {
       return props.value;
     }
     return props.label;
   });
-  const modelValue = computed2({
+  const modelValue = computed({
     get() {
       return isGroup.value ? radioGroup.modelValue : props.modelValue;
     },
@@ -24199,10 +24385,10 @@ var useRadio = (props, emit) => {
       radioRef.value.checked = props.modelValue === actualValue.value;
     }
   });
-  const size3 = useFormSize(computed2(() => radioGroup == null ? void 0 : radioGroup.size));
-  const disabled = useFormDisabled(computed2(() => radioGroup == null ? void 0 : radioGroup.disabled));
+  const size3 = useFormSize(computed(() => radioGroup == null ? void 0 : radioGroup.size));
+  const disabled = useFormDisabled(computed(() => radioGroup == null ? void 0 : radioGroup.disabled));
   const focus = ref(false);
-  const tabIndex = computed2(() => {
+  const tabIndex = computed(() => {
     return disabled.value || isGroup.value && modelValue.value !== actualValue.value ? -1 : 0;
   });
   useDeprecated({
@@ -24211,7 +24397,7 @@ var useRadio = (props, emit) => {
     version: "3.0.0",
     scope: "el-radio",
     ref: "https://element-plus.org/en-US/component/radio.html"
-  }, computed2(() => isGroup.value && isPropAbsent(props.value)));
+  }, computed(() => isGroup.value && isPropAbsent(props.value)));
   return {
     radioRef,
     isGroup,
@@ -24226,11 +24412,10 @@ var useRadio = (props, emit) => {
 };
 
 // node_modules/element-plus/es/components/radio/src/radio2.mjs
-var _hoisted_115 = ["value", "name", "disabled"];
 var __default__32 = defineComponent({
   name: "ElRadio"
 });
-var _sfc_main38 = defineComponent({
+var _sfc_main39 = defineComponent({
   ...__default__32,
   props: radioProps,
   emits: radioEmits,
@@ -24263,18 +24448,19 @@ var _sfc_main38 = defineComponent({
           withDirectives(createBaseVNode("input", {
             ref_key: "radioRef",
             ref: radioRef,
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(modelValue) ? modelValue.value = $event : null),
+            "onUpdate:modelValue": ($event) => isRef(modelValue) ? modelValue.value = $event : null,
             class: normalizeClass(unref(ns).e("original")),
             value: unref(actualValue),
             name: _ctx.name || ((_a2 = unref(radioGroup)) == null ? void 0 : _a2.name),
             disabled: unref(disabled),
+            checked: unref(modelValue) === unref(actualValue),
             type: "radio",
-            onFocus: _cache[1] || (_cache[1] = ($event) => focus.value = true),
-            onBlur: _cache[2] || (_cache[2] = ($event) => focus.value = false),
+            onFocus: ($event) => focus.value = true,
+            onBlur: ($event) => focus.value = false,
             onChange: handleChange,
-            onClick: _cache[3] || (_cache[3] = withModifiers(() => {
-            }, ["stop"]))
-          }, null, 42, _hoisted_115), [
+            onClick: withModifiers(() => {
+            }, ["stop"])
+          }, null, 42, ["onUpdate:modelValue", "value", "name", "disabled", "checked", "onFocus", "onBlur", "onClick"]), [
             [vModelRadio, unref(modelValue)]
           ]),
           createBaseVNode("span", {
@@ -24283,18 +24469,18 @@ var _sfc_main38 = defineComponent({
         ], 2),
         createBaseVNode("span", {
           class: normalizeClass(unref(ns).e("label")),
-          onKeydown: _cache[4] || (_cache[4] = withModifiers(() => {
-          }, ["stop"]))
+          onKeydown: withModifiers(() => {
+          }, ["stop"])
         }, [
           renderSlot(_ctx.$slots, "default", {}, () => [
             createTextVNode(toDisplayString(_ctx.label), 1)
           ])
-        ], 34)
+        ], 42, ["onKeydown"])
       ], 2);
     };
   }
 });
-var Radio = _export_sfc(_sfc_main38, [["__file", "radio.vue"]]);
+var Radio = _export_sfc(_sfc_main39, [["__file", "radio.vue"]]);
 
 // node_modules/element-plus/es/components/radio/src/radio-button.mjs
 var radioButtonProps = buildProps({
@@ -24302,18 +24488,17 @@ var radioButtonProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/radio/src/radio-button2.mjs
-var _hoisted_116 = ["value", "name", "disabled"];
 var __default__33 = defineComponent({
   name: "ElRadioButton"
 });
-var _sfc_main39 = defineComponent({
+var _sfc_main40 = defineComponent({
   ...__default__33,
   props: radioButtonProps,
   setup(__props) {
     const props = __props;
     const ns = useNamespace("radio");
     const { radioRef, focus, size: size3, disabled, modelValue, radioGroup, actualValue } = useRadio(props);
-    const activeStyle = computed2(() => {
+    const activeStyle = computed(() => {
       return {
         backgroundColor: (radioGroup == null ? void 0 : radioGroup.fill) || "",
         borderColor: (radioGroup == null ? void 0 : radioGroup.fill) || "",
@@ -24335,34 +24520,34 @@ var _sfc_main39 = defineComponent({
         withDirectives(createBaseVNode("input", {
           ref_key: "radioRef",
           ref: radioRef,
-          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(modelValue) ? modelValue.value = $event : null),
+          "onUpdate:modelValue": ($event) => isRef(modelValue) ? modelValue.value = $event : null,
           class: normalizeClass(unref(ns).be("button", "original-radio")),
           value: unref(actualValue),
           type: "radio",
           name: _ctx.name || ((_a2 = unref(radioGroup)) == null ? void 0 : _a2.name),
           disabled: unref(disabled),
-          onFocus: _cache[1] || (_cache[1] = ($event) => focus.value = true),
-          onBlur: _cache[2] || (_cache[2] = ($event) => focus.value = false),
-          onClick: _cache[3] || (_cache[3] = withModifiers(() => {
-          }, ["stop"]))
-        }, null, 42, _hoisted_116), [
+          onFocus: ($event) => focus.value = true,
+          onBlur: ($event) => focus.value = false,
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["onUpdate:modelValue", "value", "name", "disabled", "onFocus", "onBlur", "onClick"]), [
           [vModelRadio, unref(modelValue)]
         ]),
         createBaseVNode("span", {
           class: normalizeClass(unref(ns).be("button", "inner")),
           style: normalizeStyle(unref(modelValue) === unref(actualValue) ? unref(activeStyle) : {}),
-          onKeydown: _cache[4] || (_cache[4] = withModifiers(() => {
-          }, ["stop"]))
+          onKeydown: withModifiers(() => {
+          }, ["stop"])
         }, [
           renderSlot(_ctx.$slots, "default", {}, () => [
             createTextVNode(toDisplayString(_ctx.label), 1)
           ])
-        ], 38)
+        ], 46, ["onKeydown"])
       ], 2);
     };
   }
 });
-var RadioButton = _export_sfc(_sfc_main39, [["__file", "radio-button.vue"]]);
+var RadioButton = _export_sfc(_sfc_main40, [["__file", "radio-button.vue"]]);
 
 // node_modules/element-plus/es/components/radio/src/radio-group.mjs
 var radioGroupProps = buildProps({
@@ -24380,10 +24565,6 @@ var radioGroupProps = buildProps({
     type: String,
     default: ""
   },
-  label: {
-    type: String,
-    default: void 0
-  },
   textColor: {
     type: String,
     default: ""
@@ -24395,16 +24576,16 @@ var radioGroupProps = buildProps({
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var radioGroupEmits = radioEmits;
 
 // node_modules/element-plus/es/components/radio/src/radio-group2.mjs
-var _hoisted_117 = ["id", "aria-label", "aria-labelledby"];
 var __default__34 = defineComponent({
   name: "ElRadioGroup"
 });
-var _sfc_main40 = defineComponent({
+var _sfc_main41 = defineComponent({
   ...__default__34,
   props: radioGroupProps,
   emits: radioGroupEmits,
@@ -24428,7 +24609,7 @@ var _sfc_main40 = defineComponent({
         firstLabel.tabIndex = 0;
       }
     });
-    const name = computed2(() => {
+    const name = computed(() => {
       return props.name || radioId.value;
     });
     provide(radioGroupKey, reactive({
@@ -24448,15 +24629,15 @@ var _sfc_main40 = defineComponent({
         ref: radioGroupRef,
         class: normalizeClass(unref(ns).b("group")),
         role: "radiogroup",
-        "aria-label": !unref(isLabeledByFormItem) ? _ctx.label || "radio-group" : void 0,
+        "aria-label": !unref(isLabeledByFormItem) ? _ctx.ariaLabel || "radio-group" : void 0,
         "aria-labelledby": unref(isLabeledByFormItem) ? unref(formItem).labelId : void 0
       }, [
         renderSlot(_ctx.$slots, "default")
-      ], 10, _hoisted_117);
+      ], 10, ["id", "aria-label", "aria-labelledby"]);
     };
   }
 });
-var RadioGroup = _export_sfc(_sfc_main40, [["__file", "radio-group.vue"]]);
+var RadioGroup = _export_sfc(_sfc_main41, [["__file", "radio-group.vue"]]);
 
 // node_modules/element-plus/es/components/radio/index.mjs
 var ElRadio = withInstall(Radio, {
@@ -24488,7 +24669,7 @@ var NodeContent = defineComponent({
 var CASCADER_PANEL_INJECTION_KEY = Symbol();
 
 // node_modules/element-plus/es/components/cascader-panel/src/node2.mjs
-var _sfc_main41 = defineComponent({
+var _sfc_main42 = defineComponent({
   name: "ElCascaderNode",
   components: {
     ElCheckbox,
@@ -24510,18 +24691,18 @@ var _sfc_main41 = defineComponent({
   setup(props, { emit }) {
     const panel = inject(CASCADER_PANEL_INJECTION_KEY);
     const ns = useNamespace("cascader-node");
-    const isHoverMenu = computed2(() => panel.isHoverMenu);
-    const multiple = computed2(() => panel.config.multiple);
-    const checkStrictly = computed2(() => panel.config.checkStrictly);
-    const checkedNodeId = computed2(() => {
+    const isHoverMenu = computed(() => panel.isHoverMenu);
+    const multiple = computed(() => panel.config.multiple);
+    const checkStrictly = computed(() => panel.config.checkStrictly);
+    const checkedNodeId = computed(() => {
       var _a2;
       return (_a2 = panel.checkedNodes[0]) == null ? void 0 : _a2.uid;
     });
-    const isDisabled = computed2(() => props.node.isDisabled);
-    const isLeaf2 = computed2(() => props.node.isLeaf);
-    const expandable = computed2(() => checkStrictly.value && !isLeaf2.value || !isDisabled.value);
-    const inExpandingPath = computed2(() => isInPath(panel.expandingNode));
-    const inCheckedPath = computed2(() => checkStrictly.value && panel.checkedNodes.some(isInPath));
+    const isDisabled = computed(() => props.node.isDisabled);
+    const isLeaf2 = computed(() => props.node.isLeaf);
+    const expandable = computed(() => checkStrictly.value && !isLeaf2.value || !isDisabled.value);
+    const inExpandingPath = computed(() => isInPath(panel.expandingNode));
+    const inCheckedPath = computed(() => checkStrictly.value && panel.checkedNodes.some(isInPath));
     const isInPath = (node) => {
       var _a2;
       const { level, uid: uid2 } = props.node;
@@ -24603,8 +24784,6 @@ var _sfc_main41 = defineComponent({
     };
   }
 });
-var _hoisted_118 = ["id", "aria-haspopup", "aria-owns", "aria-expanded", "tabindex"];
-var _hoisted_210 = createBaseVNode("span", null, null, -1);
 function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_checkbox = resolveComponent("el-checkbox");
   const _component_el_radio = resolveComponent("el-radio");
@@ -24628,9 +24807,9 @@ function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
       _ctx.inExpandingPath && "in-active-path",
       _ctx.inCheckedPath && "in-checked-path"
     ]),
-    onMouseenter: _cache[2] || (_cache[2] = (...args) => _ctx.handleHoverExpand && _ctx.handleHoverExpand(...args)),
-    onFocus: _cache[3] || (_cache[3] = (...args) => _ctx.handleHoverExpand && _ctx.handleHoverExpand(...args)),
-    onClick: _cache[4] || (_cache[4] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+    onMouseenter: _ctx.handleHoverExpand,
+    onFocus: _ctx.handleHoverExpand,
+    onClick: _ctx.handleClick
   }, [
     createCommentVNode(" prefix "),
     _ctx.multiple ? (openBlock(), createBlock(_component_el_checkbox, {
@@ -24638,24 +24817,24 @@ function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
       "model-value": _ctx.node.checked,
       indeterminate: _ctx.node.indeterminate,
       disabled: _ctx.isDisabled,
-      onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-      }, ["stop"])),
+      onClick: withModifiers(() => {
+      }, ["stop"]),
       "onUpdate:modelValue": _ctx.handleSelectCheck
-    }, null, 8, ["model-value", "indeterminate", "disabled", "onUpdate:modelValue"])) : _ctx.checkStrictly ? (openBlock(), createBlock(_component_el_radio, {
+    }, null, 8, ["model-value", "indeterminate", "disabled", "onClick", "onUpdate:modelValue"])) : _ctx.checkStrictly ? (openBlock(), createBlock(_component_el_radio, {
       key: 1,
       "model-value": _ctx.checkedNodeId,
       label: _ctx.node.uid,
       disabled: _ctx.isDisabled,
       "onUpdate:modelValue": _ctx.handleSelectCheck,
-      onClick: _cache[1] || (_cache[1] = withModifiers(() => {
-      }, ["stop"]))
+      onClick: withModifiers(() => {
+      }, ["stop"])
     }, {
       default: withCtx(() => [
         createCommentVNode("\n        Add an empty element to avoid render label,\n        do not use empty fragment here for https://github.com/vuejs/vue-next/pull/2485\n      "),
-        _hoisted_210
+        createBaseVNode("span")
       ]),
       _: 1
-    }, 8, ["model-value", "label", "disabled", "onUpdate:modelValue"])) : _ctx.isLeaf && _ctx.node.checked ? (openBlock(), createBlock(_component_el_icon, {
+    }, 8, ["model-value", "label", "disabled", "onUpdate:modelValue", "onClick"])) : _ctx.isLeaf && _ctx.node.checked ? (openBlock(), createBlock(_component_el_icon, {
       key: 2,
       class: normalizeClass(_ctx.ns.e("prefix"))
     }, {
@@ -24686,12 +24865,12 @@ function _sfc_render2(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
       }, 8, ["class"]))
     ], 64)) : createCommentVNode("v-if", true)
-  ], 42, _hoisted_118);
+  ], 42, ["id", "aria-haspopup", "aria-owns", "aria-expanded", "tabindex", "onMouseenter", "onFocus", "onClick"]);
 }
-var ElCascaderNode = _export_sfc(_sfc_main41, [["render", _sfc_render2], ["__file", "node.vue"]]);
+var ElCascaderNode = _export_sfc(_sfc_main42, [["render", _sfc_render2], ["__file", "node.vue"]]);
 
 // node_modules/element-plus/es/components/cascader-panel/src/menu.mjs
-var _sfc_main42 = defineComponent({
+var _sfc_main43 = defineComponent({
   name: "ElCascaderMenu",
   components: {
     Loading: loading_default,
@@ -24718,9 +24897,9 @@ var _sfc_main42 = defineComponent({
     let hoverTimer = null;
     const panel = inject(CASCADER_PANEL_INJECTION_KEY);
     const hoverZone = ref(null);
-    const isEmpty3 = computed2(() => !props.nodes.length);
-    const isLoading = computed2(() => !panel.initialLoaded);
-    const menuId = computed2(() => `${id.value}-${props.index}`);
+    const isEmpty3 = computed(() => !props.nodes.length);
+    const isLoading = computed(() => !panel.initialLoaded);
+    const menuId = computed(() => `${id.value}-${props.index}`);
     const handleExpand = (e) => {
       activeNode = e.target;
     };
@@ -24812,17 +24991,21 @@ function _sfc_render3(_ctx, _cache, $props, $setup, $data, $options) {
         ], 2)) : _ctx.isEmpty ? (openBlock(), createElementBlock("div", {
           key: 1,
           class: normalizeClass(_ctx.ns.e("empty-text"))
-        }, toDisplayString(_ctx.t("el.cascader.noData")), 3)) : ((_a2 = _ctx.panel) == null ? void 0 : _a2.isHoverMenu) ? (openBlock(), createElementBlock("svg", {
+        }, [
+          renderSlot(_ctx.$slots, "empty", {}, () => [
+            createTextVNode(toDisplayString(_ctx.t("el.cascader.noData")), 1)
+          ])
+        ], 2)) : ((_a2 = _ctx.panel) == null ? void 0 : _a2.isHoverMenu) ? (openBlock(), createElementBlock("svg", {
           key: 2,
           ref: "hoverZone",
           class: normalizeClass(_ctx.ns.e("hover-zone"))
         }, null, 2)) : createCommentVNode("v-if", true)
       ];
     }),
-    _: 1
+    _: 3
   }, 8, ["class", "wrap-class", "view-class", "onMousemove", "onMouseleave"]);
 }
-var ElCascaderMenu = _export_sfc(_sfc_main42, [["render", _sfc_render3], ["__file", "menu.vue"]]);
+var ElCascaderMenu = _export_sfc(_sfc_main43, [["render", _sfc_render3], ["__file", "menu.vue"]]);
 
 // node_modules/element-plus/es/components/cascader-panel/src/node.mjs
 var uid = 0;
@@ -25019,7 +25202,7 @@ var DefaultProps = {
   hoverThreshold: 500
 };
 var useCascaderConfig = (props) => {
-  return computed2(() => ({
+  return computed(() => ({
     ...DefaultProps,
     ...props.props
   }));
@@ -25059,7 +25242,7 @@ var sortByOriginalOrder = (oldNodes, newNodes) => {
 };
 
 // node_modules/element-plus/es/components/cascader-panel/src/index.mjs
-var _sfc_main43 = defineComponent({
+var _sfc_main44 = defineComponent({
   name: "ElCascaderPanel",
   components: {
     ElCascaderMenu
@@ -25084,8 +25267,8 @@ var _sfc_main43 = defineComponent({
     const menus = ref([]);
     const expandingNode = ref(null);
     const checkedNodes = ref([]);
-    const isHoverMenu = computed2(() => config.value.expandTrigger === "hover");
-    const renderLabelFn = computed2(() => props.renderLabel || slots.default);
+    const isHoverMenu = computed(() => config.value.expandTrigger === "hover");
+    const renderLabelFn = computed(() => props.renderLabel || slots.default);
     const initStore = () => {
       const { options } = props;
       const cfg = config.value;
@@ -25308,7 +25491,7 @@ function _sfc_render4(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_cascader_menu = resolveComponent("el-cascader-menu");
   return openBlock(), createElementBlock("div", {
     class: normalizeClass([_ctx.ns.b("panel"), _ctx.ns.is("bordered", _ctx.border)]),
-    onKeydown: _cache[0] || (_cache[0] = (...args) => _ctx.handleKeyDown && _ctx.handleKeyDown(...args))
+    onKeydown: _ctx.handleKeyDown
   }, [
     (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.menus, (menu, index) => {
       return openBlock(), createBlock(_component_el_cascader_menu, {
@@ -25317,18 +25500,19 @@ function _sfc_render4(_ctx, _cache, $props, $setup, $data, $options) {
         ref: (item) => _ctx.menuList[index] = item,
         index,
         nodes: [...menu]
-      }, null, 8, ["index", "nodes"]);
+      }, {
+        empty: withCtx(() => [
+          renderSlot(_ctx.$slots, "empty")
+        ]),
+        _: 2
+      }, 1032, ["index", "nodes"]);
     }), 128))
-  ], 34);
+  ], 42, ["onKeydown"]);
 }
-var CascaderPanel = _export_sfc(_sfc_main43, [["render", _sfc_render4], ["__file", "index.vue"]]);
+var CascaderPanel = _export_sfc(_sfc_main44, [["render", _sfc_render4], ["__file", "index.vue"]]);
 
 // node_modules/element-plus/es/components/cascader-panel/index.mjs
-CascaderPanel.install = (app) => {
-  app.component(CascaderPanel.name, CascaderPanel);
-};
-var _CascaderPanel = CascaderPanel;
-var ElCascaderPanel = _CascaderPanel;
+var ElCascaderPanel = withInstall(CascaderPanel);
 
 // node_modules/element-plus/es/components/tag/src/tag.mjs
 var tagProps = buildProps({
@@ -25361,7 +25545,7 @@ var tagEmits = {
 var __default__35 = defineComponent({
   name: "ElTag"
 });
-var _sfc_main44 = defineComponent({
+var _sfc_main45 = defineComponent({
   ...__default__35,
   props: tagProps,
   emits: tagEmits,
@@ -25369,7 +25553,7 @@ var _sfc_main44 = defineComponent({
     const props = __props;
     const tagSize = useFormSize();
     const ns = useNamespace("tag");
-    const containerKls = computed2(() => {
+    const containerKls = computed(() => {
       const { type: type4, hit, effect, closable, round: round3 } = props;
       return [
         ns.b(),
@@ -25386,6 +25570,9 @@ var _sfc_main44 = defineComponent({
     };
     const handleClick = (event) => {
       emit("click", event);
+    };
+    const handleVNodeMounted = (vnode) => {
+      vnode.component.subTree.component.bum = null;
     };
     return (_ctx, _cache) => {
       return _ctx.disableTransitions ? (openBlock(), createElementBlock("span", {
@@ -25412,7 +25599,8 @@ var _sfc_main44 = defineComponent({
       ], 6)) : (openBlock(), createBlock(Transition, {
         key: 1,
         name: `${unref(ns).namespace.value}-zoom-in-center`,
-        appear: ""
+        appear: "",
+        onVnodeMounted: handleVNodeMounted
       }, {
         default: withCtx(() => [
           createBaseVNode("span", {
@@ -25442,7 +25630,7 @@ var _sfc_main44 = defineComponent({
     };
   }
 });
-var Tag = _export_sfc(_sfc_main44, [["__file", "tag.vue"]]);
+var Tag = _export_sfc(_sfc_main45, [["__file", "tag.vue"]]);
 
 // node_modules/element-plus/es/components/tag/index.mjs
 var ElTag = withInstall(Tag);
@@ -25484,36 +25672,49 @@ var cascaderProps = buildProps({
     type: definePropType(Function),
     default: () => true
   },
+  placement: {
+    type: definePropType(String),
+    values: Ee,
+    default: "bottom-start"
+  },
+  fallbackPlacements: {
+    type: definePropType(Array),
+    default: ["bottom-start", "bottom", "top-start", "top", "right", "left"]
+  },
   popperClass: {
     type: String,
     default: ""
   },
   teleported: useTooltipContentProps.teleported,
   tagType: { ...tagProps.type, default: "info" },
+  tagEffect: { ...tagProps.effect, default: "light" },
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  persistent: {
+    type: Boolean,
+    default: true
+  },
+  ...useEmptyValuesProps
 });
 var cascaderEmits = {
-  [UPDATE_MODEL_EVENT]: (val) => !!val || val === null,
-  [CHANGE_EVENT]: (val) => !!val || val === null,
+  [UPDATE_MODEL_EVENT]: (_2) => true,
+  [CHANGE_EVENT]: (_2) => true,
   focus: (evt) => evt instanceof FocusEvent,
   blur: (evt) => evt instanceof FocusEvent,
+  clear: () => true,
   visibleChange: (val) => isBoolean2(val),
   expandChange: (val) => !!val,
   removeTag: (val) => !!val
 };
 
 // node_modules/element-plus/es/components/cascader/src/cascader2.mjs
-var _hoisted_119 = { key: 0 };
-var _hoisted_211 = ["placeholder", "onKeydown"];
-var _hoisted_34 = ["onClick"];
-var COMPONENT_NAME11 = "ElCascader";
+var COMPONENT_NAME10 = "ElCascader";
 var __default__36 = defineComponent({
-  name: COMPONENT_NAME11
+  name: COMPONENT_NAME10
 });
-var _sfc_main45 = defineComponent({
+var _sfc_main46 = defineComponent({
   ...__default__36,
   props: cascaderProps,
   emits: cascaderEmits,
@@ -25542,6 +25743,14 @@ var _sfc_main45 = defineComponent({
     const nsInput = useNamespace("input");
     const { t } = useLocale();
     const { form, formItem } = useFormItem();
+    const { valueOnClear } = useEmptyValues(props);
+    const { isComposing, handleComposition } = useComposition({
+      afterComposition(event) {
+        var _a2;
+        const text = (_a2 = event.target) == null ? void 0 : _a2.value;
+        handleInput(text);
+      }
+    });
     const tooltipRef = ref(null);
     const input = ref(null);
     const tagWrapper = ref(null);
@@ -25556,46 +25765,46 @@ var _sfc_main45 = defineComponent({
     const presentTags = ref([]);
     const allPresentTags = ref([]);
     const suggestions = ref([]);
-    const isOnComposition = ref(false);
-    const cascaderStyle = computed2(() => {
+    const cascaderStyle = computed(() => {
       return attrs.style;
     });
-    const isDisabled = computed2(() => props.disabled || (form == null ? void 0 : form.disabled));
-    const inputPlaceholder = computed2(() => props.placeholder || t("el.cascader.placeholder"));
-    const currentPlaceholder = computed2(() => searchInputValue.value || presentTags.value.length > 0 || isOnComposition.value ? "" : inputPlaceholder.value);
+    const isDisabled = computed(() => props.disabled || (form == null ? void 0 : form.disabled));
+    const inputPlaceholder = computed(() => props.placeholder || t("el.cascader.placeholder"));
+    const currentPlaceholder = computed(() => searchInputValue.value || presentTags.value.length > 0 || isComposing.value ? "" : inputPlaceholder.value);
     const realSize = useFormSize();
-    const tagSize = computed2(() => ["small"].includes(realSize.value) ? "small" : "default");
-    const multiple = computed2(() => !!props.props.multiple);
-    const readonly2 = computed2(() => !props.filterable || multiple.value);
-    const searchKeyword = computed2(() => multiple.value ? searchInputValue.value : inputValue.value);
-    const checkedNodes = computed2(() => {
+    const tagSize = computed(() => ["small"].includes(realSize.value) ? "small" : "default");
+    const multiple = computed(() => !!props.props.multiple);
+    const readonly2 = computed(() => !props.filterable || multiple.value);
+    const searchKeyword = computed(() => multiple.value ? searchInputValue.value : inputValue.value);
+    const checkedNodes = computed(() => {
       var _a2;
       return ((_a2 = cascaderPanelRef.value) == null ? void 0 : _a2.checkedNodes) || [];
     });
-    const clearBtnVisible = computed2(() => {
+    const clearBtnVisible = computed(() => {
       if (!props.clearable || isDisabled.value || filtering.value || !inputHover.value)
         return false;
       return !!checkedNodes.value.length;
     });
-    const presentText = computed2(() => {
+    const presentText = computed(() => {
       const { showAllLevels, separator } = props;
       const nodes = checkedNodes.value;
       return nodes.length ? multiple.value ? "" : nodes[0].calcText(showAllLevels, separator) : "";
     });
-    const validateState = computed2(() => (formItem == null ? void 0 : formItem.validateState) || "");
-    const checkedValue = computed2({
+    const validateState = computed(() => (formItem == null ? void 0 : formItem.validateState) || "");
+    const checkedValue = computed({
       get() {
         return cloneDeep_default(props.modelValue);
       },
       set(val) {
-        emit(UPDATE_MODEL_EVENT, val);
-        emit(CHANGE_EVENT, val);
+        const value = val != null ? val : valueOnClear.value;
+        emit(UPDATE_MODEL_EVENT, value);
+        emit(CHANGE_EVENT, value);
         if (props.validateEvent) {
           formItem == null ? void 0 : formItem.validate("change").catch((err) => debugWarn(err));
         }
       }
     });
-    const cascaderKls = computed2(() => {
+    const cascaderKls = computed(() => {
       return [
         nsCascader.b(),
         nsCascader.m(realSize.value),
@@ -25603,17 +25812,17 @@ var _sfc_main45 = defineComponent({
         attrs.class
       ];
     });
-    const cascaderIconKls = computed2(() => {
+    const cascaderIconKls = computed(() => {
       return [
         nsInput.e("icon"),
         "icon-arrow-down",
         nsCascader.is("reverse", popperVisible.value)
       ];
     });
-    const inputClass = computed2(() => {
+    const inputClass = computed(() => {
       return nsCascader.is("focus", popperVisible.value || filterFocus.value);
     });
-    const contentRef = computed2(() => {
+    const contentRef = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = tooltipRef.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
     });
@@ -25748,19 +25957,8 @@ var _sfc_main45 = defineComponent({
       updatePopperPosition();
       emit("expandChange", value);
     };
-    const handleComposition = (event) => {
-      var _a2;
-      const text = (_a2 = event.target) == null ? void 0 : _a2.value;
-      if (event.type === "compositionend") {
-        isOnComposition.value = false;
-        nextTick(() => handleInput(text));
-      } else {
-        const lastCharacter = text[text.length - 1] || "";
-        isOnComposition.value = !isKorean(lastCharacter);
-      }
-    };
     const handleKeyDown = (e) => {
-      if (isOnComposition.value)
+      if (isComposing.value)
         return;
       switch (e.code) {
         case EVENT_CODE.enter:
@@ -25790,6 +25988,7 @@ var _sfc_main45 = defineComponent({
         syncPresentTextValue();
       }
       togglePopperVisible(false);
+      emit("clear");
     };
     const syncPresentTextValue = () => {
       const { value } = presentText;
@@ -25867,7 +26066,7 @@ var _sfc_main45 = defineComponent({
     };
     const getInputInnerHeight = (inputInner) => Number.parseFloat(useCssVar(nsInput.cssVarName("input-height"), inputInner).value) - 2;
     watch(filtering, updatePopperPosition);
-    watch([checkedNodes, isDisabled], calculatePresentTags);
+    watch([checkedNodes, isDisabled, () => props.collapseTags], calculatePresentTags);
     watch(presentTags, () => {
       nextTick(() => updateStyle());
     });
@@ -25898,37 +26097,30 @@ var _sfc_main45 = defineComponent({
         teleported: _ctx.teleported,
         "popper-class": [unref(nsCascader).e("dropdown"), _ctx.popperClass],
         "popper-options": popperOptions,
-        "fallback-placements": [
-          "bottom-start",
-          "bottom",
-          "top-start",
-          "top",
-          "right",
-          "left"
-        ],
+        "fallback-placements": _ctx.fallbackPlacements,
         "stop-popper-mouse-event": false,
         "gpu-acceleration": false,
-        placement: "bottom-start",
+        placement: _ctx.placement,
         transition: `${unref(nsCascader).namespace.value}-zoom-in-top`,
         effect: "light",
         pure: "",
-        persistent: "",
+        persistent: _ctx.persistent,
         onHide: hideSuggestionPanel
       }, {
         default: withCtx(() => [
           withDirectives((openBlock(), createElementBlock("div", {
             class: normalizeClass(unref(cascaderKls)),
             style: normalizeStyle(unref(cascaderStyle)),
-            onClick: _cache[5] || (_cache[5] = () => togglePopperVisible(unref(readonly2) ? void 0 : true)),
+            onClick: () => togglePopperVisible(unref(readonly2) ? void 0 : true),
             onKeydown: handleKeyDown,
-            onMouseenter: _cache[6] || (_cache[6] = ($event) => inputHover.value = true),
-            onMouseleave: _cache[7] || (_cache[7] = ($event) => inputHover.value = false)
+            onMouseenter: ($event) => inputHover.value = true,
+            onMouseleave: ($event) => inputHover.value = false
           }, [
             createVNode(unref(ElInput), {
               ref_key: "input",
               ref: input,
               modelValue: inputValue.value,
-              "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => inputValue.value = $event),
+              "onUpdate:modelValue": ($event) => inputValue.value = $event,
               placeholder: unref(currentPlaceholder),
               readonly: unref(readonly2),
               disabled: unref(isDisabled),
@@ -25936,9 +26128,9 @@ var _sfc_main45 = defineComponent({
               size: unref(realSize),
               class: normalizeClass(unref(inputClass)),
               tabindex: unref(multiple) && _ctx.filterable && !unref(isDisabled) ? -1 : void 0,
-              onCompositionstart: handleComposition,
-              onCompositionupdate: handleComposition,
-              onCompositionend: handleComposition,
+              onCompositionstart: unref(handleComposition),
+              onCompositionupdate: unref(handleComposition),
+              onCompositionend: unref(handleComposition),
               onFocus: handleFocus,
               onBlur: handleBlur,
               onInput: handleInput
@@ -25956,16 +26148,16 @@ var _sfc_main45 = defineComponent({
                 }, 8, ["class", "onClick"])) : (openBlock(), createBlock(unref(ElIcon), {
                   key: "arrow-down",
                   class: normalizeClass(unref(cascaderIconKls)),
-                  onClick: _cache[0] || (_cache[0] = withModifiers(($event) => togglePopperVisible(), ["stop"]))
+                  onClick: withModifiers(($event) => togglePopperVisible(), ["stop"])
                 }, {
                   default: withCtx(() => [
                     createVNode(unref(arrow_down_default))
                   ]),
                   _: 1
-                }, 8, ["class"]))
+                }, 8, ["class", "onClick"]))
               ]),
               _: 1
-            }, 8, ["modelValue", "placeholder", "readonly", "disabled", "size", "class", "tabindex"]),
+            }, 8, ["modelValue", "onUpdate:modelValue", "placeholder", "readonly", "disabled", "size", "class", "tabindex", "onCompositionstart", "onCompositionupdate", "onCompositionend"]),
             unref(multiple) ? (openBlock(), createElementBlock("div", {
               key: 0,
               ref_key: "tagWrapper",
@@ -25980,13 +26172,14 @@ var _sfc_main45 = defineComponent({
                   key: tag.key,
                   type: _ctx.tagType,
                   size: unref(tagSize),
+                  effect: _ctx.tagEffect,
                   hit: tag.hitState,
                   closable: tag.closable,
                   "disable-transitions": "",
                   onClose: ($event) => deleteTag(tag)
                 }, {
                   default: withCtx(() => [
-                    tag.isCollapseTag === false ? (openBlock(), createElementBlock("span", _hoisted_119, toDisplayString(tag.text), 1)) : (openBlock(), createBlock(unref(ElTooltip), {
+                    tag.isCollapseTag === false ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(tag.text), 1)) : (openBlock(), createBlock(unref(ElTooltip), {
                       key: 1,
                       disabled: popperVisible.value || !_ctx.collapseTagsTooltip,
                       "fallback-placements": ["bottom", "top", "right", "left"],
@@ -26010,6 +26203,7 @@ var _sfc_main45 = defineComponent({
                                 class: "in-tooltip",
                                 type: _ctx.tagType,
                                 size: unref(tagSize),
+                                effect: _ctx.tagEffect,
                                 hit: tag2.hitState,
                                 closable: tag2.closable,
                                 "disable-transitions": "",
@@ -26019,7 +26213,7 @@ var _sfc_main45 = defineComponent({
                                   createBaseVNode("span", null, toDisplayString(tag2.text), 1)
                                 ]),
                                 _: 2
-                              }, 1032, ["type", "size", "hit", "closable", "onClose"]))
+                              }, 1032, ["type", "size", "effect", "hit", "closable", "onClose"]))
                             ], 2);
                           }), 128))
                         ], 2)
@@ -26028,43 +26222,48 @@ var _sfc_main45 = defineComponent({
                     }, 1032, ["disabled"]))
                   ]),
                   _: 2
-                }, 1032, ["type", "size", "hit", "closable", "onClose"]);
+                }, 1032, ["type", "size", "effect", "hit", "closable", "onClose"]);
               }), 128)),
               _ctx.filterable && !unref(isDisabled) ? withDirectives((openBlock(), createElementBlock("input", {
                 key: 0,
-                "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => searchInputValue.value = $event),
+                "onUpdate:modelValue": ($event) => searchInputValue.value = $event,
                 type: "text",
                 class: normalizeClass(unref(nsCascader).e("search-input")),
                 placeholder: unref(presentText) ? "" : unref(inputPlaceholder),
-                onInput: _cache[3] || (_cache[3] = (e) => handleInput(searchInputValue.value, e)),
-                onClick: _cache[4] || (_cache[4] = withModifiers(($event) => togglePopperVisible(true), ["stop"])),
+                onInput: (e) => handleInput(searchInputValue.value, e),
+                onClick: withModifiers(($event) => togglePopperVisible(true), ["stop"]),
                 onKeydown: withKeys(handleDelete, ["delete"]),
-                onCompositionstart: handleComposition,
-                onCompositionupdate: handleComposition,
-                onCompositionend: handleComposition,
+                onCompositionstart: unref(handleComposition),
+                onCompositionupdate: unref(handleComposition),
+                onCompositionend: unref(handleComposition),
                 onFocus: handleFocus,
                 onBlur: handleBlur
-              }, null, 42, _hoisted_211)), [
+              }, null, 42, ["onUpdate:modelValue", "placeholder", "onInput", "onClick", "onKeydown", "onCompositionstart", "onCompositionupdate", "onCompositionend"])), [
                 [vModelText, searchInputValue.value]
               ]) : createCommentVNode("v-if", true)
             ], 2)) : createCommentVNode("v-if", true)
-          ], 38)), [
+          ], 46, ["onClick", "onMouseenter", "onMouseleave"])), [
             [unref(ClickOutside), () => togglePopperVisible(false), unref(contentRef)]
           ])
         ]),
         content: withCtx(() => [
-          withDirectives(createVNode(unref(_CascaderPanel), {
+          withDirectives(createVNode(unref(ElCascaderPanel), {
             ref_key: "cascaderPanelRef",
             ref: cascaderPanelRef,
             modelValue: unref(checkedValue),
-            "onUpdate:modelValue": _cache[8] || (_cache[8] = ($event) => isRef(checkedValue) ? checkedValue.value = $event : null),
+            "onUpdate:modelValue": ($event) => isRef(checkedValue) ? checkedValue.value = $event : null,
             options: _ctx.options,
             props: props.props,
             border: false,
             "render-label": _ctx.$slots.default,
             onExpandChange: handleExpandChange,
-            onClose: _cache[9] || (_cache[9] = ($event) => _ctx.$nextTick(() => togglePopperVisible(false)))
-          }, null, 8, ["modelValue", "options", "props", "render-label"]), [
+            onClose: ($event) => _ctx.$nextTick(() => togglePopperVisible(false))
+          }, {
+            empty: withCtx(() => [
+              renderSlot(_ctx.$slots, "empty")
+            ]),
+            _: 3
+          }, 8, ["modelValue", "onUpdate:modelValue", "options", "props", "render-label", "onClose"]), [
             [vShow, !filtering.value]
           ]),
           _ctx.filterable ? withDirectives((openBlock(), createBlock(unref(ElScrollbar), {
@@ -26094,7 +26293,7 @@ var _sfc_main45 = defineComponent({
                     ]),
                     _: 1
                   })) : createCommentVNode("v-if", true)
-                ], 10, _hoisted_34);
+                ], 10, ["onClick"]);
               }), 128)) : renderSlot(_ctx.$slots, "empty", { key: 1 }, () => [
                 createBaseVNode("li", {
                   class: normalizeClass(unref(nsCascader).e("empty-text"))
@@ -26107,25 +26306,19 @@ var _sfc_main45 = defineComponent({
           ]) : createCommentVNode("v-if", true)
         ]),
         _: 3
-      }, 8, ["visible", "teleported", "popper-class", "transition"]);
+      }, 8, ["visible", "teleported", "popper-class", "fallback-placements", "placement", "transition", "persistent"]);
     };
   }
 });
-var Cascader = _export_sfc(_sfc_main45, [["__file", "cascader.vue"]]);
+var Cascader = _export_sfc(_sfc_main46, [["__file", "cascader.vue"]]);
 
 // node_modules/element-plus/es/components/cascader/index.mjs
-Cascader.install = (app) => {
-  app.component(Cascader.name, Cascader);
-};
-var _Cascader = Cascader;
-var ElCascader = _Cascader;
+var ElCascader = withInstall(Cascader);
 
 // node_modules/element-plus/es/components/check-tag/src/check-tag.mjs
 var checkTagProps = buildProps({
-  checked: {
-    type: Boolean,
-    default: false
-  },
+  checked: Boolean,
+  disabled: Boolean,
   type: {
     type: String,
     values: ["primary", "success", "info", "warning", "danger"],
@@ -26141,19 +26334,23 @@ var checkTagEmits = {
 var __default__37 = defineComponent({
   name: "ElCheckTag"
 });
-var _sfc_main46 = defineComponent({
+var _sfc_main47 = defineComponent({
   ...__default__37,
   props: checkTagProps,
   emits: checkTagEmits,
   setup(__props, { emit }) {
     const props = __props;
     const ns = useNamespace("check-tag");
-    const containerKls = computed2(() => [
+    const isDisabled = computed(() => props.disabled);
+    const containerKls = computed(() => [
       ns.b(),
       ns.is("checked", props.checked),
+      ns.is("disabled", isDisabled.value),
       ns.m(props.type || "primary")
     ]);
     const handleChange = () => {
+      if (isDisabled.value)
+        return;
       const checked = !props.checked;
       emit(CHANGE_EVENT, checked);
       emit("update:checked", checked);
@@ -26168,7 +26365,7 @@ var _sfc_main46 = defineComponent({
     };
   }
 });
-var CheckTag = _export_sfc(_sfc_main46, [["__file", "check-tag.vue"]]);
+var CheckTag = _export_sfc(_sfc_main47, [["__file", "check-tag.vue"]]);
 
 // node_modules/element-plus/es/components/check-tag/index.mjs
 var ElCheckTag = withInstall(CheckTag);
@@ -26210,17 +26407,17 @@ var rowProps = buildProps({
 var __default__38 = defineComponent({
   name: "ElRow"
 });
-var _sfc_main47 = defineComponent({
+var _sfc_main48 = defineComponent({
   ...__default__38,
   props: rowProps,
   setup(__props) {
     const props = __props;
     const ns = useNamespace("row");
-    const gutter = computed2(() => props.gutter);
+    const gutter = computed(() => props.gutter);
     provide(rowContextKey, {
       gutter
     });
-    const style = computed2(() => {
+    const style = computed(() => {
       const styles = {};
       if (!props.gutter) {
         return styles;
@@ -26228,7 +26425,7 @@ var _sfc_main47 = defineComponent({
       styles.marginRight = styles.marginLeft = `-${props.gutter / 2}px`;
       return styles;
     });
-    const rowKls = computed2(() => [
+    const rowKls = computed(() => [
       ns.b(),
       ns.is(`justify-${props.justify}`, props.justify !== "start"),
       ns.is(`align-${props.align}`, !!props.align)
@@ -26246,7 +26443,7 @@ var _sfc_main47 = defineComponent({
     };
   }
 });
-var Row = _export_sfc(_sfc_main47, [["__file", "row.vue"]]);
+var Row = _export_sfc(_sfc_main48, [["__file", "row.vue"]]);
 
 // node_modules/element-plus/es/components/row/index.mjs
 var ElRow = withInstall(Row);
@@ -26299,21 +26496,21 @@ var colProps = buildProps({
 var __default__39 = defineComponent({
   name: "ElCol"
 });
-var _sfc_main48 = defineComponent({
+var _sfc_main49 = defineComponent({
   ...__default__39,
   props: colProps,
   setup(__props) {
     const props = __props;
-    const { gutter } = inject(rowContextKey, { gutter: computed2(() => 0) });
+    const { gutter } = inject(rowContextKey, { gutter: computed(() => 0) });
     const ns = useNamespace("col");
-    const style = computed2(() => {
+    const style = computed(() => {
       const styles = {};
       if (gutter.value) {
         styles.paddingLeft = styles.paddingRight = `${gutter.value / 2}px`;
       }
       return styles;
     });
-    const colKls = computed2(() => {
+    const colKls = computed(() => {
       const classes = [];
       const pos = ["span", "offset", "pull", "push"];
       pos.forEach((prop) => {
@@ -26353,7 +26550,7 @@ var _sfc_main48 = defineComponent({
     };
   }
 });
-var Col = _export_sfc(_sfc_main48, [["__file", "col.vue"]]);
+var Col = _export_sfc(_sfc_main49, [["__file", "col.vue"]]);
 
 // node_modules/element-plus/es/components/col/index.mjs
 var ElCol = withInstall(Col);
@@ -26410,7 +26607,7 @@ var useCollapse = (props, emit) => {
 };
 var useCollapseDOM = () => {
   const ns = useNamespace("collapse");
-  const rootKls = computed2(() => ns.b());
+  const rootKls = computed(() => ns.b());
   return {
     rootKls
   };
@@ -26420,7 +26617,7 @@ var useCollapseDOM = () => {
 var __default__40 = defineComponent({
   name: "ElCollapse"
 });
-var _sfc_main49 = defineComponent({
+var _sfc_main50 = defineComponent({
   ...__default__40,
   props: collapseProps,
   emits: collapseEmits,
@@ -26441,13 +26638,13 @@ var _sfc_main49 = defineComponent({
     };
   }
 });
-var Collapse = _export_sfc(_sfc_main49, [["__file", "collapse.vue"]]);
+var Collapse = _export_sfc(_sfc_main50, [["__file", "collapse.vue"]]);
 
 // node_modules/element-plus/es/components/collapse-transition/src/collapse-transition.mjs
 var __default__41 = defineComponent({
   name: "ElCollapseTransition"
 });
-var _sfc_main50 = defineComponent({
+var _sfc_main51 = defineComponent({
   ...__default__41,
   setup(__props) {
     const ns = useNamespace("collapse-transition");
@@ -26526,14 +26723,10 @@ var _sfc_main50 = defineComponent({
     };
   }
 });
-var CollapseTransition = _export_sfc(_sfc_main50, [["__file", "collapse-transition.vue"]]);
+var CollapseTransition = _export_sfc(_sfc_main51, [["__file", "collapse-transition.vue"]]);
 
 // node_modules/element-plus/es/components/collapse-transition/index.mjs
-CollapseTransition.install = (app) => {
-  app.component(CollapseTransition.name, CollapseTransition);
-};
-var _CollapseTransition = CollapseTransition;
-var ElCollapseTransition = _CollapseTransition;
+var ElCollapseTransition = withInstall(CollapseTransition);
 
 // node_modules/element-plus/es/components/collapse/src/collapse-item.mjs
 var collapseItemProps = buildProps({
@@ -26545,6 +26738,10 @@ var collapseItemProps = buildProps({
     type: definePropType([String, Number]),
     default: void 0
   },
+  icon: {
+    type: iconPropType,
+    default: arrow_right_default
+  },
   disabled: Boolean
 });
 
@@ -26555,12 +26752,12 @@ var useCollapseItem = (props) => {
   const focusing = ref(false);
   const isClick = ref(false);
   const idInjection = useIdInjection();
-  const id = computed2(() => idInjection.current++);
-  const name = computed2(() => {
+  const id = computed(() => idInjection.current++);
+  const name = computed(() => {
     var _a2;
     return (_a2 = props.name) != null ? _a2 : `${namespace.value}-id-${idInjection.prefix}-${unref(id)}`;
   });
-  const isActive = computed2(() => collapse == null ? void 0 : collapse.activeNames.value.includes(unref(name)));
+  const isActive = computed(() => collapse == null ? void 0 : collapse.activeNames.value.includes(unref(name)));
   const handleFocus = () => {
     setTimeout(() => {
       if (!isClick.value) {
@@ -26591,24 +26788,24 @@ var useCollapseItem = (props) => {
 };
 var useCollapseItemDOM = (props, { focusing, isActive, id }) => {
   const ns = useNamespace("collapse");
-  const rootKls = computed2(() => [
+  const rootKls = computed(() => [
     ns.b("item"),
     ns.is("active", unref(isActive)),
     ns.is("disabled", props.disabled)
   ]);
-  const headKls = computed2(() => [
+  const headKls = computed(() => [
     ns.be("item", "header"),
     ns.is("active", unref(isActive)),
     { focusing: unref(focusing) && !props.disabled }
   ]);
-  const arrowKls = computed2(() => [
+  const arrowKls = computed(() => [
     ns.be("item", "arrow"),
     ns.is("active", unref(isActive))
   ]);
-  const itemWrapperKls = computed2(() => ns.be("item", "wrap"));
-  const itemContentKls = computed2(() => ns.be("item", "content"));
-  const scopedContentId = computed2(() => ns.b(`content-${unref(id)}`));
-  const scopedHeadId = computed2(() => ns.b(`head-${unref(id)}`));
+  const itemWrapperKls = computed(() => ns.be("item", "wrap"));
+  const itemContentKls = computed(() => ns.be("item", "content"));
+  const scopedContentId = computed(() => ns.b(`content-${unref(id)}`));
+  const scopedHeadId = computed(() => ns.b(`head-${unref(id)}`));
   return {
     arrowKls,
     headKls,
@@ -26621,12 +26818,10 @@ var useCollapseItemDOM = (props, { focusing, isActive, id }) => {
 };
 
 // node_modules/element-plus/es/components/collapse/src/collapse-item2.mjs
-var _hoisted_120 = ["id", "aria-expanded", "aria-controls", "aria-describedby", "tabindex"];
-var _hoisted_212 = ["id", "aria-hidden", "aria-labelledby"];
 var __default__42 = defineComponent({
   name: "ElCollapseItem"
 });
-var _sfc_main51 = defineComponent({
+var _sfc_main52 = defineComponent({
   ...__default__42,
   props: collapseItemProps,
   setup(__props, { expose }) {
@@ -26663,24 +26858,26 @@ var _sfc_main51 = defineComponent({
           "aria-describedby": unref(scopedContentId),
           tabindex: _ctx.disabled ? -1 : 0,
           type: "button",
-          onClick: _cache[0] || (_cache[0] = (...args) => unref(handleHeaderClick) && unref(handleHeaderClick)(...args)),
-          onKeydown: _cache[1] || (_cache[1] = withKeys(withModifiers((...args) => unref(handleEnterClick) && unref(handleEnterClick)(...args), ["stop", "prevent"]), ["space", "enter"])),
-          onFocus: _cache[2] || (_cache[2] = (...args) => unref(handleFocus) && unref(handleFocus)(...args)),
-          onBlur: _cache[3] || (_cache[3] = ($event) => focusing.value = false)
+          onClick: unref(handleHeaderClick),
+          onKeydown: withKeys(withModifiers(unref(handleEnterClick), ["stop", "prevent"]), ["space", "enter"]),
+          onFocus: unref(handleFocus),
+          onBlur: ($event) => focusing.value = false
         }, [
           renderSlot(_ctx.$slots, "title", {}, () => [
             createTextVNode(toDisplayString(_ctx.title), 1)
           ]),
-          createVNode(unref(ElIcon), {
-            class: normalizeClass(unref(arrowKls))
-          }, {
-            default: withCtx(() => [
-              createVNode(unref(arrow_right_default))
-            ]),
-            _: 1
-          }, 8, ["class"])
-        ], 42, _hoisted_120),
-        createVNode(unref(_CollapseTransition), null, {
+          renderSlot(_ctx.$slots, "icon", { isActive: unref(isActive) }, () => [
+            createVNode(unref(ElIcon), {
+              class: normalizeClass(unref(arrowKls))
+            }, {
+              default: withCtx(() => [
+                (openBlock(), createBlock(resolveDynamicComponent(_ctx.icon)))
+              ]),
+              _: 1
+            }, 8, ["class"])
+          ])
+        ], 42, ["id", "aria-expanded", "aria-controls", "aria-describedby", "tabindex", "onClick", "onKeydown", "onFocus", "onBlur"]),
+        createVNode(unref(ElCollapseTransition), null, {
           default: withCtx(() => [
             withDirectives(createBaseVNode("div", {
               id: unref(scopedContentId),
@@ -26694,7 +26891,7 @@ var _sfc_main51 = defineComponent({
               }, [
                 renderSlot(_ctx.$slots, "default")
               ], 2)
-            ], 10, _hoisted_212), [
+            ], 10, ["id", "aria-hidden", "aria-labelledby"]), [
               [vShow, unref(isActive)]
             ])
           ]),
@@ -26704,7 +26901,7 @@ var _sfc_main51 = defineComponent({
     };
   }
 });
-var CollapseItem = _export_sfc(_sfc_main51, [["__file", "collapse-item.vue"]]);
+var CollapseItem = _export_sfc(_sfc_main52, [["__file", "collapse-item.vue"]]);
 
 // node_modules/element-plus/es/components/collapse/index.mjs
 var ElCollapse = withInstall(Collapse, {
@@ -26759,19 +26956,24 @@ function draggable(element, options) {
     (_a2 = options.start) == null ? void 0 : _a2.call(options, event);
   };
   element.addEventListener("mousedown", downFn);
-  element.addEventListener("touchstart", downFn);
+  element.addEventListener("touchstart", downFn, { passive: false });
 }
 
 // node_modules/element-plus/es/components/color-picker/src/composables/use-alpha-slider.mjs
 var useAlphaSlider = (props) => {
   const instance = getCurrentInstance();
+  const { t } = useLocale();
   const thumb = shallowRef();
   const bar = shallowRef();
+  const alpha = computed(() => props.color.get("alpha"));
+  const alphaLabel = computed(() => t("el.colorpicker.alphaLabel"));
   function handleClick(event) {
+    var _a2;
     const target2 = event.target;
     if (target2 !== thumb.value) {
       handleDrag(event);
     }
+    (_a2 = thumb.value) == null ? void 0 : _a2.focus();
   }
   function handleDrag(event) {
     if (!bar.value || !thumb.value)
@@ -26791,11 +26993,37 @@ var useAlphaSlider = (props) => {
       props.color.set("alpha", Math.round((top - thumb.value.offsetHeight / 2) / (rect.height - thumb.value.offsetHeight) * 100));
     }
   }
+  function handleKeydown(event) {
+    const { code, shiftKey } = event;
+    const step = shiftKey ? 10 : 1;
+    switch (code) {
+      case EVENT_CODE.left:
+      case EVENT_CODE.down:
+        event.preventDefault();
+        event.stopPropagation();
+        incrementPosition(-step);
+        break;
+      case EVENT_CODE.right:
+      case EVENT_CODE.up:
+        event.preventDefault();
+        event.stopPropagation();
+        incrementPosition(step);
+        break;
+    }
+  }
+  function incrementPosition(step) {
+    let next = alpha.value + step;
+    next = next < 0 ? 0 : next > 100 ? 100 : next;
+    props.color.set("alpha", next);
+  }
   return {
     thumb,
     bar,
+    alpha,
+    alphaLabel,
     handleDrag,
-    handleClick
+    handleClick,
+    handleKeydown
   };
 };
 var useAlphaSliderDOM = (props, {
@@ -26859,11 +27087,11 @@ var useAlphaSliderDOM = (props, {
   });
   watch(() => props.color.get("alpha"), () => update2());
   watch(() => props.color.value, () => update2());
-  const rootKls = computed2(() => [ns.b(), ns.is("vertical", props.vertical)]);
-  const barKls = computed2(() => ns.e("bar"));
-  const thumbKls = computed2(() => ns.e("thumb"));
-  const barStyle = computed2(() => ({ background: background.value }));
-  const thumbStyle = computed2(() => ({
+  const rootKls = computed(() => [ns.b(), ns.is("vertical", props.vertical)]);
+  const barKls = computed(() => ns.e("bar"));
+  const thumbKls = computed(() => ns.e("thumb"));
+  const barStyle = computed(() => ({ background: background.value }));
+  const thumbStyle = computed(() => ({
     left: addUnit(thumbLeft.value),
     top: addUnit(thumbTop.value)
   }));
@@ -26871,16 +27099,24 @@ var useAlphaSliderDOM = (props, {
 };
 
 // node_modules/element-plus/es/components/color-picker/src/components/alpha-slider.mjs
-var COMPONENT_NAME12 = "ElColorAlphaSlider";
+var COMPONENT_NAME11 = "ElColorAlphaSlider";
 var __default__43 = defineComponent({
-  name: COMPONENT_NAME12
+  name: COMPONENT_NAME11
 });
-var _sfc_main52 = defineComponent({
+var _sfc_main53 = defineComponent({
   ...__default__43,
   props: alphaSliderProps,
   setup(__props, { expose }) {
     const props = __props;
-    const { bar, thumb, handleDrag, handleClick } = useAlphaSlider(props);
+    const {
+      alpha,
+      alphaLabel,
+      bar,
+      thumb,
+      handleDrag,
+      handleClick,
+      handleKeydown
+    } = useAlphaSlider(props);
     const { rootKls, barKls, barStyle, thumbKls, thumbStyle, update: update2 } = useAlphaSliderDOM(props, {
       bar,
       thumb,
@@ -26900,22 +27136,30 @@ var _sfc_main52 = defineComponent({
           ref: bar,
           class: normalizeClass(unref(barKls)),
           style: normalizeStyle(unref(barStyle)),
-          onClick: _cache[0] || (_cache[0] = (...args) => unref(handleClick) && unref(handleClick)(...args))
-        }, null, 6),
+          onClick: unref(handleClick)
+        }, null, 14, ["onClick"]),
         createBaseVNode("div", {
           ref_key: "thumb",
           ref: thumb,
           class: normalizeClass(unref(thumbKls)),
-          style: normalizeStyle(unref(thumbStyle))
-        }, null, 6)
+          style: normalizeStyle(unref(thumbStyle)),
+          "aria-label": unref(alphaLabel),
+          "aria-valuenow": unref(alpha),
+          "aria-orientation": _ctx.vertical ? "vertical" : "horizontal",
+          "aria-valuemin": "0",
+          "aria-valuemax": "100",
+          role: "slider",
+          tabindex: "0",
+          onKeydown: unref(handleKeydown)
+        }, null, 46, ["aria-label", "aria-valuenow", "aria-orientation", "onKeydown"])
       ], 2);
     };
   }
 });
-var AlphaSlider = _export_sfc(_sfc_main52, [["__file", "alpha-slider.vue"]]);
+var AlphaSlider = _export_sfc(_sfc_main53, [["__file", "alpha-slider.vue"]]);
 
 // node_modules/element-plus/es/components/color-picker/src/components/hue-slider.mjs
-var _sfc_main53 = defineComponent({
+var _sfc_main54 = defineComponent({
   name: "ElColorHueSlider",
   props: {
     color: {
@@ -26931,7 +27175,7 @@ var _sfc_main53 = defineComponent({
     const bar = ref();
     const thumbLeft = ref(0);
     const thumbTop = ref(0);
-    const hueValue = computed2(() => {
+    const hueValue = computed(() => {
       return props.color.get("hue");
     });
     watch(() => hueValue.value, () => {
@@ -27023,8 +27267,8 @@ function _sfc_render5(_ctx, _cache, $props, $setup, $data, $options) {
     createBaseVNode("div", {
       ref: "bar",
       class: normalizeClass(_ctx.ns.e("bar")),
-      onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
-    }, null, 2),
+      onClick: _ctx.handleClick
+    }, null, 10, ["onClick"]),
     createBaseVNode("div", {
       ref: "thumb",
       class: normalizeClass(_ctx.ns.e("thumb")),
@@ -27035,7 +27279,7 @@ function _sfc_render5(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 6)
   ], 2);
 }
-var HueSlider = _export_sfc(_sfc_main53, [["render", _sfc_render5], ["__file", "hue-slider.vue"]]);
+var HueSlider = _export_sfc(_sfc_main54, [["render", _sfc_render5], ["__file", "hue-slider.vue"]]);
 
 // node_modules/element-plus/es/components/color-picker/src/color-picker.mjs
 var colorPickerProps = buildProps({
@@ -27049,28 +27293,26 @@ var colorPickerProps = buildProps({
     type: String,
     default: ""
   },
-  label: {
-    type: String,
-    default: void 0
-  },
   tabindex: {
     type: [String, Number],
     default: 0
   },
+  teleported: useTooltipContentProps.teleported,
   predefine: {
     type: definePropType(Array)
   },
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var colorPickerEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isString(val) || isNil_default(val),
   [CHANGE_EVENT]: (val) => isString(val) || isNil_default(val),
   activeChange: (val) => isString(val) || isNil_default(val),
-  focus: (event) => event instanceof FocusEvent,
-  blur: (event) => event instanceof FocusEvent
+  focus: (evt) => evt instanceof FocusEvent,
+  blur: (evt) => evt instanceof FocusEvent
 };
 var colorPickerContextKey = Symbol("colorPickerContextKey");
 
@@ -27361,7 +27603,7 @@ var Color = class {
 };
 
 // node_modules/element-plus/es/components/color-picker/src/components/predefine.mjs
-var _sfc_main54 = defineComponent({
+var _sfc_main55 = defineComponent({
   props: {
     colors: {
       type: Array,
@@ -27369,6 +27611,10 @@ var _sfc_main54 = defineComponent({
     },
     color: {
       type: Object,
+      required: true
+    },
+    enableAlpha: {
+      type: Boolean,
       required: true
     }
   },
@@ -27392,7 +27638,7 @@ var _sfc_main54 = defineComponent({
     function parseColors(colors, color) {
       return colors.map((value) => {
         const c2 = new Color();
-        c2.enableAlpha = true;
+        c2.enableAlpha = props.enableAlpha;
         c2.format = "rgba";
         c2.fromString(value);
         c2.selected = c2.value === color.value;
@@ -27406,7 +27652,6 @@ var _sfc_main54 = defineComponent({
     };
   }
 });
-var _hoisted_121 = ["onClick"];
 function _sfc_render6(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.ns.b())
@@ -27427,15 +27672,15 @@ function _sfc_render6(_ctx, _cache, $props, $setup, $data, $options) {
           createBaseVNode("div", {
             style: normalizeStyle({ backgroundColor: item.value })
           }, null, 4)
-        ], 10, _hoisted_121);
+        ], 10, ["onClick"]);
       }), 128))
     ], 2)
   ], 2);
 }
-var Predefine = _export_sfc(_sfc_main54, [["render", _sfc_render6], ["__file", "predefine.vue"]]);
+var Predefine = _export_sfc(_sfc_main55, [["render", _sfc_render6], ["__file", "predefine.vue"]]);
 
 // node_modules/element-plus/es/components/color-picker/src/components/sv-panel.mjs
-var _sfc_main55 = defineComponent({
+var _sfc_main56 = defineComponent({
   name: "ElSlPanel",
   props: {
     color: {
@@ -27449,7 +27694,7 @@ var _sfc_main55 = defineComponent({
     const cursorTop = ref(0);
     const cursorLeft = ref(0);
     const background = ref("hsl(0, 100%, 50%)");
-    const colorValue = computed2(() => {
+    const colorValue = computed(() => {
       const hue = props.color.get("hue");
       const value = props.color.get("value");
       return { hue, value };
@@ -27505,10 +27750,6 @@ var _sfc_main55 = defineComponent({
     };
   }
 });
-var _hoisted_122 = createBaseVNode("div", null, null, -1);
-var _hoisted_213 = [
-  _hoisted_122
-];
 function _sfc_render7(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.ns.b()),
@@ -27528,18 +27769,18 @@ function _sfc_render7(_ctx, _cache, $props, $setup, $data, $options) {
         top: _ctx.cursorTop + "px",
         left: _ctx.cursorLeft + "px"
       })
-    }, _hoisted_213, 6)
+    }, [
+      createBaseVNode("div")
+    ], 6)
   ], 6);
 }
-var SvPanel = _export_sfc(_sfc_main55, [["render", _sfc_render7], ["__file", "sv-panel.vue"]]);
+var SvPanel = _export_sfc(_sfc_main56, [["render", _sfc_render7], ["__file", "sv-panel.vue"]]);
 
 // node_modules/element-plus/es/components/color-picker/src/color-picker2.mjs
-var _hoisted_123 = ["onKeydown"];
-var _hoisted_214 = ["id", "aria-label", "aria-labelledby", "aria-description", "aria-disabled", "tabindex"];
 var __default__44 = defineComponent({
   name: "ElColorPicker"
 });
-var _sfc_main56 = defineComponent({
+var _sfc_main57 = defineComponent({
   ...__default__44,
   props: colorPickerProps,
   emits: colorPickerEmits,
@@ -27559,11 +27800,10 @@ var _sfc_main56 = defineComponent({
     const popper = ref();
     const triggerRef = ref();
     const inputRef = ref();
-    const {
-      isFocused,
-      handleFocus: _handleFocus,
-      handleBlur
-    } = useFocusController(triggerRef, {
+    const { isFocused, handleFocus, handleBlur } = useFocusController(triggerRef, {
+      beforeFocus() {
+        return colorDisabled.value;
+      },
       beforeBlur(event) {
         var _a2;
         return (_a2 = popper.value) == null ? void 0 : _a2.isFocusInsideContent(event);
@@ -27573,11 +27813,6 @@ var _sfc_main56 = defineComponent({
         resetColor();
       }
     });
-    const handleFocus = (event) => {
-      if (colorDisabled.value)
-        return blur();
-      _handleFocus(event);
-    };
     let shouldActiveChange = true;
     const color = reactive(new Color({
       enableAlpha: props.showAlpha,
@@ -27587,22 +27822,22 @@ var _sfc_main56 = defineComponent({
     const showPicker = ref(false);
     const showPanelColor = ref(false);
     const customInput = ref("");
-    const displayedColor = computed2(() => {
+    const displayedColor = computed(() => {
       if (!props.modelValue && !showPanelColor.value) {
         return "transparent";
       }
       return displayedRgb(color, props.showAlpha);
     });
-    const currentColor = computed2(() => {
+    const currentColor = computed(() => {
       return !props.modelValue && !showPanelColor.value ? "" : color.value;
     });
-    const buttonAriaLabel = computed2(() => {
-      return !isLabeledByFormItem.value ? props.label || t("el.colorpicker.defaultLabel") : void 0;
+    const buttonAriaLabel = computed(() => {
+      return !isLabeledByFormItem.value ? props.ariaLabel || t("el.colorpicker.defaultLabel") : void 0;
     });
-    const buttonAriaLabelledby = computed2(() => {
+    const buttonAriaLabelledby = computed(() => {
       return isLabeledByFormItem.value ? formItem == null ? void 0 : formItem.labelId : void 0;
     });
-    const btnKls = computed2(() => {
+    const btnKls = computed(() => {
       return [
         ns.b("picker"),
         ns.is("disabled", colorDisabled.value),
@@ -27678,14 +27913,11 @@ var _sfc_main56 = defineComponent({
       }
       resetColor();
     }
-    function handleClickOutside(event) {
+    function handleClickOutside() {
       if (!showPicker.value)
         return;
       hide2();
-      if (isFocused.value) {
-        const _event2 = new FocusEvent("focus", event);
-        handleBlur(_event2);
-      }
+      isFocused.value && focus();
     }
     function handleEsc(event) {
       event.preventDefault();
@@ -27724,6 +27956,13 @@ var _sfc_main56 = defineComponent({
       } else if (newVal && newVal !== color.value) {
         shouldActiveChange = false;
         color.fromString(newVal);
+      }
+    });
+    watch(() => props.colorFormat, () => {
+      if (props.colorFormat) {
+        color.format = props.colorFormat;
+        color.doOnChange();
+        emit(UPDATE_MODEL_EVENT, color.value);
       }
     });
     watch(() => currentColor.value, (val) => {
@@ -27767,9 +28006,10 @@ var _sfc_main56 = defineComponent({
         "stop-popper-mouse-event": false,
         effect: "light",
         trigger: "click",
+        teleported: _ctx.teleported,
         transition: `${unref(ns).namespace.value}-zoom-in-top`,
         persistent: "",
-        onHide: _cache[2] || (_cache[2] = ($event) => setShowPicker(false))
+        onHide: ($event) => setShowPicker(false)
       }, {
         content: withCtx(() => [
           withDirectives((openBlock(), createElementBlock("div", {
@@ -27800,9 +28040,10 @@ var _sfc_main56 = defineComponent({
             _ctx.predefine ? (openBlock(), createBlock(Predefine, {
               key: 1,
               ref: "predefine",
+              "enable-alpha": _ctx.showAlpha,
               color: unref(color),
               colors: _ctx.predefine
-            }, null, 8, ["color", "colors"])) : createCommentVNode("v-if", true),
+            }, null, 8, ["enable-alpha", "color", "colors"])) : createCommentVNode("v-if", true),
             createBaseVNode("div", {
               class: normalizeClass(unref(ns).be("dropdown", "btns"))
             }, [
@@ -27813,12 +28054,12 @@ var _sfc_main56 = defineComponent({
                   ref_key: "inputRef",
                   ref: inputRef,
                   modelValue: customInput.value,
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => customInput.value = $event),
+                  "onUpdate:modelValue": ($event) => customInput.value = $event,
                   "validate-event": false,
                   size: "small",
                   onKeyup: withKeys(handleConfirm, ["enter"]),
                   onBlur: handleConfirm
-                }, null, 8, ["modelValue", "onKeyup"])
+                }, null, 8, ["modelValue", "onUpdate:modelValue", "onKeyup"])
               ], 2),
               createVNode(unref(ElButton), {
                 class: normalizeClass(unref(ns).be("dropdown", "link-btn")),
@@ -27843,16 +28084,17 @@ var _sfc_main56 = defineComponent({
                 _: 1
               }, 8, ["class"])
             ], 2)
-          ], 40, _hoisted_123)), [
+          ], 40, ["onKeydown"])), [
             [unref(ClickOutside), handleClickOutside]
           ])
         ]),
         default: withCtx(() => [
-          createBaseVNode("div", {
+          createBaseVNode("div", mergeProps({
             id: unref(buttonId),
             ref_key: "triggerRef",
-            ref: triggerRef,
-            class: normalizeClass(unref(btnKls)),
+            ref: triggerRef
+          }, _ctx.$attrs, {
+            class: unref(btnKls),
             role: "button",
             "aria-label": unref(buttonAriaLabel),
             "aria-labelledby": unref(buttonAriaLabelledby),
@@ -27860,9 +28102,9 @@ var _sfc_main56 = defineComponent({
             "aria-disabled": unref(colorDisabled),
             tabindex: unref(colorDisabled) ? -1 : _ctx.tabindex,
             onKeydown: handleKeyDown,
-            onFocus: handleFocus,
-            onBlur: _cache[1] || (_cache[1] = (...args) => unref(handleBlur) && unref(handleBlur)(...args))
-          }, [
+            onFocus: unref(handleFocus),
+            onBlur: unref(handleBlur)
+          }), [
             unref(colorDisabled) ? (openBlock(), createElementBlock("div", {
               key: 0,
               class: normalizeClass(unref(ns).be("picker", "mask"))
@@ -27903,14 +28145,14 @@ var _sfc_main56 = defineComponent({
                 ], 6)
               ], 2)
             ], 2)
-          ], 42, _hoisted_214)
+          ], 16, ["id", "aria-label", "aria-labelledby", "aria-description", "aria-disabled", "tabindex", "onFocus", "onBlur"])
         ]),
         _: 1
-      }, 8, ["visible", "popper-class", "transition"]);
+      }, 8, ["visible", "popper-class", "teleported", "transition", "onHide"]);
     };
   }
 });
-var ColorPicker = _export_sfc(_sfc_main56, [["__file", "color-picker.vue"]]);
+var ColorPicker = _export_sfc(_sfc_main57, [["__file", "color-picker.vue"]]);
 
 // node_modules/element-plus/es/components/color-picker/index.mjs
 var ElColorPicker = withInstall(ColorPicker);
@@ -27919,7 +28161,7 @@ var ElColorPicker = withInstall(ColorPicker);
 var __default__45 = defineComponent({
   name: "ElContainer"
 });
-var _sfc_main57 = defineComponent({
+var _sfc_main58 = defineComponent({
   ...__default__45,
   props: {
     direction: {
@@ -27930,7 +28172,7 @@ var _sfc_main57 = defineComponent({
     const props = __props;
     const slots = useSlots();
     const ns = useNamespace("container");
-    const isVertical = computed2(() => {
+    const isVertical = computed(() => {
       if (props.direction === "vertical") {
         return true;
       } else if (props.direction === "horizontal") {
@@ -27955,13 +28197,13 @@ var _sfc_main57 = defineComponent({
     };
   }
 });
-var Container = _export_sfc(_sfc_main57, [["__file", "container.vue"]]);
+var Container = _export_sfc(_sfc_main58, [["__file", "container.vue"]]);
 
 // node_modules/element-plus/es/components/container/src/aside.mjs
 var __default__46 = defineComponent({
   name: "ElAside"
 });
-var _sfc_main58 = defineComponent({
+var _sfc_main59 = defineComponent({
   ...__default__46,
   props: {
     width: {
@@ -27972,7 +28214,7 @@ var _sfc_main58 = defineComponent({
   setup(__props) {
     const props = __props;
     const ns = useNamespace("aside");
-    const style = computed2(() => props.width ? ns.cssVarBlock({ width: props.width }) : {});
+    const style = computed(() => props.width ? ns.cssVarBlock({ width: props.width }) : {});
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("aside", {
         class: normalizeClass(unref(ns).b()),
@@ -27983,13 +28225,13 @@ var _sfc_main58 = defineComponent({
     };
   }
 });
-var Aside = _export_sfc(_sfc_main58, [["__file", "aside.vue"]]);
+var Aside = _export_sfc(_sfc_main59, [["__file", "aside.vue"]]);
 
 // node_modules/element-plus/es/components/container/src/footer.mjs
 var __default__47 = defineComponent({
   name: "ElFooter"
 });
-var _sfc_main59 = defineComponent({
+var _sfc_main60 = defineComponent({
   ...__default__47,
   props: {
     height: {
@@ -28000,7 +28242,7 @@ var _sfc_main59 = defineComponent({
   setup(__props) {
     const props = __props;
     const ns = useNamespace("footer");
-    const style = computed2(() => props.height ? ns.cssVarBlock({ height: props.height }) : {});
+    const style = computed(() => props.height ? ns.cssVarBlock({ height: props.height }) : {});
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("footer", {
         class: normalizeClass(unref(ns).b()),
@@ -28011,13 +28253,13 @@ var _sfc_main59 = defineComponent({
     };
   }
 });
-var Footer = _export_sfc(_sfc_main59, [["__file", "footer.vue"]]);
+var Footer = _export_sfc(_sfc_main60, [["__file", "footer.vue"]]);
 
 // node_modules/element-plus/es/components/container/src/header.mjs
 var __default__48 = defineComponent({
   name: "ElHeader"
 });
-var _sfc_main60 = defineComponent({
+var _sfc_main61 = defineComponent({
   ...__default__48,
   props: {
     height: {
@@ -28028,7 +28270,7 @@ var _sfc_main60 = defineComponent({
   setup(__props) {
     const props = __props;
     const ns = useNamespace("header");
-    const style = computed2(() => {
+    const style = computed(() => {
       return props.height ? ns.cssVarBlock({
         height: props.height
       }) : {};
@@ -28043,13 +28285,13 @@ var _sfc_main60 = defineComponent({
     };
   }
 });
-var Header = _export_sfc(_sfc_main60, [["__file", "header.vue"]]);
+var Header = _export_sfc(_sfc_main61, [["__file", "header.vue"]]);
 
 // node_modules/element-plus/es/components/container/src/main.mjs
 var __default__49 = defineComponent({
   name: "ElMain"
 });
-var _sfc_main61 = defineComponent({
+var _sfc_main62 = defineComponent({
   ...__default__49,
   setup(__props) {
     const ns = useNamespace("main");
@@ -28062,7 +28304,7 @@ var _sfc_main61 = defineComponent({
     };
   }
 });
-var Main = _export_sfc(_sfc_main61, [["__file", "main.vue"]]);
+var Main = _export_sfc(_sfc_main62, [["__file", "main.vue"]]);
 
 // node_modules/element-plus/es/components/container/index.mjs
 var ElContainer = withInstall(Container, {
@@ -28077,7 +28319,7 @@ var ElHeader = withNoopInstall(Header);
 var ElMain = withNoopInstall(Main);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker.mjs
-var import_dayjs15 = __toESM(require_dayjs_min(), 1);
+var import_dayjs16 = __toESM(require_dayjs_min(), 1);
 var import_customParseFormat2 = __toESM(require_customParseFormat(), 1);
 var import_advancedFormat = __toESM(require_advancedFormat(), 1);
 var import_localeData2 = __toESM(require_localeData(), 1);
@@ -28109,6 +28351,7 @@ var selectionModes = [
   "year",
   "years",
   "month",
+  "months",
   "week",
   "range"
 ];
@@ -28175,20 +28418,6 @@ var panelDatePickProps = buildProps({
   }
 });
 
-// node_modules/element-plus/es/components/date-picker/src/props/basic-date-table.mjs
-var basicDateTableProps = buildProps({
-  ...datePickerSharedProps,
-  cellClassName: {
-    type: definePropType(Function)
-  },
-  showWeekNumber: Boolean,
-  selectionMode: selectionModeWithDefault("date")
-});
-var basicDateTableEmits = ["changerange", "pick", "select"];
-
-// node_modules/element-plus/es/components/date-picker/src/composables/use-basic-date-table.mjs
-var import_dayjs8 = __toESM(require_dayjs_min(), 1);
-
 // node_modules/element-plus/es/components/date-picker/src/utils.mjs
 var import_dayjs7 = __toESM(require_dayjs_min(), 1);
 var isValidRange2 = (range4) => {
@@ -28197,12 +28426,12 @@ var isValidRange2 = (range4) => {
   const [left2, right2] = range4;
   return import_dayjs7.default.isDayjs(left2) && import_dayjs7.default.isDayjs(right2) && left2.isSameOrBefore(right2);
 };
-var getDefaultValue = (defaultValue, { lang, unit: unit3, unlinkPanels }) => {
+var getDefaultValue = (defaultValue, { lang, unit: unit4, unlinkPanels }) => {
   let start;
   if (isArray(defaultValue)) {
     let [left2, right2] = defaultValue.map((d2) => (0, import_dayjs7.default)(d2).locale(lang));
     if (!unlinkPanels) {
-      right2 = left2.add(1, unit3);
+      right2 = left2.add(1, unit4);
     }
     return [left2, right2];
   } else if (defaultValue) {
@@ -28211,14 +28440,14 @@ var getDefaultValue = (defaultValue, { lang, unit: unit3, unlinkPanels }) => {
     start = (0, import_dayjs7.default)();
   }
   start = start.locale(lang);
-  return [start, start.add(1, unit3)];
+  return [start, start.add(1, unit4)];
 };
 var buildPickerTable = (dimension, rows, {
   columnIndexOffset,
   startDate,
   nextEndDate,
   now: now2,
-  unit: unit3,
+  unit: unit4,
   relativeDateGetter,
   setCellMetadata,
   setRowMetadata
@@ -28243,15 +28472,15 @@ var buildPickerTable = (dimension, rows, {
       cell.date = nextStartDate.toDate();
       cell.timestamp = nextStartDate.valueOf();
       cell.type = "normal";
-      cell.inRange = !!(startDate && nextStartDate.isSameOrAfter(startDate, unit3) && nextEndDate && nextStartDate.isSameOrBefore(nextEndDate, unit3)) || !!(startDate && nextStartDate.isSameOrBefore(startDate, unit3) && nextEndDate && nextStartDate.isSameOrAfter(nextEndDate, unit3));
+      cell.inRange = !!(startDate && nextStartDate.isSameOrAfter(startDate, unit4) && nextEndDate && nextStartDate.isSameOrBefore(nextEndDate, unit4)) || !!(startDate && nextStartDate.isSameOrBefore(startDate, unit4) && nextEndDate && nextStartDate.isSameOrAfter(nextEndDate, unit4));
       if (startDate == null ? void 0 : startDate.isSameOrAfter(nextEndDate)) {
-        cell.start = !!nextEndDate && nextStartDate.isSame(nextEndDate, unit3);
-        cell.end = startDate && nextStartDate.isSame(startDate, unit3);
+        cell.start = !!nextEndDate && nextStartDate.isSame(nextEndDate, unit4);
+        cell.end = startDate && nextStartDate.isSame(startDate, unit4);
       } else {
-        cell.start = !!startDate && nextStartDate.isSame(startDate, unit3);
-        cell.end = !!nextEndDate && nextStartDate.isSame(nextEndDate, unit3);
+        cell.start = !!startDate && nextStartDate.isSame(startDate, unit4);
+        cell.end = !!nextEndDate && nextStartDate.isSame(nextEndDate, unit4);
       }
-      const isToday = nextStartDate.isSame(now2, unit3);
+      const isToday = nextStartDate.isSame(now2, unit4);
       if (isToday) {
         cell.type = "today";
       }
@@ -28261,8 +28490,51 @@ var buildPickerTable = (dimension, rows, {
     setRowMetadata == null ? void 0 : setRowMetadata(row);
   }
 };
+var datesInMonth = (year, month, lang) => {
+  const firstDay = (0, import_dayjs7.default)().locale(lang).startOf("month").month(month).year(year);
+  const numOfDays = firstDay.daysInMonth();
+  return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
+};
+var getValidDateOfMonth = (year, month, lang, disabledDate) => {
+  const _value = (0, import_dayjs7.default)().year(year).month(month).startOf("month");
+  const _date = datesInMonth(year, month, lang).find((date4) => {
+    return !(disabledDate == null ? void 0 : disabledDate(date4));
+  });
+  if (_date) {
+    return (0, import_dayjs7.default)(_date).locale(lang);
+  }
+  return _value.locale(lang);
+};
+var getValidDateOfYear = (value, lang, disabledDate) => {
+  const year = value.year();
+  if (!(disabledDate == null ? void 0 : disabledDate(value.toDate()))) {
+    return value.locale(lang);
+  }
+  const month = value.month();
+  if (!datesInMonth(year, month, lang).every(disabledDate)) {
+    return getValidDateOfMonth(year, month, lang, disabledDate);
+  }
+  for (let i = 0; i < 12; i++) {
+    if (!datesInMonth(year, i, lang).every(disabledDate)) {
+      return getValidDateOfMonth(year, i, lang, disabledDate);
+    }
+  }
+  return value;
+};
+
+// node_modules/element-plus/es/components/date-picker/src/props/basic-date-table.mjs
+var basicDateTableProps = buildProps({
+  ...datePickerSharedProps,
+  cellClassName: {
+    type: definePropType(Function)
+  },
+  showWeekNumber: Boolean,
+  selectionMode: selectionModeWithDefault("date")
+});
+var basicDateTableEmits = ["changerange", "pick", "select"];
 
 // node_modules/element-plus/es/components/date-picker/src/composables/use-basic-date-table.mjs
+var import_dayjs8 = __toESM(require_dayjs_min(), 1);
 var isNormalDay = (type4 = "") => {
   return ["normal", "today"].includes(type4);
 };
@@ -28276,22 +28548,22 @@ var useBasicDateTable = (props, emit) => {
   let focusWithClick = false;
   const firstDayOfWeek = props.date.$locale().weekStart || 7;
   const WEEKS_CONSTANT = props.date.locale("en").localeData().weekdaysShort().map((_2) => _2.toLowerCase());
-  const offsetDay = computed2(() => {
+  const offsetDay = computed(() => {
     return firstDayOfWeek > 3 ? 7 - firstDayOfWeek : -firstDayOfWeek;
   });
-  const startDate = computed2(() => {
+  const startDate = computed(() => {
     const startDayOfMonth = props.date.startOf("month");
     return startDayOfMonth.subtract(startDayOfMonth.day() || 7, "day");
   });
-  const WEEKS = computed2(() => {
+  const WEEKS = computed(() => {
     return WEEKS_CONSTANT.concat(WEEKS_CONSTANT).slice(firstDayOfWeek, firstDayOfWeek + 7);
   });
-  const hasCurrent = computed2(() => {
+  const hasCurrent = computed(() => {
     return flatten_default(unref(rows)).some((row) => {
       return row.isCurrent;
     });
   });
-  const days = computed2(() => {
+  const days = computed(() => {
     const startOfMonth = props.date.startOf("month");
     const startOfMonthDay = startOfMonth.day() || 7;
     const dateCountOfMonth = startOfMonth.daysInMonth();
@@ -28302,7 +28574,7 @@ var useBasicDateTable = (props, emit) => {
       dateCountOfLastMonth
     };
   });
-  const selectedDate = computed2(() => {
+  const selectedDate = computed(() => {
     return props.selectionMode === "dates" ? castArray2(props.parsedValue) : [];
   });
   const setDateText = (cell, { count, rowIndex, columnIndex }) => {
@@ -28329,14 +28601,14 @@ var useBasicDateTable = (props, emit) => {
     return false;
   };
   const setCellMetadata = (cell, { columnIndex, rowIndex }, count) => {
-    const { disabledDate: disabledDate2, cellClassName } = props;
+    const { disabledDate, cellClassName } = props;
     const _selectedDate = unref(selectedDate);
     const shouldIncrement = setDateText(cell, { count, rowIndex, columnIndex });
     const cellDate = cell.dayjs.toDate();
     cell.selected = _selectedDate.find((d2) => d2.isSame(cell.dayjs, "day"));
     cell.isSelected = !!cell.selected;
     cell.isCurrent = isCurrent(cell);
-    cell.disabled = disabledDate2 == null ? void 0 : disabledDate2(cellDate);
+    cell.disabled = disabledDate == null ? void 0 : disabledDate(cellDate);
     cell.customClass = cellClassName == null ? void 0 : cellClassName(cellDate);
     return shouldIncrement;
   };
@@ -28350,7 +28622,7 @@ var useBasicDateTable = (props, emit) => {
       row[end2].end = isActive;
     }
   };
-  const rows = computed2(() => {
+  const rows = computed(() => {
     const { minDate, maxDate, rangeState, showWeekNumber } = props;
     const offset2 = unref(offsetDay);
     const rows_ = unref(tableRows);
@@ -28396,10 +28668,10 @@ var useBasicDateTable = (props, emit) => {
   const isCurrent = (cell) => {
     return props.selectionMode === "date" && isNormalDay(cell.type) && cellMatchesDate(cell, props.parsedValue);
   };
-  const cellMatchesDate = (cell, date5) => {
-    if (!date5)
+  const cellMatchesDate = (cell, date4) => {
+    if (!date4)
       return false;
-    return (0, import_dayjs8.default)(date5).locale(unref(lang)).isSame(props.date.date(Number(cell.text)), "day");
+    return (0, import_dayjs8.default)(date4).locale(unref(lang)).isSame(props.date.date(Number(cell.text)), "day");
   };
   const getDateOfCell = (row, column2) => {
     const offsetFromStart = row * 7 + (column2 - (props.showWeekNumber ? 1 : 0)) - unref(offsetDay);
@@ -28550,12 +28822,12 @@ var useBasicDateTableDOM = (props, {
 }) => {
   const ns = useNamespace("date-table");
   const { t } = useLocale();
-  const tableKls = computed2(() => [
+  const tableKls = computed(() => [
     ns.b(),
     { "is-week-mode": props.selectionMode === "week" }
   ]);
-  const tableLabel = computed2(() => t("el.datepicker.dateTablePrompt"));
-  const weekLabel = computed2(() => t("el.datepicker.week"));
+  const tableLabel = computed(() => t("el.datepicker.dateTablePrompt"));
+  const weekLabel = computed(() => t("el.datepicker.week"));
   const getCellClasses = (cell) => {
     const classes = [];
     if (isNormalDay(cell.type) && !cell.disabled) {
@@ -28625,24 +28897,20 @@ var ElDatePickerCell = defineComponent({
       } = props;
       return renderSlot(slots, "default", {
         ...cell
-      }, () => [createVNode("div", {
-        "class": ns.b()
-      }, [createVNode("span", {
-        "class": ns.e("text")
-      }, [cell == null ? void 0 : cell.text])])]);
+      }, () => {
+        var _a2;
+        return [createVNode("div", {
+          "class": ns.b()
+        }, [createVNode("span", {
+          "class": ns.e("text")
+        }, [(_a2 = cell == null ? void 0 : cell.renderText) != null ? _a2 : cell == null ? void 0 : cell.text])])];
+      });
     };
   }
 });
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-date-table.mjs
-var _hoisted_124 = ["aria-label"];
-var _hoisted_215 = {
-  key: 0,
-  scope: "col"
-};
-var _hoisted_35 = ["aria-label"];
-var _hoisted_42 = ["aria-current", "aria-selected", "tabindex"];
-var _sfc_main62 = defineComponent({
+var _sfc_main63 = defineComponent({
   __name: "basic-date-table",
   props: basicDateTableProps,
   emits: basicDateTableEmits,
@@ -28677,23 +28945,26 @@ var _sfc_main62 = defineComponent({
         cellspacing: "0",
         cellpadding: "0",
         role: "grid",
-        onClick: _cache[1] || (_cache[1] = (...args) => unref(handlePickDate) && unref(handlePickDate)(...args)),
-        onMousemove: _cache[2] || (_cache[2] = (...args) => unref(handleMouseMove) && unref(handleMouseMove)(...args)),
-        onMousedown: _cache[3] || (_cache[3] = withModifiers((...args) => unref(handleMouseDown) && unref(handleMouseDown)(...args), ["prevent"])),
-        onMouseup: _cache[4] || (_cache[4] = (...args) => unref(handleMouseUp) && unref(handleMouseUp)(...args))
+        onClick: unref(handlePickDate),
+        onMousemove: unref(handleMouseMove),
+        onMousedown: withModifiers(unref(handleMouseDown), ["prevent"]),
+        onMouseup: unref(handleMouseUp)
       }, [
         createBaseVNode("tbody", {
           ref_key: "tbodyRef",
           ref: tbodyRef
         }, [
           createBaseVNode("tr", null, [
-            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", _hoisted_215, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
+            _ctx.showWeekNumber ? (openBlock(), createElementBlock("th", {
+              key: 0,
+              scope: "col"
+            }, toDisplayString(unref(weekLabel)), 1)) : createCommentVNode("v-if", true),
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(WEEKS), (week, key) => {
               return openBlock(), createElementBlock("th", {
                 key,
                 "aria-label": unref(t)("el.datepicker.weeksFull." + week),
                 scope: "col"
-              }, toDisplayString(unref(t)("el.datepicker.weeks." + week)), 9, _hoisted_35);
+              }, toDisplayString(unref(t)("el.datepicker.weeks." + week)), 9, ["aria-label"]);
             }), 128))
           ]),
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey2) => {
@@ -28710,19 +28981,19 @@ var _sfc_main62 = defineComponent({
                   "aria-current": cell.isCurrent ? "date" : void 0,
                   "aria-selected": cell.isCurrent,
                   tabindex: unref(isSelectedCell)(cell) ? 0 : -1,
-                  onFocus: _cache[0] || (_cache[0] = (...args) => unref(handleFocus) && unref(handleFocus)(...args))
+                  onFocus: unref(handleFocus)
                 }, [
                   createVNode(unref(ElDatePickerCell), { cell }, null, 8, ["cell"])
-                ], 42, _hoisted_42);
+                ], 42, ["aria-current", "aria-selected", "tabindex", "onFocus"]);
               }), 128))
             ], 2);
           }), 128))
         ], 512)
-      ], 42, _hoisted_124);
+      ], 42, ["aria-label", "onClick", "onMousemove", "onMousedown", "onMouseup"]);
     };
   }
 });
-var DateTable2 = _export_sfc(_sfc_main62, [["__file", "basic-date-table.vue"]]);
+var DateTable2 = _export_sfc(_sfc_main63, [["__file", "basic-date-table.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-month-table.mjs
 var import_dayjs9 = __toESM(require_dayjs_min(), 1);
@@ -28734,20 +29005,12 @@ var basicMonthTableProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-month-table.mjs
-var _hoisted_125 = ["aria-label"];
-var _hoisted_216 = ["aria-selected", "aria-label", "tabindex", "onKeydown"];
-var _hoisted_36 = { class: "cell" };
-var _sfc_main63 = defineComponent({
+var _sfc_main64 = defineComponent({
   __name: "basic-month-table",
   props: basicMonthTableProps,
   emits: ["changerange", "pick", "select"],
   setup(__props, { expose, emit }) {
     const props = __props;
-    const datesInMonth = (year, month, lang2) => {
-      const firstDay = (0, import_dayjs9.default)().locale(lang2).startOf("month").month(month).year(year);
-      const numOfDays = firstDay.daysInMonth();
-      return rangeArr(numOfDays).map((n) => firstDay.add(n, "day").toDate());
-    };
     const ns = useNamespace("month-table");
     const { t, lang } = useLocale();
     const tbodyRef = ref();
@@ -28760,7 +29023,7 @@ var _sfc_main63 = defineComponent({
     ]);
     const lastRow = ref();
     const lastColumn = ref();
-    const rows = computed2(() => {
+    const rows = computed(() => {
       var _a2, _b;
       const rows2 = tableRows.value;
       const now2 = (0, import_dayjs9.default)().locale(lang.value).startOf("month");
@@ -28809,7 +29072,7 @@ var _sfc_main63 = defineComponent({
       const today = /* @__PURE__ */ new Date();
       const month = cell.text;
       style.disabled = props.disabledDate ? datesInMonth(year, month, lang.value).every(props.disabledDate) : false;
-      style.current = castArray2(props.parsedValue).findIndex((date5) => import_dayjs9.default.isDayjs(date5) && date5.year() === year && date5.month() === month) >= 0;
+      style.current = castArray2(props.parsedValue).findIndex((date4) => import_dayjs9.default.isDayjs(date4) && date4.year() === year && date4.month() === month) >= 0;
       style.today = today.getFullYear() === year && today.getMonth() === month;
       if (cell.inRange) {
         style["in-range"] = true;
@@ -28825,7 +29088,7 @@ var _sfc_main63 = defineComponent({
     const isSelectedCell = (cell) => {
       const year = props.date.year();
       const month = cell.text;
-      return castArray2(props.date).findIndex((date5) => date5.year() === year && date5.month() === month) >= 0;
+      return castArray2(props.date).findIndex((date4) => date4.year() === year && date4.month() === month) >= 0;
     };
     const handleMouseMove = (event) => {
       var _a2;
@@ -28864,7 +29127,15 @@ var _sfc_main63 = defineComponent({
       const row = target2.parentNode.rowIndex;
       const month = row * 4 + column2;
       const newDate = props.date.startOf("year").month(month);
-      if (props.selectionMode === "range") {
+      if (props.selectionMode === "months") {
+        if (event.type === "keydown") {
+          emit("pick", castArray2(props.parsedValue), false);
+          return;
+        }
+        const newMonth = getValidDateOfMonth(props.date.year(), month, lang.value, props.disabledDate);
+        const newValue = hasClass(target2, "current") ? castArray2(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.month()) !== newMonth.month()) : castArray2(props.parsedValue).concat([(0, import_dayjs9.default)(newMonth)]);
+        emit("pick", newValue);
+      } else if (props.selectionMode === "range") {
         if (!props.rangeState.selecting) {
           emit("pick", { minDate: newDate, maxDate: null });
           emit("select", true);
@@ -28918,41 +29189,37 @@ var _sfc_main63 = defineComponent({
                     withKeys(withModifiers(handleMonthTableClick, ["prevent", "stop"]), ["enter"])
                   ]
                 }, [
-                  createBaseVNode("div", null, [
-                    createBaseVNode("span", _hoisted_36, toDisplayString(unref(t)("el.datepicker.months." + months.value[cell.text])), 1)
-                  ])
-                ], 42, _hoisted_216);
+                  createVNode(unref(ElDatePickerCell), {
+                    cell: {
+                      ...cell,
+                      renderText: unref(t)("el.datepicker.months." + months.value[cell.text])
+                    }
+                  }, null, 8, ["cell"])
+                ], 42, ["aria-selected", "aria-label", "tabindex", "onKeydown"]);
               }), 128))
             ]);
           }), 128))
         ], 512)
-      ], 42, _hoisted_125);
+      ], 42, ["aria-label"]);
     };
   }
 });
-var MonthTable = _export_sfc(_sfc_main63, [["__file", "basic-month-table.vue"]]);
+var MonthTable = _export_sfc(_sfc_main64, [["__file", "basic-month-table.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-year-table.mjs
 var import_dayjs10 = __toESM(require_dayjs_min(), 1);
 
 // node_modules/element-plus/es/components/date-picker/src/props/basic-year-table.mjs
-var { date: date4, disabledDate, parsedValue } = datePickerSharedProps;
 var basicYearTableProps = buildProps({
-  date: date4,
-  disabledDate,
-  parsedValue,
+  ...datePickerSharedProps,
   selectionMode: selectionModeWithDefault("year")
 });
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/basic-year-table.mjs
-var _hoisted_126 = ["aria-label"];
-var _hoisted_217 = ["aria-selected", "tabindex", "onKeydown"];
-var _hoisted_37 = { class: "cell" };
-var _hoisted_43 = { key: 1 };
-var _sfc_main64 = defineComponent({
+var _sfc_main65 = defineComponent({
   __name: "basic-year-table",
   props: basicYearTableProps,
-  emits: ["pick"],
+  emits: ["changerange", "pick", "select"],
   setup(__props, { expose, emit }) {
     const props = __props;
     const datesInYear = (year, lang2) => {
@@ -28965,41 +29232,136 @@ var _sfc_main64 = defineComponent({
     const { t, lang } = useLocale();
     const tbodyRef = ref();
     const currentCellRef = ref();
-    const startYear = computed2(() => {
+    const startYear = computed(() => {
       return Math.floor(props.date.year() / 10) * 10;
+    });
+    const tableRows = ref([[], [], []]);
+    const lastRow = ref();
+    const lastColumn = ref();
+    const rows = computed(() => {
+      var _a2;
+      const rows2 = tableRows.value;
+      const now2 = (0, import_dayjs10.default)().locale(lang.value).startOf("year");
+      for (let i = 0; i < 3; i++) {
+        const row = rows2[i];
+        for (let j = 0; j < 4; j++) {
+          if (i * 4 + j >= 10) {
+            break;
+          }
+          let cell = row[j];
+          if (!cell) {
+            cell = {
+              row: i,
+              column: j,
+              type: "normal",
+              inRange: false,
+              start: false,
+              end: false,
+              text: -1,
+              disabled: false
+            };
+          }
+          cell.type = "normal";
+          const index = i * 4 + j + startYear.value;
+          const calTime = (0, import_dayjs10.default)().year(index);
+          const calEndDate = props.rangeState.endDate || props.maxDate || props.rangeState.selecting && props.minDate || null;
+          cell.inRange = !!(props.minDate && calTime.isSameOrAfter(props.minDate, "year") && calEndDate && calTime.isSameOrBefore(calEndDate, "year")) || !!(props.minDate && calTime.isSameOrBefore(props.minDate, "year") && calEndDate && calTime.isSameOrAfter(calEndDate, "year"));
+          if ((_a2 = props.minDate) == null ? void 0 : _a2.isSameOrAfter(calEndDate)) {
+            cell.start = !!(calEndDate && calTime.isSame(calEndDate, "year"));
+            cell.end = !!(props.minDate && calTime.isSame(props.minDate, "year"));
+          } else {
+            cell.start = !!(props.minDate && calTime.isSame(props.minDate, "year"));
+            cell.end = !!(calEndDate && calTime.isSame(calEndDate, "year"));
+          }
+          const isToday = now2.isSame(calTime);
+          if (isToday) {
+            cell.type = "today";
+          }
+          cell.text = index;
+          const cellDate = calTime.toDate();
+          cell.disabled = props.disabledDate && props.disabledDate(cellDate) || false;
+          row[j] = cell;
+        }
+      }
+      return rows2;
     });
     const focus = () => {
       var _a2;
       (_a2 = currentCellRef.value) == null ? void 0 : _a2.focus();
     };
-    const getCellKls = (year) => {
+    const getCellKls = (cell) => {
       const kls = {};
       const today = (0, import_dayjs10.default)().locale(lang.value);
+      const year = cell.text;
       kls.disabled = props.disabledDate ? datesInYear(year, lang.value).every(props.disabledDate) : false;
-      kls.current = castArray2(props.parsedValue).findIndex((d2) => d2.year() === year) >= 0;
       kls.today = today.year() === year;
+      kls.current = castArray2(props.parsedValue).findIndex((d2) => d2.year() === year) >= 0;
+      if (cell.inRange) {
+        kls["in-range"] = true;
+        if (cell.start) {
+          kls["start-date"] = true;
+        }
+        if (cell.end) {
+          kls["end-date"] = true;
+        }
+      }
       return kls;
     };
-    const isSelectedCell = (year) => {
-      return year === startYear.value && props.date.year() < startYear.value && props.date.year() > startYear.value + 9 || castArray2(props.date).findIndex((date5) => date5.year() === year) >= 0 || castArray2(props.parsedValue).findIndex((date5) => (date5 == null ? void 0 : date5.year()) === year) >= 0;
+    const isSelectedCell = (cell) => {
+      const year = cell.text;
+      return castArray2(props.date).findIndex((date4) => date4.year() === year) >= 0;
     };
     const handleYearTableClick = (event) => {
-      const clickTarget = event.target;
-      const target2 = clickTarget.closest("td");
-      if (target2 && target2.textContent) {
-        if (hasClass(target2, "disabled"))
-          return;
-        const year = target2.textContent || target2.innerText;
-        if (props.selectionMode === "years") {
-          if (event.type === "keydown") {
-            emit("pick", castArray2(props.parsedValue), false);
-            return;
-          }
-          const newValue = hasClass(target2, "current") ? castArray2(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.year()) !== Number(year)) : castArray2(props.parsedValue).concat([(0, import_dayjs10.default)(year)]);
-          emit("pick", newValue);
+      var _a2;
+      const target2 = (_a2 = event.target) == null ? void 0 : _a2.closest("td");
+      if (!target2 || !target2.textContent || hasClass(target2, "disabled"))
+        return;
+      const column2 = target2.cellIndex;
+      const row = target2.parentNode.rowIndex;
+      const selectedYear = row * 4 + column2 + startYear.value;
+      const newDate = (0, import_dayjs10.default)().year(selectedYear);
+      if (props.selectionMode === "range") {
+        if (!props.rangeState.selecting) {
+          emit("pick", { minDate: newDate, maxDate: null });
+          emit("select", true);
         } else {
-          emit("pick", Number(year));
+          if (props.minDate && newDate >= props.minDate) {
+            emit("pick", { minDate: props.minDate, maxDate: newDate });
+          } else {
+            emit("pick", { minDate: newDate, maxDate: props.minDate });
+          }
+          emit("select", false);
         }
+      } else if (props.selectionMode === "years") {
+        if (event.type === "keydown") {
+          emit("pick", castArray2(props.parsedValue), false);
+          return;
+        }
+        const vaildYear = getValidDateOfYear(newDate.startOf("year"), lang.value, props.disabledDate);
+        const newValue = hasClass(target2, "current") ? castArray2(props.parsedValue).filter((d2) => (d2 == null ? void 0 : d2.year()) !== selectedYear) : castArray2(props.parsedValue).concat([vaildYear]);
+        emit("pick", newValue);
+      } else {
+        emit("pick", selectedYear);
+      }
+    };
+    const handleMouseMove = (event) => {
+      var _a2;
+      if (!props.rangeState.selecting)
+        return;
+      const target2 = (_a2 = event.target) == null ? void 0 : _a2.closest("td");
+      if (!target2)
+        return;
+      const row = target2.parentNode.rowIndex;
+      const column2 = target2.cellIndex;
+      if (rows.value[row][column2].disabled)
+        return;
+      if (row !== lastRow.value || column2 !== lastColumn.value) {
+        lastRow.value = row;
+        lastColumn.value = column2;
+        emit("changerange", {
+          selecting: true,
+          endDate: (0, import_dayjs10.default)().year(startYear.value).add(row * 4 + column2, "year")
+        });
       }
     };
     watch(() => props.date, async () => {
@@ -29017,52 +29379,43 @@ var _sfc_main64 = defineComponent({
         role: "grid",
         "aria-label": unref(t)("el.datepicker.yearTablePrompt"),
         class: normalizeClass(unref(ns).b()),
-        onClick: handleYearTableClick
+        onClick: handleYearTableClick,
+        onMousemove: handleMouseMove
       }, [
         createBaseVNode("tbody", {
           ref_key: "tbodyRef",
           ref: tbodyRef
         }, [
-          (openBlock(), createElementBlock(Fragment, null, renderList(3, (_2, i) => {
-            return createBaseVNode("tr", { key: i }, [
-              (openBlock(), createElementBlock(Fragment, null, renderList(4, (__, j) => {
-                return openBlock(), createElementBlock(Fragment, {
-                  key: i + "_" + j
+          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(rows), (row, rowKey2) => {
+            return openBlock(), createElementBlock("tr", { key: rowKey2 }, [
+              (openBlock(true), createElementBlock(Fragment, null, renderList(row, (cell, cellKey) => {
+                return openBlock(), createElementBlock("td", {
+                  key: `${rowKey2}_${cellKey}`,
+                  ref_for: true,
+                  ref: (el) => isSelectedCell(cell) && (currentCellRef.value = el),
+                  class: normalizeClass(["available", getCellKls(cell)]),
+                  "aria-selected": isSelectedCell(cell),
+                  "aria-label": String(cell.text),
+                  tabindex: isSelectedCell(cell) ? 0 : -1,
+                  onKeydown: [
+                    withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["space"]),
+                    withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["enter"])
+                  ]
                 }, [
-                  i * 4 + j < 10 ? (openBlock(), createElementBlock("td", {
-                    key: 0,
-                    ref_for: true,
-                    ref: (el) => isSelectedCell(unref(startYear) + i * 4 + j) && (currentCellRef.value = el),
-                    class: normalizeClass(["available", getCellKls(unref(startYear) + i * 4 + j)]),
-                    "aria-selected": `${isSelectedCell(unref(startYear) + i * 4 + j)}`,
-                    tabindex: isSelectedCell(unref(startYear) + i * 4 + j) ? 0 : -1,
-                    onKeydown: [
-                      withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["space"]),
-                      withKeys(withModifiers(handleYearTableClick, ["prevent", "stop"]), ["enter"])
-                    ]
-                  }, [
-                    createBaseVNode("div", null, [
-                      createBaseVNode("span", _hoisted_37, toDisplayString(unref(startYear) + i * 4 + j), 1)
-                    ])
-                  ], 42, _hoisted_217)) : (openBlock(), createElementBlock("td", _hoisted_43))
-                ], 64);
-              }), 64))
+                  createVNode(unref(ElDatePickerCell), { cell }, null, 8, ["cell"])
+                ], 42, ["aria-selected", "aria-label", "tabindex", "onKeydown"]);
+              }), 128))
             ]);
-          }), 64))
+          }), 128))
         ], 512)
-      ], 10, _hoisted_126);
+      ], 42, ["aria-label"]);
     };
   }
 });
-var YearTable = _export_sfc(_sfc_main64, [["__file", "basic-year-table.vue"]]);
+var YearTable = _export_sfc(_sfc_main65, [["__file", "basic-year-table.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-date-pick.mjs
-var _hoisted_127 = ["onClick"];
-var _hoisted_218 = ["aria-label"];
-var _hoisted_38 = ["aria-label"];
-var _hoisted_44 = ["aria-label"];
-var _hoisted_52 = ["aria-label"];
-var _sfc_main65 = defineComponent({
+var _sfc_main66 = defineComponent({
   __name: "panel-date-pick",
   props: panelDatePickProps,
   emits: ["pick", "set-picker-option", "panel-change"],
@@ -29076,26 +29429,26 @@ var _sfc_main65 = defineComponent({
     const { t, lang } = useLocale();
     const pickerBase = inject("EP_PICKER_BASE");
     const popper = inject(TOOLTIP_INJECTION_KEY);
-    const { shortcuts, disabledDate: disabledDate2, cellClassName, defaultTime } = pickerBase.props;
+    const { shortcuts, disabledDate, cellClassName, defaultTime } = pickerBase.props;
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const currentViewRef = ref();
     const innerDate = ref((0, import_dayjs11.default)().locale(lang.value));
     const isChangeToNow = ref(false);
     let isShortcut = false;
-    const defaultTimeD = computed2(() => {
+    const defaultTimeD = computed(() => {
       return (0, import_dayjs11.default)(defaultTime).locale(lang.value);
     });
-    const month = computed2(() => {
+    const month = computed(() => {
       return innerDate.value.month();
     });
-    const year = computed2(() => {
+    const year = computed(() => {
       return innerDate.value.year();
     });
     const selectableRange = ref([]);
     const userInputDate = ref(null);
     const userInputTime = ref(null);
-    const checkDateWithinRange = (date5) => {
-      return selectableRange.value.length > 0 ? timeWithinRange(date5, selectableRange.value, props.format || "HH:mm:ss") : true;
+    const checkDateWithinRange = (date4) => {
+      return selectableRange.value.length > 0 ? timeWithinRange(date4, selectableRange.value, props.format || "HH:mm:ss") : true;
     };
     const formatEmit = (emitDayjs) => {
       if (defaultTime && !visibleTime.value && !isChangeToNow.value && !isShortcut) {
@@ -29150,7 +29503,7 @@ var _sfc_main65 = defineComponent({
       handlePanelChange("year");
     };
     const currentView = ref("date");
-    const yearLabel = computed2(() => {
+    const yearLabel = computed(() => {
       const yearTranslation = t("el.datepicker.year");
       if (currentView.value === "year") {
         const startYear = Math.floor(year.value / 10) * 10;
@@ -29176,21 +29529,27 @@ var _sfc_main65 = defineComponent({
         });
       }
     };
-    const selectionMode = computed2(() => {
+    const selectionMode = computed(() => {
       const { type: type4 } = props;
-      if (["week", "month", "year", "years", "dates"].includes(type4))
+      if (["week", "month", "months", "year", "years", "dates"].includes(type4))
         return type4;
       return "date";
     });
-    const keyboardMode = computed2(() => {
+    const isMultipleType = computed(() => {
+      return selectionMode.value === "dates" || selectionMode.value === "months" || selectionMode.value === "years";
+    });
+    const keyboardMode = computed(() => {
       return selectionMode.value === "date" ? currentView.value : selectionMode.value;
     });
-    const hasShortcuts = computed2(() => !!shortcuts.length);
-    const handleMonthPick = async (month2) => {
-      innerDate.value = innerDate.value.startOf("month").month(month2);
+    const hasShortcuts = computed(() => !!shortcuts.length);
+    const handleMonthPick = async (month2, keepOpen) => {
       if (selectionMode.value === "month") {
+        innerDate.value = getValidDateOfMonth(innerDate.value.year(), month2, lang.value, disabledDate);
         emit(innerDate.value, false);
+      } else if (selectionMode.value === "months") {
+        emit(month2, keepOpen != null ? keepOpen : true);
       } else {
+        innerDate.value = getValidDateOfMonth(innerDate.value.year(), month2, lang.value, disabledDate);
         currentView.value = "date";
         if (["month", "year", "date", "week"].includes(selectionMode.value)) {
           emit(innerDate.value, true);
@@ -29202,12 +29561,14 @@ var _sfc_main65 = defineComponent({
     };
     const handleYearPick = async (year2, keepOpen) => {
       if (selectionMode.value === "year") {
-        innerDate.value = innerDate.value.startOf("year").year(year2);
+        const data = innerDate.value.startOf("year").year(year2);
+        innerDate.value = getValidDateOfYear(data, lang.value, disabledDate);
         emit(innerDate.value, false);
       } else if (selectionMode.value === "years") {
         emit(year2, keepOpen != null ? keepOpen : true);
       } else {
-        innerDate.value = innerDate.value.year(year2);
+        const data = innerDate.value.year(year2);
+        innerDate.value = getValidDateOfYear(data, lang.value, disabledDate);
         currentView.value = "month";
         if (["month", "year", "date", "week"].includes(selectionMode.value)) {
           emit(innerDate.value, true);
@@ -29222,26 +29583,28 @@ var _sfc_main65 = defineComponent({
       await nextTick();
       handleFocusPicker();
     };
-    const showTime = computed2(() => props.type === "datetime" || props.type === "datetimerange");
-    const footerVisible = computed2(() => {
+    const showTime = computed(() => props.type === "datetime" || props.type === "datetimerange");
+    const footerVisible = computed(() => {
       const showDateFooter = showTime.value || selectionMode.value === "dates";
       const showYearFooter = selectionMode.value === "years";
+      const showMonthFooter = selectionMode.value === "months";
       const isDateView = currentView.value === "date";
       const isYearView = currentView.value === "year";
-      return showDateFooter && isDateView || showYearFooter && isYearView;
+      const isMonthView = currentView.value === "month";
+      return showDateFooter && isDateView || showYearFooter && isYearView || showMonthFooter && isMonthView;
     });
-    const disabledConfirm = computed2(() => {
-      if (!disabledDate2)
+    const disabledConfirm = computed(() => {
+      if (!disabledDate)
         return false;
       if (!props.parsedValue)
         return true;
       if (isArray(props.parsedValue)) {
-        return disabledDate2(props.parsedValue[0].toDate());
+        return disabledDate(props.parsedValue[0].toDate());
       }
-      return disabledDate2(props.parsedValue.toDate());
+      return disabledDate(props.parsedValue.toDate());
     });
     const onConfirm = () => {
-      if (selectionMode.value === "dates" || selectionMode.value === "years") {
+      if (isMultipleType.value) {
         emit(props.parsedValue);
       } else {
         let result2 = props.parsedValue;
@@ -29254,34 +29617,34 @@ var _sfc_main65 = defineComponent({
         emit(result2);
       }
     };
-    const disabledNow = computed2(() => {
-      if (!disabledDate2)
+    const disabledNow = computed(() => {
+      if (!disabledDate)
         return false;
-      return disabledDate2((0, import_dayjs11.default)().locale(lang.value).toDate());
+      return disabledDate((0, import_dayjs11.default)().locale(lang.value).toDate());
     });
     const changeToNow = () => {
       const now2 = (0, import_dayjs11.default)().locale(lang.value);
       const nowDate = now2.toDate();
       isChangeToNow.value = true;
-      if ((!disabledDate2 || !disabledDate2(nowDate)) && checkDateWithinRange(nowDate)) {
+      if ((!disabledDate || !disabledDate(nowDate)) && checkDateWithinRange(nowDate)) {
         innerDate.value = (0, import_dayjs11.default)().locale(lang.value);
         emit(innerDate.value);
       }
     };
-    const timeFormat = computed2(() => {
+    const timeFormat = computed(() => {
       return props.timeFormat || extractTimeFormat(props.format);
     });
-    const dateFormat = computed2(() => {
+    const dateFormat = computed(() => {
       return props.dateFormat || extractDateFormat(props.format);
     });
-    const visibleTime = computed2(() => {
+    const visibleTime = computed(() => {
       if (userInputTime.value)
         return userInputTime.value;
       if (!props.parsedValue && !defaultValue.value)
         return;
       return (props.parsedValue || innerDate.value).format(timeFormat.value);
     });
-    const visibleDate = computed2(() => {
+    const visibleDate = computed(() => {
       if (userInputDate.value)
         return userInputDate.value;
       if (!props.parsedValue && !defaultValue.value)
@@ -29295,14 +29658,14 @@ var _sfc_main65 = defineComponent({
     const handleTimePickClose = () => {
       timePickerVisible.value = false;
     };
-    const getUnits = (date5) => {
+    const getUnits = (date4) => {
       return {
-        hour: date5.hour(),
-        minute: date5.minute(),
-        second: date5.second(),
-        year: date5.year(),
-        month: date5.month(),
-        date: date5.date()
+        hour: date4.hour(),
+        minute: date4.minute(),
+        second: date4.second(),
+        year: date4.year(),
+        month: date4.month(),
+        date: date4.date()
       };
     };
     const handleTimePick = (value, visible, first) => {
@@ -29317,8 +29680,8 @@ var _sfc_main65 = defineComponent({
     const handleVisibleTimeChange = (value) => {
       const newDate = (0, import_dayjs11.default)(value, timeFormat.value).locale(lang.value);
       if (newDate.isValid() && checkDateWithinRange(newDate)) {
-        const { year: year2, month: month2, date: date5 } = getUnits(innerDate.value);
-        innerDate.value = newDate.year(year2).month(month2).date(date5);
+        const { year: year2, month: month2, date: date4 } = getUnits(innerDate.value);
+        innerDate.value = newDate.year(year2).month(month2).date(date4);
         userInputTime.value = null;
         timePickerVisible.value = false;
         emit(innerDate.value, true);
@@ -29327,7 +29690,7 @@ var _sfc_main65 = defineComponent({
     const handleVisibleDateChange = (value) => {
       const newDate = (0, import_dayjs11.default)(value, dateFormat.value).locale(lang.value);
       if (newDate.isValid()) {
-        if (disabledDate2 && disabledDate2(newDate.toDate())) {
+        if (disabledDate && disabledDate(newDate.toDate())) {
           return;
         }
         const { hour, minute, second } = getUnits(innerDate.value);
@@ -29336,8 +29699,8 @@ var _sfc_main65 = defineComponent({
         emit(innerDate.value, true);
       }
     };
-    const isValidValue3 = (date5) => {
-      return import_dayjs11.default.isDayjs(date5) && date5.isValid() && (disabledDate2 ? !disabledDate2(date5.toDate()) : true);
+    const isValidValue3 = (date4) => {
+      return import_dayjs11.default.isDayjs(date4) && date4.isValid() && (disabledDate ? !disabledDate(date4.toDate()) : true);
     };
     const formatToString = (value) => {
       return isArray(value) ? value.map((_2) => _2.format(props.format)) : value.format(props.format);
@@ -29393,32 +29756,32 @@ var _sfc_main65 = defineComponent({
           [down2]: 4,
           [left2]: -1,
           [right2]: 1,
-          offset: (date5, step) => date5.setFullYear(date5.getFullYear() + step)
+          offset: (date4, step) => date4.setFullYear(date4.getFullYear() + step)
         },
         month: {
           [up2]: -4,
           [down2]: 4,
           [left2]: -1,
           [right2]: 1,
-          offset: (date5, step) => date5.setMonth(date5.getMonth() + step)
+          offset: (date4, step) => date4.setMonth(date4.getMonth() + step)
         },
         week: {
           [up2]: -1,
           [down2]: 1,
           [left2]: -1,
           [right2]: 1,
-          offset: (date5, step) => date5.setDate(date5.getDate() + step * 7)
+          offset: (date4, step) => date4.setDate(date4.getDate() + step * 7)
         },
         date: {
           [up2]: -7,
           [down2]: 7,
           [left2]: -1,
           [right2]: 1,
-          [home2]: (date5) => -date5.getDay(),
-          [end2]: (date5) => -date5.getDay() + 6,
-          [pageUp2]: (date5) => -new Date(date5.getFullYear(), date5.getMonth(), 0).getDate(),
-          [pageDown2]: (date5) => new Date(date5.getFullYear(), date5.getMonth() + 1, 0).getDate(),
-          offset: (date5, step) => date5.setDate(date5.getDate() + step)
+          [home2]: (date4) => -date4.getDay(),
+          [end2]: (date4) => -date4.getDay() + 6,
+          [pageUp2]: (date4) => -new Date(date4.getFullYear(), date4.getMonth(), 0).getDate(),
+          [pageDown2]: (date4) => new Date(date4.getFullYear(), date4.getMonth() + 1, 0).getDate(),
+          offset: (date4, step) => date4.setDate(date4.getDate() + step)
         }
       };
       const newDate = innerDate.value.toDate();
@@ -29427,7 +29790,7 @@ var _sfc_main65 = defineComponent({
         if (!map2)
           return;
         map2.offset(newDate, isFunction(map2[code]) ? map2[code](newDate) : (_a2 = map2[code]) != null ? _a2 : 0);
-        if (disabledDate2 && disabledDate2(newDate)) {
+        if (disabledDate && disabledDate(newDate)) {
           break;
         }
         const result2 = (0, import_dayjs11.default)(newDate).locale(lang.value);
@@ -29446,6 +29809,9 @@ var _sfc_main65 = defineComponent({
       } else if (val === "years") {
         currentView.value = "year";
         return;
+      } else if (val === "months") {
+        currentView.value = "month";
+        return;
       }
       currentView.value = "date";
     }, { immediate: true });
@@ -29459,7 +29825,7 @@ var _sfc_main65 = defineComponent({
     }, { immediate: true });
     watch(() => props.parsedValue, (val) => {
       if (val) {
-        if (selectionMode.value === "dates" || selectionMode.value === "years")
+        if (isMultipleType.value)
           return;
         if (Array.isArray(val))
           return;
@@ -29499,7 +29865,7 @@ var _sfc_main65 = defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => handleShortcutClick(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_127);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -29517,9 +29883,9 @@ var _sfc_main65 = defineComponent({
                   "model-value": unref(visibleDate),
                   size: "small",
                   "validate-event": false,
-                  onInput: _cache[0] || (_cache[0] = (val) => userInputDate.value = val),
+                  onInput: (val) => userInputDate.value = val,
                   onChange: handleVisibleDateChange
-                }, null, 8, ["placeholder", "model-value"])
+                }, null, 8, ["placeholder", "model-value", "onInput"])
               ], 2),
               withDirectives((openBlock(), createElementBlock("span", {
                 class: normalizeClass(unref(dpNs).e("editor-wrap"))
@@ -29530,9 +29896,9 @@ var _sfc_main65 = defineComponent({
                   size: "small",
                   "validate-event": false,
                   onFocus: onTimePickerInputFocus,
-                  onInput: _cache[1] || (_cache[1] = (val) => userInputTime.value = val),
+                  onInput: (val) => userInputTime.value = val,
                   onChange: handleVisibleTimeChange
-                }, null, 8, ["placeholder", "model-value"]),
+                }, null, 8, ["placeholder", "model-value", "onInput"]),
                 createVNode(unref(TimePickPanel), {
                   visible: timePickerVisible.value,
                   format: unref(timeFormat),
@@ -29556,28 +29922,32 @@ var _sfc_main65 = defineComponent({
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   class: normalizeClass(["d-arrow-left", unref(ppNs).e("icon-btn")]),
-                  onClick: _cache[2] || (_cache[2] = ($event) => moveByYear(false))
+                  onClick: ($event) => moveByYear(false)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_218),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]),
                 withDirectives(createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
-                  onClick: _cache[3] || (_cache[3] = ($event) => moveByMonth(false))
+                  onClick: ($event) => moveByMonth(false)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_38), [
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]), [
                   [vShow, currentView.value === "date"]
                 ])
               ], 2),
@@ -29586,9 +29956,9 @@ var _sfc_main65 = defineComponent({
                 class: normalizeClass(unref(dpNs).e("header-label")),
                 "aria-live": "polite",
                 tabindex: "0",
-                onKeydown: _cache[4] || (_cache[4] = withKeys(($event) => showPicker("year"), ["enter"])),
-                onClick: _cache[5] || (_cache[5] = ($event) => showPicker("year"))
-              }, toDisplayString(unref(yearLabel)), 35),
+                onKeydown: withKeys(($event) => showPicker("year"), ["enter"]),
+                onClick: ($event) => showPicker("year")
+              }, toDisplayString(unref(yearLabel)), 43, ["onKeydown", "onClick"]),
               withDirectives(createBaseVNode("span", {
                 role: "button",
                 "aria-live": "polite",
@@ -29597,9 +29967,9 @@ var _sfc_main65 = defineComponent({
                   unref(dpNs).e("header-label"),
                   { active: currentView.value === "month" }
                 ]),
-                onKeydown: _cache[6] || (_cache[6] = withKeys(($event) => showPicker("month"), ["enter"])),
-                onClick: _cache[7] || (_cache[7] = ($event) => showPicker("month"))
-              }, toDisplayString(unref(t)(`el.datepicker.month${unref(month) + 1}`)), 35), [
+                onKeydown: withKeys(($event) => showPicker("month"), ["enter"]),
+                onClick: ($event) => showPicker("month")
+              }, toDisplayString(unref(t)(`el.datepicker.month${unref(month) + 1}`)), 43, ["onKeydown", "onClick"]), [
                 [vShow, currentView.value === "date"]
               ]),
               createBaseVNode("span", {
@@ -29609,30 +29979,34 @@ var _sfc_main65 = defineComponent({
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
-                  onClick: _cache[8] || (_cache[8] = ($event) => moveByMonth(true))
+                  onClick: ($event) => moveByMonth(true)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_44), [
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"]), [
                   [vShow, currentView.value === "date"]
                 ]),
                 createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
-                  onClick: _cache[9] || (_cache[9] = ($event) => moveByYear(true))
+                  onClick: ($event) => moveByYear(true)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_52)
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label", "onClick"])
               ], 2)
             ], 2), [
               [vShow, currentView.value !== "time"]
@@ -29648,7 +30022,7 @@ var _sfc_main65 = defineComponent({
                 "selection-mode": unref(selectionMode),
                 date: innerDate.value,
                 "parsed-value": _ctx.parsedValue,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onPick: handleDatePick
               }, null, 8, ["selection-mode", "date", "parsed-value", "disabled-date", "cell-class-name"])) : createCommentVNode("v-if", true),
@@ -29658,7 +30032,7 @@ var _sfc_main65 = defineComponent({
                 ref: currentViewRef,
                 "selection-mode": unref(selectionMode),
                 date: innerDate.value,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "parsed-value": _ctx.parsedValue,
                 onPick: handleYearPick
               }, null, 8, ["selection-mode", "date", "disabled-date", "parsed-value"])) : createCommentVNode("v-if", true),
@@ -29666,11 +30040,12 @@ var _sfc_main65 = defineComponent({
                 key: 2,
                 ref_key: "currentViewRef",
                 ref: currentViewRef,
+                "selection-mode": unref(selectionMode),
                 date: innerDate.value,
                 "parsed-value": _ctx.parsedValue,
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onPick: handleMonthPick
-              }, null, 8, ["date", "parsed-value", "disabled-date"])) : createCommentVNode("v-if", true)
+              }, null, 8, ["selection-mode", "date", "parsed-value", "disabled-date"])) : createCommentVNode("v-if", true)
             ], 34)
           ], 2)
         ], 2),
@@ -29689,7 +30064,7 @@ var _sfc_main65 = defineComponent({
             ]),
             _: 1
           }, 8, ["class", "disabled"]), [
-            [vShow, unref(selectionMode) !== "dates" && unref(selectionMode) !== "years"]
+            [vShow, !unref(isMultipleType)]
           ]),
           createVNode(unref(ElButton), {
             plain: "",
@@ -29710,7 +30085,7 @@ var _sfc_main65 = defineComponent({
     };
   }
 });
-var DatePickPanel = _export_sfc(_sfc_main65, [["__file", "panel-date-pick.vue"]]);
+var DatePickPanel = _export_sfc(_sfc_main66, [["__file", "panel-date-pick.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-date-range.mjs
 var import_dayjs13 = __toESM(require_dayjs_min(), 1);
@@ -29718,7 +30093,8 @@ var import_dayjs13 = __toESM(require_dayjs_min(), 1);
 // node_modules/element-plus/es/components/date-picker/src/props/panel-date-range.mjs
 var panelDateRangeProps = buildProps({
   ...panelSharedProps,
-  ...panelRangeSharedProps
+  ...panelRangeSharedProps,
+  visible: Boolean
 });
 
 // node_modules/element-plus/es/components/date-picker/src/composables/use-shortcut.mjs
@@ -29752,7 +30128,7 @@ var useRangePicker = (props, {
   defaultValue,
   leftDate,
   rightDate,
-  unit: unit3,
+  unit: unit4,
   onParsedValueChanged
 }) => {
   const { emit } = getCurrentInstance();
@@ -29782,10 +30158,21 @@ var useRangePicker = (props, {
       rangeState.value.endDate = null;
     }
   };
+  const onReset = (parsedValue) => {
+    if (isArray(parsedValue) && parsedValue.length === 2) {
+      const [start, end2] = parsedValue;
+      minDate.value = start;
+      leftDate.value = start;
+      maxDate.value = end2;
+      onParsedValueChanged(unref(minDate), unref(maxDate));
+    } else {
+      restoreDefault();
+    }
+  };
   const restoreDefault = () => {
     const [start, end2] = getDefaultValue(unref(defaultValue), {
       lang: unref(lang),
-      unit: unit3,
+      unit: unit4,
       unlinkPanels: props.unlinkPanels
     });
     minDate.value = void 0;
@@ -29798,17 +30185,7 @@ var useRangePicker = (props, {
       restoreDefault();
     }
   }, { immediate: true });
-  watch(() => props.parsedValue, (parsedValue2) => {
-    if (isArray(parsedValue2) && parsedValue2.length === 2) {
-      const [start, end2] = parsedValue2;
-      minDate.value = start;
-      leftDate.value = start;
-      maxDate.value = end2;
-      onParsedValueChanged(unref(minDate), unref(maxDate));
-    } else {
-      restoreDefault();
-    }
-  }, { immediate: true });
+  watch(() => props.parsedValue, onReset, { immediate: true });
   return {
     minDate,
     maxDate,
@@ -29820,22 +30197,14 @@ var useRangePicker = (props, {
     handleRangeConfirm,
     handleShortcutClick,
     onSelect,
+    onReset,
     t
   };
 };
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-date-range.mjs
-var _hoisted_128 = ["onClick"];
-var _hoisted_219 = ["aria-label"];
-var _hoisted_39 = ["aria-label"];
-var _hoisted_45 = ["disabled", "aria-label"];
-var _hoisted_53 = ["disabled", "aria-label"];
-var _hoisted_62 = ["disabled", "aria-label"];
-var _hoisted_72 = ["disabled", "aria-label"];
-var _hoisted_82 = ["aria-label"];
-var _hoisted_9 = ["aria-label"];
 var unit = "month";
-var _sfc_main66 = defineComponent({
+var _sfc_main67 = defineComponent({
   __name: "panel-date-range",
   props: panelDateRangeProps,
   emits: [
@@ -29847,7 +30216,8 @@ var _sfc_main66 = defineComponent({
   setup(__props, { emit }) {
     const props = __props;
     const pickerBase = inject("EP_PICKER_BASE");
-    const { disabledDate: disabledDate2, cellClassName, format: format2, defaultTime, clearable } = pickerBase.props;
+    const { disabledDate, cellClassName, defaultTime, clearable } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
     const shortcuts = toRef(pickerBase.props, "shortcuts");
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const { lang } = useLocale();
@@ -29863,6 +30233,7 @@ var _sfc_main66 = defineComponent({
       handleRangeConfirm,
       handleShortcutClick,
       onSelect,
+      onReset,
       t
     } = useRangePicker(props, {
       defaultValue,
@@ -29870,6 +30241,12 @@ var _sfc_main66 = defineComponent({
       rightDate,
       unit,
       onParsedValueChanged
+    });
+    watch(() => props.visible, (visible) => {
+      if (!visible && rangeState.value.selecting) {
+        onReset(props.parsedValue);
+        onSelect(false);
+      }
     });
     const dateUserInput = ref({
       min: null,
@@ -29879,61 +30256,61 @@ var _sfc_main66 = defineComponent({
       min: null,
       max: null
     });
-    const leftLabel = computed2(() => {
+    const leftLabel = computed(() => {
       return `${leftDate.value.year()} ${t("el.datepicker.year")} ${t(`el.datepicker.month${leftDate.value.month() + 1}`)}`;
     });
-    const rightLabel = computed2(() => {
+    const rightLabel = computed(() => {
       return `${rightDate.value.year()} ${t("el.datepicker.year")} ${t(`el.datepicker.month${rightDate.value.month() + 1}`)}`;
     });
-    const leftYear = computed2(() => {
+    const leftYear = computed(() => {
       return leftDate.value.year();
     });
-    const leftMonth = computed2(() => {
+    const leftMonth = computed(() => {
       return leftDate.value.month();
     });
-    const rightYear = computed2(() => {
+    const rightYear = computed(() => {
       return rightDate.value.year();
     });
-    const rightMonth = computed2(() => {
+    const rightMonth = computed(() => {
       return rightDate.value.month();
     });
-    const hasShortcuts = computed2(() => !!shortcuts.value.length);
-    const minVisibleDate = computed2(() => {
+    const hasShortcuts = computed(() => !!shortcuts.value.length);
+    const minVisibleDate = computed(() => {
       if (dateUserInput.value.min !== null)
         return dateUserInput.value.min;
       if (minDate.value)
         return minDate.value.format(dateFormat.value);
       return "";
     });
-    const maxVisibleDate = computed2(() => {
+    const maxVisibleDate = computed(() => {
       if (dateUserInput.value.max !== null)
         return dateUserInput.value.max;
       if (maxDate.value || minDate.value)
         return (maxDate.value || minDate.value).format(dateFormat.value);
       return "";
     });
-    const minVisibleTime = computed2(() => {
+    const minVisibleTime = computed(() => {
       if (timeUserInput.value.min !== null)
         return timeUserInput.value.min;
       if (minDate.value)
         return minDate.value.format(timeFormat.value);
       return "";
     });
-    const maxVisibleTime = computed2(() => {
+    const maxVisibleTime = computed(() => {
       if (timeUserInput.value.max !== null)
         return timeUserInput.value.max;
       if (maxDate.value || minDate.value)
         return (maxDate.value || minDate.value).format(timeFormat.value);
       return "";
     });
-    const timeFormat = computed2(() => {
-      return props.timeFormat || extractTimeFormat(format2);
+    const timeFormat = computed(() => {
+      return props.timeFormat || extractTimeFormat(format2.value);
     });
-    const dateFormat = computed2(() => {
-      return props.dateFormat || extractDateFormat(format2);
+    const dateFormat = computed(() => {
+      return props.dateFormat || extractDateFormat(format2.value);
     });
-    const isValidValue3 = (date5) => {
-      return isValidRange2(date5) && (disabledDate2 ? !disabledDate2(date5[0].toDate()) && !disabledDate2(date5[1].toDate()) : true);
+    const isValidValue3 = (date4) => {
+      return isValidRange2(date4) && (disabledDate ? !disabledDate(date4[0].toDate()) && !disabledDate(date4[1].toDate()) : true);
     };
     const leftPrevYear = () => {
       leftDate.value = leftDate.value.subtract(1, "year");
@@ -29986,18 +30363,18 @@ var _sfc_main66 = defineComponent({
     const handlePanelChange = (mode) => {
       emit("panel-change", [leftDate.value.toDate(), rightDate.value.toDate()], mode);
     };
-    const enableMonthArrow = computed2(() => {
+    const enableMonthArrow = computed(() => {
       const nextMonth = (leftMonth.value + 1) % 12;
       const yearOffset = leftMonth.value + 1 >= 12 ? 1 : 0;
       return props.unlinkPanels && new Date(leftYear.value + yearOffset, nextMonth) < new Date(rightYear.value, rightMonth.value);
     });
-    const enableYearArrow = computed2(() => {
+    const enableYearArrow = computed(() => {
       return props.unlinkPanels && rightYear.value * 12 + rightMonth.value - (leftYear.value * 12 + leftMonth.value + 1) >= 12;
     });
-    const btnDisabled = computed2(() => {
+    const btnDisabled = computed(() => {
       return !(minDate.value && maxDate.value && !rangeState.value.selecting && isValidRange2([minDate.value, maxDate.value]));
     });
-    const showTime = computed2(() => props.type === "datetime" || props.type === "datetimerange");
+    const showTime = computed(() => props.type === "datetime" || props.type === "datetimerange");
     const formatEmit = (emitDayjs, index) => {
       if (!emitDayjs)
         return;
@@ -30034,7 +30411,7 @@ var _sfc_main66 = defineComponent({
       dateUserInput.value[type4] = value;
       const parsedValueD = (0, import_dayjs13.default)(value, dateFormat.value).locale(lang.value);
       if (parsedValueD.isValid()) {
-        if (disabledDate2 && disabledDate2(parsedValueD.toDate())) {
+        if (disabledDate && disabledDate(parsedValueD.toDate())) {
           return;
         }
         if (type4 === "min") {
@@ -30064,16 +30441,10 @@ var _sfc_main66 = defineComponent({
         if (type4 === "min") {
           minTimePickerVisible.value = true;
           minDate.value = (minDate.value || leftDate.value).hour(parsedValueD.hour()).minute(parsedValueD.minute()).second(parsedValueD.second());
-          if (!maxDate.value || maxDate.value.isBefore(minDate.value)) {
-            maxDate.value = minDate.value;
-          }
         } else {
           maxTimePickerVisible.value = true;
           maxDate.value = (maxDate.value || rightDate.value).hour(parsedValueD.hour()).minute(parsedValueD.minute()).second(parsedValueD.second());
           rightDate.value = maxDate.value;
-          if (maxDate.value && maxDate.value.isBefore(minDate.value)) {
-            minDate.value = maxDate.value;
-          }
         }
       }
     };
@@ -30082,9 +30453,15 @@ var _sfc_main66 = defineComponent({
       if (type4 === "min") {
         leftDate.value = minDate.value;
         minTimePickerVisible.value = false;
+        if (!maxDate.value || maxDate.value.isBefore(minDate.value)) {
+          maxDate.value = minDate.value;
+        }
       } else {
         rightDate.value = maxDate.value;
         maxTimePickerVisible.value = false;
+        if (maxDate.value && maxDate.value.isBefore(minDate.value)) {
+          minDate.value = maxDate.value;
+        }
       }
     };
     const handleMinTimePick = (value, visible, first) => {
@@ -30123,13 +30500,15 @@ var _sfc_main66 = defineComponent({
         unlinkPanels: props.unlinkPanels
       })[0];
       rightDate.value = leftDate.value.add(1, "month");
+      maxDate.value = void 0;
+      minDate.value = void 0;
       emit("pick", null);
     };
     const formatToString = (value) => {
-      return isArray(value) ? value.map((_2) => _2.format(format2)) : value.format(format2);
+      return isArray(value) ? value.map((_2) => _2.format(format2.value)) : value.format(format2.value);
     };
     const parseUserInput = (value) => {
-      return isArray(value) ? value.map((_2) => (0, import_dayjs13.default)(_2, format2).locale(lang.value)) : (0, import_dayjs13.default)(value, format2).locale(lang.value);
+      return isArray(value) ? value.map((_2) => (0, import_dayjs13.default)(_2, format2.value).locale(lang.value)) : (0, import_dayjs13.default)(value, format2.value).locale(lang.value);
     };
     function onParsedValueChanged(minDate2, maxDate2) {
       if (props.unlinkPanels && maxDate2) {
@@ -30176,7 +30555,7 @@ var _sfc_main66 = defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => unref(handleShortcutClick)(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_128);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -30199,9 +30578,9 @@ var _sfc_main66 = defineComponent({
                     class: normalizeClass(unref(drpNs).e("editor")),
                     "model-value": unref(minVisibleDate),
                     "validate-event": false,
-                    onInput: _cache[0] || (_cache[0] = (val) => handleDateInput(val, "min")),
-                    onChange: _cache[1] || (_cache[1] = (val) => handleDateChange(val, "min"))
-                  }, null, 8, ["disabled", "placeholder", "class", "model-value"])
+                    onInput: (val) => handleDateInput(val, "min"),
+                    onChange: (val) => handleDateChange(val, "min")
+                  }, null, 8, ["disabled", "placeholder", "class", "model-value", "onInput", "onChange"])
                 ], 2),
                 withDirectives((openBlock(), createElementBlock("span", {
                   class: normalizeClass(unref(drpNs).e("time-picker-wrap"))
@@ -30213,10 +30592,10 @@ var _sfc_main66 = defineComponent({
                     placeholder: unref(t)("el.datepicker.startTime"),
                     "model-value": unref(minVisibleTime),
                     "validate-event": false,
-                    onFocus: _cache[2] || (_cache[2] = ($event) => minTimePickerVisible.value = true),
-                    onInput: _cache[3] || (_cache[3] = (val) => handleTimeInput(val, "min")),
-                    onChange: _cache[4] || (_cache[4] = (val) => handleTimeChange(val, "min"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value"]),
+                    onFocus: ($event) => minTimePickerVisible.value = true,
+                    onInput: (val) => handleTimeInput(val, "min"),
+                    onChange: (val) => handleTimeChange(val, "min")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "onFocus", "onInput", "onChange"]),
                   createVNode(unref(TimePickPanel), {
                     visible: minTimePickerVisible.value,
                     format: unref(timeFormat),
@@ -30250,9 +30629,9 @@ var _sfc_main66 = defineComponent({
                     "model-value": unref(maxVisibleDate),
                     readonly: !unref(minDate),
                     "validate-event": false,
-                    onInput: _cache[5] || (_cache[5] = (val) => handleDateInput(val, "max")),
-                    onChange: _cache[6] || (_cache[6] = (val) => handleDateChange(val, "max"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly"])
+                    onInput: (val) => handleDateInput(val, "max"),
+                    onChange: (val) => handleDateChange(val, "max")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly", "onInput", "onChange"])
                 ], 2),
                 withDirectives((openBlock(), createElementBlock("span", {
                   class: normalizeClass(unref(drpNs).e("time-picker-wrap"))
@@ -30265,10 +30644,10 @@ var _sfc_main66 = defineComponent({
                     "model-value": unref(maxVisibleTime),
                     readonly: !unref(minDate),
                     "validate-event": false,
-                    onFocus: _cache[7] || (_cache[7] = ($event) => unref(minDate) && (maxTimePickerVisible.value = true)),
-                    onInput: _cache[8] || (_cache[8] = (val) => handleTimeInput(val, "max")),
-                    onChange: _cache[9] || (_cache[9] = (val) => handleTimeChange(val, "max"))
-                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly"]),
+                    onFocus: ($event) => unref(minDate) && (maxTimePickerVisible.value = true),
+                    onInput: (val) => handleTimeInput(val, "max"),
+                    onChange: (val) => handleTimeChange(val, "max")
+                  }, null, 8, ["class", "disabled", "placeholder", "model-value", "readonly", "onFocus", "onInput", "onChange"]),
                   createVNode(unref(TimePickPanel), {
                     "datetime-role": "end",
                     visible: maxTimePickerVisible.value,
@@ -30293,26 +30672,30 @@ var _sfc_main66 = defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: leftPrevYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_219),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-left"]),
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: leftPrevMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_39),
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
@@ -30321,13 +30704,15 @@ var _sfc_main66 = defineComponent({
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   onClick: leftNextYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_45)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 1,
                   type: "button",
@@ -30339,13 +30724,15 @@ var _sfc_main66 = defineComponent({
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: leftNextMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_53)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(DateTable2, {
@@ -30354,7 +30741,7 @@ var _sfc_main66 = defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
@@ -30375,13 +30762,15 @@ var _sfc_main66 = defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevYear`),
                   onClick: rightPrevYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_62)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 1,
                   type: "button",
@@ -30393,39 +30782,45 @@ var _sfc_main66 = defineComponent({
                   "aria-label": unref(t)(`el.datepicker.prevMonth`),
                   onClick: rightPrevMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_72)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "aria-label"])) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
                   "aria-label": unref(t)(`el.datepicker.nextYear`),
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
                   onClick: rightNextYear
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_82),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "arrow-right"]),
                   "aria-label": unref(t)(`el.datepicker.nextMonth`),
                   onClick: rightNextMonth
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_9),
+                  renderSlot(_ctx.$slots, "next-month", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["aria-label"]),
                 createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
               ], 2),
               createVNode(DateTable2, {
@@ -30434,7 +30829,7 @@ var _sfc_main66 = defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 "cell-class-name": unref(cellClassName),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
@@ -30464,19 +30859,19 @@ var _sfc_main66 = defineComponent({
             size: "small",
             class: normalizeClass(unref(ppNs).e("link-btn")),
             disabled: unref(btnDisabled),
-            onClick: _cache[10] || (_cache[10] = ($event) => unref(handleRangeConfirm)(false))
+            onClick: ($event) => unref(handleRangeConfirm)(false)
           }, {
             default: withCtx(() => [
               createTextVNode(toDisplayString(unref(t)("el.datepicker.confirm")), 1)
             ]),
             _: 1
-          }, 8, ["class", "disabled"])
+          }, 8, ["class", "disabled", "onClick"])
         ], 2)) : createCommentVNode("v-if", true)
       ], 2);
     };
   }
 });
-var DateRangePickPanel = _export_sfc(_sfc_main66, [["__file", "panel-date-range.vue"]]);
+var DateRangePickPanel = _export_sfc(_sfc_main67, [["__file", "panel-date-range.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-month-range.mjs
 var import_dayjs14 = __toESM(require_dayjs_min(), 1);
@@ -30516,16 +30911,16 @@ var useMonthRangeHeader = ({
   const rightPrevYear = () => {
     rightDate.value = rightDate.value.subtract(1, "year");
   };
-  const leftLabel = computed2(() => {
+  const leftLabel = computed(() => {
     return `${leftDate.value.year()} ${t("el.datepicker.year")}`;
   });
-  const rightLabel = computed2(() => {
+  const rightLabel = computed(() => {
     return `${rightDate.value.year()} ${t("el.datepicker.year")}`;
   });
-  const leftYear = computed2(() => {
+  const leftYear = computed(() => {
     return leftDate.value.year();
   });
-  const rightYear = computed2(() => {
+  const rightYear = computed(() => {
     return rightDate.value.year() === leftDate.value.year() ? leftDate.value.year() + 1 : rightDate.value.year();
   });
   return {
@@ -30541,14 +30936,11 @@ var useMonthRangeHeader = ({
 };
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-month-range.mjs
-var _hoisted_129 = ["onClick"];
-var _hoisted_220 = ["disabled"];
-var _hoisted_310 = ["disabled"];
 var unit2 = "year";
 var __default__50 = defineComponent({
   name: "DatePickerMonthRange"
 });
-var _sfc_main67 = defineComponent({
+var _sfc_main68 = defineComponent({
   ...__default__50,
   props: panelMonthRangeProps,
   emits: panelMonthRangeEmits,
@@ -30556,7 +30948,8 @@ var _sfc_main67 = defineComponent({
     const props = __props;
     const { lang } = useLocale();
     const pickerBase = inject("EP_PICKER_BASE");
-    const { shortcuts, disabledDate: disabledDate2, format: format2 } = pickerBase.props;
+    const { shortcuts, disabledDate } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
     const defaultValue = toRef(pickerBase.props, "defaultValue");
     const leftDate = ref((0, import_dayjs14.default)().locale(lang.value));
     const rightDate = ref((0, import_dayjs14.default)().locale(lang.value).add(1, unit2));
@@ -30577,7 +30970,7 @@ var _sfc_main67 = defineComponent({
       unit: unit2,
       onParsedValueChanged
     });
-    const hasShortcuts = computed2(() => !!shortcuts.length);
+    const hasShortcuts = computed(() => !!shortcuts.length);
     const {
       leftPrevYear,
       rightNextYear,
@@ -30592,7 +30985,7 @@ var _sfc_main67 = defineComponent({
       leftDate,
       rightDate
     });
-    const enableYearArrow = computed2(() => {
+    const enableYearArrow = computed(() => {
       return props.unlinkPanels && rightYear.value > leftYear.value + 1;
     });
     const handleRangePick = (val, close2 = true) => {
@@ -30608,8 +31001,20 @@ var _sfc_main67 = defineComponent({
         return;
       handleRangeConfirm();
     };
-    const formatToString = (days) => {
-      return days.map((day) => day.format(format2));
+    const handleClear = () => {
+      leftDate.value = getDefaultValue(unref(defaultValue), {
+        lang: unref(lang),
+        unit: "year",
+        unlinkPanels: props.unlinkPanels
+      })[0];
+      rightDate.value = leftDate.value.add(1, "year");
+      emit("pick", null);
+    };
+    const formatToString = (value) => {
+      return isArray(value) ? value.map((_2) => _2.format(format2.value)) : value.format(format2.value);
+    };
+    const parseUserInput = (value) => {
+      return isArray(value) ? value.map((_2) => (0, import_dayjs14.default)(_2, format2.value).locale(lang.value)) : (0, import_dayjs14.default)(value, format2.value).locale(lang.value);
     };
     function onParsedValueChanged(minDate2, maxDate2) {
       if (props.unlinkPanels && maxDate2) {
@@ -30620,7 +31025,10 @@ var _sfc_main67 = defineComponent({
         rightDate.value = leftDate.value.add(1, unit2);
       }
     }
+    emit("set-picker-option", ["isValidValue", isValidRange2]);
     emit("set-picker-option", ["formatToString", formatToString]);
+    emit("set-picker-option", ["parseUserInput", parseUserInput]);
+    emit("set-picker-option", ["handleClear", handleClear]);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         class: normalizeClass([
@@ -30647,7 +31055,7 @@ var _sfc_main67 = defineComponent({
                 type: "button",
                 class: normalizeClass(unref(ppNs).e("shortcut")),
                 onClick: ($event) => unref(handleShortcutClick)(shortcut)
-              }, toDisplayString(shortcut.text), 11, _hoisted_129);
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
             }), 128))
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
@@ -30662,15 +31070,17 @@ var _sfc_main67 = defineComponent({
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-left"]),
-                  onClick: _cache[0] || (_cache[0] = (...args) => unref(leftPrevYear) && unref(leftPrevYear)(...args))
+                  onClick: unref(leftPrevYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
                 _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
                   key: 0,
                   type: "button",
@@ -30679,15 +31089,17 @@ var _sfc_main67 = defineComponent({
                     unref(ppNs).e("icon-btn"),
                     { [unref(ppNs).is("disabled")]: !unref(enableYearArrow) }
                   ], "d-arrow-right"]),
-                  onClick: _cache[1] || (_cache[1] = (...args) => unref(leftNextYear) && unref(leftNextYear)(...args))
+                  onClick: unref(leftNextYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_220)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
                 createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
               ], 2),
               createVNode(MonthTable, {
@@ -30696,7 +31108,7 @@ var _sfc_main67 = defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
                 onSelect: unref(onSelect)
@@ -30713,27 +31125,31 @@ var _sfc_main67 = defineComponent({
                   type: "button",
                   disabled: !unref(enableYearArrow),
                   class: normalizeClass([[unref(ppNs).e("icon-btn"), { "is-disabled": !unref(enableYearArrow) }], "d-arrow-left"]),
-                  onClick: _cache[2] || (_cache[2] = (...args) => unref(rightPrevYear) && unref(rightPrevYear)(...args))
+                  onClick: unref(rightPrevYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_left_default))
-                    ]),
-                    _: 1
-                  })
-                ], 10, _hoisted_310)) : createCommentVNode("v-if", true),
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
                 createBaseVNode("button", {
                   type: "button",
                   class: normalizeClass([unref(ppNs).e("icon-btn"), "d-arrow-right"]),
-                  onClick: _cache[3] || (_cache[3] = (...args) => unref(rightNextYear) && unref(rightNextYear)(...args))
+                  onClick: unref(rightNextYear)
                 }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(d_arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2),
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
                 createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
               ], 2),
               createVNode(MonthTable, {
@@ -30742,7 +31158,7 @@ var _sfc_main67 = defineComponent({
                 "min-date": unref(minDate),
                 "max-date": unref(maxDate),
                 "range-state": unref(rangeState),
-                "disabled-date": unref(disabledDate2),
+                "disabled-date": unref(disabledDate),
                 onChangerange: unref(handleChangeRange),
                 onPick: handleRangePick,
                 onSelect: unref(onSelect)
@@ -30754,7 +31170,372 @@ var _sfc_main67 = defineComponent({
     };
   }
 });
-var MonthRangePickPanel = _export_sfc(_sfc_main67, [["__file", "panel-month-range.vue"]]);
+var MonthRangePickPanel = _export_sfc(_sfc_main68, [["__file", "panel-month-range.vue"]]);
+
+// node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-year-range.mjs
+var import_dayjs15 = __toESM(require_dayjs_min(), 1);
+
+// node_modules/element-plus/es/components/date-picker/src/props/panel-year-range.mjs
+var panelYearRangeProps = buildProps({
+  ...panelRangeSharedProps
+});
+var panelYearRangeEmits = [
+  "pick",
+  "set-picker-option",
+  "calendar-change"
+];
+
+// node_modules/element-plus/es/components/date-picker/src/composables/use-year-range-header.mjs
+var useYearRangeHeader = ({
+  unlinkPanels,
+  leftDate,
+  rightDate
+}) => {
+  const leftPrevYear = () => {
+    leftDate.value = leftDate.value.subtract(10, "year");
+    if (!unlinkPanels.value) {
+      rightDate.value = rightDate.value.subtract(10, "year");
+    }
+  };
+  const rightNextYear = () => {
+    if (!unlinkPanels.value) {
+      leftDate.value = leftDate.value.add(10, "year");
+    }
+    rightDate.value = rightDate.value.add(10, "year");
+  };
+  const leftNextYear = () => {
+    leftDate.value = leftDate.value.add(10, "year");
+  };
+  const rightPrevYear = () => {
+    rightDate.value = rightDate.value.subtract(10, "year");
+  };
+  const leftLabel = computed(() => {
+    const leftStartDate = Math.floor(leftDate.value.year() / 10) * 10;
+    return `${leftStartDate}-${leftStartDate + 9}`;
+  });
+  const rightLabel = computed(() => {
+    const rightStartDate = Math.floor(rightDate.value.year() / 10) * 10;
+    return `${rightStartDate}-${rightStartDate + 9}`;
+  });
+  const leftYear = computed(() => {
+    const leftEndDate = Math.floor(leftDate.value.year() / 10) * 10 + 9;
+    return leftEndDate;
+  });
+  const rightYear = computed(() => {
+    const rightStartDate = Math.floor(rightDate.value.year() / 10) * 10;
+    return rightStartDate;
+  });
+  return {
+    leftPrevYear,
+    rightNextYear,
+    leftNextYear,
+    rightPrevYear,
+    leftLabel,
+    rightLabel,
+    leftYear,
+    rightYear
+  };
+};
+
+// node_modules/element-plus/es/components/date-picker/src/date-picker-com/panel-year-range.mjs
+var unit3 = "year";
+var __default__51 = defineComponent({
+  name: "DatePickerYearRange"
+});
+var _sfc_main69 = defineComponent({
+  ...__default__51,
+  props: panelYearRangeProps,
+  emits: panelYearRangeEmits,
+  setup(__props, { emit }) {
+    const props = __props;
+    const { lang } = useLocale();
+    const leftDate = ref((0, import_dayjs15.default)().locale(lang.value));
+    const rightDate = ref(leftDate.value.add(10, "year"));
+    const { pickerNs: ppNs } = inject(ROOT_PICKER_INJECTION_KEY);
+    const drpNs = useNamespace("date-range-picker");
+    const hasShortcuts = computed(() => !!shortcuts.length);
+    const panelKls = computed(() => [
+      ppNs.b(),
+      drpNs.b(),
+      {
+        "has-sidebar": Boolean(useSlots().sidebar) || hasShortcuts.value
+      }
+    ]);
+    const leftPanelKls = computed(() => {
+      return {
+        content: [ppNs.e("content"), drpNs.e("content"), "is-left"],
+        arrowLeftBtn: [ppNs.e("icon-btn"), "d-arrow-left"],
+        arrowRightBtn: [
+          ppNs.e("icon-btn"),
+          { [ppNs.is("disabled")]: !enableYearArrow.value },
+          "d-arrow-right"
+        ]
+      };
+    });
+    const rightPanelKls = computed(() => {
+      return {
+        content: [ppNs.e("content"), drpNs.e("content"), "is-right"],
+        arrowLeftBtn: [
+          ppNs.e("icon-btn"),
+          { "is-disabled": !enableYearArrow.value },
+          "d-arrow-left"
+        ],
+        arrowRightBtn: [ppNs.e("icon-btn"), "d-arrow-right"]
+      };
+    });
+    const handleShortcutClick = useShortcut(lang);
+    const {
+      leftPrevYear,
+      rightNextYear,
+      leftNextYear,
+      rightPrevYear,
+      leftLabel,
+      rightLabel,
+      leftYear,
+      rightYear
+    } = useYearRangeHeader({
+      unlinkPanels: toRef(props, "unlinkPanels"),
+      leftDate,
+      rightDate
+    });
+    const enableYearArrow = computed(() => {
+      return props.unlinkPanels && rightYear.value > leftYear.value + 1;
+    });
+    const minDate = ref();
+    const maxDate = ref();
+    const rangeState = ref({
+      endDate: null,
+      selecting: false
+    });
+    const handleChangeRange = (val) => {
+      rangeState.value = val;
+    };
+    const handleRangePick = (val, close2 = true) => {
+      const minDate_ = val.minDate;
+      const maxDate_ = val.maxDate;
+      if (maxDate.value === maxDate_ && minDate.value === minDate_) {
+        return;
+      }
+      emit("calendar-change", [minDate_.toDate(), maxDate_ && maxDate_.toDate()]);
+      maxDate.value = maxDate_;
+      minDate.value = minDate_;
+      if (!close2)
+        return;
+      handleConfirm();
+    };
+    const handleConfirm = (visible = false) => {
+      if (isValidRange2([minDate.value, maxDate.value])) {
+        emit("pick", [minDate.value, maxDate.value], visible);
+      }
+    };
+    const onSelect = (selecting) => {
+      rangeState.value.selecting = selecting;
+      if (!selecting) {
+        rangeState.value.endDate = null;
+      }
+    };
+    const pickerBase = inject("EP_PICKER_BASE");
+    const { shortcuts, disabledDate } = pickerBase.props;
+    const format2 = toRef(pickerBase.props, "format");
+    const defaultValue = toRef(pickerBase.props, "defaultValue");
+    const getDefaultValue2 = () => {
+      let start;
+      if (isArray(defaultValue.value)) {
+        const left2 = (0, import_dayjs15.default)(defaultValue.value[0]);
+        let right2 = (0, import_dayjs15.default)(defaultValue.value[1]);
+        if (!props.unlinkPanels) {
+          right2 = left2.add(10, unit3);
+        }
+        return [left2, right2];
+      } else if (defaultValue.value) {
+        start = (0, import_dayjs15.default)(defaultValue.value);
+      } else {
+        start = (0, import_dayjs15.default)();
+      }
+      start = start.locale(lang.value);
+      return [start, start.add(10, unit3)];
+    };
+    watch(() => defaultValue.value, (val) => {
+      if (val) {
+        const defaultArr = getDefaultValue2();
+        leftDate.value = defaultArr[0];
+        rightDate.value = defaultArr[1];
+      }
+    }, { immediate: true });
+    watch(() => props.parsedValue, (newVal) => {
+      if (newVal && newVal.length === 2) {
+        minDate.value = newVal[0];
+        maxDate.value = newVal[1];
+        leftDate.value = minDate.value;
+        if (props.unlinkPanels && maxDate.value) {
+          const minDateYear = minDate.value.year();
+          const maxDateYear = maxDate.value.year();
+          rightDate.value = minDateYear === maxDateYear ? maxDate.value.add(10, "year") : maxDate.value;
+        } else {
+          rightDate.value = leftDate.value.add(10, "year");
+        }
+      } else {
+        const defaultArr = getDefaultValue2();
+        minDate.value = void 0;
+        maxDate.value = void 0;
+        leftDate.value = defaultArr[0];
+        rightDate.value = defaultArr[1];
+      }
+    }, { immediate: true });
+    const parseUserInput = (value) => {
+      return isArray(value) ? value.map((_2) => (0, import_dayjs15.default)(_2, format2.value).locale(lang.value)) : (0, import_dayjs15.default)(value, format2.value).locale(lang.value);
+    };
+    const formatToString = (value) => {
+      return isArray(value) ? value.map((day) => day.format(format2.value)) : value.format(format2.value);
+    };
+    const isValidValue3 = (date4) => {
+      return isValidRange2(date4) && (disabledDate ? !disabledDate(date4[0].toDate()) && !disabledDate(date4[1].toDate()) : true);
+    };
+    const handleClear = () => {
+      const defaultArr = getDefaultValue2();
+      leftDate.value = defaultArr[0];
+      rightDate.value = defaultArr[1];
+      maxDate.value = void 0;
+      minDate.value = void 0;
+      emit("pick", null);
+    };
+    emit("set-picker-option", ["isValidValue", isValidValue3]);
+    emit("set-picker-option", ["parseUserInput", parseUserInput]);
+    emit("set-picker-option", ["formatToString", formatToString]);
+    emit("set-picker-option", ["handleClear", handleClear]);
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(unref(panelKls))
+      }, [
+        createBaseVNode("div", {
+          class: normalizeClass(unref(ppNs).e("body-wrapper"))
+        }, [
+          renderSlot(_ctx.$slots, "sidebar", {
+            class: normalizeClass(unref(ppNs).e("sidebar"))
+          }),
+          unref(hasShortcuts) ? (openBlock(), createElementBlock("div", {
+            key: 0,
+            class: normalizeClass(unref(ppNs).e("sidebar"))
+          }, [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(unref(shortcuts), (shortcut, key) => {
+              return openBlock(), createElementBlock("button", {
+                key,
+                type: "button",
+                class: normalizeClass(unref(ppNs).e("shortcut")),
+                onClick: ($event) => unref(handleShortcutClick)(shortcut)
+              }, toDisplayString(shortcut.text), 11, ["onClick"]);
+            }), 128))
+          ], 2)) : createCommentVNode("v-if", true),
+          createBaseVNode("div", {
+            class: normalizeClass(unref(ppNs).e("body"))
+          }, [
+            createBaseVNode("div", {
+              class: normalizeClass(unref(leftPanelKls).content)
+            }, [
+              createBaseVNode("div", {
+                class: normalizeClass(unref(drpNs).e("header"))
+              }, [
+                createBaseVNode("button", {
+                  type: "button",
+                  class: normalizeClass(unref(leftPanelKls).arrowLeftBtn),
+                  onClick: unref(leftPrevYear)
+                }, [
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
+                _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
+                  key: 0,
+                  type: "button",
+                  disabled: !unref(enableYearArrow),
+                  class: normalizeClass(unref(leftPanelKls).arrowRightBtn),
+                  onClick: unref(leftNextYear)
+                }, [
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
+                createBaseVNode("div", null, toDisplayString(unref(leftLabel)), 1)
+              ], 2),
+              createVNode(YearTable, {
+                "selection-mode": "range",
+                date: leftDate.value,
+                "min-date": minDate.value,
+                "max-date": maxDate.value,
+                "range-state": rangeState.value,
+                "disabled-date": unref(disabledDate),
+                onChangerange: handleChangeRange,
+                onPick: handleRangePick,
+                onSelect
+              }, null, 8, ["date", "min-date", "max-date", "range-state", "disabled-date"])
+            ], 2),
+            createBaseVNode("div", {
+              class: normalizeClass(unref(rightPanelKls).content)
+            }, [
+              createBaseVNode("div", {
+                class: normalizeClass(unref(drpNs).e("header"))
+              }, [
+                _ctx.unlinkPanels ? (openBlock(), createElementBlock("button", {
+                  key: 0,
+                  type: "button",
+                  disabled: !unref(enableYearArrow),
+                  class: normalizeClass(unref(rightPanelKls).arrowLeftBtn),
+                  onClick: unref(rightPrevYear)
+                }, [
+                  renderSlot(_ctx.$slots, "prev-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["disabled", "onClick"])) : createCommentVNode("v-if", true),
+                createBaseVNode("button", {
+                  type: "button",
+                  class: normalizeClass(unref(rightPanelKls).arrowRightBtn),
+                  onClick: unref(rightNextYear)
+                }, [
+                  renderSlot(_ctx.$slots, "next-year", {}, () => [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(d_arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ])
+                ], 10, ["onClick"]),
+                createBaseVNode("div", null, toDisplayString(unref(rightLabel)), 1)
+              ], 2),
+              createVNode(YearTable, {
+                "selection-mode": "range",
+                date: rightDate.value,
+                "min-date": minDate.value,
+                "max-date": maxDate.value,
+                "range-state": rangeState.value,
+                "disabled-date": unref(disabledDate),
+                onChangerange: handleChangeRange,
+                onPick: handleRangePick,
+                onSelect
+              }, null, 8, ["date", "min-date", "max-date", "range-state", "disabled-date"])
+            ], 2)
+          ], 2)
+        ], 2)
+      ], 2);
+    };
+  }
+});
+var YearRangePickPanel = _export_sfc(_sfc_main69, [["__file", "panel-year-range.vue"]]);
 
 // node_modules/element-plus/es/components/date-picker/src/panel-utils.mjs
 var getPanel = function(type4) {
@@ -30766,6 +31547,9 @@ var getPanel = function(type4) {
     case "monthrange": {
       return MonthRangePickPanel;
     }
+    case "yearrange": {
+      return YearRangePickPanel;
+    }
     default: {
       return DatePickPanel;
     }
@@ -30773,14 +31557,14 @@ var getPanel = function(type4) {
 };
 
 // node_modules/element-plus/es/components/date-picker/src/date-picker.mjs
-import_dayjs15.default.extend(import_localeData2.default);
-import_dayjs15.default.extend(import_advancedFormat.default);
-import_dayjs15.default.extend(import_customParseFormat2.default);
-import_dayjs15.default.extend(import_weekOfYear.default);
-import_dayjs15.default.extend(import_weekYear.default);
-import_dayjs15.default.extend(import_dayOfYear.default);
-import_dayjs15.default.extend(import_isSameOrAfter.default);
-import_dayjs15.default.extend(import_isSameOrBefore.default);
+import_dayjs16.default.extend(import_localeData2.default);
+import_dayjs16.default.extend(import_advancedFormat.default);
+import_dayjs16.default.extend(import_customParseFormat2.default);
+import_dayjs16.default.extend(import_weekOfYear.default);
+import_dayjs16.default.extend(import_weekYear.default);
+import_dayjs16.default.extend(import_dayOfYear.default);
+import_dayjs16.default.extend(import_isSameOrAfter.default);
+import_dayjs16.default.extend(import_isSameOrBefore.default);
 var DatePicker = defineComponent({
   name: "ElDatePicker",
   install: null,
@@ -30826,7 +31610,12 @@ var DatePicker = defineComponent({
         "ref": commonPicker,
         "onUpdate:modelValue": onModelValueUpdated
       }), {
-        default: (scopedProps) => createVNode(Component, scopedProps, null),
+        default: (scopedProps) => createVNode(Component, scopedProps, {
+          "prev-month": slots["prev-month"],
+          "next-month": slots["next-month"],
+          "prev-year": slots["prev-year"],
+          "next-year": slots["next-year"]
+        }),
         "range-separator": slots["range-separator"]
       });
     };
@@ -30834,11 +31623,7 @@ var DatePicker = defineComponent({
 });
 
 // node_modules/element-plus/es/components/date-picker/index.mjs
-var _DatePicker = DatePicker;
-_DatePicker.install = (app) => {
-  app.component(_DatePicker.name, _DatePicker);
-};
-var ElDatePicker = _DatePicker;
+var ElDatePicker = withInstall(DatePicker);
 
 // node_modules/element-plus/es/components/descriptions/src/token.mjs
 var descriptionsKey = Symbol("elDescriptions");
@@ -30876,6 +31661,7 @@ var ElDescriptionsCell = defineComponent({
     const label = ((_d = (_c = (_b = this.cell) == null ? void 0 : _b.children) == null ? void 0 : _c.label) == null ? void 0 : _d.call(_c)) || item.label;
     const content = (_g = (_f = (_e = this.cell) == null ? void 0 : _e.children) == null ? void 0 : _f.default) == null ? void 0 : _g.call(_f);
     const span = item.span;
+    const rowspan = item.rowspan;
     const align = item.align ? `is-${item.align}` : "";
     const labelAlign = item.labelAlign ? `is-${item.labelAlign}` : align;
     const className = item.className;
@@ -30897,7 +31683,8 @@ var ElDescriptionsCell = defineComponent({
             labelAlign,
             labelClassName
           ],
-          colSpan: isVertical ? span : 1
+          colSpan: isVertical ? span : 1,
+          rowspan: isVertical ? 1 : rowspan
         }, label), directives);
       case "content":
         return withDirectives(h(this.tag, {
@@ -30910,13 +31697,15 @@ var ElDescriptionsCell = defineComponent({
             align,
             className
           ],
-          colSpan: isVertical ? span : span * 2 - 1
+          colSpan: isVertical ? span : span * 2 - 1,
+          rowspan: isVertical ? rowspan * 2 - 1 : rowspan
         }, content), directives);
       default:
         return withDirectives(h("td", {
           style,
           class: [ns.e("cell"), align],
-          colSpan: span
+          colSpan: span,
+          rowspan
         }, [
           !isNil_default(label) ? h("span", {
             class: [ns.e("label"), labelClassName]
@@ -30929,7 +31718,7 @@ var ElDescriptionsCell = defineComponent({
   }
 });
 
-// node_modules/element-plus/es/components/descriptions/src/descriptions-row.mjs
+// node_modules/element-plus/es/components/descriptions/src/descriptions-row2.mjs
 var descriptionsRowProps = buildProps({
   row: {
     type: definePropType(Array),
@@ -30937,13 +31726,12 @@ var descriptionsRowProps = buildProps({
   }
 });
 
-// node_modules/element-plus/es/components/descriptions/src/descriptions-row2.mjs
-var _hoisted_130 = { key: 1 };
-var __default__51 = defineComponent({
+// node_modules/element-plus/es/components/descriptions/src/descriptions-row.mjs
+var __default__52 = defineComponent({
   name: "ElDescriptionsRow"
 });
-var _sfc_main68 = defineComponent({
-  ...__default__51,
+var _sfc_main70 = defineComponent({
+  ...__default__52,
   props: descriptionsRowProps,
   setup(__props) {
     const descriptions = inject(descriptionsKey, {});
@@ -30969,7 +31757,7 @@ var _sfc_main68 = defineComponent({
             }, null, 8, ["cell"]);
           }), 128))
         ])
-      ], 64)) : (openBlock(), createElementBlock("tr", _hoisted_130, [
+      ], 64)) : (openBlock(), createElementBlock("tr", { key: 1 }, [
         (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.row, (cell, _index) => {
           return openBlock(), createElementBlock(Fragment, {
             key: `tr3-${_index}`
@@ -30997,14 +31785,11 @@ var _sfc_main68 = defineComponent({
     };
   }
 });
-var ElDescriptionsRow = _export_sfc(_sfc_main68, [["__file", "descriptions-row.vue"]]);
+var ElDescriptionsRow = _export_sfc(_sfc_main70, [["__file", "descriptions-row.vue"]]);
 
 // node_modules/element-plus/es/components/descriptions/src/description.mjs
 var descriptionProps = buildProps({
-  border: {
-    type: Boolean,
-    default: false
-  },
+  border: Boolean,
   column: {
     type: Number,
     default: 3
@@ -31026,11 +31811,11 @@ var descriptionProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/descriptions/src/description2.mjs
-var __default__52 = defineComponent({
+var __default__53 = defineComponent({
   name: "ElDescriptions"
 });
-var _sfc_main69 = defineComponent({
-  ...__default__52,
+var _sfc_main71 = defineComponent({
+  ...__default__53,
   props: descriptionProps,
   setup(__props) {
     const props = __props;
@@ -31038,7 +31823,7 @@ var _sfc_main69 = defineComponent({
     const descriptionsSize = useFormSize();
     const slots = useSlots();
     provide(descriptionsKey, props);
-    const descriptionKls = computed2(() => [ns.b(), ns.m(descriptionsSize.value)]);
+    const descriptionKls = computed(() => [ns.b(), ns.m(descriptionsSize.value)]);
     const filledNode = (node, span, count, isLast = false) => {
       if (!node.props) {
         node.props = {};
@@ -31062,9 +31847,24 @@ var _sfc_main69 = defineComponent({
       let temp = [];
       let count = props.column;
       let totalSpan = 0;
+      const rowspanTemp = [];
       children.forEach((node, index) => {
-        var _a2;
+        var _a2, _b, _c;
         const span = ((_a2 = node.props) == null ? void 0 : _a2.span) || 1;
+        const rowspan = ((_b = node.props) == null ? void 0 : _b.rowspan) || 1;
+        const rowNo = rows.length;
+        rowspanTemp[rowNo] || (rowspanTemp[rowNo] = 0);
+        if (rowspan > 1) {
+          for (let i = 1; i < rowspan; i++) {
+            rowspanTemp[_c = rowNo + i] || (rowspanTemp[_c] = 0);
+            rowspanTemp[rowNo + i]++;
+            totalSpan++;
+          }
+        }
+        if (rowspanTemp[rowNo] > 0) {
+          count -= rowspanTemp[rowNo];
+          rowspanTemp[rowNo] = 0;
+        }
         if (index < children.length - 1) {
           totalSpan += span > count ? count : span;
         }
@@ -31129,7 +31929,7 @@ var _sfc_main69 = defineComponent({
     };
   }
 });
-var Descriptions = _export_sfc(_sfc_main69, [["__file", "description.vue"]]);
+var Descriptions = _export_sfc(_sfc_main71, [["__file", "description.vue"]]);
 
 // node_modules/element-plus/es/components/descriptions/src/description-item.mjs
 var descriptionItemProps = buildProps({
@@ -31138,6 +31938,10 @@ var descriptionItemProps = buildProps({
     default: ""
   },
   span: {
+    type: Number,
+    default: 1
+  },
+  rowspan: {
     type: Number,
     default: 1
   },
@@ -31183,10 +31987,7 @@ var overlayProps = buildProps({
     type: Boolean,
     default: true
   },
-  customMaskEvent: {
-    type: Boolean,
-    default: false
-  },
+  customMaskEvent: Boolean,
   overlayClass: {
     type: definePropType([
       String,
@@ -31270,21 +32071,18 @@ var dialogContentEmits = {
 };
 
 // node_modules/element-plus/es/components/dialog/src/dialog-content2.mjs
-var _hoisted_131 = ["aria-level"];
-var _hoisted_221 = ["aria-label"];
-var _hoisted_311 = ["id"];
-var __default__53 = defineComponent({ name: "ElDialogContent" });
-var _sfc_main70 = defineComponent({
-  ...__default__53,
+var __default__54 = defineComponent({ name: "ElDialogContent" });
+var _sfc_main72 = defineComponent({
+  ...__default__54,
   props: dialogContentProps,
   emits: dialogContentEmits,
-  setup(__props) {
+  setup(__props, { expose }) {
     const props = __props;
     const { t } = useLocale();
     const { Close } = CloseComponents;
     const { dialogRef, headerRef, bodyId, ns, style } = inject(dialogInjectionKey);
     const { focusTrapRef } = inject(FOCUS_TRAP_INJECTION_KEY);
-    const dialogKls = computed2(() => [
+    const dialogKls = computed(() => [
       ns.b(),
       ns.is("fullscreen", props.fullscreen),
       ns.is("draggable", props.draggable),
@@ -31292,9 +32090,12 @@ var _sfc_main70 = defineComponent({
       { [ns.m("center")]: props.center }
     ]);
     const composedDialogRef = composeRefs(focusTrapRef, dialogRef);
-    const draggable2 = computed2(() => props.draggable);
-    const overflow = computed2(() => props.overflow);
-    useDraggable(dialogRef, headerRef, draggable2, overflow);
+    const draggable2 = computed(() => props.draggable);
+    const overflow = computed(() => props.overflow);
+    const { resetPosition } = useDraggable(dialogRef, headerRef, draggable2, overflow);
+    expose({
+      resetPosition
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
         ref: unref(composedDialogRef),
@@ -31312,14 +32113,14 @@ var _sfc_main70 = defineComponent({
               role: "heading",
               "aria-level": _ctx.ariaLevel,
               class: normalizeClass(unref(ns).e("title"))
-            }, toDisplayString(_ctx.title), 11, _hoisted_131)
+            }, toDisplayString(_ctx.title), 11, ["aria-level"])
           ]),
           _ctx.showClose ? (openBlock(), createElementBlock("button", {
             key: 0,
             "aria-label": unref(t)("el.dialog.close"),
             class: normalizeClass(unref(ns).e("headerbtn")),
             type: "button",
-            onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("close"))
+            onClick: ($event) => _ctx.$emit("close")
           }, [
             createVNode(unref(ElIcon), {
               class: normalizeClass(unref(ns).e("close"))
@@ -31329,14 +32130,14 @@ var _sfc_main70 = defineComponent({
               ]),
               _: 1
             }, 8, ["class"])
-          ], 10, _hoisted_221)) : createCommentVNode("v-if", true)
+          ], 10, ["aria-label", "onClick"])) : createCommentVNode("v-if", true)
         ], 2),
         createBaseVNode("div", {
           id: unref(bodyId),
           class: normalizeClass(unref(ns).e("body"))
         }, [
           renderSlot(_ctx.$slots, "default")
-        ], 10, _hoisted_311),
+        ], 10, ["id"]),
         _ctx.$slots.footer ? (openBlock(), createElementBlock("footer", {
           key: 0,
           class: normalizeClass(unref(ns).e("footer"))
@@ -31347,14 +32148,14 @@ var _sfc_main70 = defineComponent({
     };
   }
 });
-var ElDialogContent = _export_sfc(_sfc_main70, [["__file", "dialog-content.vue"]]);
+var ElDialogContent = _export_sfc(_sfc_main72, [["__file", "dialog-content.vue"]]);
 
 // node_modules/element-plus/es/components/dialog/src/dialog.mjs
 var dialogProps = buildProps({
   ...dialogContentProps,
   appendToBody: Boolean,
   appendTo: {
-    type: definePropType(String),
+    type: definePropType([String, Object]),
     default: "body"
   },
   beforeClose: {
@@ -31396,10 +32197,7 @@ var dialogProps = buildProps({
   zIndex: {
     type: Number
   },
-  trapFocus: {
-    type: Boolean,
-    default: false
-  },
+  trapFocus: Boolean,
   headerAriaLevel: {
     type: String,
     default: "2"
@@ -31431,7 +32229,7 @@ var useDialog = (props, targetRef) => {
   let openTimer = void 0;
   let closeTimer = void 0;
   const namespace = useGlobalConfig("namespace", defaultNamespace);
-  const style = computed2(() => {
+  const style = computed(() => {
     const style2 = {};
     const varPrefix = `--${namespace.value}-dialog`;
     if (!props.fullscreen) {
@@ -31444,7 +32242,7 @@ var useDialog = (props, targetRef) => {
     }
     return style2;
   });
-  const overlayDialogStyle = computed2(() => {
+  const overlayDialogStyle = computed(() => {
     if (props.alignCenter) {
       return { display: "flex" };
     }
@@ -31588,13 +32386,12 @@ var useDialog = (props, targetRef) => {
 };
 
 // node_modules/element-plus/es/components/dialog/src/dialog2.mjs
-var _hoisted_132 = ["aria-label", "aria-labelledby", "aria-describedby"];
-var __default__54 = defineComponent({
+var __default__55 = defineComponent({
   name: "ElDialog",
   inheritAttrs: false
 });
-var _sfc_main71 = defineComponent({
-  ...__default__54,
+var _sfc_main73 = defineComponent({
+  ...__default__55,
   props: dialogProps,
   emits: dialogEmits,
   setup(__props, { expose }) {
@@ -31606,7 +32403,7 @@ var _sfc_main71 = defineComponent({
       replacement: "the header slot",
       version: "3.0.0",
       ref: "https://element-plus.org/en-US/component/dialog.html#slots"
-    }, computed2(() => !!slots.title));
+    }, computed(() => !!slots.title));
     const ns = useNamespace("dialog");
     const dialogRef = ref();
     const headerRef = ref();
@@ -31638,106 +32435,114 @@ var _sfc_main71 = defineComponent({
       style
     });
     const overlayEvent = useSameTarget(onModalClick);
-    const draggable2 = computed2(() => props.draggable && !props.fullscreen);
+    const draggable2 = computed(() => props.draggable && !props.fullscreen);
+    const resetPosition = () => {
+      var _a2;
+      (_a2 = dialogContentRef.value) == null ? void 0 : _a2.resetPosition();
+    };
     expose({
       visible,
-      dialogContentRef
+      dialogContentRef,
+      resetPosition
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
+      return openBlock(), createBlock(unref(ElTeleport), {
         to: _ctx.appendTo,
         disabled: _ctx.appendTo !== "body" ? false : !_ctx.appendToBody
-      }, [
-        createVNode(Transition, {
-          name: "dialog-fade",
-          onAfterEnter: unref(afterEnter),
-          onAfterLeave: unref(afterLeave),
-          onBeforeLeave: unref(beforeLeave),
-          persisted: ""
-        }, {
-          default: withCtx(() => [
-            withDirectives(createVNode(unref(ElOverlay), {
-              "custom-mask-event": "",
-              mask: _ctx.modal,
-              "overlay-class": _ctx.modalClass,
-              "z-index": unref(zIndex2)
-            }, {
-              default: withCtx(() => [
-                createBaseVNode("div", {
-                  role: "dialog",
-                  "aria-modal": "true",
-                  "aria-label": _ctx.title || void 0,
-                  "aria-labelledby": !_ctx.title ? unref(titleId) : void 0,
-                  "aria-describedby": unref(bodyId),
-                  class: normalizeClass(`${unref(ns).namespace.value}-overlay-dialog`),
-                  style: normalizeStyle(unref(overlayDialogStyle)),
-                  onClick: _cache[0] || (_cache[0] = (...args) => unref(overlayEvent).onClick && unref(overlayEvent).onClick(...args)),
-                  onMousedown: _cache[1] || (_cache[1] = (...args) => unref(overlayEvent).onMousedown && unref(overlayEvent).onMousedown(...args)),
-                  onMouseup: _cache[2] || (_cache[2] = (...args) => unref(overlayEvent).onMouseup && unref(overlayEvent).onMouseup(...args))
-                }, [
-                  createVNode(unref(ElFocusTrap), {
-                    loop: "",
-                    trapped: unref(visible),
-                    "focus-start-el": "container",
-                    onFocusAfterTrapped: unref(onOpenAutoFocus),
-                    onFocusAfterReleased: unref(onCloseAutoFocus),
-                    onFocusoutPrevented: unref(onFocusoutPrevented),
-                    onReleaseRequested: unref(onCloseRequested)
-                  }, {
-                    default: withCtx(() => [
-                      unref(rendered) ? (openBlock(), createBlock(ElDialogContent, mergeProps({
-                        key: 0,
-                        ref_key: "dialogContentRef",
-                        ref: dialogContentRef
-                      }, _ctx.$attrs, {
-                        center: _ctx.center,
-                        "align-center": _ctx.alignCenter,
-                        "close-icon": _ctx.closeIcon,
-                        draggable: unref(draggable2),
-                        overflow: _ctx.overflow,
-                        fullscreen: _ctx.fullscreen,
-                        "show-close": _ctx.showClose,
-                        title: _ctx.title,
-                        "aria-level": _ctx.headerAriaLevel,
-                        onClose: unref(handleClose)
-                      }), createSlots({
-                        header: withCtx(() => [
-                          !_ctx.$slots.title ? renderSlot(_ctx.$slots, "header", {
-                            key: 0,
-                            close: unref(handleClose),
-                            titleId: unref(titleId),
-                            titleClass: unref(ns).e("title")
-                          }) : renderSlot(_ctx.$slots, "title", { key: 1 })
-                        ]),
-                        default: withCtx(() => [
-                          renderSlot(_ctx.$slots, "default")
-                        ]),
-                        _: 2
-                      }, [
-                        _ctx.$slots.footer ? {
-                          name: "footer",
-                          fn: withCtx(() => [
-                            renderSlot(_ctx.$slots, "footer")
-                          ])
-                        } : void 0
-                      ]), 1040, ["center", "align-center", "close-icon", "draggable", "overflow", "fullscreen", "show-close", "title", "aria-level", "onClose"])) : createCommentVNode("v-if", true)
-                    ]),
-                    _: 3
-                  }, 8, ["trapped", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusoutPrevented", "onReleaseRequested"])
-                ], 46, _hoisted_132)
-              ]),
-              _: 3
-            }, 8, ["mask", "overlay-class", "z-index"]), [
-              [vShow, unref(visible)]
-            ])
-          ]),
-          _: 3
-        }, 8, ["onAfterEnter", "onAfterLeave", "onBeforeLeave"])
-      ], 8, ["to", "disabled"]);
+      }, {
+        default: withCtx(() => [
+          createVNode(Transition, {
+            name: "dialog-fade",
+            onAfterEnter: unref(afterEnter),
+            onAfterLeave: unref(afterLeave),
+            onBeforeLeave: unref(beforeLeave),
+            persisted: ""
+          }, {
+            default: withCtx(() => [
+              withDirectives(createVNode(unref(ElOverlay), {
+                "custom-mask-event": "",
+                mask: _ctx.modal,
+                "overlay-class": _ctx.modalClass,
+                "z-index": unref(zIndex2)
+              }, {
+                default: withCtx(() => [
+                  createBaseVNode("div", {
+                    role: "dialog",
+                    "aria-modal": "true",
+                    "aria-label": _ctx.title || void 0,
+                    "aria-labelledby": !_ctx.title ? unref(titleId) : void 0,
+                    "aria-describedby": unref(bodyId),
+                    class: normalizeClass(`${unref(ns).namespace.value}-overlay-dialog`),
+                    style: normalizeStyle(unref(overlayDialogStyle)),
+                    onClick: unref(overlayEvent).onClick,
+                    onMousedown: unref(overlayEvent).onMousedown,
+                    onMouseup: unref(overlayEvent).onMouseup
+                  }, [
+                    createVNode(unref(ElFocusTrap), {
+                      loop: "",
+                      trapped: unref(visible),
+                      "focus-start-el": "container",
+                      onFocusAfterTrapped: unref(onOpenAutoFocus),
+                      onFocusAfterReleased: unref(onCloseAutoFocus),
+                      onFocusoutPrevented: unref(onFocusoutPrevented),
+                      onReleaseRequested: unref(onCloseRequested)
+                    }, {
+                      default: withCtx(() => [
+                        unref(rendered) ? (openBlock(), createBlock(ElDialogContent, mergeProps({
+                          key: 0,
+                          ref_key: "dialogContentRef",
+                          ref: dialogContentRef
+                        }, _ctx.$attrs, {
+                          center: _ctx.center,
+                          "align-center": _ctx.alignCenter,
+                          "close-icon": _ctx.closeIcon,
+                          draggable: unref(draggable2),
+                          overflow: _ctx.overflow,
+                          fullscreen: _ctx.fullscreen,
+                          "show-close": _ctx.showClose,
+                          title: _ctx.title,
+                          "aria-level": _ctx.headerAriaLevel,
+                          onClose: unref(handleClose)
+                        }), createSlots({
+                          header: withCtx(() => [
+                            !_ctx.$slots.title ? renderSlot(_ctx.$slots, "header", {
+                              key: 0,
+                              close: unref(handleClose),
+                              titleId: unref(titleId),
+                              titleClass: unref(ns).e("title")
+                            }) : renderSlot(_ctx.$slots, "title", { key: 1 })
+                          ]),
+                          default: withCtx(() => [
+                            renderSlot(_ctx.$slots, "default")
+                          ]),
+                          _: 2
+                        }, [
+                          _ctx.$slots.footer ? {
+                            name: "footer",
+                            fn: withCtx(() => [
+                              renderSlot(_ctx.$slots, "footer")
+                            ])
+                          } : void 0
+                        ]), 1040, ["center", "align-center", "close-icon", "draggable", "overflow", "fullscreen", "show-close", "title", "aria-level", "onClose"])) : createCommentVNode("v-if", true)
+                      ]),
+                      _: 3
+                    }, 8, ["trapped", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusoutPrevented", "onReleaseRequested"])
+                  ], 46, ["aria-label", "aria-labelledby", "aria-describedby", "onClick", "onMousedown", "onMouseup"])
+                ]),
+                _: 3
+              }, 8, ["mask", "overlay-class", "z-index"]), [
+                [vShow, unref(visible)]
+              ])
+            ]),
+            _: 3
+          }, 8, ["onAfterEnter", "onAfterLeave", "onBeforeLeave"])
+        ]),
+        _: 3
+      }, 8, ["to", "disabled"]);
     };
   }
 });
-var Dialog = _export_sfc(_sfc_main71, [["__file", "dialog.vue"]]);
+var Dialog = _export_sfc(_sfc_main73, [["__file", "dialog.vue"]]);
 
 // node_modules/element-plus/es/components/dialog/index.mjs
 var ElDialog = withInstall(Dialog);
@@ -31761,16 +32566,16 @@ var dividerProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/divider/src/divider2.mjs
-var __default__55 = defineComponent({
+var __default__56 = defineComponent({
   name: "ElDivider"
 });
-var _sfc_main72 = defineComponent({
-  ...__default__55,
+var _sfc_main74 = defineComponent({
+  ...__default__56,
   props: dividerProps,
   setup(__props) {
     const props = __props;
     const ns = useNamespace("divider");
-    const dividerStyle = computed2(() => {
+    const dividerStyle = computed(() => {
       return ns.cssVar({
         "border-style": props.borderStyle
       });
@@ -31791,7 +32596,7 @@ var _sfc_main72 = defineComponent({
     };
   }
 });
-var Divider = _export_sfc(_sfc_main72, [["__file", "divider.vue"]]);
+var Divider = _export_sfc(_sfc_main74, [["__file", "divider.vue"]]);
 
 // node_modules/element-plus/es/components/divider/index.mjs
 var ElDivider = withInstall(Divider);
@@ -31824,16 +32629,12 @@ var drawerProps = buildProps({
 var drawerEmits = dialogEmits;
 
 // node_modules/element-plus/es/components/drawer/src/drawer2.mjs
-var _hoisted_133 = ["aria-label", "aria-labelledby", "aria-describedby"];
-var _hoisted_222 = ["id", "aria-level"];
-var _hoisted_312 = ["aria-label"];
-var _hoisted_46 = ["id"];
-var __default__56 = defineComponent({
+var __default__57 = defineComponent({
   name: "ElDrawer",
   inheritAttrs: false
 });
-var _sfc_main73 = defineComponent({
-  ...__default__56,
+var _sfc_main75 = defineComponent({
+  ...__default__57,
   props: drawerProps,
   emits: drawerEmits,
   setup(__props, { expose }) {
@@ -31845,7 +32646,7 @@ var _sfc_main73 = defineComponent({
       replacement: "the header slot",
       version: "3.0.0",
       ref: "https://element-plus.org/en-US/component/drawer.html#slots"
-    }, computed2(() => !!slots.title));
+    }, computed(() => !!slots.title));
     const drawerRef = ref();
     const focusStartRef = ref();
     const ns = useNamespace("drawer");
@@ -31866,153 +32667,156 @@ var _sfc_main73 = defineComponent({
       onCloseRequested,
       handleClose
     } = useDialog(props, drawerRef);
-    const isHorizontal2 = computed2(() => props.direction === "rtl" || props.direction === "ltr");
-    const drawerSize = computed2(() => addUnit(props.size));
+    const isHorizontal2 = computed(() => props.direction === "rtl" || props.direction === "ltr");
+    const drawerSize = computed(() => addUnit(props.size));
     expose({
       handleClose,
       afterEnter,
       afterLeave
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
-        to: "body",
-        disabled: !_ctx.appendToBody
-      }, [
-        createVNode(Transition, {
-          name: unref(ns).b("fade"),
-          onAfterEnter: unref(afterEnter),
-          onAfterLeave: unref(afterLeave),
-          onBeforeLeave: unref(beforeLeave),
-          persisted: ""
-        }, {
-          default: withCtx(() => [
-            withDirectives(createVNode(unref(ElOverlay), {
-              mask: _ctx.modal,
-              "overlay-class": _ctx.modalClass,
-              "z-index": unref(zIndex2),
-              onClick: unref(onModalClick)
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(ElFocusTrap), {
-                  loop: "",
-                  trapped: unref(visible),
-                  "focus-trap-el": drawerRef.value,
-                  "focus-start-el": focusStartRef.value,
-                  onFocusAfterTrapped: unref(onOpenAutoFocus),
-                  onFocusAfterReleased: unref(onCloseAutoFocus),
-                  onFocusoutPrevented: unref(onFocusoutPrevented),
-                  onReleaseRequested: unref(onCloseRequested)
-                }, {
-                  default: withCtx(() => [
-                    createBaseVNode("div", mergeProps({
-                      ref_key: "drawerRef",
-                      ref: drawerRef,
-                      "aria-modal": "true",
-                      "aria-label": _ctx.title || void 0,
-                      "aria-labelledby": !_ctx.title ? unref(titleId) : void 0,
-                      "aria-describedby": unref(bodyId)
-                    }, _ctx.$attrs, {
-                      class: [unref(ns).b(), _ctx.direction, unref(visible) && "open"],
-                      style: unref(isHorizontal2) ? "width: " + unref(drawerSize) : "height: " + unref(drawerSize),
-                      role: "dialog",
-                      onClick: _cache[1] || (_cache[1] = withModifiers(() => {
-                      }, ["stop"]))
-                    }), [
-                      createBaseVNode("span", {
-                        ref_key: "focusStartRef",
-                        ref: focusStartRef,
-                        class: normalizeClass(unref(ns).e("sr-focus")),
-                        tabindex: "-1"
-                      }, null, 2),
-                      _ctx.withHeader ? (openBlock(), createElementBlock("header", {
-                        key: 0,
-                        class: normalizeClass(unref(ns).e("header"))
-                      }, [
-                        !_ctx.$slots.title ? renderSlot(_ctx.$slots, "header", {
+      return openBlock(), createBlock(unref(ElTeleport), {
+        to: _ctx.appendTo,
+        disabled: _ctx.appendTo !== "body" ? false : !_ctx.appendToBody
+      }, {
+        default: withCtx(() => [
+          createVNode(Transition, {
+            name: unref(ns).b("fade"),
+            onAfterEnter: unref(afterEnter),
+            onAfterLeave: unref(afterLeave),
+            onBeforeLeave: unref(beforeLeave),
+            persisted: ""
+          }, {
+            default: withCtx(() => [
+              withDirectives(createVNode(unref(ElOverlay), {
+                mask: _ctx.modal,
+                "overlay-class": _ctx.modalClass,
+                "z-index": unref(zIndex2),
+                onClick: unref(onModalClick)
+              }, {
+                default: withCtx(() => [
+                  createVNode(unref(ElFocusTrap), {
+                    loop: "",
+                    trapped: unref(visible),
+                    "focus-trap-el": drawerRef.value,
+                    "focus-start-el": focusStartRef.value,
+                    onFocusAfterTrapped: unref(onOpenAutoFocus),
+                    onFocusAfterReleased: unref(onCloseAutoFocus),
+                    onFocusoutPrevented: unref(onFocusoutPrevented),
+                    onReleaseRequested: unref(onCloseRequested)
+                  }, {
+                    default: withCtx(() => [
+                      createBaseVNode("div", mergeProps({
+                        ref_key: "drawerRef",
+                        ref: drawerRef,
+                        "aria-modal": "true",
+                        "aria-label": _ctx.title || void 0,
+                        "aria-labelledby": !_ctx.title ? unref(titleId) : void 0,
+                        "aria-describedby": unref(bodyId)
+                      }, _ctx.$attrs, {
+                        class: [unref(ns).b(), _ctx.direction, unref(visible) && "open"],
+                        style: unref(isHorizontal2) ? "width: " + unref(drawerSize) : "height: " + unref(drawerSize),
+                        role: "dialog",
+                        onClick: withModifiers(() => {
+                        }, ["stop"])
+                      }), [
+                        createBaseVNode("span", {
+                          ref_key: "focusStartRef",
+                          ref: focusStartRef,
+                          class: normalizeClass(unref(ns).e("sr-focus")),
+                          tabindex: "-1"
+                        }, null, 2),
+                        _ctx.withHeader ? (openBlock(), createElementBlock("header", {
                           key: 0,
-                          close: unref(handleClose),
-                          titleId: unref(titleId),
-                          titleClass: unref(ns).e("title")
-                        }, () => [
-                          !_ctx.$slots.title ? (openBlock(), createElementBlock("span", {
-                            key: 0,
-                            id: unref(titleId),
-                            role: "heading",
-                            "aria-level": _ctx.headerAriaLevel,
-                            class: normalizeClass(unref(ns).e("title"))
-                          }, toDisplayString(_ctx.title), 11, _hoisted_222)) : createCommentVNode("v-if", true)
-                        ]) : renderSlot(_ctx.$slots, "title", { key: 1 }, () => [
-                          createCommentVNode(" DEPRECATED SLOT ")
-                        ]),
-                        _ctx.showClose ? (openBlock(), createElementBlock("button", {
-                          key: 2,
-                          "aria-label": unref(t)("el.drawer.close"),
-                          class: normalizeClass(unref(ns).e("close-btn")),
-                          type: "button",
-                          onClick: _cache[0] || (_cache[0] = (...args) => unref(handleClose) && unref(handleClose)(...args))
+                          class: normalizeClass(unref(ns).e("header"))
                         }, [
-                          createVNode(unref(ElIcon), {
-                            class: normalizeClass(unref(ns).e("close"))
-                          }, {
-                            default: withCtx(() => [
-                              createVNode(unref(close_default))
-                            ]),
-                            _: 1
-                          }, 8, ["class"])
-                        ], 10, _hoisted_312)) : createCommentVNode("v-if", true)
-                      ], 2)) : createCommentVNode("v-if", true),
-                      unref(rendered) ? (openBlock(), createElementBlock("div", {
-                        key: 1,
-                        id: unref(bodyId),
-                        class: normalizeClass(unref(ns).e("body"))
-                      }, [
-                        renderSlot(_ctx.$slots, "default")
-                      ], 10, _hoisted_46)) : createCommentVNode("v-if", true),
-                      _ctx.$slots.footer ? (openBlock(), createElementBlock("div", {
-                        key: 2,
-                        class: normalizeClass(unref(ns).e("footer"))
-                      }, [
-                        renderSlot(_ctx.$slots, "footer")
-                      ], 2)) : createCommentVNode("v-if", true)
-                    ], 16, _hoisted_133)
-                  ]),
-                  _: 3
-                }, 8, ["trapped", "focus-trap-el", "focus-start-el", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusoutPrevented", "onReleaseRequested"])
-              ]),
-              _: 3
-            }, 8, ["mask", "overlay-class", "z-index", "onClick"]), [
-              [vShow, unref(visible)]
-            ])
-          ]),
-          _: 3
-        }, 8, ["name", "onAfterEnter", "onAfterLeave", "onBeforeLeave"])
-      ], 8, ["disabled"]);
+                          !_ctx.$slots.title ? renderSlot(_ctx.$slots, "header", {
+                            key: 0,
+                            close: unref(handleClose),
+                            titleId: unref(titleId),
+                            titleClass: unref(ns).e("title")
+                          }, () => [
+                            !_ctx.$slots.title ? (openBlock(), createElementBlock("span", {
+                              key: 0,
+                              id: unref(titleId),
+                              role: "heading",
+                              "aria-level": _ctx.headerAriaLevel,
+                              class: normalizeClass(unref(ns).e("title"))
+                            }, toDisplayString(_ctx.title), 11, ["id", "aria-level"])) : createCommentVNode("v-if", true)
+                          ]) : renderSlot(_ctx.$slots, "title", { key: 1 }, () => [
+                            createCommentVNode(" DEPRECATED SLOT ")
+                          ]),
+                          _ctx.showClose ? (openBlock(), createElementBlock("button", {
+                            key: 2,
+                            "aria-label": unref(t)("el.drawer.close"),
+                            class: normalizeClass(unref(ns).e("close-btn")),
+                            type: "button",
+                            onClick: unref(handleClose)
+                          }, [
+                            createVNode(unref(ElIcon), {
+                              class: normalizeClass(unref(ns).e("close"))
+                            }, {
+                              default: withCtx(() => [
+                                createVNode(unref(close_default))
+                              ]),
+                              _: 1
+                            }, 8, ["class"])
+                          ], 10, ["aria-label", "onClick"])) : createCommentVNode("v-if", true)
+                        ], 2)) : createCommentVNode("v-if", true),
+                        unref(rendered) ? (openBlock(), createElementBlock("div", {
+                          key: 1,
+                          id: unref(bodyId),
+                          class: normalizeClass(unref(ns).e("body"))
+                        }, [
+                          renderSlot(_ctx.$slots, "default")
+                        ], 10, ["id"])) : createCommentVNode("v-if", true),
+                        _ctx.$slots.footer ? (openBlock(), createElementBlock("div", {
+                          key: 2,
+                          class: normalizeClass(unref(ns).e("footer"))
+                        }, [
+                          renderSlot(_ctx.$slots, "footer")
+                        ], 2)) : createCommentVNode("v-if", true)
+                      ], 16, ["aria-label", "aria-labelledby", "aria-describedby", "onClick"])
+                    ]),
+                    _: 3
+                  }, 8, ["trapped", "focus-trap-el", "focus-start-el", "onFocusAfterTrapped", "onFocusAfterReleased", "onFocusoutPrevented", "onReleaseRequested"])
+                ]),
+                _: 3
+              }, 8, ["mask", "overlay-class", "z-index", "onClick"]), [
+                [vShow, unref(visible)]
+              ])
+            ]),
+            _: 3
+          }, 8, ["name", "onAfterEnter", "onAfterLeave", "onBeforeLeave"])
+        ]),
+        _: 3
+      }, 8, ["to", "disabled"]);
     };
   }
 });
-var Drawer = _export_sfc(_sfc_main73, [["__file", "drawer.vue"]]);
+var Drawer = _export_sfc(_sfc_main75, [["__file", "drawer.vue"]]);
 
 // node_modules/element-plus/es/components/drawer/index.mjs
 var ElDrawer = withInstall(Drawer);
 
 // node_modules/element-plus/es/components/collection/src/collection2.mjs
-var _sfc_main74 = defineComponent({
+var _sfc_main76 = defineComponent({
   inheritAttrs: false
 });
 function _sfc_render8(_ctx, _cache, $props, $setup, $data, $options) {
   return renderSlot(_ctx.$slots, "default");
 }
-var Collection = _export_sfc(_sfc_main74, [["render", _sfc_render8], ["__file", "collection.vue"]]);
+var Collection = _export_sfc(_sfc_main76, [["render", _sfc_render8], ["__file", "collection.vue"]]);
 
 // node_modules/element-plus/es/components/collection/src/collection-item.mjs
-var _sfc_main75 = defineComponent({
+var _sfc_main77 = defineComponent({
   name: "ElCollectionItem",
   inheritAttrs: false
 });
 function _sfc_render9(_ctx, _cache, $props, $setup, $data, $options) {
   return renderSlot(_ctx.$slots, "default");
 }
-var CollectionItem = _export_sfc(_sfc_main75, [["render", _sfc_render9], ["__file", "collection-item.vue"]]);
+var CollectionItem = _export_sfc(_sfc_main77, [["render", _sfc_render9], ["__file", "collection-item.vue"]]);
 
 // node_modules/element-plus/es/components/collection/src/collection.mjs
 var COLLECTION_ITEM_SIGN = `data-el-collection-item`;
@@ -32154,7 +32958,7 @@ var focusFirst = (elements) => {
 var CURRENT_TAB_ID_CHANGE_EVT = "currentTabIdChange";
 var ENTRY_FOCUS_EVT = "rovingFocusGroup.entryFocus";
 var EVT_OPTS = { bubbles: false, cancelable: true };
-var _sfc_main76 = defineComponent({
+var _sfc_main78 = defineComponent({
   name: "ElRovingFocusGroupImpl",
   inheritAttrs: false,
   props: rovingFocusGroupProps,
@@ -32166,7 +32970,7 @@ var _sfc_main76 = defineComponent({
     const isClickFocus = ref(false);
     const rovingFocusGroupRef = ref(null);
     const { getItems } = inject(COLLECTION_INJECTION_KEY, void 0);
-    const rovingFocusGroupRootStyle = computed2(() => {
+    const rovingFocusGroupRootStyle = computed(() => {
       return [
         {
           outline: "none"
@@ -32218,7 +33022,7 @@ var _sfc_main76 = defineComponent({
     provide(ROVING_FOCUS_GROUP_INJECTION_KEY, {
       currentTabbedId: readonly(currentTabbedId),
       loop: toRef(props, "loop"),
-      tabIndex: computed2(() => {
+      tabIndex: computed(() => {
         return unref(isBackingOut) ? -1 : 0;
       }),
       rovingFocusGroupRef,
@@ -32240,10 +33044,10 @@ var _sfc_main76 = defineComponent({
 function _sfc_render10(_ctx, _cache, $props, $setup, $data, $options) {
   return renderSlot(_ctx.$slots, "default");
 }
-var ElRovingFocusGroupImpl = _export_sfc(_sfc_main76, [["render", _sfc_render10], ["__file", "roving-focus-group-impl.vue"]]);
+var ElRovingFocusGroupImpl = _export_sfc(_sfc_main78, [["render", _sfc_render10], ["__file", "roving-focus-group-impl.vue"]]);
 
 // node_modules/element-plus/es/components/roving-focus-group/src/roving-focus-group2.mjs
-var _sfc_main77 = defineComponent({
+var _sfc_main79 = defineComponent({
   name: "ElRovingFocusGroup",
   components: {
     ElFocusGroupCollection: ElCollection,
@@ -32265,10 +33069,10 @@ function _sfc_render11(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   });
 }
-var ElRovingFocusGroup = _export_sfc(_sfc_main77, [["render", _sfc_render11], ["__file", "roving-focus-group.vue"]]);
+var ElRovingFocusGroup = _export_sfc(_sfc_main79, [["render", _sfc_render11], ["__file", "roving-focus-group.vue"]]);
 
 // node_modules/element-plus/es/components/roving-focus-group/src/roving-focus-item.mjs
-var _sfc_main78 = defineComponent({
+var _sfc_main80 = defineComponent({
   components: {
     ElRovingFocusCollectionItem: ElCollectionItem
   },
@@ -32340,10 +33144,10 @@ var _sfc_main78 = defineComponent({
         });
       }
     });
-    const isCurrentTab = computed2(() => currentTabbedId.value === unref(id));
+    const isCurrentTab = computed(() => currentTabbedId.value === unref(id));
     provide(ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY, {
       rovingFocusGroupItemRef,
-      tabIndex: computed2(() => unref(isCurrentTab) ? 0 : -1),
+      tabIndex: computed(() => unref(isCurrentTab) ? 0 : -1),
       handleMousedown,
       handleFocus,
       handleKeydown
@@ -32369,7 +33173,7 @@ function _sfc_render12(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["id", "focusable", "active"]);
 }
-var ElRovingFocusItem = _export_sfc(_sfc_main78, [["render", _sfc_render12], ["__file", "roving-focus-item.vue"]]);
+var ElRovingFocusItem = _export_sfc(_sfc_main80, [["render", _sfc_render12], ["__file", "roving-focus-item.vue"]]);
 
 // node_modules/element-plus/es/components/dropdown/src/dropdown.mjs
 var dropdownProps = buildProps({
@@ -32423,10 +33227,7 @@ var dropdownProps = buildProps({
     type: String,
     default: ""
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
   role: {
     type: String,
     default: "menu"
@@ -32470,7 +33271,7 @@ var DROPDOWN_INJECTION_KEY = Symbol("elDropdown");
 
 // node_modules/element-plus/es/components/dropdown/src/dropdown2.mjs
 var { ButtonGroup: ElButtonGroup2 } = ElButton;
-var _sfc_main79 = defineComponent({
+var _sfc_main81 = defineComponent({
   name: "ElDropdown",
   components: {
     ElButton,
@@ -32497,15 +33298,13 @@ var _sfc_main79 = defineComponent({
     const currentTabId = ref(null);
     const isUsingKeyboard = ref(false);
     const triggerKeys = [EVENT_CODE.enter, EVENT_CODE.space, EVENT_CODE.down];
-    const wrapStyle = computed2(() => ({
+    const wrapStyle = computed(() => ({
       maxHeight: addUnit(props.maxHeight)
     }));
-    const dropdownTriggerKls = computed2(() => [ns.m(dropdownSize.value)]);
-    const trigger = computed2(() => castArray_default(props.trigger));
+    const dropdownTriggerKls = computed(() => [ns.m(dropdownSize.value)]);
+    const trigger = computed(() => castArray_default(props.trigger));
     const defaultTriggerId = useId().value;
-    const triggerId = computed2(() => {
-      return props.id || defaultTriggerId;
-    });
+    const triggerId = computed(() => props.id || defaultTriggerId);
     watch([triggeringElementRef, trigger], ([triggeringElement, trigger2], [prevTriggeringElement]) => {
       var _a2, _b, _c;
       if ((_a2 = prevTriggeringElement == null ? void 0 : prevTriggeringElement.$el) == null ? void 0 : _a2.removeEventListener) {
@@ -32572,7 +33371,7 @@ var _sfc_main79 = defineComponent({
     }
     provide(DROPDOWN_INJECTION_KEY, {
       contentRef,
-      role: computed2(() => props.role),
+      role: computed(() => props.role),
       triggerId,
       isUsingKeyboard,
       onItemEnter,
@@ -32755,10 +33554,10 @@ function _sfc_render13(_ctx, _cache, $props, $setup, $data, $options) {
     })) : createCommentVNode("v-if", true)
   ], 2);
 }
-var Dropdown = _export_sfc(_sfc_main79, [["render", _sfc_render13], ["__file", "dropdown.vue"]]);
+var Dropdown = _export_sfc(_sfc_main81, [["render", _sfc_render13], ["__file", "dropdown.vue"]]);
 
 // node_modules/element-plus/es/components/dropdown/src/dropdown-item-impl.mjs
-var _sfc_main80 = defineComponent({
+var _sfc_main82 = defineComponent({
   name: "DropdownItemImpl",
   components: {
     ElIcon
@@ -32778,7 +33577,7 @@ var _sfc_main80 = defineComponent({
       handleMousedown
     } = inject(ROVING_FOCUS_GROUP_ITEM_INJECTION_KEY, void 0);
     const itemRef = composeRefs(dropdownCollectionItemRef, rovingFocusCollectionItemRef, rovingFocusGroupItemRef);
-    const role = computed2(() => {
+    const role = computed(() => {
       if (menuRole.value === "menu") {
         return "menuitem";
       } else if (menuRole.value === "navigation") {
@@ -32809,7 +33608,6 @@ var _sfc_main80 = defineComponent({
     };
   }
 });
-var _hoisted_134 = ["aria-disabled", "tabindex", "role"];
 function _sfc_render14(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_icon = resolveComponent("el-icon");
   return openBlock(), createElementBlock(Fragment, null, [
@@ -32823,12 +33621,12 @@ function _sfc_render14(_ctx, _cache, $props, $setup, $data, $options) {
       class: [_ctx.ns.be("menu", "item"), _ctx.ns.is("disabled", _ctx.disabled)],
       tabindex: _ctx.tabIndex,
       role: _ctx.role,
-      onClick: _cache[0] || (_cache[0] = (e) => _ctx.$emit("clickimpl", e)),
-      onFocus: _cache[1] || (_cache[1] = (...args) => _ctx.handleFocus && _ctx.handleFocus(...args)),
-      onKeydown: _cache[2] || (_cache[2] = withModifiers((...args) => _ctx.handleKeydown && _ctx.handleKeydown(...args), ["self"])),
-      onMousedown: _cache[3] || (_cache[3] = (...args) => _ctx.handleMousedown && _ctx.handleMousedown(...args)),
-      onPointermove: _cache[4] || (_cache[4] = (e) => _ctx.$emit("pointermove", e)),
-      onPointerleave: _cache[5] || (_cache[5] = (e) => _ctx.$emit("pointerleave", e))
+      onClick: (e) => _ctx.$emit("clickimpl", e),
+      onFocus: _ctx.handleFocus,
+      onKeydown: withModifiers(_ctx.handleKeydown, ["self"]),
+      onMousedown: _ctx.handleMousedown,
+      onPointermove: (e) => _ctx.$emit("pointermove", e),
+      onPointerleave: (e) => _ctx.$emit("pointerleave", e)
     }), [
       _ctx.icon ? (openBlock(), createBlock(_component_el_icon, { key: 0 }, {
         default: withCtx(() => [
@@ -32837,15 +33635,15 @@ function _sfc_render14(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
       })) : createCommentVNode("v-if", true),
       renderSlot(_ctx.$slots, "default")
-    ], 16, _hoisted_134)
+    ], 16, ["aria-disabled", "tabindex", "role", "onClick", "onFocus", "onKeydown", "onMousedown", "onPointermove", "onPointerleave"])
   ], 64);
 }
-var ElDropdownItemImpl = _export_sfc(_sfc_main80, [["render", _sfc_render14], ["__file", "dropdown-item-impl.vue"]]);
+var ElDropdownItemImpl = _export_sfc(_sfc_main82, [["render", _sfc_render14], ["__file", "dropdown-item-impl.vue"]]);
 
 // node_modules/element-plus/es/components/dropdown/src/useDropdown.mjs
 var useDropdown = () => {
   const elDropdown = inject("elDropdown", {});
-  const _elDropdownSize = computed2(() => elDropdown == null ? void 0 : elDropdown.dropdownSize);
+  const _elDropdownSize = computed(() => elDropdown == null ? void 0 : elDropdown.dropdownSize);
   return {
     elDropdown,
     _elDropdownSize
@@ -32853,7 +33651,7 @@ var useDropdown = () => {
 };
 
 // node_modules/element-plus/es/components/dropdown/src/dropdown-item.mjs
-var _sfc_main81 = defineComponent({
+var _sfc_main83 = defineComponent({
   name: "ElDropdownItem",
   components: {
     ElDropdownCollectionItem: ElCollectionItem2,
@@ -32867,7 +33665,7 @@ var _sfc_main81 = defineComponent({
     const { elDropdown } = useDropdown();
     const _instance = getCurrentInstance();
     const itemRef = ref(null);
-    const textContent = computed2(() => {
+    const textContent = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = unref(itemRef)) == null ? void 0 : _a2.textContent) != null ? _b : "";
     });
@@ -32892,9 +33690,7 @@ var _sfc_main81 = defineComponent({
     const handlePointerLeave = composeEventHandlers((e) => {
       emit("pointerleave", e);
       return e.defaultPrevented;
-    }, whenMouse((e) => {
-      onItemLeave(e);
-    }));
+    }, whenMouse(onItemLeave));
     const handleClick = composeEventHandlers((e) => {
       if (props.disabled) {
         return;
@@ -32912,9 +33708,7 @@ var _sfc_main81 = defineComponent({
       }
       (_c = elDropdown.commandHandler) == null ? void 0 : _c.call(elDropdown, props.command, _instance, e);
     });
-    const propsAndAttrs = computed2(() => {
-      return { ...props, ...attrs };
-    });
+    const propsAndAttrs = computed(() => ({ ...props, ...attrs }));
     return {
       handleClick,
       handlePointerMove,
@@ -32955,10 +33749,10 @@ function _sfc_render15(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["disabled", "text-value"]);
 }
-var DropdownItem = _export_sfc(_sfc_main81, [["render", _sfc_render15], ["__file", "dropdown-item.vue"]]);
+var DropdownItem = _export_sfc(_sfc_main83, [["render", _sfc_render15], ["__file", "dropdown-item.vue"]]);
 
 // node_modules/element-plus/es/components/dropdown/src/dropdown-menu.mjs
-var _sfc_main82 = defineComponent({
+var _sfc_main84 = defineComponent({
   name: "ElDropdownMenu",
   props: dropdownMenuProps,
   setup(props) {
@@ -32977,7 +33771,7 @@ var _sfc_main82 = defineComponent({
       onMousedown
     } = inject(ROVING_FOCUS_GROUP_INJECTION_KEY, void 0);
     const { collectionRef: rovingFocusGroupCollectionRef } = inject(COLLECTION_INJECTION_KEY, void 0);
-    const dropdownKls = computed2(() => {
+    const dropdownKls = computed(() => {
       return [ns.b("menu"), ns.bm("menu", size3 == null ? void 0 : size3.value)];
     });
     const dropdownListWrapperRef = composeRefs(contentRef, dropdownCollectionRef, focusTrapRef, rovingFocusGroupRef, rovingFocusGroupCollectionRef);
@@ -32993,9 +33787,7 @@ var _sfc_main82 = defineComponent({
         e.stopImmediatePropagation();
       }
       e.preventDefault();
-      if (target2 !== unref(contentRef))
-        return;
-      if (!FIRST_LAST_KEYS.includes(code))
+      if (target2 !== unref(contentRef) || !FIRST_LAST_KEYS.includes(code))
         return;
       const items = getItems().filter((item) => !item.disabled);
       const targets = items.map((item) => item.ref);
@@ -33023,7 +33815,6 @@ var _sfc_main82 = defineComponent({
     };
   }
 });
-var _hoisted_135 = ["role", "aria-labelledby"];
 function _sfc_render16(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("ul", {
     ref: _ctx.dropdownListWrapperRef,
@@ -33032,15 +33823,15 @@ function _sfc_render16(_ctx, _cache, $props, $setup, $data, $options) {
     tabindex: -1,
     role: _ctx.role,
     "aria-labelledby": _ctx.triggerId,
-    onBlur: _cache[0] || (_cache[0] = (...args) => _ctx.onBlur && _ctx.onBlur(...args)),
-    onFocus: _cache[1] || (_cache[1] = (...args) => _ctx.onFocus && _ctx.onFocus(...args)),
-    onKeydown: _cache[2] || (_cache[2] = withModifiers((...args) => _ctx.handleKeydown && _ctx.handleKeydown(...args), ["self"])),
-    onMousedown: _cache[3] || (_cache[3] = withModifiers((...args) => _ctx.onMousedown && _ctx.onMousedown(...args), ["self"]))
+    onBlur: _ctx.onBlur,
+    onFocus: _ctx.onFocus,
+    onKeydown: withModifiers(_ctx.handleKeydown, ["self"]),
+    onMousedown: withModifiers(_ctx.onMousedown, ["self"])
   }, [
     renderSlot(_ctx.$slots, "default")
-  ], 46, _hoisted_135);
+  ], 46, ["role", "aria-labelledby", "onBlur", "onFocus", "onKeydown", "onMousedown"]);
 }
-var DropdownMenu = _export_sfc(_sfc_main82, [["render", _sfc_render16], ["__file", "dropdown-menu.vue"]]);
+var DropdownMenu = _export_sfc(_sfc_main84, [["render", _sfc_render16], ["__file", "dropdown-menu.vue"]]);
 
 // node_modules/element-plus/es/components/dropdown/index.mjs
 var ElDropdown = withInstall(Dropdown, {
@@ -33051,62 +33842,21 @@ var ElDropdownItem = withNoopInstall(DropdownItem);
 var ElDropdownMenu = withNoopInstall(DropdownMenu);
 
 // node_modules/element-plus/es/components/empty/src/img-empty.mjs
-var _hoisted_136 = {
-  viewBox: "0 0 79 86",
-  version: "1.1",
-  xmlns: "http://www.w3.org/2000/svg",
-  "xmlns:xlink": "http://www.w3.org/1999/xlink"
-};
-var _hoisted_223 = ["id"];
-var _hoisted_313 = ["stop-color"];
-var _hoisted_47 = ["stop-color"];
-var _hoisted_54 = ["id"];
-var _hoisted_63 = ["stop-color"];
-var _hoisted_73 = ["stop-color"];
-var _hoisted_83 = ["id"];
-var _hoisted_92 = {
-  id: "Illustrations",
-  stroke: "none",
-  "stroke-width": "1",
-  fill: "none",
-  "fill-rule": "evenodd"
-};
-var _hoisted_10 = {
-  id: "B-type",
-  transform: "translate(-1268.000000, -535.000000)"
-};
-var _hoisted_11 = {
-  id: "Group-2",
-  transform: "translate(1268.000000, 535.000000)"
-};
-var _hoisted_1210 = ["fill"];
-var _hoisted_137 = ["fill"];
-var _hoisted_142 = {
-  id: "Group-Copy",
-  transform: "translate(34.500000, 31.500000) scale(-1, 1) rotate(-25.000000) translate(-34.500000, -31.500000) translate(7.000000, 10.000000)"
-};
-var _hoisted_152 = ["fill"];
-var _hoisted_162 = ["fill"];
-var _hoisted_172 = ["fill"];
-var _hoisted_182 = ["fill"];
-var _hoisted_192 = ["fill"];
-var _hoisted_20 = {
-  id: "Rectangle-Copy-17",
-  transform: "translate(53.000000, 45.000000)"
-};
-var _hoisted_21 = ["fill", "xlink:href"];
-var _hoisted_224 = ["fill", "mask"];
-var _hoisted_232 = ["fill"];
-var __default__57 = defineComponent({
+var __default__58 = defineComponent({
   name: "ImgEmpty"
 });
-var _sfc_main83 = defineComponent({
-  ...__default__57,
+var _sfc_main85 = defineComponent({
+  ...__default__58,
   setup(__props) {
     const ns = useNamespace("empty");
     const id = useId();
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("svg", _hoisted_136, [
+      return openBlock(), createElementBlock("svg", {
+        viewBox: "0 0 79 86",
+        version: "1.1",
+        xmlns: "http://www.w3.org/2000/svg",
+        "xmlns:xlink": "http://www.w3.org/1999/xlink"
+      }, [
         createBaseVNode("defs", null, [
           createBaseVNode("linearGradient", {
             id: `linearGradient-1-${unref(id)}`,
@@ -33118,12 +33868,12 @@ var _sfc_main83 = defineComponent({
             createBaseVNode("stop", {
               "stop-color": `var(${unref(ns).cssVarBlockName("fill-color-1")})`,
               offset: "0%"
-            }, null, 8, _hoisted_313),
+            }, null, 8, ["stop-color"]),
             createBaseVNode("stop", {
               "stop-color": `var(${unref(ns).cssVarBlockName("fill-color-4")})`,
               offset: "100%"
-            }, null, 8, _hoisted_47)
-          ], 8, _hoisted_223),
+            }, null, 8, ["stop-color"])
+          ], 8, ["id"]),
           createBaseVNode("linearGradient", {
             id: `linearGradient-2-${unref(id)}`,
             x1: "0%",
@@ -33134,46 +33884,61 @@ var _sfc_main83 = defineComponent({
             createBaseVNode("stop", {
               "stop-color": `var(${unref(ns).cssVarBlockName("fill-color-1")})`,
               offset: "0%"
-            }, null, 8, _hoisted_63),
+            }, null, 8, ["stop-color"]),
             createBaseVNode("stop", {
               "stop-color": `var(${unref(ns).cssVarBlockName("fill-color-6")})`,
               offset: "100%"
-            }, null, 8, _hoisted_73)
-          ], 8, _hoisted_54),
+            }, null, 8, ["stop-color"])
+          ], 8, ["id"]),
           createBaseVNode("rect", {
             id: `path-3-${unref(id)}`,
             x: "0",
             y: "0",
             width: "17",
             height: "36"
-          }, null, 8, _hoisted_83)
+          }, null, 8, ["id"])
         ]),
-        createBaseVNode("g", _hoisted_92, [
-          createBaseVNode("g", _hoisted_10, [
-            createBaseVNode("g", _hoisted_11, [
+        createBaseVNode("g", {
+          id: "Illustrations",
+          stroke: "none",
+          "stroke-width": "1",
+          fill: "none",
+          "fill-rule": "evenodd"
+        }, [
+          createBaseVNode("g", {
+            id: "B-type",
+            transform: "translate(-1268.000000, -535.000000)"
+          }, [
+            createBaseVNode("g", {
+              id: "Group-2",
+              transform: "translate(1268.000000, 535.000000)"
+            }, [
               createBaseVNode("path", {
                 id: "Oval-Copy-2",
                 d: "M39.5,86 C61.3152476,86 79,83.9106622 79,81.3333333 C79,78.7560045 57.3152476,78 35.5,78 C13.6847524,78 0,78.7560045 0,81.3333333 C0,83.9106622 17.6847524,86 39.5,86 Z",
                 fill: `var(${unref(ns).cssVarBlockName("fill-color-3")})`
-              }, null, 8, _hoisted_1210),
+              }, null, 8, ["fill"]),
               createBaseVNode("polygon", {
                 id: "Rectangle-Copy-14",
                 fill: `var(${unref(ns).cssVarBlockName("fill-color-7")})`,
                 transform: "translate(27.500000, 51.500000) scale(1, -1) translate(-27.500000, -51.500000) ",
                 points: "13 58 53 58 42 45 2 45"
-              }, null, 8, _hoisted_137),
-              createBaseVNode("g", _hoisted_142, [
+              }, null, 8, ["fill"]),
+              createBaseVNode("g", {
+                id: "Group-Copy",
+                transform: "translate(34.500000, 31.500000) scale(-1, 1) rotate(-25.000000) translate(-34.500000, -31.500000) translate(7.000000, 10.000000)"
+              }, [
                 createBaseVNode("polygon", {
                   id: "Rectangle-Copy-10",
                   fill: `var(${unref(ns).cssVarBlockName("fill-color-7")})`,
                   transform: "translate(11.500000, 5.000000) scale(1, -1) translate(-11.500000, -5.000000) ",
                   points: "2.84078316e-14 3 18 3 23 7 5 7"
-                }, null, 8, _hoisted_152),
+                }, null, 8, ["fill"]),
                 createBaseVNode("polygon", {
                   id: "Rectangle-Copy-11",
                   fill: `var(${unref(ns).cssVarBlockName("fill-color-5")})`,
                   points: "-3.69149156e-15 7 38 7 38 43 -3.69149156e-15 43"
-                }, null, 8, _hoisted_162),
+                }, null, 8, ["fill"]),
                 createBaseVNode("rect", {
                   id: "Rectangle-Copy-12",
                   fill: `url(#linearGradient-1-${unref(id)})`,
@@ -33182,13 +33947,13 @@ var _sfc_main83 = defineComponent({
                   y: "7",
                   width: "17",
                   height: "36"
-                }, null, 8, _hoisted_172),
+                }, null, 8, ["fill"]),
                 createBaseVNode("polygon", {
                   id: "Rectangle-Copy-13",
                   fill: `var(${unref(ns).cssVarBlockName("fill-color-2")})`,
                   transform: "translate(39.500000, 3.500000) scale(-1, 1) translate(-39.500000, -3.500000) ",
                   points: "24 7 41 7 55 -3.63806207e-12 38 -3.63806207e-12"
-                }, null, 8, _hoisted_182)
+                }, null, 8, ["fill"])
               ]),
               createBaseVNode("rect", {
                 id: "Rectangle-Copy-15",
@@ -33197,28 +33962,31 @@ var _sfc_main83 = defineComponent({
                 y: "45",
                 width: "40",
                 height: "36"
-              }, null, 8, _hoisted_192),
-              createBaseVNode("g", _hoisted_20, [
+              }, null, 8, ["fill"]),
+              createBaseVNode("g", {
+                id: "Rectangle-Copy-17",
+                transform: "translate(53.000000, 45.000000)"
+              }, [
                 createBaseVNode("use", {
                   id: "Mask",
                   fill: `var(${unref(ns).cssVarBlockName("fill-color-8")})`,
                   transform: "translate(8.500000, 18.000000) scale(-1, 1) translate(-8.500000, -18.000000) ",
                   "xlink:href": `#path-3-${unref(id)}`
-                }, null, 8, _hoisted_21),
+                }, null, 8, ["fill", "xlink:href"]),
                 createBaseVNode("polygon", {
                   id: "Rectangle-Copy",
                   fill: `var(${unref(ns).cssVarBlockName("fill-color-9")})`,
                   mask: `url(#mask-4-${unref(id)})`,
                   transform: "translate(12.000000, 9.000000) scale(-1, 1) translate(-12.000000, -9.000000) ",
                   points: "7 0 24 0 20 18 7 16.5"
-                }, null, 8, _hoisted_224)
+                }, null, 8, ["fill", "mask"])
               ]),
               createBaseVNode("polygon", {
                 id: "Rectangle-Copy-18",
                 fill: `var(${unref(ns).cssVarBlockName("fill-color-2")})`,
                 transform: "translate(66.000000, 51.500000) scale(-1, 1) translate(-66.000000, -51.500000) ",
                 points: "62 45 79 45 70 58 53 58"
-              }, null, 8, _hoisted_232)
+              }, null, 8, ["fill"])
             ])
           ])
         ])
@@ -33226,7 +33994,7 @@ var _sfc_main83 = defineComponent({
     };
   }
 });
-var ImgEmpty = _export_sfc(_sfc_main83, [["__file", "img-empty.vue"]]);
+var ImgEmpty = _export_sfc(_sfc_main85, [["__file", "img-empty.vue"]]);
 
 // node_modules/element-plus/es/components/empty/src/empty.mjs
 var emptyProps = buildProps({
@@ -33242,20 +34010,18 @@ var emptyProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/empty/src/empty2.mjs
-var _hoisted_138 = ["src"];
-var _hoisted_225 = { key: 1 };
-var __default__58 = defineComponent({
+var __default__59 = defineComponent({
   name: "ElEmpty"
 });
-var _sfc_main84 = defineComponent({
-  ...__default__58,
+var _sfc_main86 = defineComponent({
+  ...__default__59,
   props: emptyProps,
   setup(__props) {
     const props = __props;
     const { t } = useLocale();
     const ns = useNamespace("empty");
-    const emptyDescription = computed2(() => props.description || t("el.table.emptyText"));
-    const imageStyle = computed2(() => ({
+    const emptyDescription = computed(() => props.description || t("el.table.emptyText"));
+    const imageStyle = computed(() => ({
       width: addUnit(props.imageSize)
     }));
     return (_ctx, _cache) => {
@@ -33270,14 +34036,14 @@ var _sfc_main84 = defineComponent({
             key: 0,
             src: _ctx.image,
             ondragstart: "return false"
-          }, null, 8, _hoisted_138)) : renderSlot(_ctx.$slots, "image", { key: 1 }, () => [
+          }, null, 8, ["src"])) : renderSlot(_ctx.$slots, "image", { key: 1 }, () => [
             createVNode(ImgEmpty)
           ])
         ], 6),
         createBaseVNode("div", {
           class: normalizeClass(unref(ns).e("description"))
         }, [
-          _ctx.$slots.description ? renderSlot(_ctx.$slots, "description", { key: 0 }) : (openBlock(), createElementBlock("p", _hoisted_225, toDisplayString(unref(emptyDescription)), 1))
+          _ctx.$slots.description ? renderSlot(_ctx.$slots, "description", { key: 0 }) : (openBlock(), createElementBlock("p", { key: 1 }, toDisplayString(unref(emptyDescription)), 1))
         ], 2),
         _ctx.$slots.default ? (openBlock(), createElementBlock("div", {
           key: 0,
@@ -33289,7 +34055,7 @@ var _sfc_main84 = defineComponent({
     };
   }
 });
-var Empty = _export_sfc(_sfc_main84, [["__file", "empty.vue"]]);
+var Empty = _export_sfc(_sfc_main86, [["__file", "empty.vue"]]);
 
 // node_modules/element-plus/es/components/empty/index.mjs
 var ElEmpty = withInstall(Empty);
@@ -33340,12 +34106,11 @@ var imageViewerEmits = {
 };
 
 // node_modules/element-plus/es/components/image-viewer/src/image-viewer2.mjs
-var _hoisted_139 = ["src", "crossorigin"];
-var __default__59 = defineComponent({
+var __default__60 = defineComponent({
   name: "ElImageViewer"
 });
-var _sfc_main85 = defineComponent({
-  ...__default__59,
+var _sfc_main87 = defineComponent({
+  ...__default__60,
   props: imageViewerProps,
   emits: imageViewerEmits,
   setup(__props, { expose, emit }) {
@@ -33378,50 +34143,38 @@ var _sfc_main85 = defineComponent({
       enableTransition: false
     });
     const zIndex2 = ref((_a2 = props.zIndex) != null ? _a2 : nextZIndex());
-    const isSingle = computed2(() => {
+    const isSingle = computed(() => {
       const { urlList } = props;
       return urlList.length <= 1;
     });
-    const isFirst = computed2(() => {
+    const isFirst = computed(() => {
       return activeIndex.value === 0;
     });
-    const isLast = computed2(() => {
+    const isLast = computed(() => {
       return activeIndex.value === props.urlList.length - 1;
     });
-    const currentImg = computed2(() => {
+    const currentImg = computed(() => {
       return props.urlList[activeIndex.value];
     });
-    const arrowPrevKls = computed2(() => [
+    const arrowPrevKls = computed(() => [
       ns.e("btn"),
       ns.e("prev"),
       ns.is("disabled", !props.infinite && isFirst.value)
     ]);
-    const arrowNextKls = computed2(() => [
+    const arrowNextKls = computed(() => [
       ns.e("btn"),
       ns.e("next"),
       ns.is("disabled", !props.infinite && isLast.value)
     ]);
-    const imgStyle = computed2(() => {
+    const imgStyle = computed(() => {
       const { scale, deg, offsetX, offsetY, enableTransition } = transform2.value;
       let translateX = offsetX / scale;
       let translateY = offsetY / scale;
-      switch (deg % 360) {
-        case 90:
-        case -270:
-          ;
-          [translateX, translateY] = [translateY, -translateX];
-          break;
-        case 180:
-        case -180:
-          ;
-          [translateX, translateY] = [-translateX, -translateY];
-          break;
-        case 270:
-        case -90:
-          ;
-          [translateX, translateY] = [-translateY, translateX];
-          break;
-      }
+      const radian = deg * Math.PI / 180;
+      const cosRadian = Math.cos(radian);
+      const sinRadian = Math.sin(radian);
+      translateX = translateX * cosRadian + translateY * sinRadian;
+      translateY = translateY * cosRadian - offsetX / scale * sinRadian;
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg) translate(${translateX}px, ${translateY}px)`,
         transition: enableTransition ? "transform .3s" : ""
@@ -33587,147 +34340,150 @@ var _sfc_main85 = defineComponent({
       setActiveItem
     });
     return (_ctx, _cache) => {
-      return openBlock(), createBlock(Teleport, {
+      return openBlock(), createBlock(unref(ElTeleport), {
         to: "body",
         disabled: !_ctx.teleported
-      }, [
-        createVNode(Transition, {
-          name: "viewer-fade",
-          appear: ""
-        }, {
-          default: withCtx(() => [
-            createBaseVNode("div", {
-              ref_key: "wrapper",
-              ref: wrapper,
-              tabindex: -1,
-              class: normalizeClass(unref(ns).e("wrapper")),
-              style: normalizeStyle({ zIndex: zIndex2.value })
-            }, [
+      }, {
+        default: withCtx(() => [
+          createVNode(Transition, {
+            name: "viewer-fade",
+            appear: ""
+          }, {
+            default: withCtx(() => [
               createBaseVNode("div", {
-                class: normalizeClass(unref(ns).e("mask")),
-                onClick: _cache[0] || (_cache[0] = withModifiers(($event) => _ctx.hideOnClickModal && hide2(), ["self"]))
-              }, null, 2),
-              createCommentVNode(" CLOSE "),
-              createBaseVNode("span", {
-                class: normalizeClass([unref(ns).e("btn"), unref(ns).e("close")]),
-                onClick: hide2
+                ref_key: "wrapper",
+                ref: wrapper,
+                tabindex: -1,
+                class: normalizeClass(unref(ns).e("wrapper")),
+                style: normalizeStyle({ zIndex: zIndex2.value })
               }, [
-                createVNode(unref(ElIcon), null, {
-                  default: withCtx(() => [
-                    createVNode(unref(close_default))
-                  ]),
-                  _: 1
-                })
-              ], 2),
-              createCommentVNode(" ARROW "),
-              !unref(isSingle) ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                createBaseVNode("div", {
+                  class: normalizeClass(unref(ns).e("mask")),
+                  onClick: withModifiers(($event) => _ctx.hideOnClickModal && hide2(), ["self"])
+                }, null, 10, ["onClick"]),
+                createCommentVNode(" CLOSE "),
                 createBaseVNode("span", {
-                  class: normalizeClass(unref(arrowPrevKls)),
-                  onClick: prev
+                  class: normalizeClass([unref(ns).e("btn"), unref(ns).e("close")]),
+                  onClick: hide2
                 }, [
                   createVNode(unref(ElIcon), null, {
                     default: withCtx(() => [
-                      createVNode(unref(arrow_left_default))
+                      createVNode(unref(close_default))
                     ]),
                     _: 1
                   })
                 ], 2),
-                createBaseVNode("span", {
-                  class: normalizeClass(unref(arrowNextKls)),
-                  onClick: next
-                }, [
-                  createVNode(unref(ElIcon), null, {
-                    default: withCtx(() => [
-                      createVNode(unref(arrow_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2)
-              ], 64)) : createCommentVNode("v-if", true),
-              createCommentVNode(" ACTIONS "),
-              createBaseVNode("div", {
-                class: normalizeClass([unref(ns).e("btn"), unref(ns).e("actions")])
-              }, [
+                createCommentVNode(" ARROW "),
+                !unref(isSingle) ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                  createBaseVNode("span", {
+                    class: normalizeClass(unref(arrowPrevKls)),
+                    onClick: prev
+                  }, [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_left_default))
+                      ]),
+                      _: 1
+                    })
+                  ], 2),
+                  createBaseVNode("span", {
+                    class: normalizeClass(unref(arrowNextKls)),
+                    onClick: next
+                  }, [
+                    createVNode(unref(ElIcon), null, {
+                      default: withCtx(() => [
+                        createVNode(unref(arrow_right_default))
+                      ]),
+                      _: 1
+                    })
+                  ], 2)
+                ], 64)) : createCommentVNode("v-if", true),
+                createCommentVNode(" ACTIONS "),
                 createBaseVNode("div", {
-                  class: normalizeClass(unref(ns).e("actions__inner"))
+                  class: normalizeClass([unref(ns).e("btn"), unref(ns).e("actions")])
                 }, [
-                  createVNode(unref(ElIcon), {
-                    onClick: _cache[1] || (_cache[1] = ($event) => handleActions("zoomOut"))
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(unref(zoom_out_default))
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(unref(ElIcon), {
-                    onClick: _cache[2] || (_cache[2] = ($event) => handleActions("zoomIn"))
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(unref(zoom_in_default))
-                    ]),
-                    _: 1
-                  }),
-                  createBaseVNode("i", {
-                    class: normalizeClass(unref(ns).e("actions__divider"))
-                  }, null, 2),
-                  createVNode(unref(ElIcon), { onClick: toggleMode }, {
-                    default: withCtx(() => [
-                      (openBlock(), createBlock(resolveDynamicComponent(unref(mode).icon)))
-                    ]),
-                    _: 1
-                  }),
-                  createBaseVNode("i", {
-                    class: normalizeClass(unref(ns).e("actions__divider"))
-                  }, null, 2),
-                  createVNode(unref(ElIcon), {
-                    onClick: _cache[3] || (_cache[3] = ($event) => handleActions("anticlockwise"))
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(unref(refresh_left_default))
-                    ]),
-                    _: 1
-                  }),
-                  createVNode(unref(ElIcon), {
-                    onClick: _cache[4] || (_cache[4] = ($event) => handleActions("clockwise"))
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(unref(refresh_right_default))
-                    ]),
-                    _: 1
-                  })
-                ], 2)
-              ], 2),
-              createCommentVNode(" CANVAS "),
-              createBaseVNode("div", {
-                class: normalizeClass(unref(ns).e("canvas"))
-              }, [
-                (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.urlList, (url2, i) => {
-                  return withDirectives((openBlock(), createElementBlock("img", {
-                    ref_for: true,
-                    ref: (el) => imgRefs.value[i] = el,
-                    key: url2,
-                    src: url2,
-                    style: normalizeStyle(unref(imgStyle)),
-                    class: normalizeClass(unref(ns).e("img")),
-                    crossorigin: _ctx.crossorigin,
-                    onLoad: handleImgLoad,
-                    onError: handleImgError,
-                    onMousedown: handleMouseDown
-                  }, null, 46, _hoisted_139)), [
-                    [vShow, i === activeIndex.value]
-                  ]);
-                }), 128))
-              ], 2),
-              renderSlot(_ctx.$slots, "default")
-            ], 6)
-          ]),
-          _: 3
-        })
-      ], 8, ["disabled"]);
+                  createBaseVNode("div", {
+                    class: normalizeClass(unref(ns).e("actions__inner"))
+                  }, [
+                    createVNode(unref(ElIcon), {
+                      onClick: ($event) => handleActions("zoomOut")
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(zoom_out_default))
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"]),
+                    createVNode(unref(ElIcon), {
+                      onClick: ($event) => handleActions("zoomIn")
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(zoom_in_default))
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"]),
+                    createBaseVNode("i", {
+                      class: normalizeClass(unref(ns).e("actions__divider"))
+                    }, null, 2),
+                    createVNode(unref(ElIcon), { onClick: toggleMode }, {
+                      default: withCtx(() => [
+                        (openBlock(), createBlock(resolveDynamicComponent(unref(mode).icon)))
+                      ]),
+                      _: 1
+                    }),
+                    createBaseVNode("i", {
+                      class: normalizeClass(unref(ns).e("actions__divider"))
+                    }, null, 2),
+                    createVNode(unref(ElIcon), {
+                      onClick: ($event) => handleActions("anticlockwise")
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(refresh_left_default))
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"]),
+                    createVNode(unref(ElIcon), {
+                      onClick: ($event) => handleActions("clockwise")
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(unref(refresh_right_default))
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"])
+                  ], 2)
+                ], 2),
+                createCommentVNode(" CANVAS "),
+                createBaseVNode("div", {
+                  class: normalizeClass(unref(ns).e("canvas"))
+                }, [
+                  (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.urlList, (url2, i) => {
+                    return withDirectives((openBlock(), createElementBlock("img", {
+                      ref_for: true,
+                      ref: (el) => imgRefs.value[i] = el,
+                      key: url2,
+                      src: url2,
+                      style: normalizeStyle(unref(imgStyle)),
+                      class: normalizeClass(unref(ns).e("img")),
+                      crossorigin: _ctx.crossorigin,
+                      onLoad: handleImgLoad,
+                      onError: handleImgError,
+                      onMousedown: handleMouseDown
+                    }, null, 46, ["src", "crossorigin"])), [
+                      [vShow, i === activeIndex.value]
+                    ]);
+                  }), 128))
+                ], 2),
+                renderSlot(_ctx.$slots, "default")
+              ], 6)
+            ]),
+            _: 3
+          })
+        ]),
+        _: 3
+      }, 8, ["disabled"]);
     };
   }
 });
-var ImageViewer = _export_sfc(_sfc_main85, [["__file", "image-viewer.vue"]]);
+var ImageViewer = _export_sfc(_sfc_main87, [["__file", "image-viewer.vue"]]);
 
 // node_modules/element-plus/es/components/image-viewer/index.mjs
 var ElImageViewer = withInstall(ImageViewer);
@@ -33797,14 +34553,12 @@ var imageEmits = {
 };
 
 // node_modules/element-plus/es/components/image/src/image2.mjs
-var _hoisted_140 = ["src", "loading", "crossorigin"];
-var _hoisted_226 = { key: 0 };
-var __default__60 = defineComponent({
+var __default__61 = defineComponent({
   name: "ElImage",
   inheritAttrs: false
 });
-var _sfc_main86 = defineComponent({
-  ...__default__60,
+var _sfc_main88 = defineComponent({
+  ...__default__61,
   props: imageProps,
   emits: imageEmits,
   setup(__props, { emit }) {
@@ -33813,7 +34567,15 @@ var _sfc_main86 = defineComponent({
     const { t } = useLocale();
     const ns = useNamespace("image");
     const rawAttrs = useAttrs();
-    const attrs = useAttrs2();
+    const containerAttrs = computed(() => {
+      return fromPairs_default(Object.entries(rawAttrs).filter(([key]) => /^(data-|on[A-Z])/i.test(key) || ["id", "style"].includes(key)));
+    });
+    const imgAttrs = useAttrs2({
+      excludeListeners: true,
+      excludeKeys: computed(() => {
+        return Object.keys(containerAttrs.value);
+      })
+    });
     const imageSrc = ref();
     const hasLoadError = ref(false);
     const isLoading = ref(true);
@@ -33823,24 +34585,23 @@ var _sfc_main86 = defineComponent({
     const supportLoading = isClient && "loading" in HTMLImageElement.prototype;
     let stopScrollListener;
     let stopWheelListener;
-    const imageKls = computed2(() => [
+    const imageKls = computed(() => [
       ns.e("inner"),
       preview.value && ns.e("preview"),
       isLoading.value && ns.is("loading")
     ]);
-    const containerStyle = computed2(() => rawAttrs.style);
-    const imageStyle = computed2(() => {
+    const imageStyle = computed(() => {
       const { fit } = props;
       if (isClient && fit) {
         return { objectFit: fit };
       }
       return {};
     });
-    const preview = computed2(() => {
+    const preview = computed(() => {
       const { previewSrcList } = props;
       return Array.isArray(previewSrcList) && previewSrcList.length > 0;
     });
-    const imageIndex = computed2(() => {
+    const imageIndex = computed(() => {
       const { previewSrcList, initialIndex } = props;
       let previewIndex = initialIndex;
       if (initialIndex > previewSrcList.length - 1) {
@@ -33848,7 +34609,7 @@ var _sfc_main86 = defineComponent({
       }
       return previewIndex;
     });
-    const isManual = computed2(() => {
+    const isManual = computed(() => {
       if (props.loading === "eager")
         return false;
       return !supportLoading && props.loading === "lazy" || props.lazy;
@@ -33950,18 +34711,18 @@ var _sfc_main86 = defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
+      return openBlock(), createElementBlock("div", mergeProps({
         ref_key: "container",
-        ref: container,
-        class: normalizeClass([unref(ns).b(), _ctx.$attrs.class]),
-        style: normalizeStyle(unref(containerStyle))
-      }, [
+        ref: container
+      }, unref(containerAttrs), {
+        class: [unref(ns).b(), _ctx.$attrs.class]
+      }), [
         hasLoadError.value ? renderSlot(_ctx.$slots, "error", { key: 0 }, () => [
           createBaseVNode("div", {
             class: normalizeClass(unref(ns).e("error"))
           }, toDisplayString(unref(t)("el.image.error")), 3)
         ]) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-          imageSrc.value !== void 0 ? (openBlock(), createElementBlock("img", mergeProps({ key: 0 }, unref(attrs), {
+          imageSrc.value !== void 0 ? (openBlock(), createElementBlock("img", mergeProps({ key: 0 }, unref(imgAttrs), {
             src: imageSrc.value,
             loading: _ctx.loading,
             style: unref(imageStyle),
@@ -33970,7 +34731,7 @@ var _sfc_main86 = defineComponent({
             onClick: clickHandler,
             onLoad: handleLoad,
             onError: handleError
-          }), null, 16, _hoisted_140)) : createCommentVNode("v-if", true),
+          }), null, 16, ["src", "loading", "crossorigin"])) : createCommentVNode("v-if", true),
           isLoading.value ? (openBlock(), createElementBlock("div", {
             key: 1,
             class: normalizeClass(unref(ns).e("wrapper"))
@@ -33992,6 +34753,7 @@ var _sfc_main86 = defineComponent({
             "min-scale": _ctx.minScale,
             "max-scale": _ctx.maxScale,
             "url-list": _ctx.previewSrcList,
+            crossorigin: _ctx.crossorigin,
             "hide-on-click-modal": _ctx.hideOnClickModal,
             teleported: _ctx.previewTeleported,
             "close-on-press-escape": _ctx.closeOnPressEscape,
@@ -33999,18 +34761,18 @@ var _sfc_main86 = defineComponent({
             onSwitch: switchViewer
           }, {
             default: withCtx(() => [
-              _ctx.$slots.viewer ? (openBlock(), createElementBlock("div", _hoisted_226, [
+              _ctx.$slots.viewer ? (openBlock(), createElementBlock("div", { key: 0 }, [
                 renderSlot(_ctx.$slots, "viewer")
               ])) : createCommentVNode("v-if", true)
             ]),
             _: 3
-          }, 8, ["z-index", "initial-index", "infinite", "zoom-rate", "min-scale", "max-scale", "url-list", "hide-on-click-modal", "teleported", "close-on-press-escape"])) : createCommentVNode("v-if", true)
+          }, 8, ["z-index", "initial-index", "infinite", "zoom-rate", "min-scale", "max-scale", "url-list", "crossorigin", "hide-on-click-modal", "teleported", "close-on-press-escape"])) : createCommentVNode("v-if", true)
         ], 64)) : createCommentVNode("v-if", true)
-      ], 6);
+      ], 16);
     };
   }
 });
-var Image2 = _export_sfc(_sfc_main86, [["__file", "image.vue"]]);
+var Image2 = _export_sfc(_sfc_main88, [["__file", "image.vue"]]);
 
 // node_modules/element-plus/es/components/image/index.mjs
 var ElImage = withInstall(Image2);
@@ -34053,7 +34815,6 @@ var inputNumberProps = buildProps({
     default: null
   },
   name: String,
-  label: String,
   placeholder: String,
   precision: {
     type: Number,
@@ -34062,7 +34823,8 @@ var inputNumberProps = buildProps({
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var inputNumberEmits = {
   [CHANGE_EVENT]: (cur, prev) => prev !== cur,
@@ -34073,13 +34835,11 @@ var inputNumberEmits = {
 };
 
 // node_modules/element-plus/es/components/input-number/src/input-number2.mjs
-var _hoisted_141 = ["aria-label", "onKeydown"];
-var _hoisted_227 = ["aria-label", "onKeydown"];
-var __default__61 = defineComponent({
+var __default__62 = defineComponent({
   name: "ElInputNumber"
 });
-var _sfc_main87 = defineComponent({
-  ...__default__61,
+var _sfc_main89 = defineComponent({
+  ...__default__62,
   props: inputNumberProps,
   emits: inputNumberEmits,
   setup(__props, { expose, emit }) {
@@ -34092,9 +34852,9 @@ var _sfc_main87 = defineComponent({
       userInput: null
     });
     const { formItem } = useFormItem();
-    const minDisabled = computed2(() => isNumber3(props.modelValue) && props.modelValue <= props.min);
-    const maxDisabled = computed2(() => isNumber3(props.modelValue) && props.modelValue >= props.max);
-    const numPrecision = computed2(() => {
+    const minDisabled = computed(() => isNumber3(props.modelValue) && props.modelValue <= props.min);
+    const maxDisabled = computed(() => isNumber3(props.modelValue) && props.modelValue >= props.max);
+    const numPrecision = computed(() => {
       const stepPrecision = getPrecision(props.step);
       if (!isUndefined2(props.precision)) {
         if (stepPrecision > props.precision) {
@@ -34105,12 +34865,12 @@ var _sfc_main87 = defineComponent({
         return Math.max(getPrecision(props.modelValue), stepPrecision);
       }
     });
-    const controlsAtRight = computed2(() => {
+    const controlsAtRight = computed(() => {
       return props.controls && props.controlsPosition === "right";
     });
     const inputNumberSize = useFormSize();
     const inputNumberDisabled = useFormDisabled();
-    const displayValue = computed2(() => {
+    const displayValue = computed(() => {
       if (data.userInput !== null) {
         return data.userInput;
       }
@@ -34298,6 +35058,7 @@ var _sfc_main87 = defineComponent({
         }
         emit(UPDATE_MODEL_EVENT, val);
       }
+      innerInput.addEventListener("wheel", handleWheel, { passive: false });
     });
     onUpdated(() => {
       var _a2, _b;
@@ -34317,8 +35078,8 @@ var _sfc_main87 = defineComponent({
           unref(ns).is("without-controls", !_ctx.controls),
           unref(ns).is("controls-right", unref(controlsAtRight))
         ]),
-        onDragstart: _cache[0] || (_cache[0] = withModifiers(() => {
-        }, ["prevent"]))
+        onDragstart: withModifiers(() => {
+        }, ["prevent"])
       }, [
         _ctx.controls ? withDirectives((openBlock(), createElementBlock("span", {
           key: 0,
@@ -34327,13 +35088,15 @@ var _sfc_main87 = defineComponent({
           class: normalizeClass([unref(ns).e("decrease"), unref(ns).is("disabled", unref(minDisabled))]),
           onKeydown: withKeys(decrease, ["enter"])
         }, [
-          createVNode(unref(ElIcon), null, {
-            default: withCtx(() => [
-              unref(controlsAtRight) ? (openBlock(), createBlock(unref(arrow_down_default), { key: 0 })) : (openBlock(), createBlock(unref(minus_default), { key: 1 }))
-            ]),
-            _: 1
-          })
-        ], 42, _hoisted_141)), [
+          renderSlot(_ctx.$slots, "decrease-icon", {}, () => [
+            createVNode(unref(ElIcon), null, {
+              default: withCtx(() => [
+                unref(controlsAtRight) ? (openBlock(), createBlock(unref(arrow_down_default), { key: 0 })) : (openBlock(), createBlock(unref(minus_default), { key: 1 }))
+              ]),
+              _: 1
+            })
+          ])
+        ], 42, ["aria-label", "onKeydown"])), [
           [unref(vRepeatClick), decrease]
         ]) : createCommentVNode("v-if", true),
         _ctx.controls ? withDirectives((openBlock(), createElementBlock("span", {
@@ -34343,13 +35106,15 @@ var _sfc_main87 = defineComponent({
           class: normalizeClass([unref(ns).e("increase"), unref(ns).is("disabled", unref(maxDisabled))]),
           onKeydown: withKeys(increase, ["enter"])
         }, [
-          createVNode(unref(ElIcon), null, {
-            default: withCtx(() => [
-              unref(controlsAtRight) ? (openBlock(), createBlock(unref(arrow_up_default), { key: 0 })) : (openBlock(), createBlock(unref(plus_default), { key: 1 }))
-            ]),
-            _: 1
-          })
-        ], 42, _hoisted_227)), [
+          renderSlot(_ctx.$slots, "increase-icon", {}, () => [
+            createVNode(unref(ElIcon), null, {
+              default: withCtx(() => [
+                unref(controlsAtRight) ? (openBlock(), createBlock(unref(arrow_up_default), { key: 0 })) : (openBlock(), createBlock(unref(plus_default), { key: 1 }))
+              ]),
+              _: 1
+            })
+          ])
+        ], 42, ["aria-label", "onKeydown"])), [
           [unref(vRepeatClick), increase]
         ]) : createCommentVNode("v-if", true),
         createVNode(unref(ElInput), {
@@ -34366,9 +35131,8 @@ var _sfc_main87 = defineComponent({
           max: _ctx.max,
           min: _ctx.min,
           name: _ctx.name,
-          label: _ctx.label,
+          "aria-label": _ctx.ariaLabel,
           "validate-event": false,
-          onWheel: handleWheel,
           onKeydown: [
             withKeys(withModifiers(increase, ["prevent"]), ["up"]),
             withKeys(withModifiers(decrease, ["prevent"]), ["down"])
@@ -34377,12 +35141,12 @@ var _sfc_main87 = defineComponent({
           onFocus: handleFocus,
           onInput: handleInput,
           onChange: handleInputChange
-        }, null, 8, ["id", "step", "model-value", "placeholder", "readonly", "disabled", "size", "max", "min", "name", "label", "onKeydown"])
-      ], 34);
+        }, null, 8, ["id", "step", "model-value", "placeholder", "readonly", "disabled", "size", "max", "min", "name", "aria-label", "onKeydown"])
+      ], 42, ["onDragstart"]);
     };
   }
 });
-var InputNumber = _export_sfc(_sfc_main87, [["__file", "input-number.vue"]]);
+var InputNumber = _export_sfc(_sfc_main89, [["__file", "input-number.vue"]]);
 
 // node_modules/element-plus/es/components/input-number/index.mjs
 var ElInputNumber = withInstall(InputNumber);
@@ -34398,7 +35162,7 @@ var linkProps = buildProps({
     type: Boolean,
     default: true
   },
-  disabled: { type: Boolean, default: false },
+  disabled: Boolean,
   href: { type: String, default: "" },
   target: {
     type: String,
@@ -34413,18 +35177,17 @@ var linkEmits = {
 };
 
 // node_modules/element-plus/es/components/link/src/link2.mjs
-var _hoisted_143 = ["href", "target"];
-var __default__62 = defineComponent({
+var __default__63 = defineComponent({
   name: "ElLink"
 });
-var _sfc_main88 = defineComponent({
-  ...__default__62,
+var _sfc_main90 = defineComponent({
+  ...__default__63,
   props: linkProps,
   emits: linkEmits,
   setup(__props, { emit }) {
     const props = __props;
     const ns = useNamespace("link");
-    const linkKls = computed2(() => [
+    const linkKls = computed(() => [
       ns.b(),
       ns.m(props.type),
       ns.is("disabled", props.disabled),
@@ -34454,11 +35217,11 @@ var _sfc_main88 = defineComponent({
           renderSlot(_ctx.$slots, "default")
         ], 2)) : createCommentVNode("v-if", true),
         _ctx.$slots.icon ? renderSlot(_ctx.$slots, "icon", { key: 2 }) : createCommentVNode("v-if", true)
-      ], 10, _hoisted_143);
+      ], 10, ["href", "target"]);
     };
   }
 });
-var Link = _export_sfc(_sfc_main88, [["__file", "link.vue"]]);
+var Link = _export_sfc(_sfc_main90, [["__file", "link.vue"]]);
 
 // node_modules/element-plus/es/components/link/index.mjs
 var ElLink = withInstall(Link);
@@ -34590,7 +35353,7 @@ var Menu = class {
 };
 
 // node_modules/element-plus/es/components/menu/src/menu-collapse-transition.mjs
-var _sfc_main89 = defineComponent({
+var _sfc_main91 = defineComponent({
   name: "ElMenuCollapseTransition",
   setup() {
     const ns = useNamespace("menu");
@@ -34642,11 +35405,11 @@ function _sfc_render17(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 16);
 }
-var ElMenuCollapseTransition = _export_sfc(_sfc_main89, [["render", _sfc_render17], ["__file", "menu-collapse-transition.vue"]]);
+var ElMenuCollapseTransition = _export_sfc(_sfc_main91, [["render", _sfc_render17], ["__file", "menu-collapse-transition.vue"]]);
 
 // node_modules/element-plus/es/components/menu/src/use-menu.mjs
 function useMenu(instance, currentIndex) {
-  const indexPath = computed2(() => {
+  const indexPath = computed(() => {
     let parent2 = instance.parent;
     const path = [currentIndex.value];
     while (parent2.type.name !== "ElMenu") {
@@ -34657,7 +35420,7 @@ function useMenu(instance, currentIndex) {
     }
     return path;
   });
-  const parentMenu = computed2(() => {
+  const parentMenu = computed(() => {
     let parent2 = instance.parent;
     while (parent2 && !["ElMenu", "ElSubMenu"].includes(parent2.type.name)) {
       parent2 = parent2.parent;
@@ -34672,7 +35435,7 @@ function useMenu(instance, currentIndex) {
 
 // node_modules/element-plus/es/components/menu/src/use-menu-color.mjs
 function useMenuColor(props) {
-  const menuBarColor = computed2(() => {
+  const menuBarColor = computed(() => {
     const color = props.backgroundColor;
     if (!color) {
       return "";
@@ -34686,7 +35449,7 @@ function useMenuColor(props) {
 // node_modules/element-plus/es/components/menu/src/use-menu-css-var.mjs
 var useMenuCssVar = (props, level) => {
   const ns = useNamespace("menu");
-  return computed2(() => {
+  return computed(() => {
     return ns.cssVarBlock({
       "text-color": props.textColor || "",
       "hover-text-color": props.textColor || "",
@@ -34726,40 +35489,40 @@ var subMenuProps = buildProps({
     type: iconPropType
   }
 });
-var COMPONENT_NAME13 = "ElSubMenu";
+var COMPONENT_NAME12 = "ElSubMenu";
 var SubMenu2 = defineComponent({
-  name: COMPONENT_NAME13,
+  name: COMPONENT_NAME12,
   props: subMenuProps,
   setup(props, { slots, expose }) {
     const instance = getCurrentInstance();
-    const { indexPath, parentMenu } = useMenu(instance, computed2(() => props.index));
+    const { indexPath, parentMenu } = useMenu(instance, computed(() => props.index));
     const nsMenu = useNamespace("menu");
     const nsSubMenu = useNamespace("sub-menu");
     const rootMenu = inject("rootMenu");
     if (!rootMenu)
-      throwError(COMPONENT_NAME13, "can not inject root menu");
+      throwError(COMPONENT_NAME12, "can not inject root menu");
     const subMenu = inject(`subMenu:${parentMenu.value.uid}`);
     if (!subMenu)
-      throwError(COMPONENT_NAME13, "can not inject sub menu");
+      throwError(COMPONENT_NAME12, "can not inject sub menu");
     const items = ref({});
     const subMenus = ref({});
     let timeout;
     const mouseInChild = ref(false);
     const verticalTitleRef = ref();
     const vPopper = ref(null);
-    const currentPlacement = computed2(() => mode.value === "horizontal" && isFirstLevel.value ? "bottom-start" : "right-start");
-    const subMenuTitleIcon = computed2(() => {
+    const currentPlacement = computed(() => mode.value === "horizontal" && isFirstLevel.value ? "bottom-start" : "right-start");
+    const subMenuTitleIcon = computed(() => {
       return mode.value === "horizontal" && isFirstLevel.value || mode.value === "vertical" && !rootMenu.props.collapse ? props.expandCloseIcon && props.expandOpenIcon ? opened.value ? props.expandOpenIcon : props.expandCloseIcon : arrow_down_default : props.collapseCloseIcon && props.collapseOpenIcon ? opened.value ? props.collapseOpenIcon : props.collapseCloseIcon : arrow_right_default;
     });
-    const isFirstLevel = computed2(() => {
+    const isFirstLevel = computed(() => {
       return subMenu.level === 0;
     });
-    const appendToBody = computed2(() => {
+    const appendToBody = computed(() => {
       const value = props.teleported;
       return value === void 0 ? isFirstLevel.value : value;
     });
-    const menuTransitionName = computed2(() => rootMenu.props.collapse ? `${nsMenu.namespace.value}-zoom-in-left` : `${nsMenu.namespace.value}-zoom-in-top`);
-    const fallbackPlacements = computed2(() => mode.value === "horizontal" && isFirstLevel.value ? [
+    const menuTransitionName = computed(() => rootMenu.props.collapse ? `${nsMenu.namespace.value}-zoom-in-left` : `${nsMenu.namespace.value}-zoom-in-top`);
+    const fallbackPlacements = computed(() => mode.value === "horizontal" && isFirstLevel.value ? [
       "bottom-start",
       "bottom-end",
       "top-start",
@@ -34776,8 +35539,8 @@ var SubMenu2 = defineComponent({
       "top-start",
       "top-end"
     ]);
-    const opened = computed2(() => rootMenu.openedMenus.includes(props.index));
-    const active = computed2(() => {
+    const opened = computed(() => rootMenu.openedMenus.includes(props.index));
+    const active = computed(() => {
       let isActive = false;
       Object.values(items.value).forEach((item2) => {
         if (item2.active) {
@@ -34791,26 +35554,26 @@ var SubMenu2 = defineComponent({
       });
       return isActive;
     });
-    const mode = computed2(() => rootMenu.props.mode);
+    const mode = computed(() => rootMenu.props.mode);
     const item = reactive({
       index: props.index,
       indexPath,
       active
     });
     const ulStyle = useMenuCssVar(rootMenu.props, subMenu.level + 1);
-    const subMenuPopperOffset = computed2(() => {
+    const subMenuPopperOffset = computed(() => {
       var _a2;
       return (_a2 = props.popperOffset) != null ? _a2 : rootMenu.props.popperOffset;
     });
-    const subMenuPopperClass = computed2(() => {
+    const subMenuPopperClass = computed(() => {
       var _a2;
       return (_a2 = props.popperClass) != null ? _a2 : rootMenu.props.popperClass;
     });
-    const subMenuShowTimeout = computed2(() => {
+    const subMenuShowTimeout = computed(() => {
       var _a2;
       return (_a2 = props.showTimeout) != null ? _a2 : rootMenu.props.showTimeout;
     });
-    const subMenuHideTimeout = computed2(() => {
+    const subMenuHideTimeout = computed(() => {
       var _a2;
       return (_a2 = props.hideTimeout) != null ? _a2 : rootMenu.props.hideTimeout;
     });
@@ -34950,7 +35713,7 @@ var SubMenu2 = defineComponent({
           ref: verticalTitleRef,
           onClick: handleClick
         }, titleTag),
-        h(_CollapseTransition, {}, {
+        h(ElCollapseTransition, {}, {
           default: () => {
             var _a22;
             return withDirectives(h("ul", {
@@ -35023,8 +35786,7 @@ var menuProps = buildProps({
     default: () => more_default
   },
   popperEffect: {
-    type: String,
-    values: ["dark", "light"],
+    type: definePropType(String),
     default: "dark"
   },
   popperClass: String,
@@ -35058,7 +35820,7 @@ var Menu2 = defineComponent({
     const activeIndex = ref(props.defaultActive);
     const items = ref({});
     const subMenus = ref({});
-    const isMenuPopup = computed2(() => {
+    const isMenuPopup = computed(() => {
       return props.mode === "horizontal" || props.mode === "vertical" && props.collapse;
     });
     const initMenu = () => {
@@ -35250,6 +36012,7 @@ var Menu2 = defineComponent({
         handleResize
       });
     }
+    const ulStyle = useMenuCssVar(props, 0);
     return () => {
       var _a2, _b;
       let slot = (_b = (_a2 = slots.default) == null ? void 0 : _a2.call(slots)) != null ? _b : [];
@@ -35274,7 +36037,6 @@ var Menu2 = defineComponent({
           }));
         }
       }
-      const ulStyle = useMenuCssVar(props, 0);
       const directives = props.closeOnClickOutside ? [
         [
           ClickOutside,
@@ -35323,9 +36085,9 @@ var menuItemEmits = {
 };
 
 // node_modules/element-plus/es/components/menu/src/menu-item2.mjs
-var COMPONENT_NAME14 = "ElMenuItem";
-var _sfc_main90 = defineComponent({
-  name: COMPONENT_NAME14,
+var COMPONENT_NAME13 = "ElMenuItem";
+var _sfc_main92 = defineComponent({
+  name: COMPONENT_NAME13,
   components: {
     ElTooltip
   },
@@ -35337,12 +36099,12 @@ var _sfc_main90 = defineComponent({
     const nsMenu = useNamespace("menu");
     const nsMenuItem = useNamespace("menu-item");
     if (!rootMenu)
-      throwError(COMPONENT_NAME14, "can not inject root menu");
+      throwError(COMPONENT_NAME13, "can not inject root menu");
     const { parentMenu, indexPath } = useMenu(instance, toRef(props, "index"));
     const subMenu = inject(`subMenu:${parentMenu.value.uid}`);
     if (!subMenu)
-      throwError(COMPONENT_NAME14, "can not inject sub menu");
-    const active = computed2(() => props.index === rootMenu.activeIndex);
+      throwError(COMPONENT_NAME13, "can not inject sub menu");
+    const active = computed(() => props.index === rootMenu.activeIndex);
     const item = reactive({
       index: props.index,
       indexPath,
@@ -35386,7 +36148,7 @@ function _sfc_render18(_ctx, _cache, $props, $setup, $data, $options) {
     ]),
     role: "menuitem",
     tabindex: "-1",
-    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+    onClick: _ctx.handleClick
   }, [
     _ctx.parentMenu.type.name === "ElMenu" && _ctx.rootMenu.props.collapse && _ctx.$slots.title ? (openBlock(), createBlock(_component_el_tooltip, {
       key: 0,
@@ -35410,9 +36172,9 @@ function _sfc_render18(_ctx, _cache, $props, $setup, $data, $options) {
       renderSlot(_ctx.$slots, "default"),
       renderSlot(_ctx.$slots, "title")
     ], 64))
-  ], 2);
+  ], 10, ["onClick"]);
 }
-var MenuItem2 = _export_sfc(_sfc_main90, [["render", _sfc_render18], ["__file", "menu-item.vue"]]);
+var MenuItem2 = _export_sfc(_sfc_main92, [["render", _sfc_render18], ["__file", "menu-item.vue"]]);
 
 // node_modules/element-plus/es/components/menu/src/menu-item-group.mjs
 var menuItemGroupProps = {
@@ -35420,9 +36182,9 @@ var menuItemGroupProps = {
 };
 
 // node_modules/element-plus/es/components/menu/src/menu-item-group2.mjs
-var COMPONENT_NAME15 = "ElMenuItemGroup";
-var _sfc_main91 = defineComponent({
-  name: COMPONENT_NAME15,
+var COMPONENT_NAME14 = "ElMenuItemGroup";
+var _sfc_main93 = defineComponent({
+  name: COMPONENT_NAME14,
   props: menuItemGroupProps,
   setup() {
     const ns = useNamespace("menu-item-group");
@@ -35447,7 +36209,7 @@ function _sfc_render19(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 2);
 }
-var MenuItemGroup = _export_sfc(_sfc_main91, [["render", _sfc_render19], ["__file", "menu-item-group.vue"]]);
+var MenuItemGroup = _export_sfc(_sfc_main93, [["render", _sfc_render19], ["__file", "menu-item-group.vue"]]);
 
 // node_modules/element-plus/es/components/menu/index.mjs
 var ElMenu = withInstall(Menu2, {
@@ -35476,19 +36238,18 @@ var pageHeaderEmits = {
 };
 
 // node_modules/element-plus/es/components/page-header/src/page-header2.mjs
-var _hoisted_144 = ["aria-label"];
-var __default__63 = defineComponent({
+var __default__64 = defineComponent({
   name: "ElPageHeader"
 });
-var _sfc_main92 = defineComponent({
-  ...__default__63,
+var _sfc_main94 = defineComponent({
+  ...__default__64,
   props: pageHeaderProps,
   emits: pageHeaderEmits,
   setup(__props, { emit }) {
     const slots = useSlots();
     const { t } = useLocale();
     const ns = useNamespace("page-header");
-    const kls = computed2(() => {
+    const kls = computed(() => {
       return [
         ns.b(),
         {
@@ -35536,7 +36297,7 @@ var _sfc_main92 = defineComponent({
                     _: 1
                   })) : createCommentVNode("v-if", true)
                 ])
-              ], 10, _hoisted_144)) : createCommentVNode("v-if", true),
+              ], 10, ["aria-label"])) : createCommentVNode("v-if", true),
               createBaseVNode("div", {
                 class: normalizeClass(unref(ns).e("title"))
               }, [
@@ -35571,7 +36332,7 @@ var _sfc_main92 = defineComponent({
     };
   }
 });
-var PageHeader = _export_sfc(_sfc_main92, [["__file", "page-header.vue"]]);
+var PageHeader = _export_sfc(_sfc_main94, [["__file", "page-header.vue"]]);
 
 // node_modules/element-plus/es/components/page-header/index.mjs
 var ElPageHeader = withInstall(PageHeader);
@@ -35598,19 +36359,17 @@ var paginationPrevEmits = {
 };
 
 // node_modules/element-plus/es/components/pagination/src/components/prev2.mjs
-var _hoisted_145 = ["disabled", "aria-label", "aria-disabled"];
-var _hoisted_228 = { key: 0 };
-var __default__64 = defineComponent({
+var __default__65 = defineComponent({
   name: "ElPaginationPrev"
 });
-var _sfc_main93 = defineComponent({
-  ...__default__64,
+var _sfc_main95 = defineComponent({
+  ...__default__65,
   props: paginationPrevProps,
   emits: paginationPrevEmits,
   setup(__props) {
     const props = __props;
     const { t } = useLocale();
-    const internalDisabled = computed2(() => props.disabled || props.currentPage <= 1);
+    const internalDisabled = computed(() => props.disabled || props.currentPage <= 1);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("button", {
         type: "button",
@@ -35618,19 +36377,19 @@ var _sfc_main93 = defineComponent({
         disabled: unref(internalDisabled),
         "aria-label": _ctx.prevText || unref(t)("el.pagination.prev"),
         "aria-disabled": unref(internalDisabled),
-        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("click", $event))
+        onClick: ($event) => _ctx.$emit("click", $event)
       }, [
-        _ctx.prevText ? (openBlock(), createElementBlock("span", _hoisted_228, toDisplayString(_ctx.prevText), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
+        _ctx.prevText ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(_ctx.prevText), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
           default: withCtx(() => [
             (openBlock(), createBlock(resolveDynamicComponent(_ctx.prevIcon)))
           ]),
           _: 1
         }))
-      ], 8, _hoisted_145);
+      ], 8, ["disabled", "aria-label", "aria-disabled", "onClick"]);
     };
   }
 });
-var Prev = _export_sfc(_sfc_main93, [["__file", "prev.vue"]]);
+var Prev = _export_sfc(_sfc_main95, [["__file", "prev.vue"]]);
 
 // node_modules/element-plus/es/components/pagination/src/components/next.mjs
 var paginationNextProps = buildProps({
@@ -35652,19 +36411,17 @@ var paginationNextProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/pagination/src/components/next2.mjs
-var _hoisted_146 = ["disabled", "aria-label", "aria-disabled"];
-var _hoisted_229 = { key: 0 };
-var __default__65 = defineComponent({
+var __default__66 = defineComponent({
   name: "ElPaginationNext"
 });
-var _sfc_main94 = defineComponent({
-  ...__default__65,
+var _sfc_main96 = defineComponent({
+  ...__default__66,
   props: paginationNextProps,
   emits: ["click"],
   setup(__props) {
     const props = __props;
     const { t } = useLocale();
-    const internalDisabled = computed2(() => props.disabled || props.currentPage === props.pageCount || props.pageCount === 0);
+    const internalDisabled = computed(() => props.disabled || props.currentPage === props.pageCount || props.pageCount === 0);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("button", {
         type: "button",
@@ -35672,19 +36429,19 @@ var _sfc_main94 = defineComponent({
         disabled: unref(internalDisabled),
         "aria-label": _ctx.nextText || unref(t)("el.pagination.next"),
         "aria-disabled": unref(internalDisabled),
-        onClick: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("click", $event))
+        onClick: ($event) => _ctx.$emit("click", $event)
       }, [
-        _ctx.nextText ? (openBlock(), createElementBlock("span", _hoisted_229, toDisplayString(_ctx.nextText), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
+        _ctx.nextText ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(_ctx.nextText), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
           default: withCtx(() => [
             (openBlock(), createBlock(resolveDynamicComponent(_ctx.nextIcon)))
           ]),
           _: 1
         }))
-      ], 8, _hoisted_146);
+      ], 8, ["disabled", "aria-label", "aria-disabled", "onClick"]);
     };
   }
 });
-var Next = _export_sfc(_sfc_main94, [["__file", "next.vue"]]);
+var Next = _export_sfc(_sfc_main96, [["__file", "next.vue"]]);
 
 // node_modules/element-plus/es/components/select/src/token.mjs
 var selectGroupKey = Symbol("ElSelectGroup");
@@ -35694,28 +36451,25 @@ var selectKey = Symbol("ElSelect");
 function useOption(props, states) {
   const select = inject(selectKey);
   const selectGroup = inject(selectGroupKey, { disabled: false });
-  const itemSelected = computed2(() => {
-    if (select.props.multiple) {
-      return contains(select.props.modelValue, props.value);
-    } else {
-      return contains([select.props.modelValue], props.value);
-    }
+  const itemSelected = computed(() => {
+    return contains(castArray_default(select.props.modelValue), props.value);
   });
-  const limitReached = computed2(() => {
+  const limitReached = computed(() => {
+    var _a2;
     if (select.props.multiple) {
-      const modelValue = select.props.modelValue || [];
+      const modelValue = castArray_default((_a2 = select.props.modelValue) != null ? _a2 : []);
       return !itemSelected.value && modelValue.length >= select.props.multipleLimit && select.props.multipleLimit > 0;
     } else {
       return false;
     }
   });
-  const currentLabel = computed2(() => {
+  const currentLabel = computed(() => {
     return props.label || (isObject(props.value) ? "" : props.value);
   });
-  const currentValue = computed2(() => {
+  const currentValue = computed(() => {
     return props.value || props.label || "";
   });
-  const isDisabled = computed2(() => {
+  const isDisabled = computed(() => {
     return props.disabled || states.groupDisabled || limitReached.value;
   });
   const instance = getCurrentInstance();
@@ -35744,7 +36498,7 @@ function useOption(props, states) {
   });
   watch(() => props.value, (val, oldVal) => {
     const { remote, valueKey } = select.props;
-    if (!isEqual_default(val, oldVal)) {
+    if (val !== oldVal) {
       select.onOptionDestroy(oldVal, instance.proxy);
       select.onOptionCreate(instance.proxy);
     }
@@ -35770,7 +36524,7 @@ function useOption(props, states) {
 }
 
 // node_modules/element-plus/es/components/select/src/option.mjs
-var _sfc_main95 = defineComponent({
+var _sfc_main97 = defineComponent({
   name: "ElOption",
   componentName: "ElOption",
   props: {
@@ -35785,7 +36539,7 @@ var _sfc_main95 = defineComponent({
   setup(props) {
     const ns = useNamespace("select");
     const id = useId();
-    const containerKls = computed2(() => [
+    const containerKls = computed(() => [
       ns.be("dropdown", "item"),
       ns.is("disabled", unref(isDisabled)),
       ns.is("selected", unref(itemSelected)),
@@ -35823,7 +36577,7 @@ var _sfc_main95 = defineComponent({
       select.onOptionDestroy(key, vm);
     });
     function selectOptionClick() {
-      if (props.disabled !== true && states.groupDisabled !== true) {
+      if (!isDisabled.value) {
         select.handleOptionSelect(vm);
       }
     }
@@ -35844,7 +36598,6 @@ var _sfc_main95 = defineComponent({
     };
   }
 });
-var _hoisted_147 = ["id", "aria-disabled", "aria-selected"];
 function _sfc_render20(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("li", {
     id: _ctx.id,
@@ -35852,28 +36605,28 @@ function _sfc_render20(_ctx, _cache, $props, $setup, $data, $options) {
     role: "option",
     "aria-disabled": _ctx.isDisabled || void 0,
     "aria-selected": _ctx.itemSelected,
-    onMouseenter: _cache[0] || (_cache[0] = (...args) => _ctx.hoverItem && _ctx.hoverItem(...args)),
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.selectOptionClick && _ctx.selectOptionClick(...args), ["stop"]))
+    onMouseenter: _ctx.hoverItem,
+    onClick: withModifiers(_ctx.selectOptionClick, ["stop"])
   }, [
     renderSlot(_ctx.$slots, "default", {}, () => [
       createBaseVNode("span", null, toDisplayString(_ctx.currentLabel), 1)
     ])
-  ], 42, _hoisted_147)), [
+  ], 42, ["id", "aria-disabled", "aria-selected", "onMouseenter", "onClick"])), [
     [vShow, _ctx.visible]
   ]);
 }
-var Option = _export_sfc(_sfc_main95, [["render", _sfc_render20], ["__file", "option.vue"]]);
+var Option = _export_sfc(_sfc_main97, [["render", _sfc_render20], ["__file", "option.vue"]]);
 
 // node_modules/element-plus/es/components/select/src/select-dropdown.mjs
-var _sfc_main96 = defineComponent({
+var _sfc_main98 = defineComponent({
   name: "ElSelectDropdown",
   componentName: "ElSelectDropdown",
   setup() {
     const select = inject(selectKey);
     const ns = useNamespace("select");
-    const popperClass = computed2(() => select.props.popperClass);
-    const isMultiple = computed2(() => select.props.multiple);
-    const isFitInputWidth = computed2(() => select.props.fitInputWidth);
+    const popperClass = computed(() => select.props.popperClass);
+    const isMultiple = computed(() => select.props.multiple);
+    const isFitInputWidth = computed(() => select.props.fitInputWidth);
     const minWidth = ref("");
     function updateMinWidth() {
       var _a2;
@@ -35912,33 +36665,7 @@ function _sfc_render21(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)) : createCommentVNode("v-if", true)
   ], 6);
 }
-var ElSelectMenu = _export_sfc(_sfc_main96, [["render", _sfc_render21], ["__file", "select-dropdown.vue"]]);
-
-// node_modules/element-plus/es/components/select-v2/src/useInput.mjs
-function useInput(handleInput) {
-  const isComposing = ref(false);
-  const handleCompositionStart = () => {
-    isComposing.value = true;
-  };
-  const handleCompositionUpdate = (event) => {
-    const text = event.target.value;
-    const lastCharacter = text[text.length - 1] || "";
-    isComposing.value = !isKorean(lastCharacter);
-  };
-  const handleCompositionEnd = (event) => {
-    if (isComposing.value) {
-      isComposing.value = false;
-      if (isFunction(handleInput)) {
-        handleInput(event);
-      }
-    }
-  };
-  return {
-    handleCompositionStart,
-    handleCompositionUpdate,
-    handleCompositionEnd
-  };
-}
+var ElSelectMenu = _export_sfc(_sfc_main98, [["render", _sfc_render21], ["__file", "select-dropdown.vue"]]);
 
 // node_modules/element-plus/es/components/select/src/useSelect.mjs
 var MINIMUM_INPUT_WIDTH = 11;
@@ -35953,7 +36680,7 @@ var useSelect = (props, emit) => {
     cachedOptions: /* @__PURE__ */ new Map(),
     disabledOptions: /* @__PURE__ */ new Map(),
     optionValues: [],
-    selected: props.multiple ? [] : {},
+    selected: [],
     selectionWidth: 0,
     calculatorWidth: 0,
     collapseItemWidth: 0,
@@ -35976,7 +36703,18 @@ var useSelect = (props, emit) => {
   const tagMenuRef = ref(null);
   const collapseItemRef = ref(null);
   const scrollbarRef = ref(null);
-  const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
+  const {
+    isComposing,
+    handleCompositionStart,
+    handleCompositionUpdate,
+    handleCompositionEnd
+  } = useComposition({
+    afterComposition: (e) => onInput(e)
+  });
+  const { wrapperRef, isFocused } = useFocusController(inputRef, {
+    beforeFocus() {
+      return selectDisabled.value;
+    },
     afterFocus() {
       if (props.automaticDropdown && !expanded.value) {
         expanded.value = true;
@@ -35998,21 +36736,20 @@ var useSelect = (props, emit) => {
   const { inputId } = useFormItemInputId(props, {
     formItemContext: formItem
   });
-  const selectDisabled = computed2(() => props.disabled || (form == null ? void 0 : form.disabled));
-  const hasEmptyStringOption = computed2(() => optionsArray.value.some((option) => option.value === ""));
-  const hasModelValue = computed2(() => {
-    return props.multiple ? isArray(props.modelValue) && props.modelValue.length > 0 : !isNil_default(props.modelValue) && (props.modelValue !== "" || hasEmptyStringOption.value);
+  const { valueOnClear, isEmptyValue: isEmptyValue2 } = useEmptyValues(props);
+  const selectDisabled = computed(() => props.disabled || (form == null ? void 0 : form.disabled));
+  const hasModelValue = computed(() => {
+    return isArray(props.modelValue) ? props.modelValue.length > 0 : !isEmptyValue2(props.modelValue);
   });
-  const showClose = computed2(() => {
-    const criteria = props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
-    return criteria;
+  const showClose = computed(() => {
+    return props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
   });
-  const iconComponent = computed2(() => props.remote && props.filterable && !props.remoteShowSuffix ? "" : props.suffixIcon);
-  const iconReverse = computed2(() => nsSelect.is("reverse", iconComponent.value && expanded.value));
-  const validateState = computed2(() => (formItem == null ? void 0 : formItem.validateState) || "");
-  const validateIcon = computed2(() => ValidateComponentsMap[validateState.value]);
-  const debounce$1 = computed2(() => props.remote ? 300 : 0);
-  const emptyText = computed2(() => {
+  const iconComponent = computed(() => props.remote && props.filterable && !props.remoteShowSuffix ? "" : props.suffixIcon);
+  const iconReverse = computed(() => nsSelect.is("reverse", iconComponent.value && expanded.value));
+  const validateState = computed(() => (formItem == null ? void 0 : formItem.validateState) || "");
+  const validateIcon = computed(() => ValidateComponentsMap[validateState.value]);
+  const debounce$1 = computed(() => props.remote ? 300 : 0);
+  const emptyText = computed(() => {
     if (props.loading) {
       return props.loadingText || t("el.select.loading");
     } else {
@@ -36027,8 +36764,8 @@ var useSelect = (props, emit) => {
     }
     return null;
   });
-  const filteredOptionsCount = computed2(() => optionsArray.value.filter((option) => option.visible).length);
-  const optionsArray = computed2(() => {
+  const filteredOptionsCount = computed(() => optionsArray.value.filter((option) => option.visible).length);
+  const optionsArray = computed(() => {
     const list = Array.from(states.options.values());
     const newList = [];
     states.optionValues.forEach((item) => {
@@ -36039,8 +36776,8 @@ var useSelect = (props, emit) => {
     });
     return newList.length >= list.length ? newList : list;
   });
-  const cachedOptionsArray = computed2(() => Array.from(states.cachedOptions.values()));
-  const showNewOption = computed2(() => {
+  const cachedOptionsArray = computed(() => Array.from(states.cachedOptions.values()));
+  const showNewOption = computed(() => {
     const hasExistingOption = optionsArray.value.filter((option) => {
       return !option.created;
     }).some((option) => {
@@ -36054,12 +36791,13 @@ var useSelect = (props, emit) => {
     if (props.filterable && props.remote && isFunction(props.remoteMethod))
       return;
     optionsArray.value.forEach((option) => {
-      option.updateOption(states.inputValue);
+      var _a2;
+      (_a2 = option.updateOption) == null ? void 0 : _a2.call(option, states.inputValue);
     });
   };
   const selectSize = useFormSize();
-  const collapseTagSize = computed2(() => ["small"].includes(selectSize.value) ? "small" : "default");
-  const dropdownMenuVisible = computed2({
+  const collapseTagSize = computed(() => ["small"].includes(selectSize.value) ? "small" : "default");
+  const dropdownMenuVisible = computed({
     get() {
       return expanded.value && emptyText.value !== false;
     },
@@ -36067,17 +36805,19 @@ var useSelect = (props, emit) => {
       expanded.value = val;
     }
   });
-  const shouldShowPlaceholder = computed2(() => {
-    if (isArray(props.modelValue)) {
-      return props.modelValue.length === 0 && !states.inputValue;
+  const shouldShowPlaceholder = computed(() => {
+    if (props.multiple && !isUndefined2(props.modelValue)) {
+      return castArray_default(props.modelValue).length === 0 && !states.inputValue;
     }
-    return props.filterable ? !states.inputValue : true;
+    const value = isArray(props.modelValue) ? props.modelValue[0] : props.modelValue;
+    return props.filterable || isUndefined2(value) ? !states.inputValue : true;
   });
-  const currentPlaceholder = computed2(() => {
+  const currentPlaceholder = computed(() => {
     var _a2;
     const _placeholder = (_a2 = props.placeholder) != null ? _a2 : t("el.select.placeholder");
     return props.multiple || !hasModelValue.value ? _placeholder : states.selectedLabel;
   });
+  const mouseEnterEventName = computed(() => isIOS ? null : "mouseenter");
   watch(() => props.modelValue, (val, oldVal) => {
     if (props.multiple) {
       if (props.filterable && !props.reserveKeyword) {
@@ -36133,7 +36873,7 @@ var useSelect = (props, emit) => {
     updateOptions2();
   });
   const handleQueryChange = (val) => {
-    if (states.previousQuery === val) {
+    if (states.previousQuery === val || isComposing.value) {
       return;
     }
     states.previousQuery = val;
@@ -36156,16 +36896,17 @@ var useSelect = (props, emit) => {
   };
   const setSelected = () => {
     if (!props.multiple) {
-      const option = getOption(props.modelValue);
+      const value = isArray(props.modelValue) ? props.modelValue[0] : props.modelValue;
+      const option = getOption(value);
       states.selectedLabel = option.currentLabel;
-      states.selected = option;
+      states.selected = [option];
       return;
     } else {
       states.selectedLabel = "";
     }
     const result2 = [];
-    if (isArray(props.modelValue)) {
-      props.modelValue.forEach((value) => {
+    if (!isUndefined2(props.modelValue)) {
+      castArray_default(props.modelValue).forEach((value) => {
         result2.push(getOption(value));
       });
     }
@@ -36183,7 +36924,9 @@ var useSelect = (props, emit) => {
         option = {
           value,
           currentLabel: cachedOption.currentLabel,
-          isDisabled: cachedOption.isDisabled
+          get isDisabled() {
+            return cachedOption.isDisabled;
+          }
         };
         break;
       }
@@ -36198,13 +36941,7 @@ var useSelect = (props, emit) => {
     return newOption;
   };
   const updateHoveringIndex = () => {
-    if (!props.multiple) {
-      states.hoveringIndex = optionsArray.value.findIndex((item) => {
-        return getValueKey(item) === getValueKey(states.selected);
-      });
-    } else {
-      states.hoveringIndex = optionsArray.value.findIndex((item) => states.selected.some((selected) => getValueKey(selected) === getValueKey(item)));
-    }
+    states.hoveringIndex = optionsArray.value.findIndex((item) => states.selected.some((selected) => getValueKey(selected) === getValueKey(item)));
   };
   const resetSelectionWidth = () => {
     states.selectionWidth = selectionRef.value.getBoundingClientRect().width;
@@ -36252,19 +36989,21 @@ var useSelect = (props, emit) => {
     if (e.code === EVENT_CODE.delete)
       return;
     if (e.target.value.length <= 0) {
-      const value = props.modelValue.slice();
+      const value = castArray_default(props.modelValue).slice();
       const lastNotDisabledIndex = getLastNotDisabledIndex(value);
       if (lastNotDisabledIndex < 0)
         return;
+      const removeTagValue = value[lastNotDisabledIndex];
       value.splice(lastNotDisabledIndex, 1);
       emit(UPDATE_MODEL_EVENT, value);
       emitChange(value);
+      emit("remove-tag", removeTagValue);
     }
   };
   const deleteTag = (event, tag) => {
     const index = states.selected.indexOf(tag);
     if (index > -1 && !selectDisabled.value) {
-      const value = props.modelValue.slice();
+      const value = castArray_default(props.modelValue).slice();
       value.splice(index, 1);
       emit(UPDATE_MODEL_EVENT, value);
       emitChange(value);
@@ -36275,7 +37014,7 @@ var useSelect = (props, emit) => {
   };
   const deleteSelected = (event) => {
     event.stopPropagation();
-    const value = props.multiple ? [] : void 0;
+    const value = props.multiple ? [] : valueOnClear.value;
     if (props.multiple) {
       for (const item of states.selected) {
         if (item.isDisabled)
@@ -36290,8 +37029,9 @@ var useSelect = (props, emit) => {
     focus();
   };
   const handleOptionSelect = (option) => {
+    var _a2;
     if (props.multiple) {
-      const value = (props.modelValue || []).slice();
+      const value = castArray_default((_a2 = props.modelValue) != null ? _a2 : []).slice();
       const optionIndex = getValueIndex(value, option.value);
       if (optionIndex > -1) {
         value.splice(optionIndex, 1);
@@ -36360,16 +37100,12 @@ var useSelect = (props, emit) => {
       states.options.delete(key);
     }
   };
-  const {
-    handleCompositionStart,
-    handleCompositionUpdate,
-    handleCompositionEnd
-  } = useInput((e) => onInput(e));
-  const popperRef = computed2(() => {
+  const popperRef = computed(() => {
     var _a2, _b;
     return (_b = (_a2 = tooltipRef.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
   });
   const handleMenuEnter = () => {
+    states.isBeforeHide = false;
     nextTick(() => scrollToOption(states.selected));
   };
   const focus = () => {
@@ -36377,17 +37113,15 @@ var useSelect = (props, emit) => {
     (_a2 = inputRef.value) == null ? void 0 : _a2.focus();
   };
   const blur = () => {
-    handleClickOutside();
+    var _a2;
+    (_a2 = inputRef.value) == null ? void 0 : _a2.blur();
   };
   const handleClearClick = (event) => {
     deleteSelected(event);
   };
-  const handleClickOutside = (event) => {
+  const handleClickOutside = () => {
     expanded.value = false;
-    if (isFocused.value) {
-      const _event2 = new FocusEvent("focus", event);
-      nextTick(() => handleBlur(_event2));
-    }
+    isFocused.value && blur();
   };
   const handleEsc = () => {
     if (states.inputValue.length > 0) {
@@ -36399,6 +37133,8 @@ var useSelect = (props, emit) => {
   const toggleMenu = () => {
     if (selectDisabled.value)
       return;
+    if (isIOS)
+      states.inputHovering = true;
     if (states.menuVisibleOnFocus) {
       states.menuVisibleOnFocus = false;
     } else {
@@ -36417,14 +37153,14 @@ var useSelect = (props, emit) => {
   const getValueKey = (item) => {
     return isObject(item.value) ? get_default(item.value, props.valueKey) : item.value;
   };
-  const optionsAllDisabled = computed2(() => optionsArray.value.filter((option) => option.visible).every((option) => option.disabled));
-  const showTagList = computed2(() => {
+  const optionsAllDisabled = computed(() => optionsArray.value.filter((option) => option.visible).every((option) => option.disabled));
+  const showTagList = computed(() => {
     if (!props.multiple) {
       return [];
     }
     return props.collapseTags ? states.selected.slice(0, props.maxCollapseTags) : states.selected;
   });
-  const collapseTagList = computed2(() => {
+  const collapseTagList = computed(() => {
     if (!props.multiple) {
       return [];
     }
@@ -36435,7 +37171,7 @@ var useSelect = (props, emit) => {
       expanded.value = true;
       return;
     }
-    if (states.options.size === 0 || filteredOptionsCount.value === 0)
+    if (states.options.size === 0 || states.filteredOptionsCount === 0 || isComposing.value)
       return;
     if (!optionsAllDisabled.value) {
       if (direction2 === "next") {
@@ -36462,23 +37198,17 @@ var useSelect = (props, emit) => {
     const style = window.getComputedStyle(selectionRef.value);
     return Number.parseFloat(style.gap || "6px");
   };
-  const tagStyle = computed2(() => {
+  const tagStyle = computed(() => {
     const gapWidth = getGapWidth();
     const maxWidth = collapseItemRef.value && props.maxCollapseTags === 1 ? states.selectionWidth - states.collapseItemWidth - gapWidth : states.selectionWidth;
     return { maxWidth: `${maxWidth}px` };
   });
-  const collapseTagStyle = computed2(() => {
+  const collapseTagStyle = computed(() => {
     return { maxWidth: `${states.selectionWidth}px` };
   });
-  const inputStyle = computed2(() => ({
+  const inputStyle = computed(() => ({
     width: `${Math.max(states.calculatorWidth, MINIMUM_INPUT_WIDTH)}px`
   }));
-  if (props.multiple && !isArray(props.modelValue)) {
-    emit(UPDATE_MODEL_EVENT, []);
-  }
-  if (!props.multiple && isArray(props.modelValue)) {
-    emit(UPDATE_MODEL_EVENT, "");
-  }
   useResizeObserver(selectionRef, resetSelectionWidth);
   useResizeObserver(calculatorRef, resetCalculatorWidth);
   useResizeObserver(menuRef, updateTooltip);
@@ -36513,6 +37243,7 @@ var useSelect = (props, emit) => {
     hasModelValue,
     shouldShowPlaceholder,
     currentPlaceholder,
+    mouseEnterEventName,
     showClose,
     iconComponent,
     iconReverse,
@@ -36530,10 +37261,8 @@ var useSelect = (props, emit) => {
     onOptionCreate,
     onOptionDestroy,
     handleMenuEnter,
-    handleFocus,
     focus,
     blur,
-    handleBlur,
     handleClearClick,
     handleClickOutside,
     handleEsc,
@@ -36678,6 +37407,7 @@ var SelectProps = buildProps({
     default: arrow_down_default
   },
   tagType: { ...tagProps.type, default: "info" },
+  tagEffect: { ...tagProps.effect, default: "light" },
   validateEvent: {
     type: Boolean,
     default: true
@@ -36692,19 +37422,16 @@ var SelectProps = buildProps({
     type: definePropType(Array),
     default: ["bottom-start", "top-start", "right", "left"]
   },
-  ariaLabel: {
-    type: String,
-    default: void 0
-  }
+  ...useEmptyValuesProps,
+  ...useAriaProps(["ariaLabel"])
 });
 
 // node_modules/element-plus/es/components/select/src/select2.mjs
-var COMPONENT_NAME16 = "ElSelect";
-var _sfc_main97 = defineComponent({
-  name: COMPONENT_NAME16,
-  componentName: COMPONENT_NAME16,
+var COMPONENT_NAME15 = "ElSelect";
+var _sfc_main99 = defineComponent({
+  name: COMPONENT_NAME15,
+  componentName: COMPONENT_NAME15,
   components: {
-    ElInput,
     ElSelectMenu,
     ElOption: Option,
     ElOptions,
@@ -36725,9 +37452,21 @@ var _sfc_main97 = defineComponent({
     "blur"
   ],
   setup(props, { emit }) {
-    const API = useSelect(props, emit);
+    const modelValue = computed(() => {
+      const { modelValue: rawModelValue, multiple } = props;
+      const fallback = multiple ? [] : void 0;
+      if (isArray(rawModelValue)) {
+        return multiple ? rawModelValue : fallback;
+      }
+      return multiple ? fallback : rawModelValue;
+    });
+    const _props = reactive({
+      ...toRefs(props),
+      modelValue
+    });
+    const API = useSelect(_props, emit);
     provide(selectKey, reactive({
-      props,
+      props: _props,
       states: API.states,
       optionsArray: API.optionsArray,
       handleOptionSelect: API.handleOptionSelect,
@@ -36737,12 +37476,11 @@ var _sfc_main97 = defineComponent({
       setSelected: API.setSelected
     }));
     return {
-      ...API
+      ...API,
+      modelValue
     };
   }
 });
-var _hoisted_148 = ["id", "disabled", "autocomplete", "readonly", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label"];
-var _hoisted_230 = ["textContent"];
 function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_tag = resolveComponent("el-tag");
   const _component_el_tooltip = resolveComponent("el-tooltip");
@@ -36755,9 +37493,8 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("div", {
     ref: "selectRef",
     class: normalizeClass([_ctx.nsSelect.b(), _ctx.nsSelect.m(_ctx.selectSize)]),
-    onMouseenter: _cache[16] || (_cache[16] = ($event) => _ctx.states.inputHovering = true),
-    onMouseleave: _cache[17] || (_cache[17] = ($event) => _ctx.states.inputHovering = false),
-    onClick: _cache[18] || (_cache[18] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["prevent", "stop"]))
+    [toHandlerKey(_ctx.mouseEnterEventName)]: ($event) => _ctx.states.inputHovering = true,
+    onMouseleave: ($event) => _ctx.states.inputHovering = false
   }, [
     createVNode(_component_el_tooltip, {
       ref: "tooltipRef",
@@ -36775,7 +37512,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
       "gpu-acceleration": false,
       persistent: _ctx.persistent,
       onBeforeShow: _ctx.handleMenuEnter,
-      onHide: _cache[15] || (_cache[15] = ($event) => _ctx.states.isBeforeHide = false)
+      onHide: ($event) => _ctx.states.isBeforeHide = false
     }, {
       default: withCtx(() => {
         var _a2;
@@ -36788,7 +37525,8 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
               _ctx.nsSelect.is("hovering", _ctx.states.inputHovering),
               _ctx.nsSelect.is("filterable", _ctx.filterable),
               _ctx.nsSelect.is("disabled", _ctx.selectDisabled)
-            ])
+            ]),
+            onClick: withModifiers(_ctx.toggleMenu, ["prevent"])
           }, [
             _ctx.$slots.prefix ? (openBlock(), createElementBlock("div", {
               key: 0,
@@ -36814,6 +37552,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                       closable: !_ctx.selectDisabled && !item.isDisabled,
                       size: _ctx.collapseTagSize,
                       type: _ctx.tagType,
+                      effect: _ctx.tagEffect,
                       "disable-transitions": "",
                       style: normalizeStyle(_ctx.tagStyle),
                       onClose: ($event) => _ctx.deleteTag($event, item)
@@ -36821,10 +37560,17 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                       default: withCtx(() => [
                         createBaseVNode("span", {
                           class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                        }, toDisplayString(item.currentLabel), 3)
+                        }, [
+                          renderSlot(_ctx.$slots, "label", {
+                            label: item.currentLabel,
+                            value: item.value
+                          }, () => [
+                            createTextVNode(toDisplayString(item.currentLabel), 1)
+                          ])
+                        ], 2)
                       ]),
                       _: 2
-                    }, 1032, ["closable", "size", "type", "style", "onClose"])
+                    }, 1032, ["closable", "size", "type", "effect", "style", "onClose"])
                   ], 2);
                 }), 128)),
                 _ctx.collapseTags && _ctx.states.selected.length > _ctx.maxCollapseTags ? (openBlock(), createBlock(_component_el_tooltip, {
@@ -36845,6 +37591,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                         closable: false,
                         size: _ctx.collapseTagSize,
                         type: _ctx.tagType,
+                        effect: _ctx.tagEffect,
                         "disable-transitions": "",
                         style: normalizeStyle(_ctx.collapseTagStyle)
                       }, {
@@ -36854,7 +37601,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                           }, " + " + toDisplayString(_ctx.states.selected.length - _ctx.maxCollapseTags), 3)
                         ]),
                         _: 1
-                      }, 8, ["size", "type", "style"])
+                      }, 8, ["size", "type", "effect", "style"])
                     ], 2)
                   ]),
                   content: withCtx(() => [
@@ -36872,21 +37619,29 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                             closable: !_ctx.selectDisabled && !item.isDisabled,
                             size: _ctx.collapseTagSize,
                             type: _ctx.tagType,
+                            effect: _ctx.tagEffect,
                             "disable-transitions": "",
                             onClose: ($event) => _ctx.deleteTag($event, item)
                           }, {
                             default: withCtx(() => [
                               createBaseVNode("span", {
                                 class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                              }, toDisplayString(item.currentLabel), 3)
+                              }, [
+                                renderSlot(_ctx.$slots, "label", {
+                                  label: item.currentLabel,
+                                  value: item.value
+                                }, () => [
+                                  createTextVNode(toDisplayString(item.currentLabel), 1)
+                                ])
+                              ], 2)
                             ]),
                             _: 2
-                          }, 1032, ["closable", "size", "type", "onClose"])
+                          }, 1032, ["closable", "size", "type", "effect", "onClose"])
                         ], 2);
                       }), 128))
                     ], 2)
                   ]),
-                  _: 1
+                  _: 3
                 }, 8, ["disabled", "effect", "teleported"])) : createCommentVNode("v-if", true)
               ]) : createCommentVNode("v-if", true),
               !_ctx.selectDisabled ? (openBlock(), createElementBlock("div", {
@@ -36900,8 +37655,9 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                 withDirectives(createBaseVNode("input", {
                   id: _ctx.inputId,
                   ref: "inputRef",
-                  "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.states.inputValue = $event),
+                  "onUpdate:modelValue": ($event) => _ctx.states.inputValue = $event,
                   type: "text",
+                  name: _ctx.name,
                   class: normalizeClass([_ctx.nsSelect.e("input"), _ctx.nsSelect.is(_ctx.selectSize)]),
                   disabled: _ctx.selectDisabled,
                   autocomplete: _ctx.autocomplete,
@@ -36915,21 +37671,19 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-label": _ctx.ariaLabel,
                   "aria-autocomplete": "none",
                   "aria-haspopup": "listbox",
-                  onFocus: _cache[1] || (_cache[1] = (...args) => _ctx.handleFocus && _ctx.handleFocus(...args)),
-                  onBlur: _cache[2] || (_cache[2] = (...args) => _ctx.handleBlur && _ctx.handleBlur(...args)),
                   onKeydown: [
-                    _cache[3] || (_cache[3] = withKeys(withModifiers(($event) => _ctx.navigateOptions("next"), ["stop", "prevent"]), ["down"])),
-                    _cache[4] || (_cache[4] = withKeys(withModifiers(($event) => _ctx.navigateOptions("prev"), ["stop", "prevent"]), ["up"])),
-                    _cache[5] || (_cache[5] = withKeys(withModifiers((...args) => _ctx.handleEsc && _ctx.handleEsc(...args), ["stop", "prevent"]), ["esc"])),
-                    _cache[6] || (_cache[6] = withKeys(withModifiers((...args) => _ctx.selectOption && _ctx.selectOption(...args), ["stop", "prevent"]), ["enter"])),
-                    _cache[7] || (_cache[7] = withKeys(withModifiers((...args) => _ctx.deletePrevTag && _ctx.deletePrevTag(...args), ["stop"]), ["delete"]))
+                    withKeys(withModifiers(($event) => _ctx.navigateOptions("next"), ["stop", "prevent"]), ["down"]),
+                    withKeys(withModifiers(($event) => _ctx.navigateOptions("prev"), ["stop", "prevent"]), ["up"]),
+                    withKeys(withModifiers(_ctx.handleEsc, ["stop", "prevent"]), ["esc"]),
+                    withKeys(withModifiers(_ctx.selectOption, ["stop", "prevent"]), ["enter"]),
+                    withKeys(withModifiers(_ctx.deletePrevTag, ["stop"]), ["delete"])
                   ],
-                  onCompositionstart: _cache[8] || (_cache[8] = (...args) => _ctx.handleCompositionStart && _ctx.handleCompositionStart(...args)),
-                  onCompositionupdate: _cache[9] || (_cache[9] = (...args) => _ctx.handleCompositionUpdate && _ctx.handleCompositionUpdate(...args)),
-                  onCompositionend: _cache[10] || (_cache[10] = (...args) => _ctx.handleCompositionEnd && _ctx.handleCompositionEnd(...args)),
-                  onInput: _cache[11] || (_cache[11] = (...args) => _ctx.onInput && _ctx.onInput(...args)),
-                  onClick: _cache[12] || (_cache[12] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["stop"]))
-                }, null, 46, _hoisted_148), [
+                  onCompositionstart: _ctx.handleCompositionStart,
+                  onCompositionupdate: _ctx.handleCompositionUpdate,
+                  onCompositionend: _ctx.handleCompositionEnd,
+                  onInput: _ctx.onInput,
+                  onClick: withModifiers(_ctx.toggleMenu, ["stop"])
+                }, null, 46, ["id", "onUpdate:modelValue", "name", "disabled", "autocomplete", "readonly", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label", "onKeydown", "onCompositionstart", "onCompositionupdate", "onCompositionend", "onInput", "onClick"]), [
                   [vModelText, _ctx.states.inputValue]
                 ]),
                 _ctx.filterable ? (openBlock(), createElementBlock("span", {
@@ -36938,7 +37692,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                   "aria-hidden": "true",
                   class: normalizeClass(_ctx.nsSelect.e("input-calculator")),
                   textContent: toDisplayString(_ctx.states.inputValue)
-                }, null, 10, _hoisted_230)) : createCommentVNode("v-if", true)
+                }, null, 10, ["textContent"])) : createCommentVNode("v-if", true)
               ], 2)) : createCommentVNode("v-if", true),
               _ctx.shouldShowPlaceholder ? (openBlock(), createElementBlock("div", {
                 key: 2,
@@ -36948,7 +37702,13 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                   _ctx.nsSelect.is("transparent", !_ctx.hasModelValue || _ctx.expanded && !_ctx.states.inputValue)
                 ])
               }, [
-                createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+                _ctx.hasModelValue ? renderSlot(_ctx.$slots, "label", {
+                  key: 0,
+                  label: _ctx.currentPlaceholder,
+                  value: _ctx.modelValue
+                }, () => [
+                  createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+                ]) : (openBlock(), createElementBlock("span", { key: 1 }, toDisplayString(_ctx.currentPlaceholder), 1))
               ], 2)) : createCommentVNode("v-if", true)
             ], 2),
             createBaseVNode("div", {
@@ -36966,7 +37726,11 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
               }, 8, ["class"])) : createCommentVNode("v-if", true),
               _ctx.showClose && _ctx.clearIcon ? (openBlock(), createBlock(_component_el_icon, {
                 key: 1,
-                class: normalizeClass([_ctx.nsSelect.e("caret"), _ctx.nsSelect.e("icon")]),
+                class: normalizeClass([
+                  _ctx.nsSelect.e("caret"),
+                  _ctx.nsSelect.e("icon"),
+                  _ctx.nsSelect.e("clear")
+                ]),
                 onClick: _ctx.handleClearClick
               }, {
                 default: withCtx(() => [
@@ -36984,7 +37748,7 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
                 _: 1
               }, 8, ["class"])) : createCommentVNode("v-if", true)
             ], 2)
-          ], 2)
+          ], 10, ["onClick"])
         ];
       }),
       content: withCtx(() => [
@@ -36993,11 +37757,11 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.$slots.header ? (openBlock(), createElementBlock("div", {
               key: 0,
               class: normalizeClass(_ctx.nsSelect.be("dropdown", "header")),
-              onClick: _cache[13] || (_cache[13] = withModifiers(() => {
-              }, ["stop"]))
+              onClick: withModifiers(() => {
+              }, ["stop"])
             }, [
               renderSlot(_ctx.$slots, "header")
-            ], 2)) : createCommentVNode("v-if", true),
+            ], 10, ["onClick"])) : createCommentVNode("v-if", true),
             withDirectives(createVNode(_component_el_scrollbar, {
               id: _ctx.contentId,
               ref: "scrollbarRef",
@@ -37042,25 +37806,25 @@ function _sfc_render22(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.$slots.footer ? (openBlock(), createElementBlock("div", {
               key: 3,
               class: normalizeClass(_ctx.nsSelect.be("dropdown", "footer")),
-              onClick: _cache[14] || (_cache[14] = withModifiers(() => {
-              }, ["stop"]))
+              onClick: withModifiers(() => {
+              }, ["stop"])
             }, [
               renderSlot(_ctx.$slots, "footer")
-            ], 2)) : createCommentVNode("v-if", true)
+            ], 10, ["onClick"])) : createCommentVNode("v-if", true)
           ]),
           _: 3
         }, 512)
       ]),
       _: 3
-    }, 8, ["visible", "placement", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "transition", "persistent", "onBeforeShow"])
-  ], 34)), [
+    }, 8, ["visible", "placement", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "transition", "persistent", "onBeforeShow", "onHide"])
+  ], 16, ["onMouseleave"])), [
     [_directive_click_outside, _ctx.handleClickOutside, _ctx.popperRef]
   ]);
 }
-var Select = _export_sfc(_sfc_main97, [["render", _sfc_render22], ["__file", "select.vue"]]);
+var Select = _export_sfc(_sfc_main99, [["render", _sfc_render22], ["__file", "select.vue"]]);
 
 // node_modules/element-plus/es/components/select/src/option-group.mjs
-var _sfc_main98 = defineComponent({
+var _sfc_main100 = defineComponent({
   name: "ElOptionGroup",
   componentName: "ElOptionGroup",
   props: {
@@ -37075,21 +37839,24 @@ var _sfc_main98 = defineComponent({
     provide(selectGroupKey, reactive({
       ...toRefs(props)
     }));
-    const visible = computed2(() => children.value.some((option) => option.visible === true));
+    const visible = computed(() => children.value.some((option) => option.visible === true));
+    const isOption = (node) => {
+      var _a2, _b;
+      return ((_a2 = node.type) == null ? void 0 : _a2.name) === "ElOption" && !!((_b = node.component) == null ? void 0 : _b.proxy);
+    };
     const flattedChildren2 = (node) => {
+      const Nodes = castArray_default(node);
       const children2 = [];
-      if (isArray(node.children)) {
-        node.children.forEach((child) => {
-          var _a2, _b;
-          if (child.type && child.type.name === "ElOption" && child.component && child.component.proxy) {
-            children2.push(child.component.proxy);
-          } else if ((_a2 = child.children) == null ? void 0 : _a2.length) {
-            children2.push(...flattedChildren2(child));
-          } else if ((_b = child.component) == null ? void 0 : _b.subTree) {
-            children2.push(...flattedChildren2(child.component.subTree));
-          }
-        });
-      }
+      Nodes.forEach((child) => {
+        var _a2, _b;
+        if (isOption(child)) {
+          children2.push(child.component.proxy);
+        } else if ((_a2 = child.children) == null ? void 0 : _a2.length) {
+          children2.push(...flattedChildren2(child.children));
+        } else if ((_b = child.component) == null ? void 0 : _b.subTree) {
+          children2.push(...flattedChildren2(child.component.subTree));
+        }
+      });
       return children2;
     };
     const updateChildren = () => {
@@ -37129,7 +37896,7 @@ function _sfc_render23(_ctx, _cache, $props, $setup, $data, $options) {
     [vShow, _ctx.visible]
   ]);
 }
-var OptionGroup = _export_sfc(_sfc_main98, [["render", _sfc_render23], ["__file", "option-group.vue"]]);
+var OptionGroup = _export_sfc(_sfc_main100, [["render", _sfc_render23], ["__file", "option-group.vue"]]);
 
 // node_modules/element-plus/es/components/select/index.mjs
 var ElSelect = withInstall(Select, {
@@ -37164,11 +37931,11 @@ var paginationSizesProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/pagination/src/components/sizes2.mjs
-var __default__66 = defineComponent({
+var __default__67 = defineComponent({
   name: "ElPaginationSizes"
 });
-var _sfc_main99 = defineComponent({
-  ...__default__66,
+var _sfc_main101 = defineComponent({
+  ...__default__67,
   props: paginationSizesProps,
   emits: ["page-size-change"],
   setup(__props, { emit }) {
@@ -37188,7 +37955,7 @@ var _sfc_main99 = defineComponent({
     watch(() => props.pageSize, (newVal) => {
       innerPageSize.value = newVal;
     });
-    const innerPageSizes = computed2(() => props.pageSizes);
+    const innerPageSizes = computed(() => props.pageSizes);
     function handleChange(val) {
       var _a2;
       if (val !== innerPageSize.value) {
@@ -37224,7 +37991,7 @@ var _sfc_main99 = defineComponent({
     };
   }
 });
-var Sizes = _export_sfc(_sfc_main99, [["__file", "sizes.vue"]]);
+var Sizes = _export_sfc(_sfc_main101, [["__file", "sizes.vue"]]);
 
 // node_modules/element-plus/es/components/pagination/src/components/jumper.mjs
 var paginationJumperProps = buildProps({
@@ -37235,19 +38002,18 @@ var paginationJumperProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/pagination/src/components/jumper2.mjs
-var _hoisted_149 = ["disabled"];
-var __default__67 = defineComponent({
+var __default__68 = defineComponent({
   name: "ElPaginationJumper"
 });
-var _sfc_main100 = defineComponent({
-  ...__default__67,
+var _sfc_main102 = defineComponent({
+  ...__default__68,
   props: paginationJumperProps,
   setup(__props) {
     const { t } = useLocale();
     const ns = useNamespace("pagination");
     const { pageCount, disabled, currentPage, changeEvent } = usePagination();
     const userInput = ref();
-    const innerValue = computed2(() => {
+    const innerValue = computed(() => {
       var _a2;
       return (_a2 = userInput.value) != null ? _a2 : currentPage == null ? void 0 : currentPage.value;
     });
@@ -37275,19 +38041,19 @@ var _sfc_main100 = defineComponent({
           disabled: unref(disabled),
           "model-value": unref(innerValue),
           "validate-event": false,
-          label: unref(t)("el.pagination.page"),
+          "aria-label": unref(t)("el.pagination.page"),
           type: "number",
           "onUpdate:modelValue": handleInput,
           onChange: handleChange
-        }, null, 8, ["size", "class", "max", "disabled", "model-value", "label"]),
+        }, null, 8, ["size", "class", "max", "disabled", "model-value", "aria-label"]),
         createBaseVNode("span", {
           class: normalizeClass([unref(ns).e("classifier")])
         }, toDisplayString(unref(t)("el.pagination.pageClassifier")), 3)
-      ], 10, _hoisted_149);
+      ], 10, ["disabled"]);
     };
   }
 });
-var Jumper = _export_sfc(_sfc_main100, [["__file", "jumper.vue"]]);
+var Jumper = _export_sfc(_sfc_main102, [["__file", "jumper.vue"]]);
 
 // node_modules/element-plus/es/components/pagination/src/components/total.mjs
 var paginationTotalProps = buildProps({
@@ -37298,12 +38064,11 @@ var paginationTotalProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/pagination/src/components/total2.mjs
-var _hoisted_150 = ["disabled"];
-var __default__68 = defineComponent({
+var __default__69 = defineComponent({
   name: "ElPaginationTotal"
 });
-var _sfc_main101 = defineComponent({
-  ...__default__68,
+var _sfc_main103 = defineComponent({
+  ...__default__69,
   props: paginationTotalProps,
   setup(__props) {
     const { t } = useLocale();
@@ -37315,11 +38080,11 @@ var _sfc_main101 = defineComponent({
         disabled: unref(disabled)
       }, toDisplayString(unref(t)("el.pagination.total", {
         total: _ctx.total
-      })), 11, _hoisted_150);
+      })), 11, ["disabled"]);
     };
   }
 });
-var Total = _export_sfc(_sfc_main101, [["__file", "total.vue"]]);
+var Total = _export_sfc(_sfc_main103, [["__file", "total.vue"]]);
 
 // node_modules/element-plus/es/components/pagination/src/components/pager.mjs
 var paginationPagerProps = buildProps({
@@ -37339,17 +38104,11 @@ var paginationPagerProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/pagination/src/components/pager2.mjs
-var _hoisted_151 = ["onKeyup"];
-var _hoisted_231 = ["aria-current", "aria-label", "tabindex"];
-var _hoisted_314 = ["tabindex", "aria-label"];
-var _hoisted_48 = ["aria-current", "aria-label", "tabindex"];
-var _hoisted_55 = ["tabindex", "aria-label"];
-var _hoisted_64 = ["aria-current", "aria-label", "tabindex"];
-var __default__69 = defineComponent({
+var __default__70 = defineComponent({
   name: "ElPaginationPager"
 });
-var _sfc_main102 = defineComponent({
-  ...__default__69,
+var _sfc_main104 = defineComponent({
+  ...__default__70,
   props: paginationPagerProps,
   emits: ["change"],
   setup(__props, { emit }) {
@@ -37363,7 +38122,7 @@ var _sfc_main102 = defineComponent({
     const quickNextHover = ref(false);
     const quickPrevFocus = ref(false);
     const quickNextFocus = ref(false);
-    const pagers = computed2(() => {
+    const pagers = computed(() => {
       const pagerCount = props.pagerCount;
       const halfPagerCount = (pagerCount - 1) / 2;
       const currentPage = Number(props.currentPage);
@@ -37400,19 +38159,19 @@ var _sfc_main102 = defineComponent({
       }
       return array4;
     });
-    const prevMoreKls = computed2(() => [
+    const prevMoreKls = computed(() => [
       "more",
       "btn-quickprev",
       nsIcon.b(),
       nsPager.is("disabled", props.disabled)
     ]);
-    const nextMoreKls = computed2(() => [
+    const nextMoreKls = computed(() => [
       "more",
       "btn-quicknext",
       nsIcon.b(),
       nsPager.is("disabled", props.disabled)
     ]);
-    const tabindex = computed2(() => props.disabled ? -1 : 0);
+    const tabindex = computed(() => props.disabled ? -1 : 0);
     watchEffect(() => {
       const halfPagerCount = (props.pagerCount - 1) / 2;
       showPrevMore.value = false;
@@ -37496,19 +38255,19 @@ var _sfc_main102 = defineComponent({
           "aria-current": _ctx.currentPage === 1,
           "aria-label": unref(t)("el.pagination.currentPage", { pager: 1 }),
           tabindex: unref(tabindex)
-        }, " 1 ", 10, _hoisted_231)) : createCommentVNode("v-if", true),
+        }, " 1 ", 10, ["aria-current", "aria-label", "tabindex"])) : createCommentVNode("v-if", true),
         showPrevMore.value ? (openBlock(), createElementBlock("li", {
           key: 1,
           class: normalizeClass(unref(prevMoreKls)),
           tabindex: unref(tabindex),
           "aria-label": unref(t)("el.pagination.prevPages", { pager: _ctx.pagerCount - 2 }),
-          onMouseenter: _cache[0] || (_cache[0] = ($event) => onMouseEnter(true)),
-          onMouseleave: _cache[1] || (_cache[1] = ($event) => quickPrevHover.value = false),
-          onFocus: _cache[2] || (_cache[2] = ($event) => onFocus(true)),
-          onBlur: _cache[3] || (_cache[3] = ($event) => quickPrevFocus.value = false)
+          onMouseenter: ($event) => onMouseEnter(true),
+          onMouseleave: ($event) => quickPrevHover.value = false,
+          onFocus: ($event) => onFocus(true),
+          onBlur: ($event) => quickPrevFocus.value = false
         }, [
           (quickPrevHover.value || quickPrevFocus.value) && !_ctx.disabled ? (openBlock(), createBlock(unref(d_arrow_left_default), { key: 0 })) : (openBlock(), createBlock(unref(more_filled_default), { key: 1 }))
-        ], 42, _hoisted_314)) : createCommentVNode("v-if", true),
+        ], 42, ["tabindex", "aria-label", "onMouseenter", "onMouseleave", "onFocus", "onBlur"])) : createCommentVNode("v-if", true),
         (openBlock(true), createElementBlock(Fragment, null, renderList(unref(pagers), (pager) => {
           return openBlock(), createElementBlock("li", {
             key: pager,
@@ -37519,20 +38278,20 @@ var _sfc_main102 = defineComponent({
             "aria-current": _ctx.currentPage === pager,
             "aria-label": unref(t)("el.pagination.currentPage", { pager }),
             tabindex: unref(tabindex)
-          }, toDisplayString(pager), 11, _hoisted_48);
+          }, toDisplayString(pager), 11, ["aria-current", "aria-label", "tabindex"]);
         }), 128)),
         showNextMore.value ? (openBlock(), createElementBlock("li", {
           key: 2,
           class: normalizeClass(unref(nextMoreKls)),
           tabindex: unref(tabindex),
           "aria-label": unref(t)("el.pagination.nextPages", { pager: _ctx.pagerCount - 2 }),
-          onMouseenter: _cache[4] || (_cache[4] = ($event) => onMouseEnter()),
-          onMouseleave: _cache[5] || (_cache[5] = ($event) => quickNextHover.value = false),
-          onFocus: _cache[6] || (_cache[6] = ($event) => onFocus()),
-          onBlur: _cache[7] || (_cache[7] = ($event) => quickNextFocus.value = false)
+          onMouseenter: ($event) => onMouseEnter(),
+          onMouseleave: ($event) => quickNextHover.value = false,
+          onFocus: ($event) => onFocus(),
+          onBlur: ($event) => quickNextFocus.value = false
         }, [
           (quickNextHover.value || quickNextFocus.value) && !_ctx.disabled ? (openBlock(), createBlock(unref(d_arrow_right_default), { key: 0 })) : (openBlock(), createBlock(unref(more_filled_default), { key: 1 }))
-        ], 42, _hoisted_55)) : createCommentVNode("v-if", true),
+        ], 42, ["tabindex", "aria-label", "onMouseenter", "onMouseleave", "onFocus", "onBlur"])) : createCommentVNode("v-if", true),
         _ctx.pageCount > 1 ? (openBlock(), createElementBlock("li", {
           key: 3,
           class: normalizeClass([[
@@ -37542,12 +38301,12 @@ var _sfc_main102 = defineComponent({
           "aria-current": _ctx.currentPage === _ctx.pageCount,
           "aria-label": unref(t)("el.pagination.currentPage", { pager: _ctx.pageCount }),
           tabindex: unref(tabindex)
-        }, toDisplayString(_ctx.pageCount), 11, _hoisted_64)) : createCommentVNode("v-if", true)
-      ], 42, _hoisted_151);
+        }, toDisplayString(_ctx.pageCount), 11, ["aria-current", "aria-label", "tabindex"])) : createCommentVNode("v-if", true)
+      ], 42, ["onKeyup"]);
     };
   }
 });
-var Pager = _export_sfc(_sfc_main102, [["__file", "pager.vue"]]);
+var Pager = _export_sfc(_sfc_main104, [["__file", "pager.vue"]]);
 
 // node_modules/element-plus/es/components/pagination/src/pagination.mjs
 var isAbsent = (v2) => typeof v2 !== "number";
@@ -37598,6 +38357,7 @@ var paginationProps = buildProps({
     default: true
   },
   small: Boolean,
+  size: useSizeProp,
   background: Boolean,
   disabled: Boolean,
   hideOnSinglePage: Boolean
@@ -37620,9 +38380,21 @@ var Pagination = defineComponent({
     const { t } = useLocale();
     const ns = useNamespace("pagination");
     const vnodeProps = getCurrentInstance().vnode.props || {};
+    const _globalSize = useGlobalSize();
+    const _size = computed(() => {
+      var _a2;
+      return props.small ? "small" : (_a2 = props.size) != null ? _a2 : _globalSize.value;
+    });
+    useDeprecated({
+      from: "small",
+      replacement: "size",
+      version: "3.0.0",
+      scope: "el-pagination",
+      ref: "https://element-plus.org/zh-CN/component/pagination.html"
+    }, computed(() => !!props.small));
     const hasCurrentPageListener = "onUpdate:currentPage" in vnodeProps || "onUpdate:current-page" in vnodeProps || "onCurrentChange" in vnodeProps;
     const hasPageSizeListener = "onUpdate:pageSize" in vnodeProps || "onUpdate:page-size" in vnodeProps || "onSizeChange" in vnodeProps;
-    const assertValidUsage = computed2(() => {
+    const assertValidUsage = computed(() => {
       if (isAbsent(props.total) && isAbsent(props.pageCount))
         return false;
       if (!isAbsent(props.currentPage) && !hasCurrentPageListener)
@@ -37644,7 +38416,7 @@ var Pagination = defineComponent({
     });
     const innerPageSize = ref(isAbsent(props.defaultPageSize) ? 10 : props.defaultPageSize);
     const innerCurrentPage = ref(isAbsent(props.defaultCurrentPage) ? 1 : props.defaultCurrentPage);
-    const pageSizeBridge = computed2({
+    const pageSizeBridge = computed({
       get() {
         return isAbsent(props.pageSize) ? innerPageSize.value : props.pageSize;
       },
@@ -37658,7 +38430,7 @@ var Pagination = defineComponent({
         }
       }
     });
-    const pageCountBridge = computed2(() => {
+    const pageCountBridge = computed(() => {
       let pageCount = 0;
       if (!isAbsent(props.pageCount)) {
         pageCount = props.pageCount;
@@ -37667,7 +38439,7 @@ var Pagination = defineComponent({
       }
       return pageCount;
     });
-    const currentPageBridge = computed2({
+    const currentPageBridge = computed({
       get() {
         return isAbsent(props.currentPage) ? innerCurrentPage.value : props.currentPage;
       },
@@ -37726,7 +38498,7 @@ var Pagination = defineComponent({
     }
     provide(elPaginationKey, {
       pageCount: pageCountBridge,
-      disabled: computed2(() => props.disabled),
+      disabled: computed(() => props.disabled),
       currentPage: currentPageBridge,
       changeEvent: handleCurrentChange2,
       handleSizeChange
@@ -37753,7 +38525,7 @@ var Pagination = defineComponent({
           onClick: prev
         }),
         jumper: h(Jumper, {
-          size: props.small ? "small" : "default"
+          size: _size.value
         }),
         pager: h(Pager, {
           currentPage: currentPageBridge.value,
@@ -37776,7 +38548,7 @@ var Pagination = defineComponent({
           popperClass: props.popperClass,
           disabled: props.disabled,
           teleported: props.teleported,
-          size: props.small ? "small" : "default"
+          size: _size.value
         }),
         slot: (_b = (_a2 = slots == null ? void 0 : slots.default) == null ? void 0 : _a2.call(slots)) != null ? _b : null,
         total: h(Total, { total: isAbsent(props.total) ? 0 : props.total })
@@ -37805,9 +38577,7 @@ var Pagination = defineComponent({
         class: [
           ns.b(),
           ns.is("background", props.background),
-          {
-            [ns.m("small")]: props.small
-          }
+          ns.m(_size.value)
         ]
       }, rootChildren);
     };
@@ -37861,11 +38631,11 @@ var popconfirmEmits = {
 };
 
 // node_modules/element-plus/es/components/popconfirm/src/popconfirm2.mjs
-var __default__70 = defineComponent({
+var __default__71 = defineComponent({
   name: "ElPopconfirm"
 });
-var _sfc_main103 = defineComponent({
-  ...__default__70,
+var _sfc_main105 = defineComponent({
+  ...__default__71,
   props: popconfirmProps,
   emits: popconfirmEmits,
   setup(__props, { emit }) {
@@ -37877,7 +38647,7 @@ var _sfc_main103 = defineComponent({
       var _a2, _b;
       (_b = (_a2 = tooltipRef.value) == null ? void 0 : _a2.onClose) == null ? void 0 : _b.call(_a2);
     };
-    const style = computed2(() => {
+    const style = computed(() => {
       return {
         width: addUnit(props.width)
       };
@@ -37890,8 +38660,8 @@ var _sfc_main103 = defineComponent({
       emit("cancel", e);
       hidePopper();
     };
-    const finalConfirmButtonText = computed2(() => props.confirmButtonText || t("el.popconfirm.confirmButtonText"));
-    const finalCancelButtonText = computed2(() => props.cancelButtonText || t("el.popconfirm.cancelButtonText"));
+    const finalConfirmButtonText = computed(() => props.confirmButtonText || t("el.popconfirm.confirmButtonText"));
+    const finalCancelButtonText = computed(() => props.cancelButtonText || t("el.popconfirm.cancelButtonText"));
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(ElTooltip), mergeProps({
         ref_key: "tooltipRef",
@@ -37928,28 +38698,33 @@ var _sfc_main103 = defineComponent({
             createBaseVNode("div", {
               class: normalizeClass(unref(ns).e("action"))
             }, [
-              createVNode(unref(ElButton), {
-                size: "small",
-                type: _ctx.cancelButtonType === "text" ? "" : _ctx.cancelButtonType,
-                text: _ctx.cancelButtonType === "text",
-                onClick: cancel
-              }, {
-                default: withCtx(() => [
-                  createTextVNode(toDisplayString(unref(finalCancelButtonText)), 1)
-                ]),
-                _: 1
-              }, 8, ["type", "text"]),
-              createVNode(unref(ElButton), {
-                size: "small",
-                type: _ctx.confirmButtonType === "text" ? "" : _ctx.confirmButtonType,
-                text: _ctx.confirmButtonType === "text",
-                onClick: confirm
-              }, {
-                default: withCtx(() => [
-                  createTextVNode(toDisplayString(unref(finalConfirmButtonText)), 1)
-                ]),
-                _: 1
-              }, 8, ["type", "text"])
+              renderSlot(_ctx.$slots, "actions", {
+                confirm,
+                cancel
+              }, () => [
+                createVNode(unref(ElButton), {
+                  size: "small",
+                  type: _ctx.cancelButtonType === "text" ? "" : _ctx.cancelButtonType,
+                  text: _ctx.cancelButtonType === "text",
+                  onClick: cancel
+                }, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(unref(finalCancelButtonText)), 1)
+                  ]),
+                  _: 1
+                }, 8, ["type", "text"]),
+                createVNode(unref(ElButton), {
+                  size: "small",
+                  type: _ctx.confirmButtonType === "text" ? "" : _ctx.confirmButtonType,
+                  text: _ctx.confirmButtonType === "text",
+                  onClick: confirm
+                }, {
+                  default: withCtx(() => [
+                    createTextVNode(toDisplayString(unref(finalConfirmButtonText)), 1)
+                  ]),
+                  _: 1
+                }, 8, ["type", "text"])
+              ])
             ], 2)
           ], 2)
         ]),
@@ -37961,7 +38736,7 @@ var _sfc_main103 = defineComponent({
     };
   }
 });
-var Popconfirm = _export_sfc(_sfc_main103, [["__file", "popconfirm.vue"]]);
+var Popconfirm = _export_sfc(_sfc_main105, [["__file", "popconfirm.vue"]]);
 
 // node_modules/element-plus/es/components/popconfirm/index.mjs
 var ElPopconfirm = withInstall(Popconfirm);
@@ -38030,25 +38805,25 @@ var popoverEmits = {
 
 // node_modules/element-plus/es/components/popover/src/popover2.mjs
 var updateEventKeyRaw = `onUpdate:visible`;
-var __default__71 = defineComponent({
+var __default__72 = defineComponent({
   name: "ElPopover"
 });
-var _sfc_main104 = defineComponent({
-  ...__default__71,
+var _sfc_main106 = defineComponent({
+  ...__default__72,
   props: popoverProps,
   emits: popoverEmits,
   setup(__props, { expose, emit }) {
     const props = __props;
-    const onUpdateVisible = computed2(() => {
+    const onUpdateVisible = computed(() => {
       return props[updateEventKeyRaw];
     });
     const ns = useNamespace("popover");
     const tooltipRef = ref();
-    const popperRef = computed2(() => {
+    const popperRef = computed(() => {
       var _a2;
       return (_a2 = unref(tooltipRef)) == null ? void 0 : _a2.popperRef;
     });
-    const style = computed2(() => {
+    const style = computed(() => {
       return [
         {
           width: addUnit(props.width)
@@ -38056,10 +38831,10 @@ var _sfc_main104 = defineComponent({
         props.popperStyle
       ];
     });
-    const kls = computed2(() => {
+    const kls = computed(() => {
       return [ns.b(), props.popperClass, { [ns.m("plain")]: !!props.content }];
     });
-    const gpuAcceleration = computed2(() => {
+    const gpuAcceleration = computed(() => {
       return props.transition === `${ns.namespace.value}-fade-in-linear`;
     });
     const hide2 = () => {
@@ -38133,7 +38908,7 @@ var _sfc_main104 = defineComponent({
     };
   }
 });
-var Popover = _export_sfc(_sfc_main104, [["__file", "popover.vue"]]);
+var Popover = _export_sfc(_sfc_main106, [["__file", "popover.vue"]]);
 
 // node_modules/element-plus/es/components/popover/src/directive.mjs
 var attachEvents = (el, binding) => {
@@ -38176,10 +38951,7 @@ var progressProps = buildProps({
     default: "",
     values: ["", "success", "exception", "warning"]
   },
-  indeterminate: {
-    type: Boolean,
-    default: false
-  },
+  indeterminate: Boolean,
   duration: {
     type: Number,
     default: 3
@@ -38192,10 +38964,7 @@ var progressProps = buildProps({
     type: definePropType(String),
     default: "round"
   },
-  textInside: {
-    type: Boolean,
-    default: false
-  },
+  textInside: Boolean,
   width: {
     type: Number,
     default: 126
@@ -38221,16 +38990,11 @@ var progressProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/progress/src/progress2.mjs
-var _hoisted_153 = ["aria-valuenow"];
-var _hoisted_233 = { viewBox: "0 0 100 100" };
-var _hoisted_315 = ["d", "stroke", "stroke-linecap", "stroke-width"];
-var _hoisted_49 = ["d", "stroke", "opacity", "stroke-linecap", "stroke-width"];
-var _hoisted_56 = { key: 0 };
-var __default__72 = defineComponent({
+var __default__73 = defineComponent({
   name: "ElProgress"
 });
-var _sfc_main105 = defineComponent({
-  ...__default__72,
+var _sfc_main107 = defineComponent({
+  ...__default__73,
   props: progressProps,
   setup(__props) {
     const props = __props;
@@ -38241,19 +39005,27 @@ var _sfc_main105 = defineComponent({
       default: "#20a0ff"
     };
     const ns = useNamespace("progress");
-    const barStyle = computed2(() => ({
-      width: `${props.percentage}%`,
-      animationDuration: `${props.duration}s`,
-      backgroundColor: getCurrentColor(props.percentage)
-    }));
-    const relativeStrokeWidth = computed2(() => (props.strokeWidth / props.width * 100).toFixed(1));
-    const radius = computed2(() => {
+    const barStyle = computed(() => {
+      const barStyle2 = {
+        width: `${props.percentage}%`,
+        animationDuration: `${props.duration}s`
+      };
+      const color = getCurrentColor(props.percentage);
+      if (color.includes("gradient")) {
+        barStyle2.background = color;
+      } else {
+        barStyle2.backgroundColor = color;
+      }
+      return barStyle2;
+    });
+    const relativeStrokeWidth = computed(() => (props.strokeWidth / props.width * 100).toFixed(1));
+    const radius = computed(() => {
       if (["circle", "dashboard"].includes(props.type)) {
         return Number.parseInt(`${50 - Number.parseFloat(relativeStrokeWidth.value) / 2}`, 10);
       }
       return 0;
     });
-    const trackPath = computed2(() => {
+    const trackPath = computed(() => {
       const r = radius.value;
       const isDashboard = props.type === "dashboard";
       return `
@@ -38263,22 +39035,22 @@ var _sfc_main105 = defineComponent({
           a ${r} ${r} 0 1 1 0 ${isDashboard ? "" : "-"}${r * 2}
           `;
     });
-    const perimeter = computed2(() => 2 * Math.PI * radius.value);
-    const rate = computed2(() => props.type === "dashboard" ? 0.75 : 1);
-    const strokeDashoffset = computed2(() => {
+    const perimeter = computed(() => 2 * Math.PI * radius.value);
+    const rate = computed(() => props.type === "dashboard" ? 0.75 : 1);
+    const strokeDashoffset = computed(() => {
       const offset2 = -1 * perimeter.value * (1 - rate.value) / 2;
       return `${offset2}px`;
     });
-    const trailPathStyle = computed2(() => ({
+    const trailPathStyle = computed(() => ({
       strokeDasharray: `${perimeter.value * rate.value}px, ${perimeter.value}px`,
       strokeDashoffset: strokeDashoffset.value
     }));
-    const circlePathStyle = computed2(() => ({
+    const circlePathStyle = computed(() => ({
       strokeDasharray: `${perimeter.value * rate.value * (props.percentage / 100)}px, ${perimeter.value}px`,
       strokeDashoffset: strokeDashoffset.value,
       transition: "stroke-dasharray 0.6s ease 0s, stroke 0.6s ease, opacity ease 0.6s"
     }));
-    const stroke = computed2(() => {
+    const stroke = computed(() => {
       let ret;
       if (props.color) {
         ret = getCurrentColor(props.percentage);
@@ -38287,7 +39059,7 @@ var _sfc_main105 = defineComponent({
       }
       return ret;
     });
-    const statusIcon = computed2(() => {
+    const statusIcon = computed(() => {
       if (props.status === "warning") {
         return warning_filled_default;
       }
@@ -38297,10 +39069,10 @@ var _sfc_main105 = defineComponent({
         return props.status === "success" ? check_default : close_default;
       }
     });
-    const progressTextSize = computed2(() => {
+    const progressTextSize = computed(() => {
       return props.type === "line" ? 12 + props.strokeWidth * 0.4 : props.width * 0.111111 + 2;
     });
-    const content = computed2(() => props.format(props.percentage));
+    const content = computed(() => props.format(props.percentage));
     function getColors(color) {
       const span = 100 / color.length;
       const seriesColors = color.map((seriesColor, index) => {
@@ -38378,7 +39150,7 @@ var _sfc_main105 = defineComponent({
           class: normalizeClass(unref(ns).b("circle")),
           style: normalizeStyle({ height: `${_ctx.width}px`, width: `${_ctx.width}px` })
         }, [
-          (openBlock(), createElementBlock("svg", _hoisted_233, [
+          (openBlock(), createElementBlock("svg", { viewBox: "0 0 100 100" }, [
             createBaseVNode("path", {
               class: normalizeClass(unref(ns).be("circle", "track")),
               d: unref(trackPath),
@@ -38387,7 +39159,7 @@ var _sfc_main105 = defineComponent({
               "stroke-width": unref(relativeStrokeWidth),
               fill: "none",
               style: normalizeStyle(unref(trailPathStyle))
-            }, null, 14, _hoisted_315),
+            }, null, 14, ["d", "stroke", "stroke-linecap", "stroke-width"]),
             createBaseVNode("path", {
               class: normalizeClass(unref(ns).be("circle", "path")),
               d: unref(trackPath),
@@ -38397,7 +39169,7 @@ var _sfc_main105 = defineComponent({
               "stroke-linecap": _ctx.strokeLinecap,
               "stroke-width": unref(relativeStrokeWidth),
               style: normalizeStyle(unref(circlePathStyle))
-            }, null, 14, _hoisted_49)
+            }, null, 14, ["d", "stroke", "opacity", "stroke-linecap", "stroke-width"])
           ]))
         ], 6)),
         (_ctx.showText || _ctx.$slots.default) && !_ctx.textInside ? (openBlock(), createElementBlock("div", {
@@ -38406,7 +39178,7 @@ var _sfc_main105 = defineComponent({
           style: normalizeStyle({ fontSize: `${unref(progressTextSize)}px` })
         }, [
           renderSlot(_ctx.$slots, "default", { percentage: _ctx.percentage }, () => [
-            !_ctx.status ? (openBlock(), createElementBlock("span", _hoisted_56, toDisplayString(unref(content)), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
+            !_ctx.status ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(unref(content)), 1)) : (openBlock(), createBlock(unref(ElIcon), { key: 1 }, {
               default: withCtx(() => [
                 (openBlock(), createBlock(resolveDynamicComponent(unref(statusIcon))))
               ]),
@@ -38414,11 +39186,11 @@ var _sfc_main105 = defineComponent({
             }))
           ])
         ], 6)) : createCommentVNode("v-if", true)
-      ], 10, _hoisted_153);
+      ], 10, ["aria-valuenow"]);
     };
   }
 });
-var Progress = _export_sfc(_sfc_main105, [["__file", "progress.vue"]]);
+var Progress = _export_sfc(_sfc_main107, [["__file", "progress.vue"]]);
 
 // node_modules/element-plus/es/components/progress/index.mjs
 var ElProgress = withInstall(Progress);
@@ -38492,14 +39264,8 @@ var rateProps = buildProps({
     default: "{value}"
   },
   size: useSizeProp,
-  label: {
-    type: String,
-    default: void 0
-  },
-  clearable: {
-    type: Boolean,
-    default: false
-  }
+  clearable: Boolean,
+  ...useAriaProps(["ariaLabel"])
 });
 var rateEmits = {
   [CHANGE_EVENT]: (value) => isNumber3(value),
@@ -38507,13 +39273,11 @@ var rateEmits = {
 };
 
 // node_modules/element-plus/es/components/rate/src/rate2.mjs
-var _hoisted_154 = ["id", "aria-label", "aria-labelledby", "aria-valuenow", "aria-valuetext", "aria-valuemax"];
-var _hoisted_234 = ["onMousemove", "onClick"];
-var __default__73 = defineComponent({
+var __default__74 = defineComponent({
   name: "ElRate"
 });
-var _sfc_main106 = defineComponent({
-  ...__default__73,
+var _sfc_main108 = defineComponent({
+  ...__default__74,
   props: rateProps,
   emits: rateEmits,
   setup(__props, { expose, emit }) {
@@ -38538,16 +39302,16 @@ var _sfc_main106 = defineComponent({
     const currentValue = ref(props.modelValue);
     const hoverIndex = ref(-1);
     const pointerAtLeftHalf = ref(true);
-    const rateClasses = computed2(() => [ns.b(), ns.m(rateSize.value)]);
-    const rateDisabled = computed2(() => props.disabled || (formContext == null ? void 0 : formContext.disabled));
-    const rateStyles = computed2(() => {
+    const rateClasses = computed(() => [ns.b(), ns.m(rateSize.value)]);
+    const rateDisabled = computed(() => props.disabled || (formContext == null ? void 0 : formContext.disabled));
+    const rateStyles = computed(() => {
       return ns.cssVarBlock({
         "void-color": props.voidColor,
         "disabled-void-color": props.disabledVoidColor,
         "fill-color": activeColor.value
       });
     });
-    const text = computed2(() => {
+    const text = computed(() => {
       let result2 = "";
       if (props.showScore) {
         result2 = props.scoreTemplate.replace(/\{\s*value\s*\}/, rateDisabled.value ? `${props.modelValue}` : `${currentValue.value}`);
@@ -38556,17 +39320,17 @@ var _sfc_main106 = defineComponent({
       }
       return result2;
     });
-    const valueDecimal = computed2(() => props.modelValue * 100 - Math.floor(props.modelValue) * 100);
-    const colorMap = computed2(() => isArray(props.colors) ? {
+    const valueDecimal = computed(() => props.modelValue * 100 - Math.floor(props.modelValue) * 100);
+    const colorMap = computed(() => isArray(props.colors) ? {
       [props.lowThreshold]: props.colors[0],
       [props.highThreshold]: { value: props.colors[1], excluded: true },
       [props.max]: props.colors[2]
     } : props.colors);
-    const activeColor = computed2(() => {
+    const activeColor = computed(() => {
       const color = getValueFromMap(currentValue.value, colorMap.value);
       return isObject(color) ? "" : color;
     });
-    const decimalStyle = computed2(() => {
+    const decimalStyle = computed(() => {
       let width = "";
       if (rateDisabled.value) {
         width = `${valueDecimal.value}%`;
@@ -38578,7 +39342,7 @@ var _sfc_main106 = defineComponent({
         width
       };
     });
-    const componentMap = computed2(() => {
+    const componentMap = computed(() => {
       let icons = isArray(props.icons) ? [...props.icons] : { ...props.icons };
       icons = markRaw(icons);
       return isArray(icons) ? {
@@ -38590,9 +39354,9 @@ var _sfc_main106 = defineComponent({
         [props.max]: icons[2]
       } : icons;
     });
-    const decimalIconComponent = computed2(() => getValueFromMap(props.modelValue, componentMap.value));
-    const voidComponent = computed2(() => rateDisabled.value ? isString(props.disabledVoidIcon) ? props.disabledVoidIcon : markRaw(props.disabledVoidIcon) : isString(props.voidIcon) ? props.voidIcon : markRaw(props.voidIcon));
-    const activeComponent = computed2(() => getValueFromMap(currentValue.value, componentMap.value));
+    const decimalIconComponent = computed(() => getValueFromMap(props.modelValue, componentMap.value));
+    const voidComponent = computed(() => rateDisabled.value ? isString(props.disabledVoidIcon) ? props.disabledVoidIcon : markRaw(props.disabledVoidIcon) : isString(props.voidIcon) ? props.voidIcon : markRaw(props.voidIcon));
+    const activeComponent = computed(() => getValueFromMap(currentValue.value, componentMap.value));
     function showDecimalIcon(item) {
       const showWhenDisabled = rateDisabled.value && valueDecimal.value > 0 && item - 1 < props.modelValue && item > props.modelValue;
       const showWhenAllowHalf = props.allowHalf && pointerAtLeftHalf.value && item - 0.5 <= currentValue.value && item > currentValue.value;
@@ -38692,7 +39456,7 @@ var _sfc_main106 = defineComponent({
         id: unref(inputId),
         class: normalizeClass([unref(rateClasses), unref(ns).is("disabled", unref(rateDisabled))]),
         role: "slider",
-        "aria-label": !unref(isLabeledByFormItem) ? _ctx.label || "rating" : void 0,
+        "aria-label": !unref(isLabeledByFormItem) ? _ctx.ariaLabel || "rating" : void 0,
         "aria-labelledby": unref(isLabeledByFormItem) ? (_a2 = unref(formItemContext)) == null ? void 0 : _a2.labelId : void 0,
         "aria-valuenow": currentValue.value,
         "aria-valuetext": unref(text) || void 0,
@@ -38743,18 +39507,18 @@ var _sfc_main106 = defineComponent({
               ]),
               _: 2
             }, 1032, ["class"])
-          ], 42, _hoisted_234);
+          ], 42, ["onMousemove", "onClick"]);
         }), 128)),
         _ctx.showText || _ctx.showScore ? (openBlock(), createElementBlock("span", {
           key: 0,
           class: normalizeClass(unref(ns).e("text")),
           style: normalizeStyle({ color: _ctx.textColor })
         }, toDisplayString(unref(text)), 7)) : createCommentVNode("v-if", true)
-      ], 46, _hoisted_154);
+      ], 46, ["id", "aria-label", "aria-labelledby", "aria-valuenow", "aria-valuetext", "aria-valuemax"]);
     };
   }
 });
-var Rate = _export_sfc(_sfc_main106, [["__file", "rate.vue"]]);
+var Rate = _export_sfc(_sfc_main108, [["__file", "rate.vue"]]);
 
 // node_modules/element-plus/es/components/rate/index.mjs
 var ElRate = withInstall(Rate);
@@ -38789,16 +39553,16 @@ var resultProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/result/src/result2.mjs
-var __default__74 = defineComponent({
+var __default__75 = defineComponent({
   name: "ElResult"
 });
-var _sfc_main107 = defineComponent({
-  ...__default__74,
+var _sfc_main109 = defineComponent({
+  ...__default__75,
   props: resultProps,
   setup(__props) {
     const props = __props;
     const ns = useNamespace("result");
-    const resultIcon = computed2(() => {
+    const resultIcon = computed(() => {
       const icon = props.icon;
       const iconClass = icon && IconMap[icon] ? IconMap[icon] : "icon-info";
       const iconComponent = IconComponentMap[iconClass] || IconComponentMap["icon-info"];
@@ -38847,7 +39611,7 @@ var _sfc_main107 = defineComponent({
     };
   }
 });
-var Result = _export_sfc(_sfc_main107, [["__file", "result.vue"]]);
+var Result = _export_sfc(_sfc_main109, [["__file", "result.vue"]]);
 
 // node_modules/element-plus/es/components/result/index.mjs
 var ElResult = withInstall(Result);
@@ -38907,7 +39671,7 @@ function memoizeOne(resultFn, isEqual3) {
 var useCache = () => {
   const vm = getCurrentInstance();
   const props = vm.proxy.$props;
-  return computed2(() => {
+  return computed(() => {
     const _getItemStyleCache = (_2, __, ___) => ({});
     return props.perfMode ? memoize_default(_getItemStyleCache) : memoizeOne(_getItemStyleCache);
   });
@@ -39167,7 +39931,7 @@ var ScrollBar = defineComponent({
   props: virtualizedScrollbarProps,
   emits: ["scroll", "start-move", "stop-move"],
   setup(props, { emit }) {
-    const GAP2 = computed2(() => props.startGap + props.endGap);
+    const GAP2 = computed(() => props.startGap + props.endGap);
     const nsVirtualScrollbar = useNamespace("virtual-scrollbar");
     const nsScrollbar = useNamespace("scrollbar");
     const trackRef = ref();
@@ -39178,9 +39942,9 @@ var ScrollBar = defineComponent({
       isDragging: false,
       traveled: 0
     });
-    const bar = computed2(() => BAR_MAP[props.layout]);
-    const trackSize = computed2(() => props.clientSize - unref(GAP2));
-    const trackStyle = computed2(() => ({
+    const bar = computed(() => BAR_MAP[props.layout]);
+    const trackSize = computed(() => props.clientSize - unref(GAP2));
+    const trackStyle = computed(() => ({
       position: "absolute",
       width: `${HORIZONTAL === props.layout ? trackSize.value : props.scrollbarSize}px`,
       height: `${HORIZONTAL === props.layout ? props.scrollbarSize : trackSize.value}px`,
@@ -39189,7 +39953,7 @@ var ScrollBar = defineComponent({
       bottom: "2px",
       borderRadius: "4px"
     }));
-    const thumbSize = computed2(() => {
+    const thumbSize = computed(() => {
       const ratio = props.ratio;
       const clientSize = props.clientSize;
       if (ratio >= 100) {
@@ -39201,7 +39965,7 @@ var ScrollBar = defineComponent({
       const SCROLLBAR_MAX_SIZE = clientSize / 3;
       return Math.floor(Math.min(Math.max(ratio * clientSize, SCROLLBAR_MIN_SIZE), SCROLLBAR_MAX_SIZE));
     });
-    const thumbStyle = computed2(() => {
+    const thumbStyle = computed(() => {
       if (!Number.isFinite(thumbSize.value)) {
         return {
           display: "none"
@@ -39215,7 +39979,7 @@ var ScrollBar = defineComponent({
       }, props.layout);
       return style;
     });
-    const totalSteps = computed2(() => Math.floor(props.clientSize - thumbSize.value - unref(GAP2)));
+    const totalSteps = computed(() => Math.floor(props.clientSize - thumbSize.value - unref(GAP2)));
     const attachEvents2 = () => {
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
@@ -39224,7 +39988,7 @@ var ScrollBar = defineComponent({
         return;
       onselectstartStore = document.onselectstart;
       document.onselectstart = () => false;
-      thumbEl.addEventListener("touchmove", onMouseMove);
+      thumbEl.addEventListener("touchmove", onMouseMove, { passive: true });
       thumbEl.addEventListener("touchend", onMouseUp);
     };
     const detachEvents = () => {
@@ -39343,7 +40107,7 @@ var createList = ({
         isScrollbarDragging: false,
         scrollbarAlwaysOn: props.scrollbarAlwaysOn
       });
-      const itemsToRender = computed2(() => {
+      const itemsToRender = computed(() => {
         const { total: total2, cache: cache2 } = props;
         const { isScrolling, scrollDir, scrollOffset } = unref(states);
         if (total2 === 0) {
@@ -39360,9 +40124,9 @@ var createList = ({
           stopIndex
         ];
       });
-      const estimatedTotalSize = computed2(() => getEstimatedTotalSize2(props, unref(dynamicSizeCache)));
-      const _isHorizontal = computed2(() => isHorizontal(props.layout));
-      const windowStyle = computed2(() => [
+      const estimatedTotalSize = computed(() => getEstimatedTotalSize2(props, unref(dynamicSizeCache)));
+      const _isHorizontal = computed(() => isHorizontal(props.layout));
+      const windowStyle = computed(() => [
         {
           position: "relative",
           [`overflow-${_isHorizontal.value ? "x" : "y"}`]: "scroll",
@@ -39376,7 +40140,7 @@ var createList = ({
         },
         props.style
       ]);
-      const innerStyle = computed2(() => {
+      const innerStyle = computed(() => {
         const size3 = unref(estimatedTotalSize);
         const horizontal = unref(_isHorizontal);
         return {
@@ -39385,16 +40149,19 @@ var createList = ({
           width: horizontal ? `${size3}px` : "100%"
         };
       });
-      const clientSize = computed2(() => _isHorizontal.value ? props.width : props.height);
+      const clientSize = computed(() => _isHorizontal.value ? props.width : props.height);
       const { onWheel } = useWheel({
-        atStartEdge: computed2(() => states.value.scrollOffset <= 0),
-        atEndEdge: computed2(() => states.value.scrollOffset >= estimatedTotalSize.value),
-        layout: computed2(() => props.layout)
+        atStartEdge: computed(() => states.value.scrollOffset <= 0),
+        atEndEdge: computed(() => states.value.scrollOffset >= estimatedTotalSize.value),
+        layout: computed(() => props.layout)
       }, (offset2) => {
         var _a2, _b;
         ;
         (_b = (_a2 = scrollbarRef.value).onMouseUp) == null ? void 0 : _b.call(_a2);
         scrollTo(Math.min(states.value.scrollOffset + offset2, estimatedTotalSize.value - clientSize.value));
+      });
+      useEventListener(windowRef, "wheel", onWheel, {
+        passive: false
       });
       const emitEvents = () => {
         const { total: total2 } = props;
@@ -39556,6 +40323,9 @@ var createList = ({
           }
         }
       });
+      onActivated(() => {
+        unref(windowRef).scrollTop = unref(states).scrollOffset;
+      });
       const api = {
         ns,
         clientSize,
@@ -39602,7 +40372,6 @@ var createList = ({
         total: total2,
         onScroll,
         onScrollbarScroll,
-        onWheel,
         states,
         useIsScrolling,
         windowStyle,
@@ -39614,13 +40383,12 @@ var createList = ({
       const children = [];
       if (total2 > 0) {
         for (let i = start; i <= end2; i++) {
-          children.push((_a2 = $slots.default) == null ? void 0 : _a2.call($slots, {
+          children.push(h(Fragment, { key: i }, (_a2 = $slots.default) == null ? void 0 : _a2.call($slots, {
             data,
-            key: i,
             index: i,
             isScrolling: useIsScrolling ? states.isScrolling : void 0,
             style: getItemStyle(i)
-          }));
+          })));
         }
       }
       const InnerNode = [
@@ -39644,7 +40412,6 @@ var createList = ({
         class: [ns.e("window"), className],
         style: windowStyle,
         onScroll,
-        onWheel,
         ref: "windowRef",
         key: 0
       }, !isString(Container2) ? { default: () => [InnerNode] } : [InnerNode]);
@@ -39727,7 +40494,7 @@ var FixedSizeList = createList({
 });
 
 // node_modules/element-plus/es/components/virtual-list/src/components/dynamic-size-list.mjs
-var SCOPE4 = "ElDynamicSizeList";
+var SCOPE5 = "ElDynamicSizeList";
 var getItemFromCache = (props, index, listCache) => {
   const { itemSize: itemSize3 } = props;
   const { items, lastVisitedIndex } = listCache;
@@ -39868,7 +40635,7 @@ var DynamicSizeList = createList({
   validateProps: ({ itemSize: itemSize3 }) => {
     if (true) {
       if (typeof itemSize3 !== "function") {
-        throwError(SCOPE4, `
+        throwError(SCOPE5, `
           itemSize is required as function, but the given value was ${typeof itemSize3}
         `);
       }
@@ -39957,9 +40724,9 @@ var createGrid = ({
         yAxisScrollDir: FORWARD
       });
       const getItemStyleCache = useCache();
-      const parsedHeight = computed2(() => Number.parseInt(`${props.height}`, 10));
-      const parsedWidth = computed2(() => Number.parseInt(`${props.width}`, 10));
-      const columnsToRender = computed2(() => {
+      const parsedHeight = computed(() => Number.parseInt(`${props.height}`, 10));
+      const parsedWidth = computed(() => Number.parseInt(`${props.width}`, 10));
+      const columnsToRender = computed(() => {
         const { totalColumn, totalRow, columnCache } = props;
         const { isScrolling, xAxisScrollDir, scrollLeft } = unref(states);
         if (totalColumn === 0 || totalRow === 0) {
@@ -39976,7 +40743,7 @@ var createGrid = ({
           stopIndex
         ];
       });
-      const rowsToRender = computed2(() => {
+      const rowsToRender = computed(() => {
         const { totalColumn, totalRow, rowCache } = props;
         const { isScrolling, yAxisScrollDir, scrollTop } = unref(states);
         if (totalColumn === 0 || totalRow === 0) {
@@ -39993,9 +40760,9 @@ var createGrid = ({
           stopIndex
         ];
       });
-      const estimatedTotalHeight = computed2(() => getEstimatedTotalHeight2(props, unref(cache2)));
-      const estimatedTotalWidth = computed2(() => getEstimatedTotalWidth2(props, unref(cache2)));
-      const windowStyle = computed2(() => {
+      const estimatedTotalHeight = computed(() => getEstimatedTotalHeight2(props, unref(cache2)));
+      const estimatedTotalWidth = computed(() => getEstimatedTotalWidth2(props, unref(cache2)));
+      const windowStyle = computed(() => {
         var _a2;
         return [
           {
@@ -40012,7 +40779,7 @@ var createGrid = ({
           (_a2 = props.style) != null ? _a2 : {}
         ];
       });
-      const innerStyle = computed2(() => {
+      const innerStyle = computed(() => {
         const width = `${unref(estimatedTotalWidth)}px`;
         const height = `${unref(estimatedTotalHeight)}px`;
         return {
@@ -40109,10 +40876,10 @@ var createGrid = ({
         });
       };
       const { onWheel } = useGridWheel({
-        atXStartEdge: computed2(() => states.value.scrollLeft <= 0),
-        atXEndEdge: computed2(() => states.value.scrollLeft >= estimatedTotalWidth.value - unref(parsedWidth)),
-        atYStartEdge: computed2(() => states.value.scrollTop <= 0),
-        atYEndEdge: computed2(() => states.value.scrollTop >= estimatedTotalHeight.value - unref(parsedHeight))
+        atXStartEdge: computed(() => states.value.scrollLeft <= 0),
+        atXEndEdge: computed(() => states.value.scrollLeft >= estimatedTotalWidth.value - unref(parsedWidth)),
+        atYStartEdge: computed(() => states.value.scrollTop <= 0),
+        atYEndEdge: computed(() => states.value.scrollTop >= estimatedTotalHeight.value - unref(parsedHeight))
       }, (x2, y) => {
         var _a2, _b, _c, _d;
         (_b = (_a2 = hScrollbar.value) == null ? void 0 : _a2.onMouseUp) == null ? void 0 : _b.call(_a2);
@@ -40123,6 +40890,9 @@ var createGrid = ({
           scrollLeft: Math.min(states.value.scrollLeft + x2, estimatedTotalWidth.value - width),
           scrollTop: Math.min(states.value.scrollTop + y, estimatedTotalHeight.value - height)
         });
+      });
+      useEventListener(windowRef, "wheel", onWheel, {
+        passive: false
       });
       const scrollTo = ({
         scrollLeft = states.value.scrollLeft,
@@ -40297,14 +41067,14 @@ var createGrid = ({
         if (totalRow > 0 && totalColumn > 0) {
           for (let row = rowStart; row <= rowEnd; row++) {
             for (let column2 = columnStart; column2 <= columnEnd; column2++) {
-              children.push((_a2 = slots.default) == null ? void 0 : _a2.call(slots, {
+              const key = itemKey({ columnIndex: column2, data, rowIndex: row });
+              children.push(h(Fragment, { key }, (_a2 = slots.default) == null ? void 0 : _a2.call(slots, {
                 columnIndex: column2,
                 data,
-                key: itemKey({ columnIndex: column2, data, rowIndex: row }),
                 isScrolling: useIsScrolling ? unref(states).isScrolling : void 0,
                 style: getItemStyle(row, column2),
                 rowIndex: row
-              }));
+              })));
             }
           }
         }
@@ -40335,7 +41105,6 @@ var createGrid = ({
             class: props.className,
             style: unref(windowStyle),
             onScroll,
-            onWheel,
             ref: windowRef
           }, !isString(Container2) ? { default: () => Inner } : Inner),
           horizontalScrollbar,
@@ -40348,7 +41117,7 @@ var createGrid = ({
 };
 
 // node_modules/element-plus/es/components/virtual-list/src/components/fixed-size-grid.mjs
-var SCOPE5 = "ElFixedSizeGrid";
+var SCOPE6 = "ElFixedSizeGrid";
 var FixedSizeGrid = createGrid({
   name: "ElFixedSizeGrid",
   getColumnPosition: ({ columnWidth }, index) => [
@@ -40458,13 +41227,13 @@ var FixedSizeGrid = createGrid({
   validateProps: ({ columnWidth, rowHeight }) => {
     if (true) {
       if (!isNumber3(columnWidth)) {
-        throwError(SCOPE5, `
+        throwError(SCOPE6, `
           "columnWidth" must be passed as number,
             instead ${typeof columnWidth} was given.
         `);
       }
       if (!isNumber3(rowHeight)) {
-        throwError(SCOPE5, `
+        throwError(SCOPE6, `
           "columnWidth" must be passed as number,
             instead ${typeof rowHeight} was given.
         `);
@@ -40475,7 +41244,7 @@ var FixedSizeGrid = createGrid({
 
 // node_modules/element-plus/es/components/virtual-list/src/components/dynamic-size-grid.mjs
 var { max: max3, min: min3, floor: floor3 } = Math;
-var SCOPE6 = "ElDynamicSizeGrid";
+var SCOPE7 = "ElDynamicSizeGrid";
 var ACCESS_SIZER_KEY_MAP = {
   column: "columnWidth",
   row: "rowHeight"
@@ -40699,13 +41468,13 @@ var DynamicSizeGrid = createGrid({
   validateProps: ({ columnWidth, rowHeight }) => {
     if (true) {
       if (!isFunction(columnWidth)) {
-        throwError(SCOPE6, `
+        throwError(SCOPE7, `
           "columnWidth" must be passed as function,
             instead ${typeof columnWidth} was given.
         `);
       }
       if (!isFunction(rowHeight)) {
-        throwError(SCOPE6, `
+        throwError(SCOPE7, `
           "rowHeight" must be passed as function,
             instead ${typeof rowHeight} was given.
         `);
@@ -40715,7 +41484,7 @@ var DynamicSizeGrid = createGrid({
 });
 
 // node_modules/element-plus/es/components/select-v2/src/group-item.mjs
-var _sfc_main108 = defineComponent({
+var _sfc_main110 = defineComponent({
   props: {
     item: {
       type: Object,
@@ -40732,22 +41501,12 @@ var _sfc_main108 = defineComponent({
   }
 });
 function _sfc_render24(_ctx, _cache, $props, $setup, $data, $options) {
-  return _ctx.item.isTitle ? (openBlock(), createElementBlock("div", {
-    key: 0,
+  return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.ns.be("group", "title")),
     style: normalizeStyle([_ctx.style, { lineHeight: `${_ctx.height}px` }])
-  }, toDisplayString(_ctx.item.label), 7)) : (openBlock(), createElementBlock("div", {
-    key: 1,
-    class: normalizeClass(_ctx.ns.be("group", "split")),
-    style: normalizeStyle(_ctx.style)
-  }, [
-    createBaseVNode("span", {
-      class: normalizeClass(_ctx.ns.be("group", "split-dash")),
-      style: normalizeStyle({ top: `${_ctx.height / 2}px` })
-    }, null, 6)
-  ], 6));
+  }, toDisplayString(_ctx.item.label), 7);
 }
-var GroupItem = _export_sfc(_sfc_main108, [["render", _sfc_render24], ["__file", "group-item.vue"]]);
+var GroupItem = _export_sfc(_sfc_main110, [["render", _sfc_render24], ["__file", "group-item.vue"]]);
 
 // node_modules/element-plus/es/components/select-v2/src/useOption.mjs
 function useOption2(props, { emit }) {
@@ -40773,7 +41532,7 @@ var defaultProps = {
   options: "options"
 };
 function useProps(props) {
-  const aliasProps = computed2(() => ({ ...defaultProps, ...props.props }));
+  const aliasProps = computed(() => ({ ...defaultProps, ...props.props }));
   const getLabel = (option) => get_default(option, aliasProps.value.label);
   const getValue3 = (option) => get_default(option, aliasProps.value.value);
   const getDisabled = (option) => get_default(option, aliasProps.value.disabled);
@@ -40890,10 +41649,9 @@ var SelectProps2 = buildProps({
     default: ["bottom-start", "top-start", "right", "left"]
   },
   tagType: { ...tagProps.type, default: "info" },
-  ariaLabel: {
-    type: String,
-    default: void 0
-  }
+  tagEffect: { ...tagProps.effect, default: "light" },
+  ...useEmptyValuesProps,
+  ...useAriaProps(["ariaLabel"])
 });
 var OptionProps = buildProps({
   data: Array,
@@ -40913,7 +41671,7 @@ var OptionProps = buildProps({
 var selectV2InjectionKey = Symbol("ElSelectV2Injection");
 
 // node_modules/element-plus/es/components/select-v2/src/option-item.mjs
-var _sfc_main109 = defineComponent({
+var _sfc_main111 = defineComponent({
   props: OptionProps,
   emits: ["select", "hover"],
   setup(props, { emit }) {
@@ -40929,7 +41687,6 @@ var _sfc_main109 = defineComponent({
     };
   }
 });
-var _hoisted_155 = ["aria-selected"];
 function _sfc_render25(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("li", {
     "aria-selected": _ctx.selected,
@@ -40941,8 +41698,8 @@ function _sfc_render25(_ctx, _cache, $props, $setup, $data, $options) {
       _ctx.ns.is("created", _ctx.created),
       _ctx.ns.is("hovering", _ctx.hovering)
     ]),
-    onMouseenter: _cache[0] || (_cache[0] = (...args) => _ctx.hoverItem && _ctx.hoverItem(...args)),
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.selectOptionClick && _ctx.selectOptionClick(...args), ["stop"]))
+    onMouseenter: _ctx.hoverItem,
+    onClick: withModifiers(_ctx.selectOptionClick, ["stop"])
   }, [
     renderSlot(_ctx.$slots, "default", {
       item: _ctx.item,
@@ -40951,9 +41708,9 @@ function _sfc_render25(_ctx, _cache, $props, $setup, $data, $options) {
     }, () => [
       createBaseVNode("span", null, toDisplayString(_ctx.getLabel(_ctx.item)), 1)
     ])
-  ], 46, _hoisted_155);
+  ], 46, ["aria-selected", "onMouseenter", "onClick"]);
 }
-var OptionItem = _export_sfc(_sfc_main109, [["render", _sfc_render25], ["__file", "option-item.vue"]]);
+var OptionItem = _export_sfc(_sfc_main111, [["render", _sfc_render25], ["__file", "option-item.vue"]]);
 
 // node_modules/element-plus/es/components/select-v2/src/select-dropdown.mjs
 var ElSelectMenu2 = defineComponent({
@@ -40980,13 +41737,13 @@ var ElSelectMenu2 = defineComponent({
     } = useProps(select.props);
     const cachedHeights = ref([]);
     const listRef = ref();
-    const size3 = computed2(() => props.data.length);
+    const size3 = computed(() => props.data.length);
     watch(() => size3.value, () => {
       var _a2, _b;
       (_b = (_a2 = select.tooltipRef.value).updatePopper) == null ? void 0 : _b.call(_a2);
     });
-    const isSized = computed2(() => isUndefined2(select.props.estimatedOptionHeight));
-    const listProps = computed2(() => {
+    const isSized = computed(() => isUndefined2(select.props.estimatedOptionHeight));
+    const listProps = computed(() => {
       if (isSized.value) {
         return {
           itemSize: select.props.itemHeight
@@ -41187,12 +41944,12 @@ function useAllowCreate(props, states) {
   const { aliasProps, getLabel, getValue: getValue3 } = useProps(props);
   const createOptionCount = ref(0);
   const cachedSelectedOption = ref(null);
-  const enableAllowCreateMode = computed2(() => {
+  const enableAllowCreateMode = computed(() => {
     return props.allowCreate && props.filterable;
   });
   function hasExistingOption(query) {
-    const hasValue = (option) => getValue3(option) === query;
-    return props.options && props.options.some(hasValue) || states.createdOptions.some(hasValue);
+    const hasOption = (option) => getLabel(option) === query;
+    return props.options && props.options.some(hasOption) || states.createdOptions.some(hasOption);
   }
   function selectNewOption(option) {
     if (!enableAllowCreateMode.value) {
@@ -41268,7 +42025,8 @@ var useSelect2 = (props, emit) => {
   const { inputId } = useFormItemInputId(props, {
     formItemContext: elFormItem
   });
-  const { getLabel, getValue: getValue3, getDisabled, getOptions } = useProps(props);
+  const { aliasProps, getLabel, getValue: getValue3, getDisabled, getOptions } = useProps(props);
+  const { valueOnClear, isEmptyValue: isEmptyValue2 } = useEmptyValues(props);
   const states = reactive({
     inputValue: "",
     cachedOptions: [],
@@ -41284,7 +42042,6 @@ var useSelect2 = (props, emit) => {
     menuVisibleOnFocus: false,
     isBeforeHide: false
   });
-  const selectedIndex = ref(-1);
   const popperSize = ref(-1);
   const selectRef = ref(null);
   const selectionRef = ref(null);
@@ -41297,7 +42054,18 @@ var useSelect2 = (props, emit) => {
   const menuRef = ref(null);
   const tagMenuRef = ref(null);
   const collapseItemRef = ref(null);
-  const { wrapperRef, isFocused, handleFocus, handleBlur } = useFocusController(inputRef, {
+  const {
+    isComposing,
+    handleCompositionStart,
+    handleCompositionEnd,
+    handleCompositionUpdate
+  } = useComposition({
+    afterComposition: (e) => onInput(e)
+  });
+  const { wrapperRef, isFocused } = useFocusController(inputRef, {
+    beforeFocus() {
+      return selectDisabled.value;
+    },
     afterFocus() {
       if (props.automaticDropdown && !expanded.value) {
         expanded.value = true;
@@ -41316,25 +42084,23 @@ var useSelect2 = (props, emit) => {
   const allOptions = ref([]);
   const filteredOptions = ref([]);
   const expanded = ref(false);
-  const selectDisabled = computed2(() => props.disabled || (elForm == null ? void 0 : elForm.disabled));
-  const popupHeight = computed2(() => {
+  const selectDisabled = computed(() => props.disabled || (elForm == null ? void 0 : elForm.disabled));
+  const popupHeight = computed(() => {
     const totalHeight = filteredOptions.value.length * props.itemHeight;
     return totalHeight > props.height ? props.height : totalHeight;
   });
-  const hasEmptyStringOption = computed2(() => allOptions.value.some((option) => getValue3(option) === ""));
-  const hasModelValue = computed2(() => {
-    return props.multiple ? isArray(props.modelValue) && props.modelValue.length > 0 : !isNil_default(props.modelValue) && (props.modelValue !== "" || hasEmptyStringOption.value);
+  const hasModelValue = computed(() => {
+    return props.multiple ? isArray(props.modelValue) && props.modelValue.length > 0 : !isEmptyValue2(props.modelValue);
   });
-  const showClearBtn = computed2(() => {
-    const criteria = props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
-    return criteria;
+  const showClearBtn = computed(() => {
+    return props.clearable && !selectDisabled.value && states.inputHovering && hasModelValue.value;
   });
-  const iconComponent = computed2(() => props.remote && props.filterable ? "" : arrow_down_default);
-  const iconReverse = computed2(() => iconComponent.value && nsSelect.is("reverse", expanded.value));
-  const validateState = computed2(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
-  const validateIcon = computed2(() => ValidateComponentsMap[validateState.value]);
-  const debounce$1 = computed2(() => props.remote ? 300 : 0);
-  const emptyText = computed2(() => {
+  const iconComponent = computed(() => props.remote && props.filterable ? "" : arrow_down_default);
+  const iconReverse = computed(() => iconComponent.value && nsSelect.is("reverse", expanded.value));
+  const validateState = computed(() => (elFormItem == null ? void 0 : elFormItem.validateState) || "");
+  const validateIcon = computed(() => ValidateComponentsMap[validateState.value]);
+  const debounce$1 = computed(() => props.remote ? 300 : 0);
+  const emptyText = computed(() => {
     if (props.loading) {
       return props.loadingText || t("el.select.loading");
     } else {
@@ -41368,9 +42134,8 @@ var useSelect2 = (props, emit) => {
         if (filtered.length > 0) {
           all.push({
             label: getLabel(item),
-            isTitle: true,
             type: "Group"
-          }, ...filtered, { type: "Group" });
+          }, ...filtered);
         }
       } else if (props.remote || isValidOption(item)) {
         all.push(item);
@@ -41382,23 +42147,23 @@ var useSelect2 = (props, emit) => {
     allOptions.value = filterOptions("");
     filteredOptions.value = filterOptions(states.inputValue);
   };
-  const allOptionsValueMap = computed2(() => {
+  const allOptionsValueMap = computed(() => {
     const valueMap = /* @__PURE__ */ new Map();
     allOptions.value.forEach((option, index) => {
       valueMap.set(getValueKey(getValue3(option)), { option, index });
     });
     return valueMap;
   });
-  const filteredOptionsValueMap = computed2(() => {
+  const filteredOptionsValueMap = computed(() => {
     const valueMap = /* @__PURE__ */ new Map();
     filteredOptions.value.forEach((option, index) => {
       valueMap.set(getValueKey(getValue3(option)), { option, index });
     });
     return valueMap;
   });
-  const optionsAllDisabled = computed2(() => filteredOptions.value.every((option) => getDisabled(option)));
+  const optionsAllDisabled = computed(() => filteredOptions.value.every((option) => getDisabled(option)));
   const selectSize = useFormSize();
-  const collapseTagSize = computed2(() => selectSize.value === "small" ? "small" : "default");
+  const collapseTagSize = computed(() => selectSize.value === "small" ? "small" : "default");
   const calculatePopperSize = () => {
     var _a2;
     popperSize.value = ((_a2 = selectRef.value) == null ? void 0 : _a2.offsetWidth) || 200;
@@ -41409,33 +42174,33 @@ var useSelect2 = (props, emit) => {
     const style = window.getComputedStyle(selectionRef.value);
     return Number.parseFloat(style.gap || "6px");
   };
-  const tagStyle = computed2(() => {
+  const tagStyle = computed(() => {
     const gapWidth = getGapWidth();
     const maxWidth = collapseItemRef.value && props.maxCollapseTags === 1 ? states.selectionWidth - states.collapseItemWidth - gapWidth : states.selectionWidth;
     return { maxWidth: `${maxWidth}px` };
   });
-  const collapseTagStyle = computed2(() => {
+  const collapseTagStyle = computed(() => {
     return { maxWidth: `${states.selectionWidth}px` };
   });
-  const inputStyle = computed2(() => ({
+  const inputStyle = computed(() => ({
     width: `${Math.max(states.calculatorWidth, MINIMUM_INPUT_WIDTH2)}px`
   }));
-  const shouldShowPlaceholder = computed2(() => {
+  const shouldShowPlaceholder = computed(() => {
     if (isArray(props.modelValue)) {
       return props.modelValue.length === 0 && !states.inputValue;
     }
     return props.filterable ? !states.inputValue : true;
   });
-  const currentPlaceholder = computed2(() => {
+  const currentPlaceholder = computed(() => {
     var _a2;
     const _placeholder = (_a2 = props.placeholder) != null ? _a2 : t("el.select.placeholder");
     return props.multiple || !hasModelValue.value ? _placeholder : states.selectedLabel;
   });
-  const popperRef = computed2(() => {
+  const popperRef = computed(() => {
     var _a2, _b;
     return (_b = (_a2 = tooltipRef.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
   });
-  const indexRef = computed2(() => {
+  const indexRef = computed(() => {
     if (props.multiple) {
       const len = props.modelValue.length;
       if (props.modelValue.length > 0 && filteredOptionsValueMap.value.has(props.modelValue[len - 1])) {
@@ -41450,7 +42215,7 @@ var useSelect2 = (props, emit) => {
     }
     return -1;
   });
-  const dropdownMenuVisible = computed2({
+  const dropdownMenuVisible = computed({
     get() {
       return expanded.value && emptyText.value !== false;
     },
@@ -41458,13 +42223,13 @@ var useSelect2 = (props, emit) => {
       expanded.value = val;
     }
   });
-  const showTagList = computed2(() => {
+  const showTagList = computed(() => {
     if (!props.multiple) {
       return [];
     }
     return props.collapseTags ? states.cachedOptions.slice(0, props.maxCollapseTags) : states.cachedOptions;
   });
-  const collapseTagList = computed2(() => {
+  const collapseTagList = computed(() => {
     if (!props.multiple) {
       return [];
     }
@@ -41476,11 +42241,6 @@ var useSelect2 = (props, emit) => {
     selectNewOption,
     clearAllNewOption
   } = useAllowCreate(props, states);
-  const {
-    handleCompositionStart,
-    handleCompositionUpdate,
-    handleCompositionEnd
-  } = useInput((e) => onInput(e));
   const toggleMenu = () => {
     if (selectDisabled.value)
       return;
@@ -41499,7 +42259,7 @@ var useSelect2 = (props, emit) => {
   };
   const debouncedOnInputChange = debounce_default(onInputChange, debounce$1.value);
   const handleQueryChange = (val) => {
-    if (states.previousQuery === val) {
+    if (states.previousQuery === val || isComposing.value) {
       return;
     }
     states.previousQuery = val;
@@ -41528,7 +42288,7 @@ var useSelect2 = (props, emit) => {
   const update2 = (val) => {
     emit(UPDATE_MODEL_EVENT, val);
     emitChange(val);
-    states.previousValue = String(val);
+    states.previousValue = props.multiple ? String(val) : val;
   };
   const getValueIndex = (arr = [], value) => {
     if (!isObject(value)) {
@@ -41568,7 +42328,7 @@ var useSelect2 = (props, emit) => {
     var _a2, _b;
     (_b = (_a2 = tagTooltipRef.value) == null ? void 0 : _a2.updatePopper) == null ? void 0 : _b.call(_a2);
   };
-  const onSelect = (option, idx) => {
+  const onSelect = (option) => {
     if (props.multiple) {
       let selectedOptions = props.modelValue.slice();
       const index = getValueIndex(selectedOptions, getValue3(option));
@@ -41592,7 +42352,6 @@ var useSelect2 = (props, emit) => {
         states.inputValue = "";
       }
     } else {
-      selectedIndex.value = idx;
       states.selectedLabel = getLabel(option);
       update2(getValue3(option));
       expanded.value = false;
@@ -41646,11 +42405,13 @@ var useSelect2 = (props, emit) => {
       const lastNotDisabledIndex = getLastNotDisabledIndex(selected);
       if (lastNotDisabledIndex < 0)
         return;
+      const removeTagValue = selected[lastNotDisabledIndex];
       selected.splice(lastNotDisabledIndex, 1);
       const option = states.cachedOptions[lastNotDisabledIndex];
       states.cachedOptions.splice(lastNotDisabledIndex, 1);
       removeNewOption(option);
       update2(selected);
+      emit("remove-tag", removeTagValue);
     }
   };
   const handleClear = () => {
@@ -41658,7 +42419,7 @@ var useSelect2 = (props, emit) => {
     if (isArray(props.modelValue)) {
       emptyValue = [];
     } else {
-      emptyValue = void 0;
+      emptyValue = valueOnClear.value;
     }
     if (props.multiple) {
       states.cachedOptions = [];
@@ -41673,7 +42434,7 @@ var useSelect2 = (props, emit) => {
   };
   const onKeyboardNavigate = (direction2, hoveringIndex = void 0) => {
     const options = filteredOptions.value;
-    if (!["forward", "backward"].includes(direction2) || selectDisabled.value || options.length <= 0 || optionsAllDisabled.value) {
+    if (!["forward", "backward"].includes(direction2) || selectDisabled.value || options.length <= 0 || optionsAllDisabled.value || isComposing.value) {
       return;
     }
     if (!expanded.value) {
@@ -41706,7 +42467,7 @@ var useSelect2 = (props, emit) => {
     if (!expanded.value) {
       return toggleMenu();
     } else if (~states.hoveringIndex && filteredOptions.value[states.hoveringIndex]) {
-      onSelect(filteredOptions.value[states.hoveringIndex], states.hoveringIndex);
+      onSelect(filteredOptions.value[states.hoveringIndex]);
     }
   };
   const onHoverOption = (idx) => {
@@ -41729,14 +42490,12 @@ var useSelect2 = (props, emit) => {
       return onInputChange();
     }
   };
-  const handleClickOutside = (event) => {
+  const handleClickOutside = () => {
     expanded.value = false;
-    if (isFocused.value) {
-      const _event2 = new FocusEvent("focus", event);
-      handleBlur(_event2);
-    }
+    isFocused.value && blur();
   };
   const handleMenuEnter = () => {
+    states.isBeforeHide = false;
     return nextTick(() => {
       if (~indexRef.value) {
         scrollToItem(states.hoveringIndex);
@@ -41746,24 +42505,31 @@ var useSelect2 = (props, emit) => {
   const scrollToItem = (index) => {
     menuRef.value.scrollToItem(index);
   };
-  const getOption = (value) => {
+  const getOption = (value, cachedOptions) => {
     const selectValue = getValueKey(value);
     if (allOptionsValueMap.value.has(selectValue)) {
       const { option } = allOptionsValueMap.value.get(selectValue);
       return option;
     }
+    if (cachedOptions && cachedOptions.length) {
+      const option = cachedOptions.find((option2) => getValueKey(getValue3(option2)) === selectValue);
+      if (option) {
+        return option;
+      }
+    }
     return {
-      value,
-      label: value
+      [aliasProps.value.value]: value,
+      [aliasProps.value.label]: value
     };
   };
   const initStates = () => {
     if (props.multiple) {
       if (props.modelValue.length > 0) {
+        const cachedOptions = states.cachedOptions.slice();
         states.cachedOptions.length = 0;
         states.previousValue = props.modelValue.toString();
         for (const value of props.modelValue) {
-          const option = getOption(value);
+          const option = getOption(value, cachedOptions);
           states.cachedOptions.push(option);
         }
       } else {
@@ -41801,7 +42567,7 @@ var useSelect2 = (props, emit) => {
   });
   watch(() => props.modelValue, (val, oldVal) => {
     var _a2;
-    if (!val || val.toString() !== states.previousValue) {
+    if (!val || props.multiple && val.toString() !== states.previousValue || !props.multiple && getValueKey(val) !== getValueKey(states.previousValue)) {
       initStates();
     }
     if (!isEqual_default(val, oldVal) && props.validateEvent) {
@@ -41903,12 +42669,10 @@ var useSelect2 = (props, emit) => {
     getValue: getValue3,
     getDisabled,
     getValueKey,
-    handleBlur,
     handleClear,
     handleClickOutside,
     handleDel,
     handleEsc,
-    handleFocus,
     focus,
     blur,
     handleMenuEnter,
@@ -41932,7 +42696,7 @@ var useSelect2 = (props, emit) => {
 };
 
 // node_modules/element-plus/es/components/select-v2/src/select.mjs
-var _sfc_main110 = defineComponent({
+var _sfc_main112 = defineComponent({
   name: "ElSelectV2",
   components: {
     ElSelectMenu: ElSelectMenu2,
@@ -41952,7 +42716,7 @@ var _sfc_main110 = defineComponent({
     "blur"
   ],
   setup(props, { emit }) {
-    const modelValue = computed2(() => {
+    const modelValue = computed(() => {
       const { modelValue: rawModelValue, multiple } = props;
       const fallback = multiple ? [] : void 0;
       if (isArray(rawModelValue)) {
@@ -41982,8 +42746,6 @@ var _sfc_main110 = defineComponent({
     };
   }
 });
-var _hoisted_156 = ["id", "autocomplete", "aria-expanded", "aria-label", "disabled", "readonly", "name"];
-var _hoisted_235 = ["textContent"];
 function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_tag = resolveComponent("el-tag");
   const _component_el_tooltip = resolveComponent("el-tooltip");
@@ -41993,9 +42755,8 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
   return withDirectives((openBlock(), createElementBlock("div", {
     ref: "selectRef",
     class: normalizeClass([_ctx.nsSelect.b(), _ctx.nsSelect.m(_ctx.selectSize)]),
-    onMouseenter: _cache[14] || (_cache[14] = ($event) => _ctx.states.inputHovering = true),
-    onMouseleave: _cache[15] || (_cache[15] = ($event) => _ctx.states.inputHovering = false),
-    onClick: _cache[16] || (_cache[16] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["prevent", "stop"]))
+    onMouseenter: ($event) => _ctx.states.inputHovering = true,
+    onMouseleave: ($event) => _ctx.states.inputHovering = false
   }, [
     createVNode(_component_el_tooltip, {
       ref: "tooltipRef",
@@ -42013,7 +42774,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
       trigger: "click",
       persistent: _ctx.persistent,
       onBeforeShow: _ctx.handleMenuEnter,
-      onHide: _cache[13] || (_cache[13] = ($event) => _ctx.states.isBeforeHide = false)
+      onHide: ($event) => _ctx.states.isBeforeHide = false
     }, {
       default: withCtx(() => [
         createBaseVNode("div", {
@@ -42024,7 +42785,8 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.nsSelect.is("hovering", _ctx.states.inputHovering),
             _ctx.nsSelect.is("filterable", _ctx.filterable),
             _ctx.nsSelect.is("disabled", _ctx.selectDisabled)
-          ])
+          ]),
+          onClick: withModifiers(_ctx.toggleMenu, ["prevent"])
         }, [
           _ctx.$slots.prefix ? (openBlock(), createElementBlock("div", {
             key: 0,
@@ -42050,6 +42812,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                     closable: !_ctx.selectDisabled && !_ctx.getDisabled(item),
                     size: _ctx.collapseTagSize,
                     type: _ctx.tagType,
+                    effect: _ctx.tagEffect,
                     "disable-transitions": "",
                     style: normalizeStyle(_ctx.tagStyle),
                     onClose: ($event) => _ctx.deleteTag($event, item)
@@ -42057,10 +42820,17 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                     default: withCtx(() => [
                       createBaseVNode("span", {
                         class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                      }, toDisplayString(_ctx.getLabel(item)), 3)
+                      }, [
+                        renderSlot(_ctx.$slots, "label", {
+                          label: _ctx.getLabel(item),
+                          value: _ctx.getValue(item)
+                        }, () => [
+                          createTextVNode(toDisplayString(_ctx.getLabel(item)), 1)
+                        ])
+                      ], 2)
                     ]),
                     _: 2
-                  }, 1032, ["closable", "size", "type", "style", "onClose"])
+                  }, 1032, ["closable", "size", "type", "effect", "style", "onClose"])
                 ], 2);
               }), 128)),
               _ctx.collapseTags && _ctx.modelValue.length > _ctx.maxCollapseTags ? (openBlock(), createBlock(_component_el_tooltip, {
@@ -42081,6 +42851,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                       closable: false,
                       size: _ctx.collapseTagSize,
                       type: _ctx.tagType,
+                      effect: _ctx.tagEffect,
                       style: normalizeStyle(_ctx.collapseTagStyle),
                       "disable-transitions": ""
                     }, {
@@ -42090,7 +42861,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                         }, " + " + toDisplayString(_ctx.modelValue.length - _ctx.maxCollapseTags), 3)
                       ]),
                       _: 1
-                    }, 8, ["size", "type", "style"])
+                    }, 8, ["size", "type", "effect", "style"])
                   ], 2)
                 ]),
                 content: withCtx(() => [
@@ -42108,21 +42879,29 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                           closable: !_ctx.selectDisabled && !_ctx.getDisabled(selected),
                           size: _ctx.collapseTagSize,
                           type: _ctx.tagType,
+                          effect: _ctx.tagEffect,
                           "disable-transitions": "",
                           onClose: ($event) => _ctx.deleteTag($event, selected)
                         }, {
                           default: withCtx(() => [
                             createBaseVNode("span", {
                               class: normalizeClass(_ctx.nsSelect.e("tags-text"))
-                            }, toDisplayString(_ctx.getLabel(selected)), 3)
+                            }, [
+                              renderSlot(_ctx.$slots, "label", {
+                                label: _ctx.getLabel(selected),
+                                value: _ctx.getValue(selected)
+                              }, () => [
+                                createTextVNode(toDisplayString(_ctx.getLabel(selected)), 1)
+                              ])
+                            ], 2)
                           ]),
                           _: 2
-                        }, 1032, ["closable", "size", "type", "onClose"])
+                        }, 1032, ["closable", "size", "type", "effect", "onClose"])
                       ], 2);
                     }), 128))
                   ], 2)
                 ]),
-                _: 1
+                _: 3
               }, 8, ["disabled", "effect", "teleported"])) : createCommentVNode("v-if", true)
             ]) : createCommentVNode("v-if", true),
             !_ctx.selectDisabled ? (openBlock(), createElementBlock("div", {
@@ -42136,7 +42915,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
               withDirectives(createBaseVNode("input", {
                 id: _ctx.inputId,
                 ref: "inputRef",
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.states.inputValue = $event),
+                "onUpdate:modelValue": ($event) => _ctx.states.inputValue = $event,
                 style: normalizeStyle(_ctx.inputStyle),
                 autocomplete: _ctx.autocomplete,
                 "aria-autocomplete": "list",
@@ -42151,21 +42930,19 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                 spellcheck: "false",
                 type: "text",
                 name: _ctx.name,
-                onFocus: _cache[1] || (_cache[1] = (...args) => _ctx.handleFocus && _ctx.handleFocus(...args)),
-                onBlur: _cache[2] || (_cache[2] = (...args) => _ctx.handleBlur && _ctx.handleBlur(...args)),
-                onInput: _cache[3] || (_cache[3] = (...args) => _ctx.onInput && _ctx.onInput(...args)),
-                onCompositionstart: _cache[4] || (_cache[4] = (...args) => _ctx.handleCompositionStart && _ctx.handleCompositionStart(...args)),
-                onCompositionupdate: _cache[5] || (_cache[5] = (...args) => _ctx.handleCompositionUpdate && _ctx.handleCompositionUpdate(...args)),
-                onCompositionend: _cache[6] || (_cache[6] = (...args) => _ctx.handleCompositionEnd && _ctx.handleCompositionEnd(...args)),
+                onInput: _ctx.onInput,
+                onCompositionstart: _ctx.handleCompositionStart,
+                onCompositionupdate: _ctx.handleCompositionUpdate,
+                onCompositionend: _ctx.handleCompositionEnd,
                 onKeydown: [
-                  _cache[7] || (_cache[7] = withKeys(withModifiers(($event) => _ctx.onKeyboardNavigate("backward"), ["stop", "prevent"]), ["up"])),
-                  _cache[8] || (_cache[8] = withKeys(withModifiers(($event) => _ctx.onKeyboardNavigate("forward"), ["stop", "prevent"]), ["down"])),
-                  _cache[9] || (_cache[9] = withKeys(withModifiers((...args) => _ctx.onKeyboardSelect && _ctx.onKeyboardSelect(...args), ["stop", "prevent"]), ["enter"])),
-                  _cache[10] || (_cache[10] = withKeys(withModifiers((...args) => _ctx.handleEsc && _ctx.handleEsc(...args), ["stop", "prevent"]), ["esc"])),
-                  _cache[11] || (_cache[11] = withKeys(withModifiers((...args) => _ctx.handleDel && _ctx.handleDel(...args), ["stop"]), ["delete"]))
+                  withKeys(withModifiers(($event) => _ctx.onKeyboardNavigate("backward"), ["stop", "prevent"]), ["up"]),
+                  withKeys(withModifiers(($event) => _ctx.onKeyboardNavigate("forward"), ["stop", "prevent"]), ["down"]),
+                  withKeys(withModifiers(_ctx.onKeyboardSelect, ["stop", "prevent"]), ["enter"]),
+                  withKeys(withModifiers(_ctx.handleEsc, ["stop", "prevent"]), ["esc"]),
+                  withKeys(withModifiers(_ctx.handleDel, ["stop"]), ["delete"])
                 ],
-                onClick: _cache[12] || (_cache[12] = withModifiers((...args) => _ctx.toggleMenu && _ctx.toggleMenu(...args), ["stop"]))
-              }, null, 46, _hoisted_156), [
+                onClick: withModifiers(_ctx.toggleMenu, ["stop"])
+              }, null, 46, ["id", "onUpdate:modelValue", "autocomplete", "aria-expanded", "aria-label", "disabled", "readonly", "name", "onInput", "onCompositionstart", "onCompositionupdate", "onCompositionend", "onKeydown", "onClick"]), [
                 [vModelText, _ctx.states.inputValue]
               ]),
               _ctx.filterable ? (openBlock(), createElementBlock("span", {
@@ -42174,7 +42951,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                 "aria-hidden": "true",
                 class: normalizeClass(_ctx.nsSelect.e("input-calculator")),
                 textContent: toDisplayString(_ctx.states.inputValue)
-              }, null, 10, _hoisted_235)) : createCommentVNode("v-if", true)
+              }, null, 10, ["textContent"])) : createCommentVNode("v-if", true)
             ], 2)) : createCommentVNode("v-if", true),
             _ctx.shouldShowPlaceholder ? (openBlock(), createElementBlock("div", {
               key: 2,
@@ -42184,7 +42961,13 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
                 _ctx.nsSelect.is("transparent", !_ctx.hasModelValue || _ctx.expanded && !_ctx.states.inputValue)
               ])
             }, [
-              createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+              _ctx.hasModelValue ? renderSlot(_ctx.$slots, "label", {
+                key: 0,
+                label: _ctx.currentPlaceholder,
+                value: _ctx.modelValue
+              }, () => [
+                createBaseVNode("span", null, toDisplayString(_ctx.currentPlaceholder), 1)
+              ]) : (openBlock(), createElementBlock("span", { key: 1 }, toDisplayString(_ctx.currentPlaceholder), 1))
             ], 2)) : createCommentVNode("v-if", true)
           ], 2),
           createBaseVNode("div", {
@@ -42204,7 +42987,11 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
             ]) : createCommentVNode("v-if", true),
             _ctx.showClearBtn && _ctx.clearIcon ? (openBlock(), createBlock(_component_el_icon, {
               key: 1,
-              class: normalizeClass([_ctx.nsSelect.e("caret"), _ctx.nsInput.e("icon")]),
+              class: normalizeClass([
+                _ctx.nsSelect.e("caret"),
+                _ctx.nsInput.e("icon"),
+                _ctx.nsSelect.e("clear")
+              ]),
               onClick: withModifiers(_ctx.handleClear, ["prevent", "stop"])
             }, {
               default: withCtx(() => [
@@ -42222,7 +43009,7 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
               _: 1
             }, 8, ["class"])) : createCommentVNode("v-if", true)
           ], 2)
-        ], 2)
+        ], 10, ["onClick"])
       ]),
       content: withCtx(() => [
         createVNode(_component_el_select_menu, {
@@ -42281,19 +43068,15 @@ function _sfc_render26(_ctx, _cache, $props, $setup, $data, $options) {
         ]), 1032, ["data", "width", "hovering-index", "scrollbar-always-on"])
       ]),
       _: 3
-    }, 8, ["visible", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "placement", "transition", "persistent", "onBeforeShow"])
-  ], 34)), [
+    }, 8, ["visible", "teleported", "popper-class", "popper-options", "fallback-placements", "effect", "placement", "transition", "persistent", "onBeforeShow", "onHide"])
+  ], 42, ["onMouseenter", "onMouseleave"])), [
     [_directive_click_outside, _ctx.handleClickOutside, _ctx.popperRef]
   ]);
 }
-var Select2 = _export_sfc(_sfc_main110, [["render", _sfc_render26], ["__file", "select.vue"]]);
+var Select2 = _export_sfc(_sfc_main112, [["render", _sfc_render26], ["__file", "select.vue"]]);
 
 // node_modules/element-plus/es/components/select-v2/index.mjs
-Select2.install = (app) => {
-  app.component(Select2.name, Select2);
-};
-var _Select = Select2;
-var ElSelectV2 = _Select;
+var ElSelectV2 = withInstall(Select2);
 
 // node_modules/element-plus/es/components/skeleton/src/skeleton.mjs
 var skeletonProps = buildProps({
@@ -42338,11 +43121,11 @@ var skeletonItemProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/skeleton/src/skeleton-item2.mjs
-var __default__75 = defineComponent({
+var __default__76 = defineComponent({
   name: "ElSkeletonItem"
 });
-var _sfc_main111 = defineComponent({
-  ...__default__75,
+var _sfc_main113 = defineComponent({
+  ...__default__76,
   props: skeletonItemProps,
   setup(__props) {
     const ns = useNamespace("skeleton");
@@ -42355,14 +43138,14 @@ var _sfc_main111 = defineComponent({
     };
   }
 });
-var SkeletonItem = _export_sfc(_sfc_main111, [["__file", "skeleton-item.vue"]]);
+var SkeletonItem = _export_sfc(_sfc_main113, [["__file", "skeleton-item.vue"]]);
 
 // node_modules/element-plus/es/components/skeleton/src/skeleton2.mjs
-var __default__76 = defineComponent({
+var __default__77 = defineComponent({
   name: "ElSkeleton"
 });
-var _sfc_main112 = defineComponent({
-  ...__default__76,
+var _sfc_main114 = defineComponent({
+  ...__default__77,
   props: skeletonProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -42400,7 +43183,7 @@ var _sfc_main112 = defineComponent({
     };
   }
 });
-var Skeleton = _export_sfc(_sfc_main112, [["__file", "skeleton.vue"]]);
+var Skeleton = _export_sfc(_sfc_main114, [["__file", "skeleton.vue"]]);
 
 // node_modules/element-plus/es/components/skeleton/index.mjs
 var ElSkeleton = withInstall(Skeleton, {
@@ -42457,10 +43240,6 @@ var sliderProps = buildProps({
     type: Number,
     default: 300
   },
-  label: {
-    type: String,
-    default: void 0
-  },
   rangeStartLabel: {
     type: String,
     default: void 0
@@ -42488,7 +43267,8 @@ var sliderProps = buildProps({
   validateEvent: {
     type: Boolean,
     default: true
-  }
+  },
+  ...useAriaProps(["ariaLabel"])
 });
 var isValidValue = (value) => isNumber3(value) || isArray(value) && value.every(isNumber3);
 var sliderEmits = {
@@ -42529,7 +43309,7 @@ var useLifecycle = (props, initData, resetSize) => {
 
 // node_modules/element-plus/es/components/slider/src/composables/use-marks.mjs
 var useMarks = (props) => {
-  return computed2(() => {
+  return computed(() => {
     if (!props.marks) {
       return [];
     }
@@ -42552,25 +43332,25 @@ var useSlide = (props, initData, emit) => {
     firstButton,
     secondButton
   };
-  const sliderDisabled = computed2(() => {
+  const sliderDisabled = computed(() => {
     return props.disabled || (elForm == null ? void 0 : elForm.disabled) || false;
   });
-  const minValue = computed2(() => {
+  const minValue = computed(() => {
     return Math.min(initData.firstValue, initData.secondValue);
   });
-  const maxValue = computed2(() => {
+  const maxValue = computed(() => {
     return Math.max(initData.firstValue, initData.secondValue);
   });
-  const barSize = computed2(() => {
+  const barSize = computed(() => {
     return props.range ? `${100 * (maxValue.value - minValue.value) / (props.max - props.min)}%` : `${100 * (initData.firstValue - props.min) / (props.max - props.min)}%`;
   });
-  const barStart = computed2(() => {
+  const barStart = computed(() => {
     return props.range ? `${100 * (minValue.value - props.min) / (props.max - props.min)}%` : "0%";
   });
-  const runwayStyle = computed2(() => {
+  const runwayStyle = computed(() => {
     return props.vertical ? { height: props.height } : {};
   });
-  const barStyle = computed2(() => {
+  const barStyle = computed(() => {
     return props.vertical ? {
       height: barSize.value,
       bottom: barStart.value
@@ -42603,8 +43383,8 @@ var useSlide = (props, initData, emit) => {
     return buttonRef;
   };
   const setFirstValue = (firstValue) => {
-    initData.firstValue = firstValue;
-    _emit(props.range ? [minValue.value, maxValue.value] : firstValue);
+    initData.firstValue = firstValue != null ? firstValue : props.min;
+    _emit(props.range ? [minValue.value, maxValue.value] : firstValue != null ? firstValue : props.min);
   };
   const setSecondValue = (secondValue) => {
     initData.secondValue = secondValue;
@@ -42658,6 +43438,11 @@ var useSlide = (props, initData, emit) => {
       emitChange();
     }
   };
+  const onSliderMarkerDown = (position) => {
+    if (sliderDisabled.value || initData.dragging)
+      return;
+    setPosition(position);
+  };
   return {
     elFormItem,
     slider,
@@ -42674,6 +43459,7 @@ var useSlide = (props, initData, emit) => {
     onSliderWrapperPrevent,
     onSliderClick,
     onSliderDown,
+    onSliderMarkerDown,
     setFirstValue,
     setSecondValue
   };
@@ -42684,10 +43470,10 @@ var { left, down, right, up, home, end, pageUp, pageDown } = EVENT_CODE;
 var useTooltip = (props, formatTooltip, showTooltip) => {
   const tooltip = ref();
   const tooltipVisible = ref(false);
-  const enableFormat = computed2(() => {
+  const enableFormat = computed(() => {
     return formatTooltip.value instanceof Function;
   });
-  const formatValue = computed2(() => {
+  const formatValue = computed(() => {
     return enableFormat.value && formatTooltip.value(props.modelValue) || props.modelValue;
   });
   const displayTooltip = debounce_default(() => {
@@ -42720,10 +43506,10 @@ var useSliderButton = (props, initData, emit) => {
   } = inject(sliderContextKey);
   const { tooltip, tooltipVisible, formatValue, displayTooltip, hideTooltip } = useTooltip(props, formatTooltip, showTooltip);
   const button = ref();
-  const currentPosition = computed2(() => {
+  const currentPosition = computed(() => {
     return `${(props.modelValue - min4.value) / (max4.value - min4.value) * 100}%`;
   });
-  const wrapperStyle = computed2(() => {
+  const wrapperStyle = computed(() => {
     return props.vertical ? { bottom: currentPosition.value } : { left: currentPosition.value };
   });
   const handleMouseEnter = () => {
@@ -42887,6 +43673,7 @@ var useSliderButton = (props, initData, emit) => {
   watch(() => initData.dragging, (val) => {
     updateDragging(val);
   });
+  useEventListener(button, "touchstart", onButtonDown, { passive: false });
   return {
     disabled,
     button,
@@ -42905,7 +43692,7 @@ var useSliderButton = (props, initData, emit) => {
 
 // node_modules/element-plus/es/components/slider/src/composables/use-stops.mjs
 var useStops = (props, initData, minValue, maxValue) => {
-  const stops = computed2(() => {
+  const stops = computed(() => {
     if (!props.showStops || props.min > props.max)
       return [];
     if (props.step === 0) {
@@ -43024,12 +43811,11 @@ var sliderButtonEmits = {
 };
 
 // node_modules/element-plus/es/components/slider/src/button2.mjs
-var _hoisted_157 = ["tabindex"];
-var __default__77 = defineComponent({
+var __default__78 = defineComponent({
   name: "ElSliderButton"
 });
-var _sfc_main113 = defineComponent({
-  ...__default__77,
+var _sfc_main115 = defineComponent({
+  ...__default__78,
   props: sliderButtonProps,
   emits: sliderButtonEmits,
   setup(__props, { expose, emit }) {
@@ -43076,13 +43862,12 @@ var _sfc_main113 = defineComponent({
         class: normalizeClass([unref(ns).e("button-wrapper"), { hover: unref(hovering), dragging: unref(dragging) }]),
         style: normalizeStyle(unref(wrapperStyle)),
         tabindex: unref(disabled) ? -1 : 0,
-        onMouseenter: _cache[0] || (_cache[0] = (...args) => unref(handleMouseEnter) && unref(handleMouseEnter)(...args)),
-        onMouseleave: _cache[1] || (_cache[1] = (...args) => unref(handleMouseLeave) && unref(handleMouseLeave)(...args)),
-        onMousedown: _cache[2] || (_cache[2] = (...args) => unref(onButtonDown) && unref(onButtonDown)(...args)),
-        onTouchstart: _cache[3] || (_cache[3] = (...args) => unref(onButtonDown) && unref(onButtonDown)(...args)),
-        onFocus: _cache[4] || (_cache[4] = (...args) => unref(handleMouseEnter) && unref(handleMouseEnter)(...args)),
-        onBlur: _cache[5] || (_cache[5] = (...args) => unref(handleMouseLeave) && unref(handleMouseLeave)(...args)),
-        onKeydown: _cache[6] || (_cache[6] = (...args) => unref(onKeyDown) && unref(onKeyDown)(...args))
+        onMouseenter: unref(handleMouseEnter),
+        onMouseleave: unref(handleMouseLeave),
+        onMousedown: unref(onButtonDown),
+        onFocus: unref(handleMouseEnter),
+        onBlur: unref(handleMouseLeave),
+        onKeydown: unref(onKeyDown)
       }, [
         createVNode(unref(ElTooltip), {
           ref_key: "tooltip",
@@ -43105,11 +43890,11 @@ var _sfc_main113 = defineComponent({
           ]),
           _: 1
         }, 8, ["visible", "placement", "popper-class", "disabled"])
-      ], 46, _hoisted_157);
+      ], 46, ["tabindex", "onMouseenter", "onMouseleave", "onMousedown", "onFocus", "onBlur", "onKeydown"]);
     };
   }
 });
-var SliderButton = _export_sfc(_sfc_main113, [["__file", "button.vue"]]);
+var SliderButton = _export_sfc(_sfc_main115, [["__file", "button.vue"]]);
 
 // node_modules/element-plus/es/components/slider/src/marker.mjs
 var sliderMarkerProps = buildProps({
@@ -43123,10 +43908,10 @@ var SliderMarker = defineComponent({
   props: sliderMarkerProps,
   setup(props) {
     const ns = useNamespace("slider");
-    const label = computed2(() => {
+    const label = computed(() => {
       return isString(props.mark) ? props.mark : props.mark.label;
     });
-    const style = computed2(() => isString(props.mark) ? void 0 : props.mark.style);
+    const style = computed(() => isString(props.mark) ? void 0 : props.mark.style);
     return () => h("div", {
       class: ns.e("marks-text"),
       style: style.value
@@ -43135,13 +43920,11 @@ var SliderMarker = defineComponent({
 });
 
 // node_modules/element-plus/es/components/slider/src/slider2.mjs
-var _hoisted_158 = ["id", "role", "aria-label", "aria-labelledby"];
-var _hoisted_236 = { key: 1 };
-var __default__78 = defineComponent({
+var __default__79 = defineComponent({
   name: "ElSlider"
 });
-var _sfc_main114 = defineComponent({
-  ...__default__78,
+var _sfc_main116 = defineComponent({
+  ...__default__79,
   props: sliderProps,
   emits: sliderEmits,
   setup(__props, { expose, emit }) {
@@ -43170,6 +43953,7 @@ var _sfc_main114 = defineComponent({
       onSliderWrapperPrevent,
       onSliderClick,
       onSliderDown,
+      onSliderMarkerDown,
       setFirstValue,
       setSecondValue
     } = useSlide(props, initData, emit);
@@ -43178,30 +43962,30 @@ var _sfc_main114 = defineComponent({
       formItemContext: elFormItem
     });
     const sliderWrapperSize = useFormSize();
-    const sliderInputSize = computed2(() => props.inputSize || sliderWrapperSize.value);
-    const groupLabel = computed2(() => {
-      return props.label || t("el.slider.defaultLabel", {
+    const sliderInputSize = computed(() => props.inputSize || sliderWrapperSize.value);
+    const groupLabel = computed(() => {
+      return props.ariaLabel || t("el.slider.defaultLabel", {
         min: props.min,
         max: props.max
       });
     });
-    const firstButtonLabel = computed2(() => {
+    const firstButtonLabel = computed(() => {
       if (props.range) {
         return props.rangeStartLabel || t("el.slider.defaultRangeStartLabel");
       } else {
         return groupLabel.value;
       }
     });
-    const firstValueText = computed2(() => {
+    const firstValueText = computed(() => {
       return props.formatValueText ? props.formatValueText(firstValue.value) : `${firstValue.value}`;
     });
-    const secondButtonLabel = computed2(() => {
+    const secondButtonLabel = computed(() => {
       return props.rangeEndLabel || t("el.slider.defaultRangeEndLabel");
     });
-    const secondValueText = computed2(() => {
+    const secondValueText = computed(() => {
       return props.formatValueText ? props.formatValueText(secondValue.value) : `${secondValue.value}`;
     });
-    const sliderKls = computed2(() => [
+    const sliderKls = computed(() => [
       ns.b(),
       ns.m(sliderWrapperSize.value),
       ns.is("vertical", props.vertical),
@@ -43209,7 +43993,7 @@ var _sfc_main114 = defineComponent({
     ]);
     const markList = useMarks(props);
     useWatch(props, initData, minValue, maxValue, emit, elFormItem);
-    const precision = computed2(() => {
+    const precision = computed(() => {
       const precisions = [props.min, props.max, props.step].map((item) => {
         const decimal = `${item}`.split(".")[1];
         return decimal ? decimal.length : 0;
@@ -43221,6 +44005,12 @@ var _sfc_main114 = defineComponent({
     const updateDragging = (val) => {
       initData.dragging = val;
     };
+    useEventListener(sliderWrapper, "touchstart", onSliderWrapperPrevent, {
+      passive: false
+    });
+    useEventListener(sliderWrapper, "touchmove", onSliderWrapperPrevent, {
+      passive: false
+    });
     provide(sliderContextKey, {
       ...toRefs(props),
       sliderSize,
@@ -43242,9 +44032,7 @@ var _sfc_main114 = defineComponent({
         class: normalizeClass(unref(sliderKls)),
         role: _ctx.range ? "group" : void 0,
         "aria-label": _ctx.range && !unref(isLabeledByFormItem) ? unref(groupLabel) : void 0,
-        "aria-labelledby": _ctx.range && unref(isLabeledByFormItem) ? (_a2 = unref(elFormItem)) == null ? void 0 : _a2.labelId : void 0,
-        onTouchstart: _cache[2] || (_cache[2] = (...args) => unref(onSliderWrapperPrevent) && unref(onSliderWrapperPrevent)(...args)),
-        onTouchmove: _cache[3] || (_cache[3] = (...args) => unref(onSliderWrapperPrevent) && unref(onSliderWrapperPrevent)(...args))
+        "aria-labelledby": _ctx.range && unref(isLabeledByFormItem) ? (_a2 = unref(elFormItem)) == null ? void 0 : _a2.labelId : void 0
       }, [
         createBaseVNode("div", {
           ref_key: "slider",
@@ -43255,8 +44043,8 @@ var _sfc_main114 = defineComponent({
             unref(ns).is("disabled", unref(sliderDisabled))
           ]),
           style: normalizeStyle(unref(runwayStyle)),
-          onMousedown: _cache[0] || (_cache[0] = (...args) => unref(onSliderDown) && unref(onSliderDown)(...args)),
-          onTouchstart: _cache[1] || (_cache[1] = (...args) => unref(onSliderDown) && unref(onSliderDown)(...args))
+          onMousedown: unref(onSliderDown),
+          onTouchstartPassive: unref(onSliderDown)
         }, [
           createBaseVNode("div", {
             class: normalizeClass(unref(ns).e("bar")),
@@ -43299,7 +44087,7 @@ var _sfc_main114 = defineComponent({
             "aria-disabled": unref(sliderDisabled),
             "onUpdate:modelValue": unref(setSecondValue)
           }, null, 8, ["model-value", "vertical", "tooltip-class", "placement", "aria-label", "aria-valuemin", "aria-valuemax", "aria-valuenow", "aria-valuetext", "aria-orientation", "aria-disabled", "onUpdate:modelValue"])) : createCommentVNode("v-if", true),
-          _ctx.showStops ? (openBlock(), createElementBlock("div", _hoisted_236, [
+          _ctx.showStops ? (openBlock(), createElementBlock("div", { key: 1 }, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(unref(stops), (item, key) => {
               return openBlock(), createElementBlock("div", {
                 key,
@@ -43325,12 +44113,13 @@ var _sfc_main114 = defineComponent({
                 return openBlock(), createBlock(unref(SliderMarker), {
                   key,
                   mark: item.mark,
-                  style: normalizeStyle(unref(getStopStyle)(item.position))
-                }, null, 8, ["mark", "style"]);
+                  style: normalizeStyle(unref(getStopStyle)(item.position)),
+                  onMousedown: withModifiers(($event) => unref(onSliderMarkerDown)(item.position), ["stop"])
+                }, null, 8, ["mark", "style", "onMousedown"]);
               }), 128))
             ], 2)
           ], 64)) : createCommentVNode("v-if", true)
-        ], 38),
+        ], 46, ["onMousedown", "onTouchstartPassive"]),
         _ctx.showInput && !_ctx.range ? (openBlock(), createBlock(unref(ElInputNumber), {
           key: 0,
           ref: "input",
@@ -43341,16 +44130,17 @@ var _sfc_main114 = defineComponent({
           controls: _ctx.showInputControls,
           min: _ctx.min,
           max: _ctx.max,
+          precision: unref(precision),
           debounce: _ctx.debounce,
           size: unref(sliderInputSize),
           "onUpdate:modelValue": unref(setFirstValue),
           onChange: unref(emitChange)
-        }, null, 8, ["model-value", "class", "step", "disabled", "controls", "min", "max", "debounce", "size", "onUpdate:modelValue", "onChange"])) : createCommentVNode("v-if", true)
-      ], 42, _hoisted_158);
+        }, null, 8, ["model-value", "class", "step", "disabled", "controls", "min", "max", "precision", "debounce", "size", "onUpdate:modelValue", "onChange"])) : createCommentVNode("v-if", true)
+      ], 10, ["id", "role", "aria-label", "aria-labelledby"]);
     };
   }
 });
-var Slider = _export_sfc(_sfc_main114, [["__file", "slider.vue"]]);
+var Slider = _export_sfc(_sfc_main116, [["__file", "slider.vue"]]);
 
 // node_modules/element-plus/es/components/slider/index.mjs
 var ElSlider = withInstall(Slider);
@@ -43366,7 +44156,7 @@ var SpaceItem = defineComponent({
   props: spaceItemProps,
   setup(props, { slots }) {
     const ns = useNamespace("space");
-    const classes = computed2(() => `${props.prefixCls || ns.b()}__item`);
+    const classes = computed(() => `${props.prefixCls || ns.b()}__item`);
     return () => h("div", { class: classes.value }, renderSlot(slots, "default"));
   }
 });
@@ -43379,10 +44169,10 @@ var SIZE_MAP = {
 };
 function useSpace(props) {
   const ns = useNamespace("space");
-  const classes = computed2(() => [ns.b(), ns.m(props.direction), props.class]);
+  const classes = computed(() => [ns.b(), ns.m(props.direction), props.class]);
   const horizontalSize = ref(0);
   const verticalSize = ref(0);
-  const containerStyle = computed2(() => {
+  const containerStyle = computed(() => {
     const wrapKls = props.wrap || props.fill ? { flexWrap: "wrap" } : {};
     const alignment = {
       alignItems: props.alignment
@@ -43393,7 +44183,7 @@ function useSpace(props) {
     };
     return [wrapKls, alignment, gap, props.style];
   });
-  const itemStyle = computed2(() => {
+  const itemStyle = computed(() => {
     return props.fill ? { flexGrow: 1, minWidth: `${props.fillRatio}%` } : {};
   });
   watchEffect(() => {
@@ -43577,20 +44367,20 @@ var statisticProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/statistic/src/statistic2.mjs
-var __default__79 = defineComponent({
+var __default__80 = defineComponent({
   name: "ElStatistic"
 });
-var _sfc_main115 = defineComponent({
-  ...__default__79,
+var _sfc_main117 = defineComponent({
+  ...__default__80,
   props: statisticProps,
   setup(__props, { expose }) {
     const props = __props;
     const ns = useNamespace("statistic");
-    const displayValue = computed2(() => {
+    const displayValue = computed(() => {
       const { value, formatter: formatter2, precision, decimalSeparator, groupSeparator } = props;
       if (isFunction(formatter2))
         return formatter2(value);
-      if (!isNumber3(value))
+      if (!isNumber3(value) || Number.isNaN(value))
         return value;
       let [integer4, decimal = ""] = String(value).split(".");
       decimal = decimal.padEnd(precision, "0").slice(0, precision > 0 ? precision : 0);
@@ -43640,7 +44430,7 @@ var _sfc_main115 = defineComponent({
     };
   }
 });
-var Statistic = _export_sfc(_sfc_main115, [["__file", "statistic.vue"]]);
+var Statistic = _export_sfc(_sfc_main117, [["__file", "statistic.vue"]]);
 
 // node_modules/element-plus/es/components/statistic/index.mjs
 var ElStatistic = withInstall(Statistic);
@@ -43683,11 +44473,11 @@ var getTime = (value) => {
 var formatTime = (timestamp2, format2) => {
   let timeLeft = timestamp2;
   const escapeRegex = /\[([^\]]*)]/g;
-  const replacedText = timeUnits2.reduce((current, [name, unit3]) => {
+  const replacedText = timeUnits2.reduce((current, [name, unit4]) => {
     const replaceRegex = new RegExp(`${name}+(?![^\\[\\]]*\\])`, "g");
     if (replaceRegex.test(current)) {
-      const value = Math.floor(timeLeft / unit3);
-      timeLeft -= value * unit3;
+      const value = Math.floor(timeLeft / unit4);
+      timeLeft -= value * unit4;
       return current.replace(replaceRegex, (match) => String(value).padStart(match.length, "0"));
     }
     return current;
@@ -43696,18 +44486,18 @@ var formatTime = (timestamp2, format2) => {
 };
 
 // node_modules/element-plus/es/components/countdown/src/countdown2.mjs
-var __default__80 = defineComponent({
+var __default__81 = defineComponent({
   name: "ElCountdown"
 });
-var _sfc_main116 = defineComponent({
-  ...__default__80,
+var _sfc_main118 = defineComponent({
+  ...__default__81,
   props: countdownProps,
   emits: countdownEmits,
   setup(__props, { expose, emit }) {
     const props = __props;
     let timer;
-    const rawValue = ref(getTime(props.value) - Date.now());
-    const displayValue = computed2(() => formatTime(rawValue.value, props.format));
+    const rawValue = ref(0);
+    const displayValue = computed(() => formatTime(rawValue.value, props.format));
     const formatter2 = (val) => formatTime(val, props.format);
     const stopTimer = () => {
       if (timer) {
@@ -43731,11 +44521,14 @@ var _sfc_main116 = defineComponent({
       };
       timer = rAF(frameFunc);
     };
-    watch(() => [props.value, props.format], () => {
-      stopTimer();
-      startTimer();
-    }, {
-      immediate: true
+    onMounted(() => {
+      rawValue.value = getTime(props.value) - Date.now();
+      watch(() => [props.value, props.format], () => {
+        stopTimer();
+        startTimer();
+      }, {
+        immediate: true
+      });
     });
     onBeforeUnmount(() => {
       stopTimer();
@@ -43764,7 +44557,7 @@ var _sfc_main116 = defineComponent({
     };
   }
 });
-var Countdown = _export_sfc(_sfc_main116, [["__file", "countdown.vue"]]);
+var Countdown = _export_sfc(_sfc_main118, [["__file", "countdown.vue"]]);
 
 // node_modules/element-plus/es/components/countdown/index.mjs
 var ElCountdown = withInstall(Countdown);
@@ -43806,11 +44599,11 @@ var stepsEmits = {
 };
 
 // node_modules/element-plus/es/components/steps/src/steps2.mjs
-var __default__81 = defineComponent({
+var __default__82 = defineComponent({
   name: "ElSteps"
 });
-var _sfc_main117 = defineComponent({
-  ...__default__81,
+var _sfc_main119 = defineComponent({
+  ...__default__82,
   props: stepsProps,
   emits: stepsEmits,
   setup(__props, { emit }) {
@@ -43839,7 +44632,7 @@ var _sfc_main117 = defineComponent({
     };
   }
 });
-var Steps = _export_sfc(_sfc_main117, [["__file", "steps.vue"]]);
+var Steps = _export_sfc(_sfc_main119, [["__file", "steps.vue"]]);
 
 // node_modules/element-plus/es/components/steps/src/item.mjs
 var stepProps = buildProps({
@@ -43862,11 +44655,11 @@ var stepProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/steps/src/item2.mjs
-var __default__82 = defineComponent({
+var __default__83 = defineComponent({
   name: "ElStep"
 });
-var _sfc_main118 = defineComponent({
-  ...__default__82,
+var _sfc_main120 = defineComponent({
+  ...__default__83,
   props: stepProps,
   setup(__props) {
     const props = __props;
@@ -43888,33 +44681,33 @@ var _sfc_main118 = defineComponent({
     onBeforeUnmount(() => {
       parent2.removeStep(stepItemState.uid);
     });
-    const currentStatus = computed2(() => {
+    const currentStatus = computed(() => {
       return props.status || internalStatus.value;
     });
-    const prevStatus = computed2(() => {
+    const prevStatus = computed(() => {
       const prevStep = parent2.steps.value[index.value - 1];
       return prevStep ? prevStep.currentStatus : "wait";
     });
-    const isCenter = computed2(() => {
+    const isCenter = computed(() => {
       return parent2.props.alignCenter;
     });
-    const isVertical = computed2(() => {
+    const isVertical = computed(() => {
       return parent2.props.direction === "vertical";
     });
-    const isSimple = computed2(() => {
+    const isSimple = computed(() => {
       return parent2.props.simple;
     });
-    const stepsCount = computed2(() => {
+    const stepsCount = computed(() => {
       return parent2.steps.value.length;
     });
-    const isLast = computed2(() => {
+    const isLast = computed(() => {
       var _a2;
       return ((_a2 = parent2.steps.value[stepsCount.value - 1]) == null ? void 0 : _a2.uid) === (currentInstance == null ? void 0 : currentInstance.uid);
     });
-    const space = computed2(() => {
+    const space = computed(() => {
       return isSimple.value ? "" : parent2.props.space;
     });
-    const containerKls = computed2(() => {
+    const containerKls = computed(() => {
       return [
         ns.b(),
         ns.is(isSimple.value ? "simple" : parent2.props.direction),
@@ -43922,7 +44715,7 @@ var _sfc_main118 = defineComponent({
         ns.is("center", isCenter.value && !isVertical.value && !isSimple.value)
       ];
     });
-    const style = computed2(() => {
+    const style = computed(() => {
       const style2 = {
         flexBasis: isNumber3(space.value) ? `${space.value}px` : space.value ? space.value : `${100 / (stepsCount.value - (isCenter.value ? 0 : 1))}%`
       };
@@ -44045,7 +44838,7 @@ var _sfc_main118 = defineComponent({
     };
   }
 });
-var Step = _export_sfc(_sfc_main118, [["__file", "item.vue"]]);
+var Step = _export_sfc(_sfc_main120, [["__file", "item.vue"]]);
 
 // node_modules/element-plus/es/components/steps/index.mjs
 var ElSteps = withInstall(Steps, {
@@ -44059,14 +44852,8 @@ var switchProps = buildProps({
     type: [Boolean, String, Number],
     default: false
   },
-  disabled: {
-    type: Boolean,
-    default: false
-  },
-  loading: {
-    type: Boolean,
-    default: false
-  },
+  disabled: Boolean,
+  loading: Boolean,
   size: {
     type: String,
     validator: isValidComponentSize
@@ -44075,10 +44862,7 @@ var switchProps = buildProps({
     type: [String, Number],
     default: ""
   },
-  inlinePrompt: {
-    type: Boolean,
-    default: false
-  },
+  inlinePrompt: Boolean,
   inactiveActionIcon: {
     type: iconPropType
   },
@@ -44122,10 +44906,7 @@ var switchProps = buildProps({
   tabindex: {
     type: [String, Number]
   },
-  label: {
-    type: String,
-    default: void 0
-  }
+  ...useAriaProps(["ariaLabel"])
 });
 var switchEmits = {
   [UPDATE_MODEL_EVENT]: (val) => isBoolean2(val) || isString(val) || isNumber3(val),
@@ -44134,17 +44915,12 @@ var switchEmits = {
 };
 
 // node_modules/element-plus/es/components/switch/src/switch2.mjs
-var _hoisted_159 = ["onClick"];
-var _hoisted_237 = ["id", "aria-checked", "aria-disabled", "aria-label", "name", "true-value", "false-value", "disabled", "tabindex", "onKeydown"];
-var _hoisted_316 = ["aria-hidden"];
-var _hoisted_410 = ["aria-hidden"];
-var _hoisted_57 = ["aria-hidden"];
-var COMPONENT_NAME17 = "ElSwitch";
-var __default__83 = defineComponent({
-  name: COMPONENT_NAME17
+var COMPONENT_NAME16 = "ElSwitch";
+var __default__84 = defineComponent({
+  name: COMPONENT_NAME16
 });
-var _sfc_main119 = defineComponent({
-  ...__default__83,
+var _sfc_main121 = defineComponent({
+  ...__default__84,
   props: switchProps,
   emits: switchEmits,
   setup(__props, { expose, emit }) {
@@ -44155,36 +44931,36 @@ var _sfc_main119 = defineComponent({
     const { inputId } = useFormItemInputId(props, {
       formItemContext: formItem
     });
-    const switchDisabled = useFormDisabled(computed2(() => props.loading));
+    const switchDisabled = useFormDisabled(computed(() => props.loading));
     const isControlled = ref(props.modelValue !== false);
     const input = ref();
     const core = ref();
-    const switchKls = computed2(() => [
+    const switchKls = computed(() => [
       ns.b(),
       ns.m(switchSize.value),
       ns.is("disabled", switchDisabled.value),
       ns.is("checked", checked.value)
     ]);
-    const labelLeftKls = computed2(() => [
+    const labelLeftKls = computed(() => [
       ns.e("label"),
       ns.em("label", "left"),
       ns.is("active", !checked.value)
     ]);
-    const labelRightKls = computed2(() => [
+    const labelRightKls = computed(() => [
       ns.e("label"),
       ns.em("label", "right"),
       ns.is("active", checked.value)
     ]);
-    const coreStyle = computed2(() => ({
+    const coreStyle = computed(() => ({
       width: addUnit(props.width)
     }));
     watch(() => props.modelValue, () => {
       isControlled.value = true;
     });
-    const actualValue = computed2(() => {
+    const actualValue = computed(() => {
       return isControlled.value ? props.modelValue : false;
     });
-    const checked = computed2(() => actualValue.value === props.activeValue);
+    const checked = computed(() => actualValue.value === props.activeValue);
     if (![props.activeValue, props.inactiveValue].includes(actualValue.value)) {
       emit(UPDATE_MODEL_EVENT, props.inactiveValue);
       emit(CHANGE_EVENT, props.inactiveValue);
@@ -44220,7 +44996,7 @@ var _sfc_main119 = defineComponent({
         isBoolean2(shouldChange)
       ].includes(true);
       if (!isPromiseOrBool) {
-        throwError(COMPONENT_NAME17, "beforeChange must return type `Promise<boolean>` or `boolean`");
+        throwError(COMPONENT_NAME16, "beforeChange must return type `Promise<boolean>` or `boolean`");
       }
       if (isPromise(shouldChange)) {
         shouldChange.then((result2) => {
@@ -44228,7 +45004,7 @@ var _sfc_main119 = defineComponent({
             handleChange();
           }
         }).catch((e) => {
-          debugWarn(COMPONENT_NAME17, `some error occurred: ${e}`);
+          debugWarn(COMPONENT_NAME16, `some error occurred: ${e}`);
         });
       } else if (shouldChange) {
         handleChange();
@@ -44259,7 +45035,7 @@ var _sfc_main119 = defineComponent({
           role: "switch",
           "aria-checked": unref(checked),
           "aria-disabled": unref(switchDisabled),
-          "aria-label": _ctx.label,
+          "aria-label": _ctx.ariaLabel,
           name: _ctx.name,
           "true-value": _ctx.activeValue,
           "false-value": _ctx.inactiveValue,
@@ -44267,7 +45043,7 @@ var _sfc_main119 = defineComponent({
           tabindex: _ctx.tabindex,
           onChange: handleChange,
           onKeydown: withKeys(switchValue, ["enter"])
-        }, null, 42, _hoisted_237),
+        }, null, 42, ["id", "aria-checked", "aria-disabled", "aria-label", "name", "true-value", "false-value", "disabled", "tabindex", "onKeydown"]),
         !_ctx.inlinePrompt && (_ctx.inactiveIcon || _ctx.inactiveText) ? (openBlock(), createElementBlock("span", {
           key: 0,
           class: normalizeClass(unref(labelLeftKls))
@@ -44281,7 +45057,7 @@ var _sfc_main119 = defineComponent({
           !_ctx.inactiveIcon && _ctx.inactiveText ? (openBlock(), createElementBlock("span", {
             key: 1,
             "aria-hidden": unref(checked)
-          }, toDisplayString(_ctx.inactiveText), 9, _hoisted_316)) : createCommentVNode("v-if", true)
+          }, toDisplayString(_ctx.inactiveText), 9, ["aria-hidden"])) : createCommentVNode("v-if", true)
         ], 2)) : createCommentVNode("v-if", true),
         createBaseVNode("span", {
           ref_key: "core",
@@ -44305,7 +45081,7 @@ var _sfc_main119 = defineComponent({
               key: 1,
               class: normalizeClass(unref(ns).is("text")),
               "aria-hidden": !unref(checked)
-            }, toDisplayString(unref(checked) ? _ctx.activeText : _ctx.inactiveText), 11, _hoisted_410)) : createCommentVNode("v-if", true)
+            }, toDisplayString(unref(checked) ? _ctx.activeText : _ctx.inactiveText), 11, ["aria-hidden"])) : createCommentVNode("v-if", true)
           ], 2)) : createCommentVNode("v-if", true),
           createBaseVNode("div", {
             class: normalizeClass(unref(ns).e("action"))
@@ -44348,13 +45124,13 @@ var _sfc_main119 = defineComponent({
           !_ctx.activeIcon && _ctx.activeText ? (openBlock(), createElementBlock("span", {
             key: 1,
             "aria-hidden": !unref(checked)
-          }, toDisplayString(_ctx.activeText), 9, _hoisted_57)) : createCommentVNode("v-if", true)
+          }, toDisplayString(_ctx.activeText), 9, ["aria-hidden"])) : createCommentVNode("v-if", true)
         ], 2)) : createCommentVNode("v-if", true)
-      ], 10, _hoisted_159);
+      ], 10, ["onClick"]);
     };
   }
 });
-var Switch = _export_sfc(_sfc_main119, [["__file", "switch.vue"]]);
+var Switch = _export_sfc(_sfc_main121, [["__file", "switch.vue"]]);
 
 // node_modules/element-plus/es/components/switch/index.mjs
 var ElSwitch = withInstall(Switch);
@@ -44533,10 +45309,12 @@ function compose(...funcs) {
   }
   return funcs.reduce((a2, b2) => (...args) => a2(b2(...args)));
 }
-function toggleRowStatus(statusArr, row, newVal) {
+function toggleRowStatus(statusArr, row, newVal, tableTreeProps, selectable, rowIndex) {
+  let _rowIndex = rowIndex != null ? rowIndex : 0;
   let changed = false;
   const index = statusArr.indexOf(row);
   const included = index !== -1;
+  const isRowSelectable = selectable == null ? void 0 : selectable.call(null, row, rowIndex);
   const toggleStatus = (type4) => {
     if (type4 === "add") {
       statusArr.push(row);
@@ -44544,20 +45322,34 @@ function toggleRowStatus(statusArr, row, newVal) {
       statusArr.splice(index, 1);
     }
     changed = true;
-    if (isArray(row.children)) {
-      row.children.forEach((item) => {
-        toggleRowStatus(statusArr, item, newVal != null ? newVal : !included);
+  };
+  const getChildrenCount = (row2) => {
+    let count = 0;
+    const children = (tableTreeProps == null ? void 0 : tableTreeProps.children) && row2[tableTreeProps.children];
+    if (children && isArray(children)) {
+      count += children.length;
+      children.forEach((item) => {
+        count += getChildrenCount(item);
       });
     }
+    return count;
   };
-  if (isBoolean2(newVal)) {
-    if (newVal && !included) {
-      toggleStatus("add");
-    } else if (!newVal && included) {
-      toggleStatus("remove");
+  if (!selectable || isRowSelectable) {
+    if (isBoolean2(newVal)) {
+      if (newVal && !included) {
+        toggleStatus("add");
+      } else if (!newVal && included) {
+        toggleStatus("remove");
+      }
+    } else {
+      included ? toggleStatus("remove") : toggleStatus("add");
     }
-  } else {
-    included ? toggleStatus("remove") : toggleStatus("add");
+  }
+  if (!(tableTreeProps == null ? void 0 : tableTreeProps.checkStrictly) && (tableTreeProps == null ? void 0 : tableTreeProps.children) && isArray(row[tableTreeProps.children])) {
+    row[tableTreeProps.children].forEach((item) => {
+      toggleRowStatus(statusArr, item, newVal != null ? newVal : !included, tableTreeProps, selectable, _rowIndex + 1);
+      _rowIndex += getChildrenCount(item) + 1;
+    });
   }
   return changed;
 }
@@ -44856,14 +45648,15 @@ function useTree(watcherData) {
   const lazyTreeNodeMap = ref({});
   const lazyColumnIdentifier = ref("hasChildren");
   const childrenColumnName = ref("children");
+  const checkStrictly = ref(false);
   const instance = getCurrentInstance();
-  const normalizedData = computed2(() => {
+  const normalizedData = computed(() => {
     if (!watcherData.rowKey.value)
       return {};
     const data = watcherData.data.value || [];
     return normalize(data);
   });
-  const normalizedLazyNode = computed2(() => {
+  const normalizedLazyNode = computed(() => {
     const rowKey2 = watcherData.rowKey.value;
     const keys3 = Object.keys(lazyTreeNodeMap.value);
     const res = {};
@@ -45035,7 +45828,8 @@ function useTree(watcherData) {
       lazy,
       lazyTreeNodeMap,
       lazyColumnIdentifier,
-      childrenColumnName
+      childrenColumnName,
+      checkStrictly
     }
   };
 }
@@ -45104,15 +45898,30 @@ function useWatcher() {
       updateChildFixed(childColumn);
     });
   };
+  let selectionInitialFixed = void 0;
   const updateColumns = () => {
     _columns.value.forEach((column2) => {
       updateChildFixed(column2);
     });
     fixedColumns.value = _columns.value.filter((column2) => column2.fixed === true || column2.fixed === "left");
     rightFixedColumns.value = _columns.value.filter((column2) => column2.fixed === "right");
-    if (fixedColumns.value.length > 0 && _columns.value[0] && _columns.value[0].type === "selection" && !_columns.value[0].fixed) {
-      _columns.value[0].fixed = true;
-      fixedColumns.value.unshift(_columns.value[0]);
+    if (isUndefined2(selectionInitialFixed) && _columns.value[0] && _columns.value[0].type === "selection") {
+      selectionInitialFixed = Boolean(_columns.value[0].fixed);
+    }
+    if (fixedColumns.value.length > 0 && _columns.value[0] && _columns.value[0].type === "selection") {
+      if (!_columns.value[0].fixed) {
+        _columns.value[0].fixed = true;
+        fixedColumns.value.unshift(_columns.value[0]);
+      } else {
+        const hasNotSelectionColumns = fixedColumns.value.some((column2) => column2.type !== "selection");
+        if (!hasNotSelectionColumns) {
+          _columns.value[0].fixed = selectionInitialFixed;
+          if (!selectionInitialFixed)
+            fixedColumns.value.shift();
+        } else {
+          selectionInitialFixed = void 0;
+        }
+      }
     }
     const notFixedColumns = _columns.value.filter((column2) => !column2.fixed);
     originColumns.value = [].concat(fixedColumns.value).concat(notFixedColumns).concat(rightFixedColumns.value);
@@ -45136,13 +45945,13 @@ function useWatcher() {
     }
   };
   const isSelected = (row) => {
-    return selection.value.includes(row);
+    return selection.value.some((item) => isEqual_default(item, row));
   };
   const clearSelection = () => {
     isAllSelected.value = false;
     const oldSelection = selection.value;
+    selection.value = [];
     if (oldSelection.length) {
-      selection.value = [];
       instance.emit("selection-change", []);
     }
   };
@@ -45169,8 +45978,13 @@ function useWatcher() {
   const getSelectionRows = () => {
     return (selection.value || []).slice();
   };
-  const toggleRowSelection = (row, selected = void 0, emitChange = true) => {
-    const changed = toggleRowStatus(selection.value, row, selected);
+  const toggleRowSelection = (row, selected, emitChange = true, ignoreSelectable = false) => {
+    var _a22, _b, _c, _d;
+    const treeProps2 = {
+      children: (_b = (_a22 = instance == null ? void 0 : instance.store) == null ? void 0 : _a22.states) == null ? void 0 : _b.childrenColumnName.value,
+      checkStrictly: (_d = (_c = instance == null ? void 0 : instance.store) == null ? void 0 : _c.states) == null ? void 0 : _d.checkStrictly.value
+    };
+    const changed = toggleRowStatus(selection.value, row, selected, treeProps2, ignoreSelectable ? void 0 : selectable.value);
     if (changed) {
       const newSelection = (selection.value || []).slice();
       if (emitChange) {
@@ -45186,23 +46000,22 @@ function useWatcher() {
     let selectionChanged = false;
     let childrenCount = 0;
     const rowKey22 = (_b = (_a22 = instance == null ? void 0 : instance.store) == null ? void 0 : _a22.states) == null ? void 0 : _b.rowKey.value;
+    const { childrenColumnName } = instance.store.states;
+    const treeProps2 = {
+      children: childrenColumnName.value,
+      checkStrictly: false
+    };
     data.value.forEach((row, index) => {
       const rowIndex = index + childrenCount;
-      if (selectable.value) {
-        if (selectable.value.call(null, row, rowIndex) && toggleRowStatus(selection.value, row, value)) {
-          selectionChanged = true;
-        }
-      } else {
-        if (toggleRowStatus(selection.value, row, value)) {
-          selectionChanged = true;
-        }
+      if (toggleRowStatus(selection.value, row, value, treeProps2, selectable.value, rowIndex)) {
+        selectionChanged = true;
       }
       childrenCount += getChildrenCount(getRowIdentity(row, rowKey22));
     });
     if (selectionChanged) {
       instance.emit("selection-change", selection.value ? selection.value.slice() : []);
     }
-    instance.emit("select-all", selection.value);
+    instance.emit("select-all", (selection.value || []).slice());
   };
   const updateSelectionByRowKey = () => {
     const selectedMap = getKeysMap(selection.value, rowKey2.value);
@@ -45215,43 +46028,42 @@ function useWatcher() {
     });
   };
   const updateAllSelected = () => {
-    var _a22, _b, _c;
+    var _a22;
     if (((_a22 = data.value) == null ? void 0 : _a22.length) === 0) {
       isAllSelected.value = false;
       return;
     }
-    let selectedMap;
-    if (rowKey2.value) {
-      selectedMap = getKeysMap(selection.value, rowKey2.value);
-    }
-    const isSelected2 = function(row) {
+    const { childrenColumnName } = instance.store.states;
+    const selectedMap = rowKey2.value ? getKeysMap(selection.value, rowKey2.value) : void 0;
+    let rowIndex = 0;
+    let selectedCount = 0;
+    const isSelected2 = (row) => {
       if (selectedMap) {
         return !!selectedMap[getRowIdentity(row, rowKey2.value)];
       } else {
         return selection.value.includes(row);
       }
     };
-    let isAllSelected_ = true;
-    let selectedCount = 0;
-    let childrenCount = 0;
-    for (let i = 0, j = (data.value || []).length; i < j; i++) {
-      const keyProp = (_c = (_b = instance == null ? void 0 : instance.store) == null ? void 0 : _b.states) == null ? void 0 : _c.rowKey.value;
-      const rowIndex = i + childrenCount;
-      const item = data.value[i];
-      const isRowSelectable = selectable.value && selectable.value.call(null, item, rowIndex);
-      if (!isSelected2(item)) {
-        if (!selectable.value || isRowSelectable) {
-          isAllSelected_ = false;
-          break;
+    const checkSelectedStatus = (data2) => {
+      var _a3;
+      for (const row of data2) {
+        const isRowSelectable = selectable.value && selectable.value.call(null, row, rowIndex);
+        if (!isSelected2(row)) {
+          if (!selectable.value || isRowSelectable) {
+            return false;
+          }
+        } else {
+          selectedCount++;
         }
-      } else {
-        selectedCount++;
+        rowIndex++;
+        if (((_a3 = row[childrenColumnName.value]) == null ? void 0 : _a3.length) && !checkSelectedStatus(row[childrenColumnName.value])) {
+          return false;
+        }
       }
-      childrenCount += getChildrenCount(getRowIdentity(item, keyProp));
-    }
-    if (selectedCount === 0)
-      isAllSelected_ = false;
-    isAllSelected.value = isAllSelected_;
+      return true;
+    };
+    const isAllSelected_ = checkSelectedStatus(data.value || []);
+    isAllSelected.value = selectedCount === 0 ? false : isAllSelected_;
   };
   const getChildrenCount = (rowKey22) => {
     var _a22;
@@ -45671,6 +46483,10 @@ var InitialStateMap = {
   ["treeProps.children"]: {
     key: "childrenColumnName",
     default: "children"
+  },
+  ["treeProps.checkStrictly"]: {
+    key: "checkStrictly",
+    default: false
   }
 };
 function createStore(table, props) {
@@ -45908,7 +46724,7 @@ var TableLayout = class {
 
 // node_modules/element-plus/es/components/table/src/filter-panel.mjs
 var { CheckboxGroup: ElCheckboxGroup2 } = ElCheckbox;
-var _sfc_main120 = defineComponent({
+var _sfc_main122 = defineComponent({
   name: "ElTableFilterPanel",
   components: {
     ElCheckbox,
@@ -45945,16 +46761,16 @@ var _sfc_main120 = defineComponent({
     }
     const tooltipVisible = ref(false);
     const tooltip = ref(null);
-    const filters = computed2(() => {
+    const filters = computed(() => {
       return props.column && props.column.filters;
     });
-    const filterClassName = computed2(() => {
+    const filterClassName = computed(() => {
       if (props.column.filterClassName) {
         return `${ns.b()} ${props.column.filterClassName}`;
       }
       return ns.b();
     });
-    const filterValue = computed2({
+    const filterValue = computed({
       get: () => {
         var _a2;
         return (((_a2 = props.column) == null ? void 0 : _a2.filteredValue) || [])[0];
@@ -45969,7 +46785,7 @@ var _sfc_main120 = defineComponent({
         }
       }
     });
-    const filteredValue = computed2({
+    const filteredValue = computed({
       get() {
         if (props.column) {
           return props.column.filteredValue || [];
@@ -45982,7 +46798,7 @@ var _sfc_main120 = defineComponent({
         }
       }
     });
-    const multiple = computed2(() => {
+    const multiple = computed(() => {
       if (props.column) {
         return props.column.filterMultiple;
       }
@@ -46033,7 +46849,7 @@ var _sfc_main120 = defineComponent({
     }, {
       immediate: true
     });
-    const popperPaneRef = computed2(() => {
+    const popperPaneRef = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = tooltip.value) == null ? void 0 : _a2.popperRef) == null ? void 0 : _b.contentRef;
     });
@@ -46057,9 +46873,6 @@ var _sfc_main120 = defineComponent({
     };
   }
 });
-var _hoisted_160 = { key: 0 };
-var _hoisted_238 = ["disabled"];
-var _hoisted_317 = ["label", "onClick"];
 function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_checkbox = resolveComponent("el-checkbox");
   const _component_el_checkbox_group = resolveComponent("el-checkbox-group");
@@ -46083,7 +46896,7 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
     persistent: ""
   }, {
     content: withCtx(() => [
-      _ctx.multiple ? (openBlock(), createElementBlock("div", _hoisted_160, [
+      _ctx.multiple ? (openBlock(), createElementBlock("div", { key: 0 }, [
         createBaseVNode("div", {
           class: normalizeClass(_ctx.ns.e("content"))
         }, [
@@ -46093,7 +46906,7 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
             default: withCtx(() => [
               createVNode(_component_el_checkbox_group, {
                 modelValue: _ctx.filteredValue,
-                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.filteredValue = $event),
+                "onUpdate:modelValue": ($event) => _ctx.filteredValue = $event,
                 class: normalizeClass(_ctx.ns.e("checkbox-group"))
               }, {
                 default: withCtx(() => [
@@ -46110,7 +46923,7 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
                   }), 128))
                 ]),
                 _: 1
-              }, 8, ["modelValue", "class"])
+              }, 8, ["modelValue", "onUpdate:modelValue", "class"])
             ]),
             _: 1
           }, 8, ["wrap-class"])
@@ -46122,12 +46935,12 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
             class: normalizeClass({ [_ctx.ns.is("disabled")]: _ctx.filteredValue.length === 0 }),
             disabled: _ctx.filteredValue.length === 0,
             type: "button",
-            onClick: _cache[1] || (_cache[1] = (...args) => _ctx.handleConfirm && _ctx.handleConfirm(...args))
-          }, toDisplayString(_ctx.t("el.table.confirmFilter")), 11, _hoisted_238),
+            onClick: _ctx.handleConfirm
+          }, toDisplayString(_ctx.t("el.table.confirmFilter")), 11, ["disabled", "onClick"]),
           createBaseVNode("button", {
             type: "button",
-            onClick: _cache[2] || (_cache[2] = (...args) => _ctx.handleReset && _ctx.handleReset(...args))
-          }, toDisplayString(_ctx.t("el.table.resetFilter")), 1)
+            onClick: _ctx.handleReset
+          }, toDisplayString(_ctx.t("el.table.resetFilter")), 9, ["onClick"])
         ], 2)
       ])) : (openBlock(), createElementBlock("ul", {
         key: 1,
@@ -46140,15 +46953,15 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
               [_ctx.ns.is("active")]: _ctx.filterValue === void 0 || _ctx.filterValue === null
             }
           ]),
-          onClick: _cache[3] || (_cache[3] = ($event) => _ctx.handleSelect(null))
-        }, toDisplayString(_ctx.t("el.table.clearFilter")), 3),
+          onClick: ($event) => _ctx.handleSelect(null)
+        }, toDisplayString(_ctx.t("el.table.clearFilter")), 11, ["onClick"]),
         (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.filters, (filter2) => {
           return openBlock(), createElementBlock("li", {
             key: filter2.value,
             class: normalizeClass([_ctx.ns.e("list-item"), _ctx.ns.is("active", _ctx.isActive(filter2))]),
             label: filter2.value,
             onClick: ($event) => _ctx.handleSelect(filter2.value)
-          }, toDisplayString(filter2.text), 11, _hoisted_317);
+          }, toDisplayString(filter2.text), 11, ["label", "onClick"]);
         }), 128))
       ], 2))
     ]),
@@ -46158,22 +46971,24 @@ function _sfc_render27(_ctx, _cache, $props, $setup, $data, $options) {
           `${_ctx.ns.namespace.value}-table__column-filter-trigger`,
           `${_ctx.ns.namespace.value}-none-outline`
         ]),
-        onClick: _cache[4] || (_cache[4] = (...args) => _ctx.showFilterPanel && _ctx.showFilterPanel(...args))
+        onClick: _ctx.showFilterPanel
       }, [
         createVNode(_component_el_icon, null, {
           default: withCtx(() => [
-            _ctx.column.filterOpened ? (openBlock(), createBlock(_component_arrow_up, { key: 0 })) : (openBlock(), createBlock(_component_arrow_down, { key: 1 }))
+            renderSlot(_ctx.$slots, "filter-icon", {}, () => [
+              _ctx.column.filterOpened ? (openBlock(), createBlock(_component_arrow_up, { key: 0 })) : (openBlock(), createBlock(_component_arrow_down, { key: 1 }))
+            ])
           ]),
-          _: 1
+          _: 3
         })
-      ], 2)), [
+      ], 10, ["onClick"])), [
         [_directive_click_outside, _ctx.hideFilterPanel, _ctx.popperPaneRef]
       ])
     ]),
-    _: 1
+    _: 3
   }, 8, ["visible", "placement", "popper-class"]);
 }
-var FilterPanel = _export_sfc(_sfc_main120, [["render", _sfc_render27], ["__file", "filter-panel.vue"]]);
+var FilterPanel = _export_sfc(_sfc_main122, [["render", _sfc_render27], ["__file", "filter-panel.vue"]]);
 
 // node_modules/element-plus/es/components/table/src/layout-observer.mjs
 function useLayoutObserver(root2) {
@@ -46192,7 +47007,7 @@ function useLayoutObserver(root2) {
   onUnmounted(() => {
     tableLayout.value.removeObserver(instance);
   });
-  const tableLayout = computed2(() => {
+  const tableLayout = computed(() => {
     const layout2 = root2.layout;
     if (!layout2) {
       throw new Error("Can not find table layout.");
@@ -46378,6 +47193,10 @@ function useEvent(props, emit) {
     }
     if (!column2.sortable)
       return;
+    const clickTarget = event.currentTarget;
+    if (["ascending", "descending"].some((str) => hasClass(clickTarget, str) && !column2.sortOrders.includes(str))) {
+      return;
+    }
     const states = props.store.states;
     let sortProp = states.sortProp.value;
     let sortOrder;
@@ -46539,10 +47358,10 @@ var convertToRows = (originColumns) => {
 };
 function useUtils(props) {
   const parent2 = inject(TABLE_INJECTION_KEY);
-  const columnRows = computed2(() => {
+  const columnRows = computed(() => {
     return convertToRows(props.store.states.originColumns.value);
   });
-  const isGroup = computed2(() => {
+  const isGroup = computed(() => {
     const result2 = columnRows.value.length > 1;
     if (result2 && parent2) {
       parent2.state.isGroup.value = true;
@@ -46675,7 +47494,12 @@ var TableHeader = defineComponent({
         key: `${column2.id}-thead`,
         rowspan: column2.rowSpan,
         style: getHeaderCellStyle(rowIndex, cellIndex, subColumns, column2),
-        onClick: ($event) => handleHeaderClick($event, column2),
+        onClick: ($event) => {
+          if ($event.currentTarget.classList.contains("noclick")) {
+            return;
+          }
+          handleHeaderClick($event, column2);
+        },
         onContextmenu: ($event) => handleHeaderContextMenu($event, column2),
         onMousedown: ($event) => handleMouseDown($event, column2),
         onMousemove: ($event) => handleMouseMove($event, column2),
@@ -46713,6 +47537,10 @@ var TableHeader = defineComponent({
             upDataColumn: (key, value) => {
               column2[key] = value;
             }
+          }, {
+            "filter-icon": () => column2.renderFilterIcon ? column2.renderFilterIcon({
+              filterOpened: column2.filterOpened
+            }) : null
           })
         ])
       ]);
@@ -46721,6 +47549,9 @@ var TableHeader = defineComponent({
 });
 
 // node_modules/element-plus/es/components/table/src/table-body/events-helper.mjs
+function isGreaterThan(a2, b2, epsilon = 0.03) {
+  return a2 - b2 > epsilon;
+}
 function useEvents(props) {
   const parent2 = inject(TABLE_INJECTION_KEY);
   const tooltipContent = ref("");
@@ -46805,20 +47636,12 @@ function useEvents(props) {
     const range4 = document.createRange();
     range4.setStart(cellChild, 0);
     range4.setEnd(cellChild, cellChild.childNodes.length);
-    let rangeWidth = range4.getBoundingClientRect().width;
-    let rangeHeight = range4.getBoundingClientRect().height;
-    const offsetWidth = rangeWidth - Math.floor(rangeWidth);
-    if (offsetWidth < 1e-3) {
-      rangeWidth = Math.floor(rangeWidth);
-    }
-    const offsetHeight = rangeHeight - Math.floor(rangeHeight);
-    if (offsetHeight < 1e-3) {
-      rangeHeight = Math.floor(rangeHeight);
-    }
+    const { width: rangeWidth, height: rangeHeight } = range4.getBoundingClientRect();
+    const { width: cellChildWidth, height: cellChildHeight } = cellChild.getBoundingClientRect();
     const { top, left: left2, right: right2, bottom } = getPadding(cellChild);
     const horizontalPadding = left2 + right2;
     const verticalPadding = top + bottom;
-    if (rangeWidth + horizontalPadding > cellChild.offsetWidth || rangeHeight + verticalPadding > cellChild.offsetHeight || cellChild.scrollWidth > cellChild.offsetWidth) {
+    if (isGreaterThan(rangeWidth + horizontalPadding, cellChildWidth) || isGreaterThan(rangeHeight + verticalPadding, cellChildHeight) || isGreaterThan(cellChild.scrollWidth, cellChildWidth)) {
       createTablePopper(tooltipOptions, cell.innerText || cell.textContent, cell, table);
     }
   };
@@ -46972,7 +47795,7 @@ function useRender(props) {
     getSpan,
     getColspanRealWidth
   } = useStyles(props);
-  const firstDefaultColumnIndex = computed2(() => {
+  const firstDefaultColumnIndex = computed(() => {
     return props.store.states.columns.value.findIndex(({ type: type4 }) => type4 === "default");
   });
   const getKeyOfRow = (row, index) => {
@@ -47034,7 +47857,7 @@ function useRender(props) {
           }
         }
       }
-      const baseKey = `${$index},${cellIndex}`;
+      const baseKey = `${getKeyOfRow(row, $index)},${cellIndex}`;
       const patchKey = columnData.columnKey || columnData.rawColumnKey || "";
       const tdChildren = cellChildren(cellIndex, column2, data);
       const mergedTooltipOptions = column2.showOverflowTooltip && merge_default({
@@ -47199,20 +48022,24 @@ var TableBody = defineComponent({
       let rowNum = newVal;
       const childNodes = (_a2 = rows[rowNum]) == null ? void 0 : _a2.childNodes;
       if (childNodes == null ? void 0 : childNodes.length) {
+        let control = 0;
         const indexes = Array.from(childNodes).reduce((acc, item, index) => {
           var _a22, _b;
-          const pre = ((_a22 = childNodes[index - 1]) == null ? void 0 : _a22.colSpan) > 1;
-          const next = ((_b = childNodes[index + 1]) == null ? void 0 : _b.colSpan) > 1;
-          if (item.nodeName !== "TD" && !pre && !next) {
+          if (((_a22 = childNodes[index]) == null ? void 0 : _a22.colSpan) > 1) {
+            control = (_b = childNodes[index]) == null ? void 0 : _b.colSpan;
+          }
+          if (item.nodeName !== "TD" && control === 0) {
             acc.push(index);
           }
+          control > 0 && control--;
           return acc;
         }, []);
         indexes.forEach((rowIndex) => {
           var _a22;
+          rowNum = newVal;
           while (rowNum > 0) {
             const preChildNodes = (_a22 = rows[rowNum - 1]) == null ? void 0 : _a22.childNodes;
-            if (preChildNodes[rowIndex] && preChildNodes[rowIndex].nodeName === "TD") {
+            if (preChildNodes[rowIndex] && preChildNodes[rowIndex].nodeName === "TD" && preChildNodes[rowIndex].rowSpan > 1) {
               addClass(preChildNodes[rowIndex], "hover-cell");
               hoveredCellList.push(preChildNodes[rowIndex]);
               break;
@@ -47265,19 +48092,19 @@ var TableBody = defineComponent({
 function useMapState() {
   const table = inject(TABLE_INJECTION_KEY);
   const store = table == null ? void 0 : table.store;
-  const leftFixedLeafCount = computed2(() => {
+  const leftFixedLeafCount = computed(() => {
     return store.states.fixedLeafColumnsLength.value;
   });
-  const rightFixedLeafCount = computed2(() => {
+  const rightFixedLeafCount = computed(() => {
     return store.states.rightFixedColumns.value.length;
   });
-  const columnsCount = computed2(() => {
+  const columnsCount = computed(() => {
     return store.states.columns.value.length;
   });
-  const leftFixedCount = computed2(() => {
+  const leftFixedCount = computed(() => {
     return store.states.fixedColumns.value.length;
   });
-  const rightFixedCount = computed2(() => {
+  const rightFixedCount = computed(() => {
     return store.states.rightFixedColumns.value.length;
   });
   return {
@@ -47425,8 +48252,8 @@ function useUtils2(store) {
   const getSelectionRows = () => {
     return store.getSelectionRows();
   };
-  const toggleRowSelection = (row, selected) => {
-    store.toggleRowSelection(row, selected, false);
+  const toggleRowSelection = (row, selected, ignoreSelectable = true) => {
+    store.toggleRowSelection(row, selected, false, ignoreSelectable);
     store.updateAllSelected();
   };
   const clearSelection = () => {
@@ -47519,10 +48346,10 @@ function useStyle3(props, layout2, store, table) {
       table.refs.bodyWrapper.scrollLeft += data.pixelX / 5;
     }
   };
-  const shouldUpdateHeight = computed2(() => {
+  const shouldUpdateHeight = computed(() => {
     return props.height || props.maxHeight || store.states.fixedColumns.value.length > 0 || store.states.rightFixedColumns.value.length > 0;
   });
-  const tableBodyStyles = computed2(() => {
+  const tableBodyStyles = computed(() => {
     return {
       width: layout2.bodyWidth.value ? `${layout2.bodyWidth.value}px` : ""
     };
@@ -47660,16 +48487,16 @@ function useStyle3(props, layout2, store, table) {
     }
   };
   const tableSize = useFormSize();
-  const bodyWidth = computed2(() => {
+  const bodyWidth = computed(() => {
     const { bodyWidth: bodyWidth_, scrollY, gutterWidth } = layout2;
     return bodyWidth_.value ? `${bodyWidth_.value - (scrollY.value ? gutterWidth : 0)}px` : "";
   });
-  const tableLayout = computed2(() => {
+  const tableLayout = computed(() => {
     if (props.maxHeight)
       return "fixed";
     return props.tableLayout;
   });
-  const emptyBlockStyle = computed2(() => {
+  const emptyBlockStyle = computed(() => {
     if (props.data && props.data.length)
       return null;
     let height = "100%";
@@ -47682,7 +48509,7 @@ function useStyle3(props, layout2, store, table) {
       height
     };
   });
-  const tableInnerStyle = computed2(() => {
+  const tableInnerStyle = computed(() => {
     if (props.height) {
       return {
         height: !Number.isNaN(Number(props.height)) ? `${props.height}px` : props.height
@@ -47695,7 +48522,7 @@ function useStyle3(props, layout2, store, table) {
     }
     return {};
   });
-  const scrollbarStyle = computed2(() => {
+  const scrollbarStyle = computed(() => {
     if (props.height) {
       return {
         height: "100%"
@@ -47827,7 +48654,8 @@ var defaultProps3 = {
     default: () => {
       return {
         hasChildren: "hasChildren",
-        children: "children"
+        children: "children",
+        checkStrictly: false
       };
     }
   },
@@ -47847,7 +48675,11 @@ var defaultProps3 = {
   },
   scrollbarAlwaysOn: Boolean,
   flexible: Boolean,
-  showOverflowTooltip: [Boolean, Object]
+  showOverflowTooltip: [Boolean, Object],
+  scrollbarTabindex: {
+    type: [Number, String],
+    default: void 0
+  }
 };
 
 // node_modules/element-plus/es/components/table/src/h-helper.mjs
@@ -47905,7 +48737,7 @@ var useScrollbar = () => {
 
 // node_modules/element-plus/es/components/table/src/table.mjs
 var tableIdSeed = 1;
-var _sfc_main121 = defineComponent({
+var _sfc_main123 = defineComponent({
   name: "ElTable",
   directives: {
     Mousewheel
@@ -47952,7 +48784,7 @@ var _sfc_main121 = defineComponent({
       showHeader: props.showHeader
     });
     table.layout = layout2;
-    const isEmpty3 = computed2(() => (store.states.data.value || []).length === 0);
+    const isEmpty3 = computed(() => (store.states.data.value || []).length === 0);
     const {
       setCurrentRow,
       getSelectionRows,
@@ -47994,15 +48826,23 @@ var _sfc_main121 = defineComponent({
       doLayout,
       debouncedUpdateLayout
     };
-    const computedSumText = computed2(() => props.sumText || t("el.table.sumText"));
-    const computedEmptyText = computed2(() => {
-      return props.emptyText || t("el.table.emptyText");
+    const computedSumText = computed(() => {
+      var _a2;
+      return (_a2 = props.sumText) != null ? _a2 : t("el.table.sumText");
+    });
+    const computedEmptyText = computed(() => {
+      var _a2;
+      return (_a2 = props.emptyText) != null ? _a2 : t("el.table.emptyText");
+    });
+    const columns2 = computed(() => {
+      return convertToRows(store.states.originColumns.value)[0];
     });
     useKeyRender(table);
     return {
       ns,
       layout: layout2,
       store,
+      columns: columns2,
       handleHeaderFooterMousewheel,
       handleMouseLeave,
       tableId,
@@ -48044,11 +48884,6 @@ var _sfc_main121 = defineComponent({
     };
   }
 });
-var _hoisted_161 = ["data-prefix"];
-var _hoisted_239 = {
-  ref: "hiddenColumns",
-  class: "hidden-columns"
-};
 function _sfc_render28(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_hColgroup = resolveComponent("hColgroup");
   const _component_table_header = resolveComponent("table-header");
@@ -48079,13 +48914,16 @@ function _sfc_render28(_ctx, _cache, $props, $setup, $data, $options) {
     ]),
     style: normalizeStyle(_ctx.style),
     "data-prefix": _ctx.ns.namespace.value,
-    onMouseleave: _cache[0] || (_cache[0] = (...args) => _ctx.handleMouseLeave && _ctx.handleMouseLeave(...args))
+    onMouseleave: _ctx.handleMouseLeave
   }, [
     createBaseVNode("div", {
       class: normalizeClass(_ctx.ns.e("inner-wrapper")),
       style: normalizeStyle(_ctx.tableInnerStyle)
     }, [
-      createBaseVNode("div", _hoisted_239, [
+      createBaseVNode("div", {
+        ref: "hiddenColumns",
+        class: "hidden-columns"
+      }, [
         renderSlot(_ctx.$slots, "default")
       ], 512),
       _ctx.showHeader && _ctx.tableLayout === "fixed" ? withDirectives((openBlock(), createElementBlock("div", {
@@ -48124,7 +48962,8 @@ function _sfc_render28(_ctx, _cache, $props, $setup, $data, $options) {
           ref: "scrollBarRef",
           "view-style": _ctx.scrollbarViewStyle,
           "wrap-style": _ctx.scrollbarStyle,
-          always: _ctx.scrollbarAlwaysOn
+          always: _ctx.scrollbarAlwaysOn,
+          tabindex: _ctx.scrollbarTabindex
         }, {
           default: withCtx(() => [
             createBaseVNode("table", {
@@ -48194,7 +49033,7 @@ function _sfc_render28(_ctx, _cache, $props, $setup, $data, $options) {
             ], 2)) : createCommentVNode("v-if", true)
           ]),
           _: 3
-        }, 8, ["view-style", "wrap-style", "always"])
+        }, 8, ["view-style", "wrap-style", "always", "tabindex"])
       ], 2),
       _ctx.showSummary && _ctx.tableLayout === "fixed" ? withDirectives((openBlock(), createElementBlock("div", {
         key: 1,
@@ -48235,9 +49074,9 @@ function _sfc_render28(_ctx, _cache, $props, $setup, $data, $options) {
     }, null, 2), [
       [vShow, _ctx.resizeProxyVisible]
     ])
-  ], 46, _hoisted_161);
+  ], 46, ["data-prefix", "onMouseleave"]);
 }
-var Table = _export_sfc(_sfc_main121, [["render", _sfc_render28], ["__file", "table.vue"]]);
+var Table = _export_sfc(_sfc_main123, [["render", _sfc_render28], ["__file", "table.vue"]]);
 
 // node_modules/element-plus/es/components/table/src/config.mjs
 var defaultClassNames = {
@@ -48519,14 +49358,14 @@ function useRender2(props, slots, owner) {
     realHeaderAlign.value = props.headerAlign ? `is-${props.headerAlign}` : realAlign.value;
     realHeaderAlign.value;
   });
-  const columnOrTableParent = computed2(() => {
+  const columnOrTableParent = computed(() => {
     let parent2 = instance.vnode.vParent || instance.parent;
     while (parent2 && !parent2.tableId && !parent2.columnId) {
       parent2 = parent2.vnode.vParent || parent2.parent;
     }
     return parent2;
   });
-  const hasTreeColumn = computed2(() => {
+  const hasTreeColumn = computed(() => {
     const { store } = instance.parent;
     if (!store)
       return false;
@@ -48587,6 +49426,11 @@ function useRender2(props, slots, owner) {
       column2.renderHeader = (scope) => {
         instance.columnConfig.value["label"];
         return renderSlot(slots, "header", scope, () => [column2.label]);
+      };
+    }
+    if (slots["filter-icon"]) {
+      column2.renderFilterIcon = (scope) => {
+        return renderSlot(slots, "filter-icon", scope);
       };
     }
     let originRenderCell = column2.renderCell;
@@ -48731,7 +49575,7 @@ var ElTableColumn = defineComponent({
   setup(props, { slots }) {
     const instance = getCurrentInstance();
     const columnConfig = ref({});
-    const owner = computed2(() => {
+    const owner = computed(() => {
       let parent22 = instance.parent;
       while (parent22 && !parent22.tableId) {
         parent22 = parent22.parent;
@@ -48818,7 +49662,9 @@ var ElTableColumn = defineComponent({
       columnIndex > -1 && owner.value.store.commit("insertColumn", columnConfig.value, isSubColumn.value ? parent22.columnConfig.value : null, updateColumnOrder);
     });
     onBeforeUnmount(() => {
-      owner.value.store.commit("removeColumn", columnConfig.value, isSubColumn.value ? parent2.columnConfig.value : null, updateColumnOrder);
+      const getColumnIndex = columnConfig.value.getColumnIndex;
+      const columnIndex = getColumnIndex ? getColumnIndex() : -1;
+      columnIndex > -1 && owner.value.store.commit("removeColumn", columnConfig.value, isSubColumn.value ? parent2.columnConfig.value : null, updateColumnOrder);
     });
     instance.columnId = columnId.value;
     instance.columnConfig = columnConfig;
@@ -48922,13 +49768,20 @@ var calcColumnStyle = (column2, fixedColumn, fixed) => {
 
 // node_modules/element-plus/es/components/table-v2/src/composables/use-columns.mjs
 function useColumns(props, columns2, fixed) {
-  const visibleColumns = computed2(() => {
-    return unref(columns2).filter((column2) => !column2.hidden);
+  const _columns = computed(() => unref(columns2).map((column2, index) => {
+    var _a2, _b;
+    return {
+      ...column2,
+      key: (_b = (_a2 = column2.key) != null ? _a2 : column2.dataKey) != null ? _b : index
+    };
+  }));
+  const visibleColumns = computed(() => {
+    return unref(_columns).filter((column2) => !column2.hidden);
   });
-  const fixedColumnsOnLeft = computed2(() => unref(visibleColumns).filter((column2) => column2.fixed === "left" || column2.fixed === true));
-  const fixedColumnsOnRight = computed2(() => unref(visibleColumns).filter((column2) => column2.fixed === "right"));
-  const normalColumns = computed2(() => unref(visibleColumns).filter((column2) => !column2.fixed));
-  const mainColumns = computed2(() => {
+  const fixedColumnsOnLeft = computed(() => unref(visibleColumns).filter((column2) => column2.fixed === "left" || column2.fixed === true));
+  const fixedColumnsOnRight = computed(() => unref(visibleColumns).filter((column2) => column2.fixed === "right"));
+  const normalColumns = computed(() => unref(visibleColumns).filter((column2) => !column2.fixed));
+  const mainColumns = computed(() => {
     const ret = [];
     unref(fixedColumnsOnLeft).forEach((column2) => {
       ret.push({
@@ -48947,21 +49800,20 @@ function useColumns(props, columns2, fixed) {
     });
     return ret;
   });
-  const hasFixedColumns = computed2(() => {
+  const hasFixedColumns = computed(() => {
     return unref(fixedColumnsOnLeft).length || unref(fixedColumnsOnRight).length;
   });
-  const columnsStyles = computed2(() => {
-    const _columns = unref(columns2);
-    return _columns.reduce((style, column2) => {
+  const columnsStyles = computed(() => {
+    return unref(_columns).reduce((style, column2) => {
       style[column2.key] = calcColumnStyle(column2, unref(fixed), props.fixed);
       return style;
     }, {});
   });
-  const columnsTotalWidth = computed2(() => {
+  const columnsTotalWidth = computed(() => {
     return unref(visibleColumns).reduce((width, column2) => width + column2.width, 0);
   });
   const getColumn = (key) => {
-    return unref(columns2).find((column2) => column2.key === key);
+    return unref(_columns).find((column2) => column2.key === key);
   };
   const getColumnStyle = (key) => {
     return unref(columnsStyles)[key];
@@ -48984,7 +49836,7 @@ function useColumns(props, columns2, fixed) {
     (_a2 = props.onColumnSort) == null ? void 0 : _a2.call(props, { column: getColumn(key), key, order });
   }
   return {
-    columns: columns2,
+    columns: _columns,
     columnsStyles,
     columnsTotalWidth,
     fixedColumnsOnLeft,
@@ -49058,11 +49910,17 @@ var useScrollbar2 = (props, {
 };
 
 // node_modules/element-plus/es/components/table-v2/src/composables/use-row.mjs
-var useRow = (props, { mainTableRef, leftTableRef, rightTableRef }) => {
+var useRow = (props, {
+  mainTableRef,
+  leftTableRef,
+  rightTableRef,
+  tableInstance,
+  ns,
+  isScrolling
+}) => {
   const vm = getCurrentInstance();
   const { emit } = vm;
   const isResetting = shallowRef(false);
-  const hoveringRowKey = shallowRef(null);
   const expandedRowKeys = ref(props.defaultExpandedRowKeys || []);
   const lastRenderedRowIndex = ref(-1);
   const resetIndex = shallowRef(null);
@@ -49071,7 +49929,7 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef }) => {
   const leftTableHeights = shallowRef({});
   const mainTableHeights = shallowRef({});
   const rightTableHeights = shallowRef({});
-  const isDynamic = computed2(() => isNumber3(props.estimatedRowHeight));
+  const isDynamic = computed(() => isNumber3(props.estimatedRowHeight));
   function onRowsRendered(params) {
     var _a2;
     (_a2 = props.onRowsRendered) == null ? void 0 : _a2.call(props, params);
@@ -49080,7 +49938,18 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef }) => {
     }
   }
   function onRowHovered({ hovered, rowKey: rowKey2 }) {
-    hoveringRowKey.value = hovered ? rowKey2 : null;
+    if (isScrolling.value) {
+      return;
+    }
+    const tableRoot = tableInstance.vnode.el;
+    const rows = tableRoot.querySelectorAll(`[rowkey="${String(rowKey2)}"]`);
+    rows.forEach((row) => {
+      if (hovered) {
+        row.classList.add(ns.is("hovered"));
+      } else {
+        row.classList.remove(ns.is("hovered"));
+      }
+    });
   }
   function onRowExpanded({
     expanded,
@@ -49158,7 +50027,6 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef }) => {
     }
   }
   return {
-    hoveringRowKey,
     expandedRowKeys,
     lastRenderedRowIndex,
     isDynamic,
@@ -49175,7 +50043,7 @@ var useRow = (props, { mainTableRef, leftTableRef, rightTableRef }) => {
 // node_modules/element-plus/es/components/table-v2/src/composables/use-data.mjs
 var useData = (props, { expandedRowKeys, lastRenderedRowIndex, resetAfterIndex }) => {
   const depthMap = ref({});
-  const flattenedData = computed2(() => {
+  const flattenedData = computed(() => {
     const depths = {};
     const { data: data2, rowKey: rowKey2 } = props;
     const _expandedRowKeys = unref(expandedRowKeys);
@@ -49197,7 +50065,7 @@ var useData = (props, { expandedRowKeys, lastRenderedRowIndex, resetAfterIndex }
     depthMap.value = depths;
     return array4;
   });
-  const data = computed2(() => {
+  const data = computed(() => {
     const { data: data2, expandColumnKey: expandColumnKey2 } = props;
     return expandColumnKey2 ? unref(flattenedData) : data2;
   });
@@ -49237,13 +50105,13 @@ var useStyles2 = (props, {
   fixedColumnsOnLeft,
   fixedColumnsOnRight
 }) => {
-  const bodyWidth = computed2(() => {
+  const bodyWidth = computed(() => {
     const { fixed, width, vScrollbarSize } = props;
     const ret = width - vScrollbarSize;
     return fixed ? Math.max(Math.round(unref(columnsTotalWidth)), ret) : ret;
   });
-  const headerWidth = computed2(() => unref(bodyWidth) + props.vScrollbarSize);
-  const mainTableHeight = computed2(() => {
+  const headerWidth = computed(() => unref(bodyWidth) + props.vScrollbarSize);
+  const mainTableHeight = computed(() => {
     const { height = 0, maxHeight = 0, footerHeight: footerHeight2, hScrollbarSize } = props;
     if (maxHeight > 0) {
       const _fixedRowsHeight = unref(fixedRowsHeight);
@@ -49254,7 +50122,7 @@ var useStyles2 = (props, {
     }
     return height - footerHeight2;
   });
-  const rowsHeight = computed2(() => {
+  const rowsHeight = computed(() => {
     const { rowHeight, estimatedRowHeight } = props;
     const _data = unref(data);
     if (isNumber3(estimatedRowHeight)) {
@@ -49262,7 +50130,7 @@ var useStyles2 = (props, {
     }
     return _data.length * rowHeight;
   });
-  const fixedTableHeight = computed2(() => {
+  const fixedTableHeight = computed(() => {
     const { maxHeight } = props;
     const tableHeight = unref(mainTableHeight);
     if (isNumber3(maxHeight) && maxHeight > 0)
@@ -49271,17 +50139,17 @@ var useStyles2 = (props, {
     return Math.min(tableHeight, totalHeight);
   });
   const mapColumn = (column2) => column2.width;
-  const leftTableWidth = computed2(() => sum2(unref(fixedColumnsOnLeft).map(mapColumn)));
-  const rightTableWidth = computed2(() => sum2(unref(fixedColumnsOnRight).map(mapColumn)));
-  const headerHeight = computed2(() => sum2(props.headerHeight));
-  const fixedRowsHeight = computed2(() => {
+  const leftTableWidth = computed(() => sum2(unref(fixedColumnsOnLeft).map(mapColumn)));
+  const rightTableWidth = computed(() => sum2(unref(fixedColumnsOnRight).map(mapColumn)));
+  const headerHeight = computed(() => sum2(props.headerHeight));
+  const fixedRowsHeight = computed(() => {
     var _a2;
     return (((_a2 = props.fixedData) == null ? void 0 : _a2.length) || 0) * props.rowHeight;
   });
-  const windowHeight = computed2(() => {
+  const windowHeight = computed(() => {
     return unref(mainTableHeight) - unref(headerHeight) - unref(fixedRowsHeight);
   });
-  const rootStyle = computed2(() => {
+  const rootStyle = computed(() => {
     const { style = {}, height, width } = props;
     return enforceUnit({
       ...style,
@@ -49289,8 +50157,8 @@ var useStyles2 = (props, {
       width
     });
   });
-  const footerHeight = computed2(() => enforceUnit({ height: props.footerHeight }));
-  const emptyStyle = computed2(() => ({
+  const footerHeight = computed(() => enforceUnit({ height: props.footerHeight }));
+  const emptyStyle = computed(() => ({
     top: addUnit(unref(headerHeight)),
     bottom: addUnit(props.footerHeight),
     width: addUnit(props.width)
@@ -49375,9 +50243,11 @@ function useTable(props) {
     rightTableRef,
     onMaybeEndReached
   });
+  const ns = useNamespace("table-v2");
+  const instance = getCurrentInstance();
+  const isScrolling = shallowRef(false);
   const {
     expandedRowKeys,
-    hoveringRowKey,
     lastRenderedRowIndex,
     isDynamic,
     isResetting,
@@ -49390,7 +50260,10 @@ function useTable(props) {
   } = useRow(props, {
     mainTableRef,
     leftTableRef,
-    rightTableRef
+    rightTableRef,
+    tableInstance: instance,
+    ns,
+    isScrolling
   });
   const { data, depthMap } = useData(props, {
     expandedRowKeys,
@@ -49416,9 +50289,8 @@ function useTable(props) {
     fixedColumnsOnLeft,
     fixedColumnsOnRight
   });
-  const isScrolling = shallowRef(false);
   const containerRef = ref();
-  const showEmpty = computed2(() => {
+  const showEmpty = computed(() => {
     const noData = unref(data).length === 0;
     return isArray(props.fixedData) ? props.fixedData.length === 0 && noData : noData;
   });
@@ -49452,7 +50324,6 @@ function useTable(props) {
     isDynamic,
     isResetting,
     isScrolling,
-    hoveringRowKey,
     hasFixedColumns,
     columnsStyles,
     columnsTotalWidth,
@@ -49811,9 +50682,9 @@ var TableV2HeaderRow = defineComponent({
 });
 
 // node_modules/element-plus/es/components/table-v2/src/components/header.mjs
-var COMPONENT_NAME18 = "ElTableV2Header";
+var COMPONENT_NAME17 = "ElTableV2Header";
 var TableV2Header = defineComponent({
-  name: COMPONENT_NAME18,
+  name: COMPONENT_NAME17,
   props: tableV2HeaderProps,
   setup(props, {
     slots,
@@ -49821,15 +50692,15 @@ var TableV2Header = defineComponent({
   }) {
     const ns = useNamespace("table-v2");
     const headerRef = ref();
-    const headerStyle = computed2(() => enforceUnit({
+    const headerStyle = computed(() => enforceUnit({
       width: props.width,
       height: props.height
     }));
-    const rowStyle = computed2(() => enforceUnit({
+    const rowStyle = computed(() => enforceUnit({
       width: props.rowWidth,
       height: props.height
     }));
-    const headerHeights = computed2(() => castArray_default(unref(props.headerHeight)));
+    const headerHeights = computed(() => castArray_default(unref(props.headerHeight)));
     const scrollToLeft = (left2) => {
       const headerEl = unref(headerRef);
       nextTick(() => {
@@ -49905,7 +50776,7 @@ var useTableRow = (props) => {
   } = inject(TableV2InjectionKey);
   const measured = ref(false);
   const rowRef = ref();
-  const measurable = computed2(() => {
+  const measurable = computed(() => {
     return isNumber3(props.estimatedRowHeight) && props.rowIndex >= 0;
   });
   const doMeasure = (isInit = false) => {
@@ -49935,7 +50806,7 @@ var useTableRow = (props) => {
       }
     });
   };
-  const eventHandlers = computed2(() => {
+  const eventHandlers = computed(() => {
     const {
       rowData,
       rowIndex,
@@ -50011,9 +50882,9 @@ var useTableRow = (props) => {
     onExpand
   };
 };
-var COMPONENT_NAME19 = "ElTableV2TableRow";
+var COMPONENT_NAME18 = "ElTableV2TableRow";
 var TableV2Row = defineComponent({
-  name: COMPONENT_NAME19,
+  name: COMPONENT_NAME18,
   props: tableV2RowProps,
   setup(props, {
     expose,
@@ -50133,11 +51004,11 @@ var ExpandIcon = (props) => {
 };
 
 // node_modules/element-plus/es/components/table-v2/src/table-grid.mjs
-var COMPONENT_NAME20 = "ElTableV2Grid";
+var COMPONENT_NAME19 = "ElTableV2Grid";
 var useTableGrid = (props) => {
   const headerRef = ref();
   const bodyRef = ref();
-  const totalHeight = computed2(() => {
+  const totalHeight = computed(() => {
     const {
       data,
       rowHeight,
@@ -50148,21 +51019,21 @@ var useTableGrid = (props) => {
     }
     return data.length * rowHeight;
   });
-  const fixedRowHeight = computed2(() => {
+  const fixedRowHeight = computed(() => {
     const {
       fixedData,
       rowHeight
     } = props;
     return ((fixedData == null ? void 0 : fixedData.length) || 0) * rowHeight;
   });
-  const headerHeight = computed2(() => sum2(props.headerHeight));
-  const gridHeight = computed2(() => {
+  const headerHeight = computed(() => sum2(props.headerHeight));
+  const gridHeight = computed(() => {
     const {
       height
     } = props;
     return Math.max(0, height - unref(headerHeight) - unref(fixedRowHeight));
   });
-  const hasHeader = computed2(() => {
+  const hasHeader = computed(() => {
     return unref(headerHeight) + unref(fixedRowHeight) > 0;
   });
   const itemKey = ({
@@ -50190,14 +51061,12 @@ var useTableGrid = (props) => {
   function scrollTo(leftOrOptions, top) {
     const header$ = unref(headerRef);
     const body$ = unref(bodyRef);
-    if (!header$ || !body$)
-      return;
     if (isObject(leftOrOptions)) {
-      header$.scrollToLeft(leftOrOptions.scrollLeft);
-      body$.scrollTo(leftOrOptions);
+      header$ == null ? void 0 : header$.scrollToLeft(leftOrOptions.scrollLeft);
+      body$ == null ? void 0 : body$.scrollTo(leftOrOptions);
     } else {
-      header$.scrollToLeft(leftOrOptions);
-      body$.scrollTo({
+      header$ == null ? void 0 : header$.scrollToLeft(leftOrOptions);
+      body$ == null ? void 0 : body$.scrollTo({
         scrollLeft: leftOrOptions,
         scrollTop: top
       });
@@ -50236,7 +51105,7 @@ var useTableGrid = (props) => {
   };
 };
 var TableGrid = defineComponent({
-  name: COMPONENT_NAME20,
+  name: COMPONENT_NAME19,
   props: tableV2GridProps,
   setup(props, {
     slots,
@@ -50420,7 +51289,6 @@ var RowRenderer = (props, {
     expandedRowKeys,
     estimatedRowHeight,
     hasFixedColumns,
-    hoveringRowKey,
     rowData,
     rowIndex,
     style,
@@ -50450,7 +51318,6 @@ var RowRenderer = (props, {
   const kls = [ns.e("row"), rowKls, {
     [ns.e(`row-depth-${depth}`)]: canExpand && rowIndex >= 0,
     [ns.is("expanded")]: canExpand && expandedRowKeys.includes(_rowKey),
-    [ns.is("hovered")]: !isScrolling && _rowKey === hoveringRowKey,
     [ns.is("fixed")]: !depth && isFixedRow,
     [ns.is("customized")]: Boolean(slots.row)
   }];
@@ -50470,9 +51337,29 @@ var RowRenderer = (props, {
     rowEventHandlers,
     style
   };
+  const handlerMosueEnter = (e) => {
+    onRowHover == null ? void 0 : onRowHover({
+      hovered: true,
+      rowKey: _rowKey,
+      event: e,
+      rowData,
+      rowIndex
+    });
+  };
+  const handlerMouseLeave = (e) => {
+    onRowHover == null ? void 0 : onRowHover({
+      hovered: false,
+      rowKey: _rowKey,
+      event: e,
+      rowData,
+      rowIndex
+    });
+  };
   return createVNode(TableV2Row, mergeProps(_rowProps, {
-    "onRowHover": onRowHover,
-    "onRowExpand": onRowExpanded
+    "onRowExpand": onRowExpanded,
+    "onMouseenter": handlerMosueEnter,
+    "onMouseleave": handlerMouseLeave,
+    "rowkey": _rowKey
   }), _isSlot4(slots) ? slots : {
     default: () => [slots]
   });
@@ -50700,9 +51587,9 @@ Overlay2.displayName = "ElTableV2Overlay";
 function _isSlot6(s2) {
   return typeof s2 === "function" || Object.prototype.toString.call(s2) === "[object Object]" && !isVNode(s2);
 }
-var COMPONENT_NAME21 = "ElTableV2";
+var COMPONENT_NAME20 = "ElTableV2";
 var TableV2 = defineComponent({
-  name: COMPONENT_NAME21,
+  name: COMPONENT_NAME20,
   props: tableV2Props,
   setup(props, {
     slots,
@@ -50722,7 +51609,6 @@ var TableV2 = defineComponent({
       depthMap,
       expandedRowKeys,
       hasFixedColumns,
-      hoveringRowKey,
       mainTableRef,
       leftTableRef,
       rightTableRef,
@@ -50757,7 +51643,6 @@ var TableV2 = defineComponent({
     provide(TableV2InjectionKey, {
       ns,
       isResetting,
-      hoveringRowKey,
       isScrolling
     });
     return () => {
@@ -50865,7 +51750,6 @@ var TableV2 = defineComponent({
         expandedRowKeys: unref(expandedRowKeys),
         estimatedRowHeight,
         hasFixedColumns: unref(hasFixedColumns),
-        hoveringRowKey: unref(hoveringRowKey),
         rowProps: rowProps2,
         rowClass,
         rowKey: rowKey2,
@@ -51012,19 +51896,19 @@ var tabBarProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/tabs/src/tab-bar2.mjs
-var COMPONENT_NAME22 = "ElTabBar";
-var __default__84 = defineComponent({
-  name: COMPONENT_NAME22
+var COMPONENT_NAME21 = "ElTabBar";
+var __default__85 = defineComponent({
+  name: COMPONENT_NAME21
 });
-var _sfc_main122 = defineComponent({
-  ...__default__84,
+var _sfc_main124 = defineComponent({
+  ...__default__85,
   props: tabBarProps,
   setup(__props, { expose }) {
     const props = __props;
     const instance = getCurrentInstance();
     const rootTabs = inject(tabsRootContextKey);
     if (!rootTabs)
-      throwError(COMPONENT_NAME22, "<el-tabs><el-tab-bar /></el-tabs>");
+      throwError(COMPONENT_NAME21, "<el-tabs><el-tab-bar /></el-tabs>");
     const ns = useNamespace("tabs");
     const barRef = ref();
     const barStyle = ref();
@@ -51046,9 +51930,7 @@ var _sfc_main122 = defineComponent({
         tabSize = $el[`client${capitalize3(sizeName)}`];
         const tabStyles = window.getComputedStyle($el);
         if (sizeName === "width") {
-          if (props.tabs.length > 1) {
-            tabSize -= Number.parseFloat(tabStyles.paddingLeft) + Number.parseFloat(tabStyles.paddingRight);
-          }
+          tabSize -= Number.parseFloat(tabStyles.paddingLeft) + Number.parseFloat(tabStyles.paddingRight);
           offset2 += Number.parseFloat(tabStyles.paddingLeft);
         }
         return false;
@@ -51059,11 +51941,34 @@ var _sfc_main122 = defineComponent({
       };
     };
     const update2 = () => barStyle.value = getBarStyle();
+    const saveObserver = [];
+    const observerTabs = () => {
+      var _a2;
+      saveObserver.forEach((observer) => observer.stop());
+      saveObserver.length = 0;
+      const list = (_a2 = instance.parent) == null ? void 0 : _a2.refs;
+      if (!list)
+        return;
+      for (const key in list) {
+        if (key.startsWith("tab-")) {
+          const _el = list[key];
+          if (_el) {
+            saveObserver.push(useResizeObserver(_el, update2));
+          }
+        }
+      }
+    };
     watch(() => props.tabs, async () => {
       await nextTick();
       update2();
+      observerTabs();
     }, { immediate: true });
-    useResizeObserver(barRef, () => update2());
+    const barObserever = useResizeObserver(barRef, () => update2());
+    onBeforeUnmount(() => {
+      saveObserver.forEach((observer) => observer.stop());
+      saveObserver.length = 0;
+      barObserever.stop();
+    });
     expose({
       ref: barRef,
       update: update2
@@ -51078,7 +51983,7 @@ var _sfc_main122 = defineComponent({
     };
   }
 });
-var TabBar = _export_sfc(_sfc_main122, [["__file", "tab-bar.vue"]]);
+var TabBar = _export_sfc(_sfc_main124, [["__file", "tab-bar.vue"]]);
 
 // node_modules/element-plus/es/components/tabs/src/tab-nav.mjs
 var tabNavProps = buildProps({
@@ -51102,19 +52007,18 @@ var tabNavEmits = {
   tabClick: (tab, tabName, ev) => ev instanceof Event,
   tabRemove: (tab, ev) => ev instanceof Event
 };
-var COMPONENT_NAME23 = "ElTabNav";
+var COMPONENT_NAME22 = "ElTabNav";
 var TabNav = defineComponent({
-  name: COMPONENT_NAME23,
+  name: COMPONENT_NAME22,
   props: tabNavProps,
   emits: tabNavEmits,
   setup(props, {
     expose,
     emit
   }) {
-    const vm = getCurrentInstance();
     const rootTabs = inject(tabsRootContextKey);
     if (!rootTabs)
-      throwError(COMPONENT_NAME23, `<el-tabs><tab-nav /></el-tabs>`);
+      throwError(COMPONENT_NAME22, `<el-tabs><tab-nav /></el-tabs>`);
     const ns = useNamespace("tabs");
     const visibility = useDocumentVisibility();
     const focused = useWindowFocus();
@@ -51126,8 +52030,8 @@ var TabNav = defineComponent({
     const navOffset = ref(0);
     const isFocus = ref(false);
     const focusable = ref(true);
-    const sizeName = computed2(() => ["top", "bottom"].includes(rootTabs.props.tabPosition) ? "width" : "height");
-    const navStyle = computed2(() => {
+    const sizeName = computed(() => ["top", "bottom"].includes(rootTabs.props.tabPosition) ? "width" : "height");
+    const navStyle = computed(() => {
       const dir = sizeName.value === "width" ? "X" : "Y";
       return {
         transform: `translate${dir}(-${navOffset.value}px)`
@@ -51267,10 +52171,6 @@ var TabNav = defineComponent({
       scrollToActiveTab,
       removeFocus
     });
-    watch(() => props.panes, () => vm.update(), {
-      flush: "post",
-      deep: true
-    });
     return () => {
       const scrollBtn = scrollable.value ? [createVNode("span", {
         "class": [ns.e("nav-prev"), ns.is("disabled", !scrollable.value.prev)],
@@ -51384,9 +52284,10 @@ var Tabs = defineComponent({
   }) {
     var _a2;
     const ns = useNamespace("tabs");
+    const isVertical = computed(() => ["left", "right"].includes(props.tabPosition));
     const {
       children: panes,
-      addChild: registerPane,
+      addChild: sortPane,
       removeChild: unregisterPane
     } = useOrderedChildren(getCurrentInstance(), "ElTabPane");
     const nav$ = ref();
@@ -51434,16 +52335,24 @@ var Tabs = defineComponent({
     provide(tabsRootContextKey, {
       props,
       currentName,
-      registerPane,
+      registerPane: (pane) => {
+        panes.value.push(pane);
+      },
+      sortPane,
       unregisterPane
     });
     expose({
       currentName
     });
+    const TabNavRenderer = ({
+      render: render2
+    }) => {
+      return render2();
+    };
     return () => {
       const addSlot = slots["add-icon"];
-      const newButton = props.editable || props.addable ? createVNode("span", {
-        "class": ns.e("new-tab"),
+      const newButton = props.editable || props.addable ? createVNode("div", {
+        "class": [ns.e("new-tab"), isVertical.value && ns.e("new-tab-vertical")],
         "tabindex": "0",
         "onClick": handleTabAdd,
         "onKeydown": (ev) => {
@@ -51456,17 +52365,24 @@ var Tabs = defineComponent({
         default: () => [createVNode(plus_default, null, null)]
       })]) : null;
       const header = createVNode("div", {
-        "class": [ns.e("header"), ns.is(props.tabPosition)]
-      }, [newButton, createVNode(TabNav, {
-        "ref": nav$,
-        "currentName": currentName.value,
-        "editable": props.editable,
-        "type": props.type,
-        "panes": panes.value,
-        "stretch": props.stretch,
-        "onTabClick": handleTabClick,
-        "onTabRemove": handleTabRemove
-      }, null)]);
+        "class": [ns.e("header"), isVertical.value && ns.e("header-vertical"), ns.is(props.tabPosition)]
+      }, [createVNode(TabNavRenderer, {
+        "render": () => {
+          const hasLabelSlot = panes.value.some((pane) => pane.slots.label);
+          return createVNode(TabNav, {
+            ref: nav$,
+            currentName: currentName.value,
+            editable: props.editable,
+            type: props.type,
+            panes: panes.value,
+            stretch: props.stretch,
+            onTabClick: handleTabClick,
+            onTabRemove: handleTabRemove
+          }, {
+            $stable: !hasLabelSlot
+          });
+        }
+      }, null), newButton]);
       const panels = createVNode("div", {
         "class": ns.e("content")
       }, [renderSlot(slots, "default")]);
@@ -51475,7 +52391,7 @@ var Tabs = defineComponent({
           [ns.m("card")]: props.type === "card",
           [ns.m("border-card")]: props.type === "border-card"
         }]
-      }, [...props.tabPosition !== "bottom" ? [header, panels] : [panels, header]]);
+      }, [panels, header]);
     };
   }
 });
@@ -51495,13 +52411,12 @@ var tabPaneProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/tabs/src/tab-pane2.mjs
-var _hoisted_163 = ["id", "aria-hidden", "aria-labelledby"];
-var COMPONENT_NAME24 = "ElTabPane";
-var __default__85 = defineComponent({
-  name: COMPONENT_NAME24
+var COMPONENT_NAME23 = "ElTabPane";
+var __default__86 = defineComponent({
+  name: COMPONENT_NAME23
 });
-var _sfc_main123 = defineComponent({
-  ...__default__85,
+var _sfc_main125 = defineComponent({
+  ...__default__86,
   props: tabPaneProps,
   setup(__props) {
     const props = __props;
@@ -51509,16 +52424,16 @@ var _sfc_main123 = defineComponent({
     const slots = useSlots();
     const tabsRoot = inject(tabsRootContextKey);
     if (!tabsRoot)
-      throwError(COMPONENT_NAME24, "usage: <el-tabs><el-tab-pane /></el-tabs/>");
+      throwError(COMPONENT_NAME23, "usage: <el-tabs><el-tab-pane /></el-tabs/>");
     const ns = useNamespace("tab-pane");
     const index = ref();
-    const isClosable = computed2(() => props.closable || tabsRoot.props.closable);
+    const isClosable = computed(() => props.closable || tabsRoot.props.closable);
     const active = computedEager(() => {
       var _a2;
       return tabsRoot.currentName.value === ((_a2 = props.name) != null ? _a2 : index.value);
     });
     const loaded = ref(active.value);
-    const paneName = computed2(() => {
+    const paneName = computed(() => {
       var _a2;
       return (_a2 = props.name) != null ? _a2 : index.value;
     });
@@ -51536,8 +52451,9 @@ var _sfc_main123 = defineComponent({
       index,
       isClosable
     });
+    tabsRoot.registerPane(pane);
     onMounted(() => {
-      tabsRoot.registerPane(pane);
+      tabsRoot.sortPane(pane);
     });
     onUnmounted(() => {
       tabsRoot.unregisterPane(pane.uid);
@@ -51552,13 +52468,13 @@ var _sfc_main123 = defineComponent({
         "aria-labelledby": `tab-${unref(paneName)}`
       }, [
         renderSlot(_ctx.$slots, "default")
-      ], 10, _hoisted_163)), [
+      ], 10, ["id", "aria-hidden", "aria-labelledby"])), [
         [vShow, unref(active)]
       ]) : createCommentVNode("v-if", true);
     };
   }
 });
-var TabPane = _export_sfc(_sfc_main123, [["__file", "tab-pane.vue"]]);
+var TabPane = _export_sfc(_sfc_main125, [["__file", "tab-pane.vue"]]);
 
 // node_modules/element-plus/es/components/tabs/index.mjs
 var ElTabs = withInstall(Tabs, {
@@ -51578,9 +52494,7 @@ var textProps = buildProps({
     values: componentSizes,
     default: ""
   },
-  truncated: {
-    type: Boolean
-  },
+  truncated: Boolean,
   lineClamp: {
     type: [String, Number]
   },
@@ -51591,17 +52505,17 @@ var textProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/text/src/text2.mjs
-var __default__86 = defineComponent({
+var __default__87 = defineComponent({
   name: "ElText"
 });
-var _sfc_main124 = defineComponent({
-  ...__default__86,
+var _sfc_main126 = defineComponent({
+  ...__default__87,
   props: textProps,
   setup(__props) {
     const props = __props;
     const textSize = useFormSize();
     const ns = useNamespace("text");
-    const textKls = computed2(() => [
+    const textKls = computed(() => [
       ns.b(),
       ns.m(props.type),
       ns.m(textSize.value),
@@ -51621,13 +52535,13 @@ var _sfc_main124 = defineComponent({
     };
   }
 });
-var Text2 = _export_sfc(_sfc_main124, [["__file", "text.vue"]]);
+var Text2 = _export_sfc(_sfc_main126, [["__file", "text.vue"]]);
 
 // node_modules/element-plus/es/components/text/index.mjs
 var ElText = withInstall(Text2);
 
 // node_modules/element-plus/es/components/time-select/src/time-select2.mjs
-var import_dayjs16 = __toESM(require_dayjs_min(), 1);
+var import_dayjs17 = __toESM(require_dayjs_min(), 1);
 var import_customParseFormat3 = __toESM(require_customParseFormat(), 1);
 
 // node_modules/element-plus/es/components/time-select/src/time-select.mjs
@@ -51643,7 +52557,7 @@ var timeSelectProps = buildProps({
     default: true
   },
   effect: {
-    type: String,
+    type: definePropType(String),
     default: "light"
   },
   clearable: {
@@ -51674,7 +52588,8 @@ var timeSelectProps = buildProps({
   clearIcon: {
     type: definePropType([String, Object]),
     default: () => circle_close_default
-  }
+  },
+  ...useEmptyValuesProps
 });
 
 // node_modules/element-plus/es/components/time-select/src/utils.mjs
@@ -51735,49 +52650,49 @@ var nextTime = (time, step) => {
 };
 
 // node_modules/element-plus/es/components/time-select/src/time-select2.mjs
-var __default__87 = defineComponent({
+var __default__88 = defineComponent({
   name: "ElTimeSelect"
 });
-var _sfc_main125 = defineComponent({
-  ...__default__87,
+var _sfc_main127 = defineComponent({
+  ...__default__88,
   props: timeSelectProps,
-  emits: ["change", "blur", "focus", "update:modelValue"],
+  emits: ["change", "blur", "focus", "clear", "update:modelValue"],
   setup(__props, { expose }) {
     const props = __props;
-    import_dayjs16.default.extend(import_customParseFormat3.default);
+    import_dayjs17.default.extend(import_customParseFormat3.default);
     const { Option: ElOption2 } = ElSelect;
     const nsInput = useNamespace("input");
     const select = ref();
     const _disabled = useFormDisabled();
     const { lang } = useLocale();
-    const value = computed2(() => props.modelValue);
-    const start = computed2(() => {
+    const value = computed(() => props.modelValue);
+    const start = computed(() => {
       const time = parseTime(props.start);
       return time ? formatTime2(time) : null;
     });
-    const end2 = computed2(() => {
+    const end2 = computed(() => {
       const time = parseTime(props.end);
       return time ? formatTime2(time) : null;
     });
-    const step = computed2(() => {
+    const step = computed(() => {
       const time = parseTime(props.step);
       return time ? formatTime2(time) : null;
     });
-    const minTime = computed2(() => {
+    const minTime = computed(() => {
       const time = parseTime(props.minTime || "");
       return time ? formatTime2(time) : null;
     });
-    const maxTime = computed2(() => {
+    const maxTime = computed(() => {
       const time = parseTime(props.maxTime || "");
       return time ? formatTime2(time) : null;
     });
-    const items = computed2(() => {
+    const items = computed(() => {
       const result2 = [];
       if (props.start && props.end && props.step) {
         let current = start.value;
         let currentTime;
         while (current && end2.value && compareTime(current, end2.value) <= 0) {
-          currentTime = (0, import_dayjs16.default)(current, "HH:mm").locale(lang.value).format(props.format);
+          currentTime = (0, import_dayjs17.default)(current, "HH:mm").locale(lang.value).format(props.format);
           result2.push({
             value: currentTime,
             disabled: compareTime(current, minTime.value || "-1:-1") <= 0 || compareTime(current, maxTime.value || "100:100") >= 0
@@ -51812,10 +52727,13 @@ var _sfc_main125 = defineComponent({
         placeholder: _ctx.placeholder,
         "default-first-option": "",
         filterable: _ctx.editable,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = (event) => _ctx.$emit("update:modelValue", event)),
-        onChange: _cache[1] || (_cache[1] = (event) => _ctx.$emit("change", event)),
-        onBlur: _cache[2] || (_cache[2] = (event) => _ctx.$emit("blur", event)),
-        onFocus: _cache[3] || (_cache[3] = (event) => _ctx.$emit("focus", event))
+        "empty-values": _ctx.emptyValues,
+        "value-on-clear": _ctx.valueOnClear,
+        "onUpdate:modelValue": (event) => _ctx.$emit("update:modelValue", event),
+        onChange: (event) => _ctx.$emit("change", event),
+        onBlur: (event) => _ctx.$emit("blur", event),
+        onFocus: (event) => _ctx.$emit("focus", event),
+        onClear: () => _ctx.$emit("clear")
       }, {
         prefix: withCtx(() => [
           _ctx.prefixIcon ? (openBlock(), createBlock(unref(ElIcon), {
@@ -51839,18 +52757,14 @@ var _sfc_main125 = defineComponent({
           }), 128))
         ]),
         _: 1
-      }, 8, ["model-value", "disabled", "clearable", "clear-icon", "size", "effect", "placeholder", "filterable"]);
+      }, 8, ["model-value", "disabled", "clearable", "clear-icon", "size", "effect", "placeholder", "filterable", "empty-values", "value-on-clear", "onUpdate:modelValue", "onChange", "onBlur", "onFocus", "onClear"]);
     };
   }
 });
-var TimeSelect = _export_sfc(_sfc_main125, [["__file", "time-select.vue"]]);
+var TimeSelect = _export_sfc(_sfc_main127, [["__file", "time-select.vue"]]);
 
 // node_modules/element-plus/es/components/time-select/index.mjs
-TimeSelect.install = (app) => {
-  app.component(TimeSelect.name, TimeSelect);
-};
-var _TimeSelect = TimeSelect;
-var ElTimeSelect = _TimeSelect;
+var ElTimeSelect = withInstall(TimeSelect);
 
 // node_modules/element-plus/es/components/timeline/src/timeline.mjs
 var Timeline = defineComponent({
@@ -51870,14 +52784,8 @@ var timelineItemProps = buildProps({
     type: String,
     default: ""
   },
-  hideTimestamp: {
-    type: Boolean,
-    default: false
-  },
-  center: {
-    type: Boolean,
-    default: false
-  },
+  hideTimestamp: Boolean,
+  center: Boolean,
   placement: {
     type: String,
     values: ["top", "bottom"],
@@ -51900,23 +52808,20 @@ var timelineItemProps = buildProps({
   icon: {
     type: iconPropType
   },
-  hollow: {
-    type: Boolean,
-    default: false
-  }
+  hollow: Boolean
 });
 
 // node_modules/element-plus/es/components/timeline/src/timeline-item2.mjs
-var __default__88 = defineComponent({
+var __default__89 = defineComponent({
   name: "ElTimelineItem"
 });
-var _sfc_main126 = defineComponent({
-  ...__default__88,
+var _sfc_main128 = defineComponent({
+  ...__default__89,
   props: timelineItemProps,
   setup(__props) {
     const props = __props;
     const ns = useNamespace("timeline-item");
-    const defaultNodeKls = computed2(() => [
+    const defaultNodeKls = computed(() => [
       ns.e("node"),
       ns.em("node", props.size || ""),
       ns.em("node", props.type || ""),
@@ -51973,7 +52878,7 @@ var _sfc_main126 = defineComponent({
     };
   }
 });
-var TimelineItem = _export_sfc(_sfc_main126, [["__file", "timeline-item.vue"]]);
+var TimelineItem = _export_sfc(_sfc_main128, [["__file", "timeline-item.vue"]]);
 
 // node_modules/element-plus/es/components/timeline/index.mjs
 var ElTimeline = withInstall(Timeline, {
@@ -51994,7 +52899,7 @@ var TooltipV2Sides = ((TooltipV2Sides2) => {
 })(TooltipV2Sides || {});
 var tooltipV2Sides = Object.values(TooltipV2Sides);
 
-// node_modules/element-plus/es/components/tooltip-v2/src/arrow.mjs
+// node_modules/element-plus/es/components/tooltip-v2/src/arrow2.mjs
 var tooltipV2ArrowProps = buildProps({
   width: {
     type: Number,
@@ -52034,14 +52939,13 @@ var tooltipV2Placements = [
   "right"
 ];
 var tooltipV2ContentProps = buildProps({
-  ariaLabel: String,
   arrowPadding: {
     type: definePropType(Number),
     default: 5
   },
   effect: {
-    type: String,
-    default: ""
+    type: definePropType(String),
+    default: "light"
   },
   contentClass: String,
   placement: {
@@ -52062,10 +52966,8 @@ var tooltipV2ContentProps = buildProps({
     values: tooltipV2Strategies,
     default: "absolute"
   },
-  showArrow: {
-    type: Boolean,
-    default: false
-  }
+  showArrow: Boolean,
+  ...useAriaProps(["ariaLabel"])
 });
 
 // node_modules/element-plus/es/components/tooltip-v2/src/root.mjs
@@ -52125,17 +53027,17 @@ var tooltipV2ContentKey = Symbol("tooltipV2Content");
 var TOOLTIP_V2_OPEN = "tooltip_v2.open";
 
 // node_modules/element-plus/es/components/tooltip-v2/src/root2.mjs
-var __default__89 = defineComponent({
+var __default__90 = defineComponent({
   name: "ElTooltipV2Root"
 });
-var _sfc_main127 = defineComponent({
-  ...__default__89,
+var _sfc_main129 = defineComponent({
+  ...__default__90,
   props: tooltipV2RootProps,
   setup(__props, { expose }) {
     const props = __props;
     const _open = ref(props.defaultOpen);
     const triggerRef = ref(null);
-    const open = computed2({
+    const open = computed({
       get: () => isPropAbsent(props.open) ? _open.value : props.open,
       set: (open2) => {
         var _a2;
@@ -52143,10 +53045,10 @@ var _sfc_main127 = defineComponent({
         (_a2 = props["onUpdate:open"]) == null ? void 0 : _a2.call(props, open2);
       }
     });
-    const isOpenDelayed = computed2(() => isNumber3(props.delayDuration) && props.delayDuration > 0);
+    const isOpenDelayed = computed(() => isNumber3(props.delayDuration) && props.delayDuration > 0);
     const { start: onDelayedOpen, stop: clearTimer } = useTimeoutFn(() => {
       open.value = true;
-    }, computed2(() => props.delayDuration), {
+    }, computed(() => props.delayDuration), {
       immediate: false
     });
     const ns = useNamespace("tooltip-v2");
@@ -52196,14 +53098,14 @@ var _sfc_main127 = defineComponent({
     };
   }
 });
-var TooltipV2Root = _export_sfc(_sfc_main127, [["__file", "root.vue"]]);
+var TooltipV2Root = _export_sfc(_sfc_main129, [["__file", "root.vue"]]);
 
-// node_modules/element-plus/es/components/tooltip-v2/src/arrow2.mjs
-var __default__90 = defineComponent({
+// node_modules/element-plus/es/components/tooltip-v2/src/arrow.mjs
+var __default__91 = defineComponent({
   name: "ElTooltipV2Arrow"
 });
-var _sfc_main128 = defineComponent({
-  ...__default__90,
+var _sfc_main130 = defineComponent({
+  ...__default__91,
   props: {
     ...tooltipV2ArrowProps,
     ...tooltipV2ArrowSpecialProps
@@ -52212,7 +53114,7 @@ var _sfc_main128 = defineComponent({
     const props = __props;
     const { ns } = inject(tooltipV2RootKey);
     const { arrowRef } = inject(tooltipV2ContentKey);
-    const arrowStyle = computed2(() => {
+    const arrowStyle = computed(() => {
       const { style, width, height } = props;
       const namespace = ns.namespace.value;
       return {
@@ -52233,7 +53135,7 @@ var _sfc_main128 = defineComponent({
     };
   }
 });
-var TooltipV2Arrow = _export_sfc(_sfc_main128, [["__file", "arrow.vue"]]);
+var TooltipV2Arrow = _export_sfc(_sfc_main130, [["__file", "arrow.vue"]]);
 
 // node_modules/element-plus/es/components/visual-hidden/src/visual-hidden.mjs
 var visualHiddenProps = buildProps({
@@ -52244,15 +53146,15 @@ var visualHiddenProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/visual-hidden/src/visual-hidden2.mjs
-var __default__91 = defineComponent({
+var __default__92 = defineComponent({
   name: "ElVisuallyHidden"
 });
-var _sfc_main129 = defineComponent({
-  ...__default__91,
+var _sfc_main131 = defineComponent({
+  ...__default__92,
   props: visualHiddenProps,
   setup(__props) {
     const props = __props;
-    const computedStyle = computed2(() => {
+    const computedStyle = computed(() => {
       return [
         props.style,
         {
@@ -52276,15 +53178,14 @@ var _sfc_main129 = defineComponent({
     };
   }
 });
-var ElVisuallyHidden = _export_sfc(_sfc_main129, [["__file", "visual-hidden.vue"]]);
+var ElVisuallyHidden = _export_sfc(_sfc_main131, [["__file", "visual-hidden.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip-v2/src/content2.mjs
-var _hoisted_164 = ["data-side"];
-var __default__92 = defineComponent({
+var __default__93 = defineComponent({
   name: "ElTooltipV2Content"
 });
-var _sfc_main130 = defineComponent({
-  ...__default__92,
+var _sfc_main132 = defineComponent({
+  ...__default__93,
   props: { ...tooltipV2ContentProps, ...tooltipV2CommonProps },
   setup(__props) {
     const props = __props;
@@ -52295,7 +53196,7 @@ var _sfc_main130 = defineComponent({
     const { referenceRef, contentRef, middlewareData, x: x2, y, update: update2 } = useFloating({
       placement,
       strategy,
-      middleware: computed2(() => {
+      middleware: computed(() => {
         const middleware = [offset(props.offset)];
         if (props.showArrow) {
           middleware.push(arrowMiddleware({
@@ -52307,10 +53208,10 @@ var _sfc_main130 = defineComponent({
     });
     const zIndex2 = useZIndex().nextZIndex();
     const ns = useNamespace("tooltip-v2");
-    const side = computed2(() => {
+    const side = computed(() => {
       return placement.value.split("-")[0];
     });
-    const contentStyle = computed2(() => {
+    const contentStyle = computed(() => {
       return {
         position: unref(strategy),
         top: `${unref(y) || 0}px`,
@@ -52318,7 +53219,7 @@ var _sfc_main130 = defineComponent({
         zIndex: zIndex2
       };
     });
-    const arrowStyle = computed2(() => {
+    const arrowStyle = computed(() => {
       if (!props.showArrow)
         return {};
       const { arrow: arrow3 } = unref(middlewareData);
@@ -52327,7 +53228,7 @@ var _sfc_main130 = defineComponent({
         [`--${ns.namespace.value}-tooltip-v2-arrow-y`]: `${arrow3 == null ? void 0 : arrow3.y}px` || ""
       };
     });
-    const contentClass = computed2(() => [
+    const contentClass = computed(() => [
       ns.e("content"),
       ns.is("dark", props.effect === "dark"),
       ns.is(unref(strategy)),
@@ -52374,12 +53275,12 @@ var _sfc_main130 = defineComponent({
             style: normalizeStyle(unref(arrowStyle)),
             side: unref(side)
           })
-        ], 10, _hoisted_164)) : createCommentVNode("v-if", true)
+        ], 10, ["data-side"])) : createCommentVNode("v-if", true)
       ], 4);
     };
   }
 });
-var TooltipV2Content = _export_sfc(_sfc_main130, [["__file", "content.vue"]]);
+var TooltipV2Content = _export_sfc(_sfc_main132, [["__file", "content.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip-v2/src/forward-ref.mjs
 var forwardRefProps = buildProps({
@@ -52414,11 +53315,11 @@ var ForwardRef = defineComponent({
 });
 
 // node_modules/element-plus/es/components/tooltip-v2/src/trigger2.mjs
-var __default__93 = defineComponent({
+var __default__94 = defineComponent({
   name: "ElTooltipV2Trigger"
 });
-var _sfc_main131 = defineComponent({
-  ...__default__93,
+var _sfc_main133 = defineComponent({
+  ...__default__94,
   props: {
     ...tooltipV2CommonProps,
     ...tooltipV2TriggerProps
@@ -52495,14 +53396,14 @@ var _sfc_main131 = defineComponent({
     };
   }
 });
-var TooltipV2Trigger = _export_sfc(_sfc_main131, [["__file", "trigger.vue"]]);
+var TooltipV2Trigger = _export_sfc(_sfc_main133, [["__file", "trigger.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip-v2/src/tooltip2.mjs
-var __default__94 = defineComponent({
+var __default__95 = defineComponent({
   name: "ElTooltipV2"
 });
-var _sfc_main132 = defineComponent({
-  ...__default__94,
+var _sfc_main134 = defineComponent({
+  ...__default__95,
   props: tooltipV2Props,
   setup(__props) {
     const props = __props;
@@ -52520,12 +53421,28 @@ var _sfc_main132 = defineComponent({
             ]),
             _: 3
           }, 16),
-          (openBlock(), createBlock(Teleport, {
+          createVNode(unref(ElTeleport), {
             to: _ctx.to,
             disabled: !_ctx.teleported
-          }, [
-            _ctx.fullTransition ? (openBlock(), createBlock(Transition, normalizeProps(mergeProps({ key: 0 }, _ctx.transitionProps)), {
-              default: withCtx(() => [
+          }, {
+            default: withCtx(() => [
+              _ctx.fullTransition ? (openBlock(), createBlock(Transition, normalizeProps(mergeProps({ key: 0 }, _ctx.transitionProps)), {
+                default: withCtx(() => [
+                  _ctx.alwaysOn || open ? (openBlock(), createBlock(TooltipV2Content, normalizeProps(mergeProps({ key: 0 }, contentProps)), {
+                    arrow: withCtx(({ style, side }) => [
+                      _ctx.showArrow ? (openBlock(), createBlock(TooltipV2Arrow, mergeProps({ key: 0 }, arrowProps, {
+                        style,
+                        side
+                      }), null, 16, ["style", "side"])) : createCommentVNode("v-if", true)
+                    ]),
+                    default: withCtx(() => [
+                      renderSlot(_ctx.$slots, "default")
+                    ]),
+                    _: 3
+                  }, 16)) : createCommentVNode("v-if", true)
+                ]),
+                _: 2
+              }, 1040)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
                 _ctx.alwaysOn || open ? (openBlock(), createBlock(TooltipV2Content, normalizeProps(mergeProps({ key: 0 }, contentProps)), {
                   arrow: withCtx(({ style, side }) => [
                     _ctx.showArrow ? (openBlock(), createBlock(TooltipV2Arrow, mergeProps({ key: 0 }, arrowProps, {
@@ -52538,30 +53455,17 @@ var _sfc_main132 = defineComponent({
                   ]),
                   _: 3
                 }, 16)) : createCommentVNode("v-if", true)
-              ]),
-              _: 2
-            }, 1040)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-              _ctx.alwaysOn || open ? (openBlock(), createBlock(TooltipV2Content, normalizeProps(mergeProps({ key: 0 }, contentProps)), {
-                arrow: withCtx(({ style, side }) => [
-                  _ctx.showArrow ? (openBlock(), createBlock(TooltipV2Arrow, mergeProps({ key: 0 }, arrowProps, {
-                    style,
-                    side
-                  }), null, 16, ["style", "side"])) : createCommentVNode("v-if", true)
-                ]),
-                default: withCtx(() => [
-                  renderSlot(_ctx.$slots, "default")
-                ]),
-                _: 3
-              }, 16)) : createCommentVNode("v-if", true)
-            ], 64))
-          ], 8, ["to", "disabled"]))
+              ], 64))
+            ]),
+            _: 2
+          }, 1032, ["to", "disabled"])
         ]),
         _: 3
       }, 16);
     };
   }
 });
-var TooltipV2 = _export_sfc(_sfc_main132, [["__file", "tooltip.vue"]]);
+var TooltipV2 = _export_sfc(_sfc_main134, [["__file", "tooltip.vue"]]);
 
 // node_modules/element-plus/es/components/tooltip-v2/index.mjs
 var ElTooltipV2 = withInstall(TooltipV2);
@@ -52658,7 +53562,7 @@ var usePropsAlias = (props) => {
     key: "key",
     disabled: "disabled"
   };
-  return computed2(() => ({
+  return computed(() => ({
     ...initProps,
     ...props.props
   }));
@@ -52667,7 +53571,7 @@ var usePropsAlias = (props) => {
 // node_modules/element-plus/es/components/transfer/src/composables/use-check.mjs
 var useCheck = (props, panelState, emit) => {
   const propsAlias = usePropsAlias(props);
-  const filteredData = computed2(() => {
+  const filteredData = computed(() => {
     return props.data.filter((item) => {
       if (isFunction(props.filterMethod)) {
         return props.filterMethod(panelState.query, item);
@@ -52677,8 +53581,8 @@ var useCheck = (props, panelState, emit) => {
       }
     });
   });
-  const checkableData = computed2(() => filteredData.value.filter((item) => !item[propsAlias.value.disabled]));
-  const checkedSummary = computed2(() => {
+  const checkableData = computed(() => filteredData.value.filter((item) => !item[propsAlias.value.disabled]));
+  const checkedSummary = computed(() => {
     const checkedLength = panelState.checked.length;
     const dataLength = props.data.length;
     const { noChecked, hasChecked } = props.format;
@@ -52688,7 +53592,7 @@ var useCheck = (props, panelState, emit) => {
       return `${checkedLength}/${dataLength}`;
     }
   });
-  const isIndeterminate = computed2(() => {
+  const isIndeterminate = computed(() => {
     const checkedLength = panelState.checked.length;
     return checkedLength > 0 && checkedLength < checkableData.value.length;
   });
@@ -52771,9 +53675,9 @@ var useCheckedChange = (checkedState, emit) => {
 // node_modules/element-plus/es/components/transfer/src/composables/use-computed-data.mjs
 var useComputedData = (props) => {
   const propsAlias = usePropsAlias(props);
-  const dataObj = computed2(() => props.data.reduce((o2, cur) => (o2[cur[propsAlias.value.key]] = cur) && o2, {}));
-  const sourceData = computed2(() => props.data.filter((item) => !props.modelValue.includes(item[propsAlias.value.key])));
-  const targetData = computed2(() => {
+  const dataObj = computed(() => props.data.reduce((o2, cur) => (o2[cur[propsAlias.value.key]] = cur) && o2, {}));
+  const sourceData = computed(() => props.data.filter((item) => !props.modelValue.includes(item[propsAlias.value.key])));
+  const targetData = computed(() => {
     if (props.targetOrder === "original") {
       return props.data.filter((item) => props.modelValue.includes(item[propsAlias.value.key]));
     } else {
@@ -52828,11 +53732,11 @@ var useMove = (props, checkedState, emit) => {
 };
 
 // node_modules/element-plus/es/components/transfer/src/transfer-panel2.mjs
-var __default__95 = defineComponent({
+var __default__96 = defineComponent({
   name: "ElTransferPanel"
 });
-var _sfc_main133 = defineComponent({
-  ...__default__95,
+var _sfc_main135 = defineComponent({
+  ...__default__96,
   props: transferPanelProps,
   emits: transferPanelEmits,
   setup(__props, { expose, emit }) {
@@ -52854,8 +53758,8 @@ var _sfc_main133 = defineComponent({
       isIndeterminate,
       handleAllCheckedChange
     } = useCheck(props, panelState, emit);
-    const hasNoMatch = computed2(() => !isEmpty2(panelState.query) && isEmpty2(filteredData.value));
-    const hasFooter = computed2(() => !isEmpty2(slots.default()[0].children));
+    const hasNoMatch = computed(() => !isEmpty2(panelState.query) && isEmpty2(filteredData.value));
+    const hasFooter = computed(() => !isEmpty2(slots.default()[0].children));
     const { checked, allChecked, query } = toRefs(panelState);
     expose({
       query
@@ -52869,7 +53773,7 @@ var _sfc_main133 = defineComponent({
         }, [
           createVNode(unref(ElCheckbox), {
             modelValue: unref(allChecked),
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isRef(allChecked) ? allChecked.value = $event : null),
+            "onUpdate:modelValue": ($event) => isRef(allChecked) ? allChecked.value = $event : null,
             indeterminate: unref(isIndeterminate),
             "validate-event": false,
             onChange: unref(handleAllCheckedChange)
@@ -52879,7 +53783,7 @@ var _sfc_main133 = defineComponent({
               createBaseVNode("span", null, toDisplayString(unref(checkedSummary)), 1)
             ]),
             _: 1
-          }, 8, ["modelValue", "indeterminate", "onChange"])
+          }, 8, ["modelValue", "onUpdate:modelValue", "indeterminate", "onChange"])
         ], 2),
         createBaseVNode("div", {
           class: normalizeClass([unref(ns).be("panel", "body"), unref(ns).is("with-footer", unref(hasFooter))])
@@ -52887,17 +53791,17 @@ var _sfc_main133 = defineComponent({
           _ctx.filterable ? (openBlock(), createBlock(unref(ElInput), {
             key: 0,
             modelValue: unref(query),
-            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => isRef(query) ? query.value = $event : null),
+            "onUpdate:modelValue": ($event) => isRef(query) ? query.value = $event : null,
             class: normalizeClass(unref(ns).be("panel", "filter")),
             size: "default",
             placeholder: _ctx.placeholder,
             "prefix-icon": unref(search_default),
             clearable: "",
             "validate-event": false
-          }, null, 8, ["modelValue", "class", "placeholder", "prefix-icon"])) : createCommentVNode("v-if", true),
+          }, null, 8, ["modelValue", "onUpdate:modelValue", "class", "placeholder", "prefix-icon"])) : createCommentVNode("v-if", true),
           withDirectives(createVNode(unref(ElCheckboxGroup), {
             modelValue: unref(checked),
-            "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => isRef(checked) ? checked.value = $event : null),
+            "onUpdate:modelValue": ($event) => isRef(checked) ? checked.value = $event : null,
             "validate-event": false,
             class: normalizeClass([unref(ns).is("filterable", _ctx.filterable), unref(ns).be("panel", "list")])
           }, {
@@ -52923,7 +53827,7 @@ var _sfc_main133 = defineComponent({
               }), 128))
             ]),
             _: 1
-          }, 8, ["modelValue", "class"]), [
+          }, 8, ["modelValue", "onUpdate:modelValue", "class"]), [
             [vShow, !unref(hasNoMatch) && !unref(isEmpty2)(_ctx.data)]
           ]),
           withDirectives(createBaseVNode("p", {
@@ -52942,16 +53846,14 @@ var _sfc_main133 = defineComponent({
     };
   }
 });
-var TransferPanel = _export_sfc(_sfc_main133, [["__file", "transfer-panel.vue"]]);
+var TransferPanel = _export_sfc(_sfc_main135, [["__file", "transfer-panel.vue"]]);
 
 // node_modules/element-plus/es/components/transfer/src/transfer2.mjs
-var _hoisted_165 = { key: 0 };
-var _hoisted_240 = { key: 0 };
-var __default__96 = defineComponent({
+var __default__97 = defineComponent({
   name: "ElTransfer"
 });
-var _sfc_main134 = defineComponent({
-  ...__default__96,
+var _sfc_main136 = defineComponent({
+  ...__default__97,
   props: transferProps,
   emits: transferEmits,
   setup(__props, { expose, emit }) {
@@ -52980,17 +53882,17 @@ var _sfc_main134 = defineComponent({
           break;
       }
     };
-    const hasButtonTexts = computed2(() => props.buttonTexts.length === 2);
-    const leftPanelTitle = computed2(() => props.titles[0] || t("el.transfer.titles.0"));
-    const rightPanelTitle = computed2(() => props.titles[1] || t("el.transfer.titles.1"));
-    const panelFilterPlaceholder = computed2(() => props.filterPlaceholder || t("el.transfer.filterPlaceholder"));
+    const hasButtonTexts = computed(() => props.buttonTexts.length === 2);
+    const leftPanelTitle = computed(() => props.titles[0] || t("el.transfer.titles.0"));
+    const rightPanelTitle = computed(() => props.titles[1] || t("el.transfer.titles.1"));
+    const panelFilterPlaceholder = computed(() => props.filterPlaceholder || t("el.transfer.filterPlaceholder"));
     watch(() => props.modelValue, () => {
       var _a2;
       if (props.validateEvent) {
         (_a2 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a2.call(formItem, "change").catch((err) => debugWarn(err));
       }
     });
-    const optionRender = computed2(() => (option) => {
+    const optionRender = computed(() => (option) => {
       if (props.renderContent)
         return props.renderContent(h, option);
       if (slots.default)
@@ -53041,7 +53943,7 @@ var _sfc_main134 = defineComponent({
                 ]),
                 _: 1
               }),
-              !unref(isUndefined2)(_ctx.buttonTexts[0]) ? (openBlock(), createElementBlock("span", _hoisted_165, toDisplayString(_ctx.buttonTexts[0]), 1)) : createCommentVNode("v-if", true)
+              !unref(isUndefined2)(_ctx.buttonTexts[0]) ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(_ctx.buttonTexts[0]), 1)) : createCommentVNode("v-if", true)
             ]),
             _: 1
           }, 8, ["class", "disabled", "onClick"]),
@@ -53052,7 +53954,7 @@ var _sfc_main134 = defineComponent({
             onClick: unref(addToRight)
           }, {
             default: withCtx(() => [
-              !unref(isUndefined2)(_ctx.buttonTexts[1]) ? (openBlock(), createElementBlock("span", _hoisted_240, toDisplayString(_ctx.buttonTexts[1]), 1)) : createCommentVNode("v-if", true),
+              !unref(isUndefined2)(_ctx.buttonTexts[1]) ? (openBlock(), createElementBlock("span", { key: 0 }, toDisplayString(_ctx.buttonTexts[1]), 1)) : createCommentVNode("v-if", true),
               createVNode(unref(ElIcon), null, {
                 default: withCtx(() => [
                   createVNode(unref(arrow_right_default))
@@ -53086,7 +53988,7 @@ var _sfc_main134 = defineComponent({
     };
   }
 });
-var Transfer = _export_sfc(_sfc_main134, [["__file", "transfer.vue"]]);
+var Transfer = _export_sfc(_sfc_main136, [["__file", "transfer.vue"]]);
 
 // node_modules/element-plus/es/components/transfer/index.mjs
 var ElTransfer = withInstall(Transfer);
@@ -53215,7 +54117,7 @@ var Node3 = class _Node {
         this.expanded = true;
         this.canFocus = true;
       }
-    } else if (this.level > 0 && store.lazy && store.defaultExpandAll) {
+    } else if (this.level > 0 && store.lazy && store.defaultExpandAll && !this.isLeafByUser) {
       this.expand();
     }
     if (!Array.isArray(this.data)) {
@@ -53530,12 +54432,28 @@ var Node3 = class _Node {
           callback.call(this, children);
         }
       };
-      this.store.load(this, resolve);
+      const reject2 = () => {
+        this.loading = false;
+      };
+      this.store.load(this, resolve, reject2);
     } else {
       if (callback) {
         callback.call(this);
       }
     }
+  }
+  eachNode(callback) {
+    const arr = [this];
+    while (arr.length) {
+      const node = arr.shift();
+      arr.unshift(...node.childNodes);
+      callback(node);
+    }
+  }
+  reInitChecked() {
+    if (this.store.checkStrictly)
+      return;
+    reInitChecked(this);
   }
 };
 
@@ -53601,6 +54519,7 @@ var TreeStore = class {
   setData(newVal) {
     const instanceChanged = newVal !== this.root.data;
     if (instanceChanged) {
+      this.nodesMap = {};
       this.root.setData(newVal);
       this._initDefaultCheckedNodes();
     } else {
@@ -53852,7 +54771,7 @@ var TreeStore = class {
 };
 
 // node_modules/element-plus/es/components/tree/src/tree-node-content.mjs
-var _sfc_main135 = defineComponent({
+var _sfc_main137 = defineComponent({
   name: "ElTreeNodeContent",
   props: {
     node: {
@@ -53874,7 +54793,7 @@ var _sfc_main135 = defineComponent({
     };
   }
 });
-var NodeContent2 = _export_sfc(_sfc_main135, [["__file", "tree-node-content.vue"]]);
+var NodeContent2 = _export_sfc(_sfc_main137, [["__file", "tree-node-content.vue"]]);
 
 // node_modules/element-plus/es/components/tree/src/model/useNodeExpandEventBroadcast.mjs
 function useNodeExpandEventBroadcast(props) {
@@ -54008,7 +54927,9 @@ function useDragNodeHandler({ props, ctx, el$, dropIndicator$, store }) {
   const treeNodeDragEnd = (event) => {
     const { draggingNode, dropType, dropNode } = dragState.value;
     event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
+    if (event.dataTransfer) {
+      event.dataTransfer.dropEffect = "move";
+    }
     if (draggingNode && dropNode) {
       const draggingNodeCopy = { data: draggingNode.node.data };
       if (dropType !== "none") {
@@ -54023,6 +54944,12 @@ function useDragNodeHandler({ props, ctx, el$, dropIndicator$, store }) {
       }
       if (dropType !== "none") {
         store.value.registerNode(draggingNodeCopy);
+        if (store.value.key) {
+          draggingNode.node.eachNode((node) => {
+            var _a2;
+            (_a2 = store.value.nodesMap[node.data[store.value.key]]) == null ? void 0 : _a2.setChecked(node.checked, !store.value.checkStrictly);
+          });
+        }
       }
       removeClass(dropNode.$el, ns.is("drop-inner"));
       ctx.emit("node-drag-end", draggingNode.node, dropNode.node, dropType, event);
@@ -54049,10 +54976,10 @@ function useDragNodeHandler({ props, ctx, el$, dropIndicator$, store }) {
 }
 
 // node_modules/element-plus/es/components/tree/src/tree-node.mjs
-var _sfc_main136 = defineComponent({
+var _sfc_main138 = defineComponent({
   name: "ElTreeNode",
   components: {
-    ElCollapseTransition: _CollapseTransition,
+    ElCollapseTransition,
     ElCheckbox,
     NodeContent: NodeContent2,
     ElIcon,
@@ -54108,6 +55035,7 @@ var _sfc_main136 = defineComponent({
     watch(() => props.node.checked, (val) => {
       handleSelectChange(val, props.node.indeterminate);
     });
+    watch(() => props.node.childNodes.length, () => props.node.reInitChecked());
     watch(() => props.node.expanded, (val) => {
       nextTick(() => expanded.value = val);
       if (val) {
@@ -54169,8 +55097,9 @@ var _sfc_main136 = defineComponent({
         tree.ctx.emit("node-collapse", props.node.data, props.node, instance);
         props.node.collapse();
       } else {
-        props.node.expand();
-        ctx.emit("node-expand", props.node.data, props.node, instance);
+        props.node.expand(() => {
+          ctx.emit("node-expand", props.node.data, props.node, instance);
+        });
       }
     };
     const handleCheckChange = (value, ev) => {
@@ -54235,8 +55164,6 @@ var _sfc_main136 = defineComponent({
     };
   }
 });
-var _hoisted_166 = ["aria-expanded", "aria-disabled", "aria-checked", "draggable", "data-key"];
-var _hoisted_241 = ["aria-expanded"];
 function _sfc_render29(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_icon = resolveComponent("el-icon");
   const _component_el_checkbox = resolveComponent("el-checkbox");
@@ -54262,12 +55189,12 @@ function _sfc_render29(_ctx, _cache, $props, $setup, $data, $options) {
     "aria-checked": _ctx.node.checked,
     draggable: _ctx.tree.props.draggable,
     "data-key": _ctx.getNodeKey(_ctx.node),
-    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"])),
-    onContextmenu: _cache[2] || (_cache[2] = (...args) => _ctx.handleContextMenu && _ctx.handleContextMenu(...args)),
-    onDragstart: _cache[3] || (_cache[3] = withModifiers((...args) => _ctx.handleDragStart && _ctx.handleDragStart(...args), ["stop"])),
-    onDragover: _cache[4] || (_cache[4] = withModifiers((...args) => _ctx.handleDragOver && _ctx.handleDragOver(...args), ["stop"])),
-    onDragend: _cache[5] || (_cache[5] = withModifiers((...args) => _ctx.handleDragEnd && _ctx.handleDragEnd(...args), ["stop"])),
-    onDrop: _cache[6] || (_cache[6] = withModifiers((...args) => _ctx.handleDrop && _ctx.handleDrop(...args), ["stop"]))
+    onClick: withModifiers(_ctx.handleClick, ["stop"]),
+    onContextmenu: _ctx.handleContextMenu,
+    onDragstart: withModifiers(_ctx.handleDragStart, ["stop"]),
+    onDragover: withModifiers(_ctx.handleDragOver, ["stop"]),
+    onDragend: withModifiers(_ctx.handleDragEnd, ["stop"]),
+    onDrop: withModifiers(_ctx.handleDrop, ["stop"])
   }, [
     createBaseVNode("div", {
       class: normalizeClass(_ctx.ns.be("node", "content")),
@@ -54294,10 +55221,10 @@ function _sfc_render29(_ctx, _cache, $props, $setup, $data, $options) {
         "model-value": _ctx.node.checked,
         indeterminate: _ctx.node.indeterminate,
         disabled: !!_ctx.node.disabled,
-        onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-        }, ["stop"])),
+        onClick: withModifiers(() => {
+        }, ["stop"]),
         onChange: _ctx.handleCheckChange
-      }, null, 8, ["model-value", "indeterminate", "disabled", "onChange"])) : createCommentVNode("v-if", true),
+      }, null, 8, ["model-value", "indeterminate", "disabled", "onClick", "onChange"])) : createCommentVNode("v-if", true),
       _ctx.node.loading ? (openBlock(), createBlock(_component_el_icon, {
         key: 2,
         class: normalizeClass([_ctx.ns.be("node", "loading-icon"), _ctx.ns.is("loading")])
@@ -54332,17 +55259,17 @@ function _sfc_render29(_ctx, _cache, $props, $setup, $data, $options) {
               onNodeExpand: _ctx.handleChildNodeExpand
             }, null, 8, ["render-content", "render-after-expand", "show-checkbox", "node", "accordion", "props", "onNodeExpand"]);
           }), 128))
-        ], 10, _hoisted_241)), [
+        ], 10, ["aria-expanded"])), [
           [vShow, _ctx.expanded]
         ]) : createCommentVNode("v-if", true)
       ]),
       _: 1
     })
-  ], 42, _hoisted_166)), [
+  ], 42, ["aria-expanded", "aria-disabled", "aria-checked", "draggable", "data-key", "onClick", "onContextmenu", "onDragstart", "onDragover", "onDragend", "onDrop"])), [
     [vShow, _ctx.node.visible]
   ]);
 }
-var ElTreeNode = _export_sfc(_sfc_main136, [["render", _sfc_render29], ["__file", "tree-node.vue"]]);
+var ElTreeNode = _export_sfc(_sfc_main138, [["render", _sfc_render29], ["__file", "tree-node.vue"]]);
 
 // node_modules/element-plus/es/components/tree/src/model/useKeydown.mjs
 function useKeydown({ el$ }, store) {
@@ -54429,7 +55356,7 @@ function useKeydown({ el$ }, store) {
 }
 
 // node_modules/element-plus/es/components/tree/src/tree.mjs
-var _sfc_main137 = defineComponent({
+var _sfc_main139 = defineComponent({
   name: "ElTree",
   components: { ElTreeNode },
   props: {
@@ -54516,6 +55443,7 @@ var _sfc_main137 = defineComponent({
   setup(props, ctx) {
     const { t } = useLocale();
     const ns = useNamespace("tree");
+    const selectInfo = inject(selectKey, null);
     const store = ref(new TreeStore({
       key: props.nodeKey,
       data: props.data,
@@ -54545,9 +55473,10 @@ var _sfc_main137 = defineComponent({
       store
     });
     useKeydown({ el$ }, store);
-    const isEmpty3 = computed2(() => {
+    const isEmpty3 = computed(() => {
       const { childNodes } = root2.value;
-      return !childNodes || childNodes.length === 0 || childNodes.every(({ visible }) => !visible);
+      const hasFilteredOptions = selectInfo ? selectInfo.hasFilteredOptions !== 0 : false;
+      return (!childNodes || childNodes.length === 0 || childNodes.every(({ visible }) => !visible)) && !hasFilteredOptions;
     });
     watch(() => props.currentNodeKey, (newVal) => {
       store.value.setCurrentNodeKey(newVal);
@@ -54624,12 +55553,18 @@ var _sfc_main137 = defineComponent({
     const setCurrentNode = (node, shouldAutoExpandParent = true) => {
       if (!props.nodeKey)
         throw new Error("[Tree] nodeKey is required in setCurrentNode");
-      handleCurrentChange(store, ctx.emit, () => store.value.setUserCurrentNode(node, shouldAutoExpandParent));
+      handleCurrentChange(store, ctx.emit, () => {
+        broadcastExpanded(node);
+        store.value.setUserCurrentNode(node, shouldAutoExpandParent);
+      });
     };
     const setCurrentKey = (key, shouldAutoExpandParent = true) => {
       if (!props.nodeKey)
         throw new Error("[Tree] nodeKey is required in setCurrentKey");
-      handleCurrentChange(store, ctx.emit, () => store.value.setCurrentNodeKey(key, shouldAutoExpandParent));
+      handleCurrentChange(store, ctx.emit, () => {
+        broadcastExpanded();
+        store.value.setCurrentNodeKey(key, shouldAutoExpandParent);
+      });
     };
     const getNode = (data) => {
       return store.value.getNode(data);
@@ -54744,14 +55679,10 @@ function _sfc_render30(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 2);
 }
-var Tree = _export_sfc(_sfc_main137, [["render", _sfc_render30], ["__file", "tree.vue"]]);
+var Tree = _export_sfc(_sfc_main139, [["render", _sfc_render30], ["__file", "tree.vue"]]);
 
 // node_modules/element-plus/es/components/tree/index.mjs
-Tree.install = (app) => {
-  app.component(Tree.name, Tree);
-};
-var _Tree = Tree;
-var ElTree = _Tree;
+var ElTree = withInstall(Tree);
 
 // node_modules/element-plus/es/components/tree-select/src/select.mjs
 var useSelect3 = (props, { attrs, emit }, {
@@ -54773,7 +55704,7 @@ var useSelect3 = (props, { attrs, emit }, {
     ...attrs,
     "onUpdate:modelValue": (value) => emit(UPDATE_MODEL_EVENT, value),
     valueKey: key,
-    popperClass: computed2(() => {
+    popperClass: computed(() => {
       const classes = [ns.e("popper")];
       if (props.popperClass)
         classes.push(props.popperClass);
@@ -54804,6 +55735,11 @@ var component = defineComponent({
       if (!result2.select.states.cachedOptions.get(vm.value)) {
         result2.select.onOptionCreate(vm);
       }
+    });
+    watch(() => ctx.attrs.visible, (val) => {
+      result2.states.visible = val;
+    }, {
+      immediate: true
     });
     return result2;
   },
@@ -54869,7 +55805,7 @@ var useTree2 = (props, { attrs, slots, emit }, {
     immediate: true,
     deep: true
   });
-  const propsMap = computed2(() => ({
+  const propsMap = computed(() => ({
     value: key.value,
     label: "label",
     children: "children",
@@ -54889,7 +55825,7 @@ var useTree2 = (props, { attrs, slots, emit }, {
   const defaultExpandedParentKeys = toValidArray(props.modelValue).map((value) => {
     return treeFind(props.data || [], (data) => getNodeValByProp("value", data) === value, (data) => getNodeValByProp("children", data), (data, index, array4, parent2) => parent2 && getNodeValByProp("value", parent2));
   }).filter((item) => isValidValue2(item));
-  const cacheOptions = computed2(() => {
+  const cacheOptions = computed(() => {
     if (!props.renderAfterExpand && !props.lazy)
       return [];
     const options = [];
@@ -54903,21 +55839,30 @@ var useTree2 = (props, { attrs, slots, emit }, {
     }, (data) => getNodeValByProp("children", data));
     return options;
   });
+  const getChildCheckedKeys = () => {
+    var _a2;
+    return (_a2 = tree.value) == null ? void 0 : _a2.getCheckedKeys().filter((checkedKey) => {
+      var _a22;
+      const node = (_a22 = tree.value) == null ? void 0 : _a22.getNode(checkedKey);
+      return !isNil_default(node) && isEmpty2(node.childNodes);
+    });
+  };
   return {
-    ...pick_default(toRefs(props), Object.keys(_Tree.props)),
+    ...pick_default(toRefs(props), Object.keys(ElTree.props)),
     ...attrs,
     nodeKey: key,
-    expandOnClickNode: computed2(() => {
+    expandOnClickNode: computed(() => {
       return !props.checkStrictly && props.expandOnClickNode;
     }),
-    defaultExpandedKeys: computed2(() => {
+    defaultExpandedKeys: computed(() => {
       return props.defaultExpandedKeys ? props.defaultExpandedKeys.concat(defaultExpandedParentKeys) : defaultExpandedParentKeys;
     }),
     renderContent: (h3, { node, data, store }) => {
       return h3(component, {
         value: getNodeValByProp("value", data),
         label: getNodeValByProp("label", data),
-        disabled: getNodeValByProp("disabled", data)
+        disabled: getNodeValByProp("disabled", data),
+        visible: node.visible
       }, props.renderContent ? () => props.renderContent(h3, { node, data, store }) : slots.default ? () => slots.default({ node, data, store }) : void 0);
     },
     filterNodeMethod: (value, data, node) => {
@@ -54957,7 +55902,8 @@ var useTree2 = (props, { attrs, slots, emit }, {
         emit(UPDATE_MODEL_EVENT, props.multiple ? checkedKeys : checkedKeys.includes(dataValue) ? dataValue : void 0);
       } else {
         if (props.multiple) {
-          emit(UPDATE_MODEL_EVENT, cachedKeys.concat(tree.value.getCheckedKeys(true)));
+          const childKeys = getChildCheckedKeys();
+          emit(UPDATE_MODEL_EVENT, cachedKeys.concat(childKeys));
         } else {
           const firstLeaf = treeFind([data], (data2) => !isValidArray(getNodeValByProp("children", data2)) && !getNodeValByProp("disabled", data2), (data2) => getNodeValByProp("children", data2));
           const firstLeafKey = firstLeaf ? getNodeValByProp("value", firstLeaf) : void 0;
@@ -54977,6 +55923,20 @@ var useTree2 = (props, { attrs, slots, emit }, {
         });
       });
       (_a2 = select.value) == null ? void 0 : _a2.focus();
+    },
+    onNodeExpand: (data, node, e) => {
+      var _a2;
+      (_a2 = attrs.onNodeExpand) == null ? void 0 : _a2.call(attrs, data, node, e);
+      nextTick(() => {
+        if (!props.checkStrictly && props.lazy && props.multiple && node.checked) {
+          const dataMap = {};
+          const uncachedCheckedKeys = tree.value.getCheckedKeys();
+          treeEach([tree.value.store.root], (node2) => dataMap[node2.key] = node2, (node2) => node2.childNodes);
+          const cachedKeys = toValidArray(props.modelValue).filter((item) => !(item in dataMap) && !uncachedCheckedKeys.includes(item));
+          const childKeys = getChildCheckedKeys();
+          emit(UPDATE_MODEL_EVENT, cachedKeys.concat(childKeys));
+        }
+      });
     },
     cacheOptions
   };
@@ -55000,7 +55960,7 @@ var CacheOptions = defineComponent({
         }
       });
       const inputs = ((_a2 = select.selectRef) == null ? void 0 : _a2.querySelectorAll("input")) || [];
-      if (!Array.from(inputs).includes(document.activeElement)) {
+      if (isClient && !Array.from(inputs).includes(document.activeElement)) {
         select.setSelected();
       }
     }, { flush: "post", immediate: true });
@@ -55009,12 +55969,12 @@ var CacheOptions = defineComponent({
 });
 
 // node_modules/element-plus/es/components/tree-select/src/tree-select.mjs
-var _sfc_main138 = defineComponent({
+var _sfc_main140 = defineComponent({
   name: "ElTreeSelect",
   inheritAttrs: false,
   props: {
     ...ElSelect.props,
-    ..._Tree.props,
+    ...ElTree.props,
     cacheData: {
       type: Array,
       default: () => []
@@ -55024,7 +55984,7 @@ var _sfc_main138 = defineComponent({
     const { slots, expose } = context;
     const select = ref();
     const tree = ref();
-    const key = computed2(() => props.nodeKey || props.valueKey || "value");
+    const key = computed(() => props.nodeKey || props.valueKey || "value");
     const selectProps = useSelect3(props, context, { select, tree, key });
     const { cacheOptions, ...treeProps2 } = useTree2(props, context, {
       select,
@@ -55065,7 +56025,7 @@ var _sfc_main138 = defineComponent({
       ...slots,
       default: () => [
         h(CacheOptions, { data: cacheOptions.value }),
-        h(_Tree, reactive({
+        h(ElTree, reactive({
           ...treeProps2,
           ref: (ref2) => tree.value = ref2
         }))
@@ -55073,14 +56033,10 @@ var _sfc_main138 = defineComponent({
     });
   }
 });
-var TreeSelect = _export_sfc(_sfc_main138, [["__file", "tree-select.vue"]]);
+var TreeSelect = _export_sfc(_sfc_main140, [["__file", "tree-select.vue"]]);
 
 // node_modules/element-plus/es/components/tree-select/index.mjs
-TreeSelect.install = (app) => {
-  app.component(TreeSelect.name, TreeSelect);
-};
-var _TreeSelect = TreeSelect;
-var ElTreeSelect = _TreeSelect;
+var ElTreeSelect = withInstall(TreeSelect);
 
 // node_modules/element-plus/es/components/tree-v2/src/virtual-tree.mjs
 var ROOT_TREE_INJECTION_KEY = Symbol();
@@ -55220,6 +56176,7 @@ var treeNodeContentProps = buildProps({
   }
 });
 var NODE_CLICK = "node-click";
+var NODE_DROP = "node-drop";
 var NODE_EXPAND = "node-expand";
 var NODE_COLLAPSE = "node-collapse";
 var CURRENT_CHANGE = "current-change";
@@ -55228,15 +56185,17 @@ var NODE_CHECK_CHANGE = "check-change";
 var NODE_CONTEXTMENU = "node-contextmenu";
 var treeEmits = {
   [NODE_CLICK]: (data, node, e) => data && node && e,
+  [NODE_DROP]: (data, node, e) => data && node && e,
   [NODE_EXPAND]: (data, node) => data && node,
   [NODE_COLLAPSE]: (data, node) => data && node,
   [CURRENT_CHANGE]: (data, node) => data && node,
   [NODE_CHECK]: (data, checkedInfo) => data && checkedInfo,
   [NODE_CHECK_CHANGE]: (data, checked) => data && typeof checked === "boolean",
-  [NODE_CONTEXTMENU]: (event, data, node) => event && data && node
+  [NODE_CONTEXTMENU]: (evt, data, node) => evt && data && node
 };
 var treeNodeEmits = {
   click: (node, e) => !!(node && e),
+  drop: (node, e) => !!(node && e),
   toggle: (node) => !!node,
   check: (node, checked) => node && typeof checked === "boolean"
 };
@@ -55421,7 +56380,7 @@ function useCheck2(props, tree) {
 function useFilter(props, tree) {
   const hiddenNodeKeySet = ref(/* @__PURE__ */ new Set([]));
   const hiddenExpandIconKeySet = ref(/* @__PURE__ */ new Set([]));
-  const filterable = computed2(() => {
+  const filterable = computed(() => {
     return isFunction(props.filterMethod);
   });
   function doFilter(query) {
@@ -55490,6 +56449,7 @@ function useTree3(props, emit) {
   const expandedKeySet = ref(new Set(props.defaultExpandedKeys));
   const currentKey = ref();
   const tree = shallowRef();
+  const listRef = ref();
   watch(() => props.currentNodeKey, (key) => {
     currentKey.value = key;
   }, {
@@ -55512,54 +56472,46 @@ function useTree3(props, emit) {
     setCheckedKeys
   } = useCheck2(props, tree);
   const { doFilter, hiddenNodeKeySet, isForceHiddenExpandIcon } = useFilter(props, tree);
-  const valueKey = computed2(() => {
+  const valueKey = computed(() => {
     var _a2;
     return ((_a2 = props.props) == null ? void 0 : _a2.value) || TreeOptionsEnum.KEY;
   });
-  const childrenKey = computed2(() => {
+  const childrenKey = computed(() => {
     var _a2;
     return ((_a2 = props.props) == null ? void 0 : _a2.children) || TreeOptionsEnum.CHILDREN;
   });
-  const disabledKey = computed2(() => {
+  const disabledKey = computed(() => {
     var _a2;
     return ((_a2 = props.props) == null ? void 0 : _a2.disabled) || TreeOptionsEnum.DISABLED;
   });
-  const labelKey = computed2(() => {
+  const labelKey = computed(() => {
     var _a2;
     return ((_a2 = props.props) == null ? void 0 : _a2.label) || TreeOptionsEnum.LABEL;
   });
-  const flattenTree = computed2(() => {
+  const flattenTree = computed(() => {
+    var _a2;
     const expandedKeys = expandedKeySet.value;
     const hiddenKeys = hiddenNodeKeySet.value;
     const flattenNodes = [];
-    const nodes = tree.value && tree.value.treeNodes || [];
-    function traverse() {
-      const stack = [];
-      for (let i = nodes.length - 1; i >= 0; --i) {
-        stack.push(nodes[i]);
-      }
-      while (stack.length) {
-        const node = stack.pop();
-        if (!node)
-          continue;
-        if (!hiddenKeys.has(node.key)) {
-          flattenNodes.push(node);
-        }
-        if (expandedKeys.has(node.key)) {
-          const children = node.children;
-          if (children) {
-            const length = children.length;
-            for (let i = length - 1; i >= 0; --i) {
-              stack.push(children[i]);
-            }
-          }
+    const nodes = ((_a2 = tree.value) == null ? void 0 : _a2.treeNodes) || [];
+    const stack = [];
+    for (let i = nodes.length - 1; i >= 0; --i) {
+      stack.push(nodes[i]);
+    }
+    while (stack.length) {
+      const node = stack.pop();
+      if (hiddenKeys.has(node.key))
+        continue;
+      flattenNodes.push(node);
+      if (node.children && expandedKeys.has(node.key)) {
+        for (let i = node.children.length - 1; i >= 0; --i) {
+          stack.push(node.children[i]);
         }
       }
     }
-    traverse();
     return flattenNodes;
   });
-  const isNotEmpty = computed2(() => {
+  const isNotEmpty = computed(() => {
     return flattenTree.value.length > 0;
   });
   function createTree(data) {
@@ -55634,7 +56586,16 @@ function useTree3(props, emit) {
     }
   }
   function setExpandedKeys(keys3) {
-    expandedKeySet.value = new Set(keys3);
+    const expandedKeys = /* @__PURE__ */ new Set();
+    const nodeMap = tree.value.treeNodeMap;
+    keys3.forEach((k) => {
+      let node = nodeMap.get(k);
+      while (node && !expandedKeys.has(node.key)) {
+        expandedKeys.add(node.key);
+        node = node.parent;
+      }
+    });
+    expandedKeySet.value = expandedKeys;
   }
   function handleNodeClick(node, e) {
     emit(NODE_CLICK, node.data, node, e);
@@ -55645,6 +56606,9 @@ function useTree3(props, emit) {
     if (props.showCheckbox && props.checkOnClickNode && !node.disabled) {
       toggleCheckbox(node, !isChecked(node), true);
     }
+  }
+  function handleNodeDrop(node, e) {
+    emit(NODE_DROP, node.data, node, e);
   }
   function handleCurrentChange2(node) {
     if (!isCurrent(node)) {
@@ -55703,10 +56667,21 @@ function useTree3(props, emit) {
     const key = isObject(data) ? getKey(data) : data;
     return (_a2 = tree.value) == null ? void 0 : _a2.treeNodeMap.get(key);
   }
+  function scrollToNode(key, strategy = "auto") {
+    const node = getNode(key);
+    if (node && listRef.value) {
+      listRef.value.scrollToItem(flattenTree.value.indexOf(node), strategy);
+    }
+  }
+  function scrollTo(offset2) {
+    var _a2;
+    (_a2 = listRef.value) == null ? void 0 : _a2.scrollTo(offset2);
+  }
   return {
     tree,
     flattenTree,
     isNotEmpty,
+    listRef,
     getKey,
     getChildren,
     toggleExpand,
@@ -55718,6 +56693,7 @@ function useTree3(props, emit) {
     isCurrent,
     isForceHiddenExpandIcon,
     handleNodeClick,
+    handleNodeDrop,
     handleNodeCheck,
     getCurrentNode,
     getCurrentKey,
@@ -55733,7 +56709,9 @@ function useTree3(props, emit) {
     getNode,
     expandNode,
     collapseNode,
-    setExpandedKeys
+    setExpandedKeys,
+    scrollToNode,
+    scrollTo
   };
 }
 
@@ -55753,28 +56731,30 @@ var ElNodeContent = defineComponent({
 });
 
 // node_modules/element-plus/es/components/tree-v2/src/tree-node.mjs
-var _hoisted_167 = ["aria-expanded", "aria-disabled", "aria-checked", "data-key", "onClick"];
-var __default__97 = defineComponent({
+var __default__98 = defineComponent({
   name: "ElTreeNode"
 });
-var _sfc_main139 = defineComponent({
-  ...__default__97,
+var _sfc_main141 = defineComponent({
+  ...__default__98,
   props: treeNodeProps,
   emits: treeNodeEmits,
   setup(__props, { emit }) {
     const props = __props;
     const tree = inject(ROOT_TREE_INJECTION_KEY);
     const ns = useNamespace("tree");
-    const indent = computed2(() => {
+    const indent = computed(() => {
       var _a2;
       return (_a2 = tree == null ? void 0 : tree.props.indent) != null ? _a2 : 16;
     });
-    const icon = computed2(() => {
+    const icon = computed(() => {
       var _a2;
       return (_a2 = tree == null ? void 0 : tree.props.icon) != null ? _a2 : caret_right_default;
     });
     const handleClick = (e) => {
       emit("click", props.node, e);
+    };
+    const handleDrop = (e) => {
+      emit("drop", props.node, e);
     };
     const handleExpandIconClick = () => {
       emit("toggle", props.node);
@@ -55808,7 +56788,12 @@ var _sfc_main139 = defineComponent({
         "aria-checked": _ctx.checked,
         "data-key": (_a2 = _ctx.node) == null ? void 0 : _a2.key,
         onClick: withModifiers(handleClick, ["stop"]),
-        onContextmenu: handleContextMenu
+        onContextmenu: handleContextMenu,
+        onDragover: withModifiers(() => {
+        }, ["prevent"]),
+        onDragenter: withModifiers(() => {
+        }, ["prevent"]),
+        onDrop: withModifiers(handleDrop, ["stop"])
       }, [
         createBaseVNode("div", {
           class: normalizeClass(unref(ns).be("node", "content")),
@@ -55840,29 +56825,29 @@ var _sfc_main139 = defineComponent({
             indeterminate: _ctx.indeterminate,
             disabled: _ctx.disabled,
             onChange: handleCheckChange,
-            onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-            }, ["stop"]))
-          }, null, 8, ["model-value", "indeterminate", "disabled"])) : createCommentVNode("v-if", true),
+            onClick: withModifiers(() => {
+            }, ["stop"])
+          }, null, 8, ["model-value", "indeterminate", "disabled", "onClick"])) : createCommentVNode("v-if", true),
           createVNode(unref(ElNodeContent), { node: _ctx.node }, null, 8, ["node"])
         ], 6)
-      ], 42, _hoisted_167);
+      ], 42, ["aria-expanded", "aria-disabled", "aria-checked", "data-key", "onClick", "onDragover", "onDragenter", "onDrop"]);
     };
   }
 });
-var ElTreeNode2 = _export_sfc(_sfc_main139, [["__file", "tree-node.vue"]]);
+var ElTreeNode2 = _export_sfc(_sfc_main141, [["__file", "tree-node.vue"]]);
 
 // node_modules/element-plus/es/components/tree-v2/src/tree.mjs
-var __default__98 = defineComponent({
+var __default__99 = defineComponent({
   name: "ElTreeV2"
 });
-var _sfc_main140 = defineComponent({
-  ...__default__98,
+var _sfc_main142 = defineComponent({
+  ...__default__99,
   props: treeProps,
   emits: treeEmits,
   setup(__props, { expose, emit }) {
     const props = __props;
     const slots = useSlots();
-    const treeNodeSize = computed2(() => props.itemSize);
+    const treeNodeSize = computed(() => props.itemSize);
     provide(ROOT_TREE_INJECTION_KEY, {
       ctx: {
         emit,
@@ -55877,6 +56862,7 @@ var _sfc_main140 = defineComponent({
     const {
       flattenTree,
       isNotEmpty,
+      listRef,
       toggleExpand,
       isExpanded,
       isIndeterminate,
@@ -55885,6 +56871,7 @@ var _sfc_main140 = defineComponent({
       isCurrent,
       isForceHiddenExpandIcon,
       handleNodeClick,
+      handleNodeDrop,
       handleNodeCheck,
       toggleCheckbox,
       getCurrentNode,
@@ -55901,7 +56888,9 @@ var _sfc_main140 = defineComponent({
       getNode,
       expandNode,
       collapseNode,
-      setExpandedKeys
+      setExpandedKeys,
+      scrollToNode,
+      scrollTo
     } = useTree3(props, emit);
     expose({
       toggleCheckbox,
@@ -55919,7 +56908,9 @@ var _sfc_main140 = defineComponent({
       getNode,
       expandNode,
       collapseNode,
-      setExpandedKeys
+      setExpandedKeys,
+      scrollToNode,
+      scrollTo
     });
     return (_ctx, _cache) => {
       var _a2;
@@ -55929,6 +56920,8 @@ var _sfc_main140 = defineComponent({
       }, [
         unref(isNotEmpty) ? (openBlock(), createBlock(unref(FixedSizeList), {
           key: 0,
+          ref_key: "listRef",
+          ref: listRef,
           "class-name": unref(ns).b("virtual-list"),
           data: unref(flattenTree),
           total: unref(flattenTree).length,
@@ -55951,8 +56944,9 @@ var _sfc_main140 = defineComponent({
               "hidden-expand-icon": unref(isForceHiddenExpandIcon)(data[index]),
               onClick: unref(handleNodeClick),
               onToggle: unref(toggleExpand),
-              onCheck: unref(handleNodeCheck)
-            }, null, 8, ["style", "node", "expanded", "show-checkbox", "checked", "indeterminate", "item-size", "disabled", "current", "hidden-expand-icon", "onClick", "onToggle", "onCheck"]))
+              onCheck: unref(handleNodeCheck),
+              onDrop: unref(handleNodeDrop)
+            }, null, 8, ["style", "node", "expanded", "show-checkbox", "checked", "indeterminate", "item-size", "disabled", "current", "hidden-expand-icon", "onClick", "onToggle", "onCheck", "onDrop"]))
           ]),
           _: 1
         }, 8, ["class-name", "data", "total", "height", "item-size", "perf-mode"])) : (openBlock(), createElementBlock("div", {
@@ -55967,7 +56961,7 @@ var _sfc_main140 = defineComponent({
     };
   }
 });
-var TreeV2 = _export_sfc(_sfc_main140, [["__file", "tree.vue"]]);
+var TreeV2 = _export_sfc(_sfc_main142, [["__file", "tree.vue"]]);
 
 // node_modules/element-plus/es/components/tree-v2/index.mjs
 var ElTreeV2 = withInstall(TreeV2);
@@ -55976,7 +56970,7 @@ var ElTreeV2 = withInstall(TreeV2);
 var uploadContextKey = Symbol("uploadContextKey");
 
 // node_modules/element-plus/es/components/upload/src/ajax.mjs
-var SCOPE7 = "ElUpload";
+var SCOPE8 = "ElUpload";
 var UploadAjaxError = class extends Error {
   constructor(message2, status, method5, url2) {
     super(message2);
@@ -56010,7 +57004,7 @@ function getBody(xhr) {
 }
 var ajaxUpload = (option) => {
   if (typeof XMLHttpRequest === "undefined")
-    throwError(SCOPE7, "XMLHttpRequest is undefined");
+    throwError(SCOPE8, "XMLHttpRequest is undefined");
   const xhr = new XMLHttpRequest();
   const action = option.action;
   if (xhr.upload) {
@@ -56077,18 +57071,12 @@ var uploadBaseProps = buildProps({
     type: definePropType([Object, Function, Promise]),
     default: () => mutable({})
   },
-  multiple: {
-    type: Boolean,
-    default: false
-  },
+  multiple: Boolean,
   name: {
     type: String,
     default: "file"
   },
-  drag: {
-    type: Boolean,
-    default: false
-  },
+  drag: Boolean,
   withCredentials: Boolean,
   showFileList: {
     type: Boolean,
@@ -56160,7 +57148,7 @@ var uploadProps = buildProps({
   }
 });
 
-// node_modules/element-plus/es/components/upload/src/upload-list2.mjs
+// node_modules/element-plus/es/components/upload/src/upload-list.mjs
 var uploadListProps = buildProps({
   files: {
     type: definePropType(Array),
@@ -56187,18 +57175,12 @@ var uploadListEmits = {
   remove: (file) => !!file
 };
 
-// node_modules/element-plus/es/components/upload/src/upload-list.mjs
-var _hoisted_168 = ["onKeydown"];
-var _hoisted_242 = ["src", "crossorigin"];
-var _hoisted_318 = ["onClick"];
-var _hoisted_411 = ["title"];
-var _hoisted_58 = ["onClick"];
-var _hoisted_65 = ["onClick"];
-var __default__99 = defineComponent({
+// node_modules/element-plus/es/components/upload/src/upload-list2.mjs
+var __default__100 = defineComponent({
   name: "ElUploadList"
 });
-var _sfc_main141 = defineComponent({
-  ...__default__99,
+var _sfc_main143 = defineComponent({
+  ...__default__100,
   props: uploadListProps,
   emits: uploadListEmits,
   setup(__props, { emit }) {
@@ -56209,7 +57191,7 @@ var _sfc_main141 = defineComponent({
     const nsList = useNamespace("list");
     const disabled = useFormDisabled();
     const focusing = ref(false);
-    const containerKls = computed2(() => [
+    const containerKls = computed(() => [
       nsUpload.b("list"),
       nsUpload.bm("list", props.listType),
       nsUpload.is("disabled", props.disabled)
@@ -56224,7 +57206,7 @@ var _sfc_main141 = defineComponent({
         name: unref(nsList).b()
       }, {
         default: withCtx(() => [
-          (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.files, (file) => {
+          (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.files, (file, index) => {
             return openBlock(), createElementBlock("li", {
               key: file.uid || file.name,
               class: normalizeClass([
@@ -56234,18 +57216,21 @@ var _sfc_main141 = defineComponent({
               ]),
               tabindex: "0",
               onKeydown: withKeys(($event) => !unref(disabled) && handleRemove(file), ["delete"]),
-              onFocus: _cache[0] || (_cache[0] = ($event) => focusing.value = true),
-              onBlur: _cache[1] || (_cache[1] = ($event) => focusing.value = false),
-              onClick: _cache[2] || (_cache[2] = ($event) => focusing.value = false)
+              onFocus: ($event) => focusing.value = true,
+              onBlur: ($event) => focusing.value = false,
+              onClick: ($event) => focusing.value = false
             }, [
-              renderSlot(_ctx.$slots, "default", { file }, () => [
+              renderSlot(_ctx.$slots, "default", {
+                file,
+                index
+              }, () => [
                 _ctx.listType === "picture" || file.status !== "uploading" && _ctx.listType === "picture-card" ? (openBlock(), createElementBlock("img", {
                   key: 0,
                   class: normalizeClass(unref(nsUpload).be("list", "item-thumbnail")),
                   src: file.url,
                   crossorigin: _ctx.crossorigin,
                   alt: ""
-                }, null, 10, _hoisted_242)) : createCommentVNode("v-if", true),
+                }, null, 10, ["src", "crossorigin"])) : createCommentVNode("v-if", true),
                 file.status === "uploading" || _ctx.listType !== "picture-card" ? (openBlock(), createElementBlock("div", {
                   key: 1,
                   class: normalizeClass(unref(nsUpload).be("list", "item-info"))
@@ -56265,8 +57250,8 @@ var _sfc_main141 = defineComponent({
                     createBaseVNode("span", {
                       class: normalizeClass(unref(nsUpload).be("list", "item-file-name")),
                       title: file.name
-                    }, toDisplayString(file.name), 11, _hoisted_411)
-                  ], 10, _hoisted_318),
+                    }, toDisplayString(file.name), 11, ["title"])
+                  ], 10, ["onClick"]),
                   file.status === "uploading" ? (openBlock(), createBlock(unref(ElProgress), {
                     key: 0,
                     type: _ctx.listType === "picture-card" ? "circle" : "line",
@@ -56329,7 +57314,7 @@ var _sfc_main141 = defineComponent({
                       ]),
                       _: 1
                     }, 8, ["class"])
-                  ], 10, _hoisted_58),
+                  ], 10, ["onClick"]),
                   !unref(disabled) ? (openBlock(), createElementBlock("span", {
                     key: 0,
                     class: normalizeClass(unref(nsUpload).be("list", "item-delete")),
@@ -56343,10 +57328,10 @@ var _sfc_main141 = defineComponent({
                       ]),
                       _: 1
                     }, 8, ["class"])
-                  ], 10, _hoisted_65)) : createCommentVNode("v-if", true)
+                  ], 10, ["onClick"])) : createCommentVNode("v-if", true)
                 ], 2)) : createCommentVNode("v-if", true)
               ])
-            ], 42, _hoisted_168);
+            ], 42, ["onKeydown", "onFocus", "onBlur", "onClick"]);
           }), 128)),
           renderSlot(_ctx.$slots, "append")
         ]),
@@ -56355,7 +57340,7 @@ var _sfc_main141 = defineComponent({
     };
   }
 });
-var UploadList = _export_sfc(_sfc_main141, [["__file", "upload-list.vue"]]);
+var UploadList = _export_sfc(_sfc_main143, [["__file", "upload-list.vue"]]);
 
 // node_modules/element-plus/es/components/upload/src/upload-dragger.mjs
 var uploadDraggerProps = buildProps({
@@ -56369,19 +57354,18 @@ var uploadDraggerEmits = {
 };
 
 // node_modules/element-plus/es/components/upload/src/upload-dragger2.mjs
-var _hoisted_169 = ["onDrop", "onDragover"];
-var COMPONENT_NAME25 = "ElUploadDrag";
-var __default__100 = defineComponent({
-  name: COMPONENT_NAME25
+var COMPONENT_NAME24 = "ElUploadDrag";
+var __default__101 = defineComponent({
+  name: COMPONENT_NAME24
 });
-var _sfc_main142 = defineComponent({
-  ...__default__100,
+var _sfc_main144 = defineComponent({
+  ...__default__101,
   props: uploadDraggerProps,
   emits: uploadDraggerEmits,
   setup(__props, { emit }) {
     const uploaderContext = inject(uploadContextKey);
     if (!uploaderContext) {
-      throwError(COMPONENT_NAME25, "usage: <el-upload><el-upload-dragger /></el-upload>");
+      throwError(COMPONENT_NAME24, "usage: <el-upload><el-upload-dragger /></el-upload>");
     }
     const ns = useNamespace("upload");
     const dragover = ref(false);
@@ -56403,14 +57387,14 @@ var _sfc_main142 = defineComponent({
         class: normalizeClass([unref(ns).b("dragger"), unref(ns).is("dragover", dragover.value)]),
         onDrop: withModifiers(onDrop, ["prevent"]),
         onDragover: withModifiers(onDragover, ["prevent"]),
-        onDragleave: _cache[0] || (_cache[0] = withModifiers(($event) => dragover.value = false, ["prevent"]))
+        onDragleave: withModifiers(($event) => dragover.value = false, ["prevent"])
       }, [
         renderSlot(_ctx.$slots, "default")
-      ], 42, _hoisted_169);
+      ], 42, ["onDrop", "onDragover", "onDragleave"]);
     };
   }
 });
-var UploadDragger = _export_sfc(_sfc_main142, [["__file", "upload-dragger.vue"]]);
+var UploadDragger = _export_sfc(_sfc_main144, [["__file", "upload-dragger.vue"]]);
 
 // node_modules/element-plus/es/components/upload/src/upload-content.mjs
 var uploadContentProps = buildProps({
@@ -56446,14 +57430,12 @@ var uploadContentProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/upload/src/upload-content2.mjs
-var _hoisted_170 = ["onKeydown"];
-var _hoisted_243 = ["name", "multiple", "accept"];
-var __default__101 = defineComponent({
+var __default__102 = defineComponent({
   name: "ElUploadContent",
   inheritAttrs: false
 });
-var _sfc_main143 = defineComponent({
-  ...__default__101,
+var _sfc_main145 = defineComponent({
+  ...__default__102,
   props: uploadContentProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -56597,8 +57579,13 @@ var _sfc_main143 = defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass([unref(ns).b(), unref(ns).m(_ctx.listType), unref(ns).is("drag", _ctx.drag)]),
-        tabindex: "0",
+        class: normalizeClass([
+          unref(ns).b(),
+          unref(ns).m(_ctx.listType),
+          unref(ns).is("drag", _ctx.drag),
+          unref(ns).is("disabled", unref(disabled))
+        ]),
+        tabindex: unref(disabled) ? "-1" : "0",
         onClick: handleClick,
         onKeydown: withKeys(withModifiers(handleKeydown, ["self"]), ["enter", "space"])
       }, [
@@ -56617,21 +57604,22 @@ var _sfc_main143 = defineComponent({
           ref: inputRef,
           class: normalizeClass(unref(ns).e("input")),
           name: _ctx.name,
+          disabled: unref(disabled),
           multiple: _ctx.multiple,
           accept: _ctx.accept,
           type: "file",
           onChange: handleChange,
-          onClick: _cache[0] || (_cache[0] = withModifiers(() => {
-          }, ["stop"]))
-        }, null, 42, _hoisted_243)
-      ], 42, _hoisted_170);
+          onClick: withModifiers(() => {
+          }, ["stop"])
+        }, null, 42, ["name", "disabled", "multiple", "accept", "onClick"])
+      ], 42, ["tabindex", "onKeydown"]);
     };
   }
 });
-var UploadContent = _export_sfc(_sfc_main143, [["__file", "upload-content.vue"]]);
+var UploadContent = _export_sfc(_sfc_main145, [["__file", "upload-content.vue"]]);
 
 // node_modules/element-plus/es/components/upload/src/use-handlers.mjs
-var SCOPE8 = "ElUpload";
+var SCOPE9 = "ElUpload";
 var revokeFileObjectURL = (file) => {
   var _a2;
   if ((_a2 = file.url) == null ? void 0 : _a2.startsWith("blob:")) {
@@ -56648,13 +57636,16 @@ var useHandlers = (props, uploadRef) => {
   function clearFiles(states = ["ready", "uploading", "success", "fail"]) {
     uploadFiles.value = uploadFiles.value.filter((row) => !states.includes(row.status));
   }
+  function removeFile(file) {
+    uploadFiles.value = uploadFiles.value.filter((uploadFile) => uploadFile !== file);
+  }
   const handleError = (err, rawFile) => {
     const file = getFile(rawFile);
     if (!file)
       return;
     console.error(err);
     file.status = "fail";
-    uploadFiles.value.splice(uploadFiles.value.indexOf(file), 1);
+    removeFile(file);
     props.onError(err, file, uploadFiles.value);
     props.onChange(file, uploadFiles.value);
   };
@@ -56690,7 +57681,7 @@ var useHandlers = (props, uploadRef) => {
       try {
         uploadFile.url = URL.createObjectURL(file);
       } catch (err) {
-        debugWarn(SCOPE8, err.message);
+        debugWarn(SCOPE9, err.message);
         props.onError(err, uploadFile, uploadFiles.value);
       }
     }
@@ -56700,12 +57691,11 @@ var useHandlers = (props, uploadRef) => {
   const handleRemove = async (file) => {
     const uploadFile = file instanceof File ? getFile(file) : file;
     if (!uploadFile)
-      throwError(SCOPE8, "file to be removed not found");
+      throwError(SCOPE9, "file to be removed not found");
     const doRemove = (file2) => {
       abort(file2);
-      const fileList = uploadFiles.value;
-      fileList.splice(fileList.indexOf(file2), 1);
-      props.onRemove(file2, fileList);
+      removeFile(file2);
+      props.onRemove(file2, uploadFiles.value);
       revokeFileObjectURL(file2);
     };
     if (props.beforeRemove) {
@@ -56759,11 +57749,11 @@ var useHandlers = (props, uploadRef) => {
 };
 
 // node_modules/element-plus/es/components/upload/src/upload2.mjs
-var __default__102 = defineComponent({
+var __default__103 = defineComponent({
   name: "ElUpload"
 });
-var _sfc_main144 = defineComponent({
-  ...__default__102,
+var _sfc_main146 = defineComponent({
+  ...__default__103,
   props: uploadProps,
   setup(__props, { expose }) {
     const props = __props;
@@ -56781,8 +57771,8 @@ var _sfc_main144 = defineComponent({
       handleProgress,
       revokeFileObjectURL: revokeFileObjectURL2
     } = useHandlers(props, uploadRef);
-    const isPictureCard = computed2(() => props.listType === "picture-card");
-    const uploadContentProps2 = computed2(() => ({
+    const isPictureCard = computed(() => props.listType === "picture-card");
+    const uploadContentProps2 = computed(() => ({
       ...props,
       fileList: uploadFiles.value,
       onStart: handleStart,
@@ -56831,8 +57821,11 @@ var _sfc_main144 = defineComponent({
         }, [
           _ctx.$slots.file ? {
             name: "default",
-            fn: withCtx(({ file }) => [
-              renderSlot(_ctx.$slots, "file", { file })
+            fn: withCtx(({ file, index }) => [
+              renderSlot(_ctx.$slots, "file", {
+                file,
+                index
+              })
             ])
           } : void 0
         ]), 1032, ["disabled", "list-type", "files", "crossorigin", "handle-preview", "onRemove"])) : createCommentVNode("v-if", true),
@@ -56860,8 +57853,11 @@ var _sfc_main144 = defineComponent({
         }, createSlots({ _: 2 }, [
           _ctx.$slots.file ? {
             name: "default",
-            fn: withCtx(({ file }) => [
-              renderSlot(_ctx.$slots, "file", { file })
+            fn: withCtx(({ file, index }) => [
+              renderSlot(_ctx.$slots, "file", {
+                file,
+                index
+              })
             ])
           } : void 0
         ]), 1032, ["disabled", "list-type", "files", "crossorigin", "handle-preview", "onRemove"])) : createCommentVNode("v-if", true)
@@ -56869,7 +57865,7 @@ var _sfc_main144 = defineComponent({
     };
   }
 });
-var Upload = _export_sfc(_sfc_main144, [["__file", "upload.vue"]]);
+var Upload = _export_sfc(_sfc_main146, [["__file", "upload.vue"]]);
 
 // node_modules/element-plus/es/components/upload/index.mjs
 var ElUpload = withInstall(Upload);
@@ -57014,54 +58010,54 @@ function useClips() {
 }
 
 // node_modules/element-plus/es/components/watermark/src/watermark2.mjs
-var __default__103 = defineComponent({
+var __default__104 = defineComponent({
   name: "ElWatermark"
 });
-var _sfc_main145 = defineComponent({
-  ...__default__103,
+var _sfc_main147 = defineComponent({
+  ...__default__104,
   props: watermarkProps,
   setup(__props) {
     const props = __props;
     const style = {
       position: "relative"
     };
-    const color = computed2(() => {
+    const color = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.color) != null ? _b : "rgba(0,0,0,.15)";
     });
-    const fontSize = computed2(() => {
+    const fontSize = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.fontSize) != null ? _b : 16;
     });
-    const fontWeight = computed2(() => {
+    const fontWeight = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.fontWeight) != null ? _b : "normal";
     });
-    const fontStyle = computed2(() => {
+    const fontStyle = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.fontStyle) != null ? _b : "normal";
     });
-    const fontFamily = computed2(() => {
+    const fontFamily = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.fontFamily) != null ? _b : "sans-serif";
     });
-    const textAlign = computed2(() => {
+    const textAlign = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.font) == null ? void 0 : _a2.textAlign) != null ? _b : "center";
     });
-    const textBaseline = computed2(() => {
+    const textBaseline = computed(() => {
       var _a2, _b;
-      return (_b = (_a2 = props.font) == null ? void 0 : _a2.textBaseline) != null ? _b : "top";
+      return (_b = (_a2 = props.font) == null ? void 0 : _a2.textBaseline) != null ? _b : "hanging";
     });
-    const gapX = computed2(() => props.gap[0]);
-    const gapY = computed2(() => props.gap[1]);
-    const gapXCenter = computed2(() => gapX.value / 2);
-    const gapYCenter = computed2(() => gapY.value / 2);
-    const offsetLeft = computed2(() => {
+    const gapX = computed(() => props.gap[0]);
+    const gapY = computed(() => props.gap[1]);
+    const gapXCenter = computed(() => gapX.value / 2);
+    const gapYCenter = computed(() => gapY.value / 2);
+    const offsetLeft = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.offset) == null ? void 0 : _a2[0]) != null ? _b : gapXCenter.value;
     });
-    const offsetTop = computed2(() => {
+    const offsetTop = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.offset) == null ? void 0 : _a2[1]) != null ? _b : gapYCenter.value;
     });
@@ -57217,7 +58213,7 @@ var _sfc_main145 = defineComponent({
     };
   }
 });
-var Watermark = _export_sfc(_sfc_main145, [["__file", "watermark.vue"]]);
+var Watermark = _export_sfc(_sfc_main147, [["__file", "watermark.vue"]]);
 
 // node_modules/element-plus/es/components/watermark/index.mjs
 var ElWatermark = withInstall(Watermark);
@@ -57289,7 +58285,7 @@ var useTarget = (target2, open, gap, mergedMask, scrollIntoViewOptions) => {
     var _a2;
     return (_a2 = isArray(gap.value.offset) ? gap.value.offset[index] : gap.value.offset) != null ? _a2 : 6;
   };
-  const mergedPosInfo = computed2(() => {
+  const mergedPosInfo = computed(() => {
     var _a2;
     if (!posInfo.value)
       return posInfo.value;
@@ -57304,7 +58300,7 @@ var useTarget = (target2, open, gap, mergedMask, scrollIntoViewOptions) => {
       radius: gapRadius
     };
   });
-  const triggerTarget = computed2(() => {
+  const triggerTarget = computed(() => {
     const targetEl = getTargetEl();
     if (!mergedMask.value || !targetEl || !window.DOMRect) {
       return targetEl || void 0;
@@ -57344,7 +58340,7 @@ var useFloating2 = (referenceRef, contentRef, arrowRef, placement, strategy, off
     strategy,
     middlewareData
   };
-  const middleware = computed2(() => {
+  const middleware = computed(() => {
     const _middleware = [
       offset(unref(offset$1)),
       flip3(),
@@ -57374,7 +58370,7 @@ var useFloating2 = (referenceRef, contentRef, arrowRef, placement, strategy, off
       states[key].value = data[key];
     });
   };
-  const contentStyle = computed2(() => {
+  const contentStyle = computed(() => {
     if (!unref(referenceRef)) {
       return {
         position: "fixed",
@@ -57394,7 +58390,7 @@ var useFloating2 = (referenceRef, contentRef, arrowRef, placement, strategy, off
       maxWidth: (overflow == null ? void 0 : overflow.maxWidth) ? `${overflow == null ? void 0 : overflow.maxWidth}px` : ""
     };
   });
-  const arrowStyle = computed2(() => {
+  const arrowStyle = computed(() => {
     if (!unref(showArrow))
       return {};
     const { arrow: arrow22 } = unref(middlewareData);
@@ -57444,26 +58440,21 @@ var overflowMiddleware = () => {
 };
 
 // node_modules/element-plus/es/components/tour/src/mask2.mjs
-var _hoisted_171 = { style: {
-  width: "100%",
-  height: "100%"
-} };
-var _hoisted_244 = ["d"];
-var __default__104 = defineComponent({
+var __default__105 = defineComponent({
   name: "ElTourMask",
   inheritAttrs: false
 });
-var _sfc_main146 = defineComponent({
-  ...__default__104,
+var _sfc_main148 = defineComponent({
+  ...__default__105,
   props: maskProps,
   setup(__props) {
     const props = __props;
     const { ns } = inject(tourKey);
-    const radius = computed2(() => {
+    const radius = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.pos) == null ? void 0 : _a2.radius) != null ? _b : 2;
     });
-    const roundInfo = computed2(() => {
+    const roundInfo = computed(() => {
       const v2 = radius.value;
       const baseInfo = `a${v2},${v2} 0 0 1`;
       return {
@@ -57473,7 +58464,7 @@ var _sfc_main146 = defineComponent({
         topLeft: `${baseInfo} ${v2},${-v2}`
       };
     });
-    const path = computed2(() => {
+    const path = computed(() => {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const info = roundInfo.value;
@@ -57481,7 +58472,7 @@ var _sfc_main146 = defineComponent({
       const _radius = radius.value;
       return props.pos ? `${_path} M${props.pos.left + _radius},${props.pos.top} h${props.pos.width - _radius * 2} ${info.topRight} v${props.pos.height - _radius * 2} ${info.bottomRight} h${-props.pos.width + _radius * 2} ${info.bottomLeft} v${-props.pos.height + _radius * 2} ${info.topLeft} z` : _path;
     });
-    const pathStyle = computed2(() => {
+    const pathStyle = computed(() => {
       return {
         fill: props.fill,
         pointerEvents: "auto",
@@ -57505,18 +58496,21 @@ var _sfc_main146 = defineComponent({
           pointerEvents: _ctx.pos && _ctx.targetAreaClickable ? "none" : "auto"
         }
       }, _ctx.$attrs), [
-        (openBlock(), createElementBlock("svg", _hoisted_171, [
+        (openBlock(), createElementBlock("svg", { style: {
+          width: "100%",
+          height: "100%"
+        } }, [
           createBaseVNode("path", {
             class: normalizeClass(unref(ns).e("hollow")),
             style: normalizeStyle(unref(pathStyle)),
             d: unref(path)
-          }, null, 14, _hoisted_244)
+          }, null, 14, ["d"])
         ]))
       ], 16)) : createCommentVNode("v-if", true);
     };
   }
 });
-var ElTourMask = _export_sfc(_sfc_main146, [["__file", "mask.vue"]]);
+var ElTourMask = _export_sfc(_sfc_main148, [["__file", "mask.vue"]]);
 
 // node_modules/element-plus/es/components/tour/src/content.mjs
 var tourStrategies = ["absolute", "fixed"];
@@ -57564,12 +58558,11 @@ var tourContentEmits = {
 };
 
 // node_modules/element-plus/es/components/tour/src/content2.mjs
-var _hoisted_173 = ["data-side"];
-var __default__105 = defineComponent({
+var __default__106 = defineComponent({
   name: "ElTourContent"
 });
-var _sfc_main147 = defineComponent({
-  ...__default__105,
+var _sfc_main149 = defineComponent({
+  ...__default__106,
   props: tourContentProps,
   emits: tourContentEmits,
   setup(__props, { emit }) {
@@ -57582,7 +58575,7 @@ var _sfc_main147 = defineComponent({
       placement.value = props.placement;
     });
     const { contentStyle, arrowStyle } = useFloating2(toRef(props, "reference"), contentRef, arrowRef, placement, strategy, toRef(props, "offset"), toRef(props, "zIndex"), toRef(props, "showArrow"));
-    const side = computed2(() => {
+    const side = computed(() => {
       return placement.value.split("-")[0];
     });
     const { ns } = inject(tourKey);
@@ -57623,11 +58616,11 @@ var _sfc_main147 = defineComponent({
           style: normalizeStyle(unref(arrowStyle)),
           class: normalizeClass(unref(ns).e("arrow"))
         }, null, 6)) : createCommentVNode("v-if", true)
-      ], 14, _hoisted_173);
+      ], 14, ["data-side"]);
     };
   }
 });
-var ElTourContent = _export_sfc(_sfc_main147, [["__file", "content.vue"]]);
+var ElTourContent = _export_sfc(_sfc_main149, [["__file", "content.vue"]]);
 
 // node_modules/element-plus/es/components/tour/src/steps.mjs
 var ElTourSteps = defineComponent({
@@ -57740,11 +58733,11 @@ var tourEmits = {
 };
 
 // node_modules/element-plus/es/components/tour/src/tour2.mjs
-var __default__106 = defineComponent({
+var __default__107 = defineComponent({
   name: "ElTour"
 });
-var _sfc_main148 = defineComponent({
-  ...__default__106,
+var _sfc_main150 = defineComponent({
+  ...__default__107,
   props: tourProps,
   emits: tourEmits,
   setup(__props, { emit }) {
@@ -57755,43 +58748,43 @@ var _sfc_main148 = defineComponent({
     const current = useVModel(props, "current", emit, {
       passive: true
     });
-    const currentTarget = computed2(() => {
+    const currentTarget = computed(() => {
       var _a2;
       return (_a2 = currentStep.value) == null ? void 0 : _a2.target;
     });
-    const kls = computed2(() => [
+    const kls = computed(() => [
       ns.b(),
       mergedType.value === "primary" ? ns.m("primary") : ""
     ]);
-    const mergedPlacement = computed2(() => {
+    const mergedPlacement = computed(() => {
       var _a2;
       return ((_a2 = currentStep.value) == null ? void 0 : _a2.placement) || props.placement;
     });
-    const mergedContentStyle = computed2(() => {
+    const mergedContentStyle = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = currentStep.value) == null ? void 0 : _a2.contentStyle) != null ? _b : props.contentStyle;
     });
-    const mergedMask = computed2(() => {
+    const mergedMask = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = currentStep.value) == null ? void 0 : _a2.mask) != null ? _b : props.mask;
     });
-    const mergedShowMask = computed2(() => !!mergedMask.value && props.modelValue);
-    const mergedMaskStyle = computed2(() => isBoolean2(mergedMask.value) ? void 0 : mergedMask.value);
-    const mergedShowArrow = computed2(() => {
+    const mergedShowMask = computed(() => !!mergedMask.value && props.modelValue);
+    const mergedMaskStyle = computed(() => isBoolean2(mergedMask.value) ? void 0 : mergedMask.value);
+    const mergedShowArrow = computed(() => {
       var _a2, _b;
       return !!currentTarget.value && ((_b = (_a2 = currentStep.value) == null ? void 0 : _a2.showArrow) != null ? _b : props.showArrow);
     });
-    const mergedScrollIntoViewOptions = computed2(() => {
+    const mergedScrollIntoViewOptions = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = currentStep.value) == null ? void 0 : _a2.scrollIntoViewOptions) != null ? _b : props.scrollIntoViewOptions;
     });
-    const mergedType = computed2(() => {
+    const mergedType = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = currentStep.value) == null ? void 0 : _a2.type) != null ? _b : props.type;
     });
     const { nextZIndex } = useZIndex();
     const nowZIndex = nextZIndex();
-    const mergedZIndex = computed2(() => {
+    const mergedZIndex = computed(() => {
       var _a2;
       return (_a2 = props.zIndex) != null ? _a2 : nowZIndex;
     });
@@ -57834,42 +58827,47 @@ var _sfc_main148 = defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      var _a2, _b;
       return openBlock(), createElementBlock(Fragment, null, [
-        (openBlock(), createBlock(Teleport, { to: _ctx.appendTo }, [
-          createBaseVNode("div", mergeProps({ class: unref(kls) }, _ctx.$attrs), [
-            createVNode(ElTourMask, {
-              visible: unref(mergedShowMask),
-              fill: (_a2 = unref(mergedMaskStyle)) == null ? void 0 : _a2.color,
-              style: normalizeStyle((_b = unref(mergedMaskStyle)) == null ? void 0 : _b.style),
-              pos: unref(pos),
-              "z-index": unref(mergedZIndex),
-              "target-area-clickable": _ctx.targetAreaClickable
-            }, null, 8, ["visible", "fill", "style", "pos", "z-index", "target-area-clickable"]),
-            _ctx.modelValue ? (openBlock(), createBlock(ElTourContent, {
-              key: unref(current),
-              reference: unref(triggerTarget),
-              placement: unref(mergedPlacement),
-              "show-arrow": unref(mergedShowArrow),
-              "z-index": unref(mergedZIndex),
-              style: normalizeStyle(unref(mergedContentStyle)),
-              onClose: onEscClose
-            }, {
-              default: withCtx(() => [
-                createVNode(unref(ElTourSteps), {
-                  current: unref(current),
-                  onUpdateTotal
+        createVNode(unref(ElTeleport), { to: _ctx.appendTo }, {
+          default: withCtx(() => {
+            var _a2, _b;
+            return [
+              createBaseVNode("div", mergeProps({ class: unref(kls) }, _ctx.$attrs), [
+                createVNode(ElTourMask, {
+                  visible: unref(mergedShowMask),
+                  fill: (_a2 = unref(mergedMaskStyle)) == null ? void 0 : _a2.color,
+                  style: normalizeStyle((_b = unref(mergedMaskStyle)) == null ? void 0 : _b.style),
+                  pos: unref(pos),
+                  "z-index": unref(mergedZIndex),
+                  "target-area-clickable": _ctx.targetAreaClickable
+                }, null, 8, ["visible", "fill", "style", "pos", "z-index", "target-area-clickable"]),
+                _ctx.modelValue ? (openBlock(), createBlock(ElTourContent, {
+                  key: unref(current),
+                  reference: unref(triggerTarget),
+                  placement: unref(mergedPlacement),
+                  "show-arrow": unref(mergedShowArrow),
+                  "z-index": unref(mergedZIndex),
+                  style: normalizeStyle(unref(mergedContentStyle)),
+                  onClose: onEscClose
                 }, {
                   default: withCtx(() => [
-                    renderSlot(_ctx.$slots, "default")
+                    createVNode(unref(ElTourSteps), {
+                      current: unref(current),
+                      onUpdateTotal
+                    }, {
+                      default: withCtx(() => [
+                        renderSlot(_ctx.$slots, "default")
+                      ]),
+                      _: 3
+                    }, 8, ["current"])
                   ]),
                   _: 3
-                }, 8, ["current"])
-              ]),
-              _: 3
-            }, 8, ["reference", "placement", "show-arrow", "z-index", "style"])) : createCommentVNode("v-if", true)
-          ], 16)
-        ], 8, ["to"])),
+                }, 8, ["reference", "placement", "show-arrow", "z-index", "style"])) : createCommentVNode("v-if", true)
+              ], 16)
+            ];
+          }),
+          _: 3
+        }, 8, ["to"]),
         createCommentVNode(" just for IDE "),
         false ? renderSlot(_ctx.$slots, "indicators", {
           key: 0,
@@ -57880,7 +58878,7 @@ var _sfc_main148 = defineComponent({
     };
   }
 });
-var Tour = _export_sfc(_sfc_main148, [["__file", "tour.vue"]]);
+var Tour = _export_sfc(_sfc_main150, [["__file", "tour.vue"]]);
 
 // node_modules/element-plus/es/components/tour/src/step.mjs
 var tourStepProps = buildProps({
@@ -57927,11 +58925,11 @@ var tourStepEmits = {
 };
 
 // node_modules/element-plus/es/components/tour/src/step2.mjs
-var __default__107 = defineComponent({
+var __default__108 = defineComponent({
   name: "ElTourStep"
 });
-var _sfc_main149 = defineComponent({
-  ...__default__107,
+var _sfc_main151 = defineComponent({
+  ...__default__108,
   props: tourStepProps,
   emits: tourStepEmits,
   setup(__props, { emit }) {
@@ -57957,11 +58955,11 @@ var _sfc_main149 = defineComponent({
     }, {
       immediate: true
     });
-    const mergedShowClose = computed2(() => {
+    const mergedShowClose = computed(() => {
       var _a2;
       return (_a2 = props.showClose) != null ? _a2 : showClose.value;
     });
-    const mergedCloseIcon = computed2(() => {
+    const mergedCloseIcon = computed(() => {
       var _a2, _b;
       return (_b = (_a2 = props.closeIcon) != null ? _a2 : closeIcon.value) != null ? _b : Close;
     });
@@ -58086,7 +59084,7 @@ var _sfc_main149 = defineComponent({
     };
   }
 });
-var TourStep = _export_sfc(_sfc_main149, [["__file", "step.vue"]]);
+var TourStep = _export_sfc(_sfc_main151, [["__file", "step.vue"]]);
 
 // node_modules/element-plus/es/components/tour/index.mjs
 var ElTour = withInstall(Tour, {
@@ -58136,11 +59134,11 @@ var anchorEmits = {
 var anchorKey = Symbol("anchor");
 
 // node_modules/element-plus/es/components/anchor/src/anchor2.mjs
-var __default__108 = defineComponent({
+var __default__109 = defineComponent({
   name: "ElAnchor"
 });
-var _sfc_main150 = defineComponent({
-  ...__default__108,
+var _sfc_main152 = defineComponent({
+  ...__default__109,
   props: anchorProps,
   emits: anchorEmits,
   setup(__props, { expose, emit }) {
@@ -58153,7 +59151,7 @@ var _sfc_main150 = defineComponent({
     let isScrolling = false;
     let currentScrollTop = 0;
     const ns = useNamespace("anchor");
-    const cls = computed2(() => [
+    const cls = computed(() => [
       ns.b(),
       props.type === "underline" ? ns.m("underline") : "",
       ns.m(props.direction)
@@ -58247,7 +59245,7 @@ var _sfc_main150 = defineComponent({
       }
     };
     useEventListener(containerEl, "scroll", handleScroll2);
-    const markerStyle = computed2(() => {
+    const markerStyle = computed(() => {
       if (!anchorRef.value || !markerRef.value || !currentAnchor.value)
         return {};
       const currentLinkEl = links[currentAnchor.value];
@@ -58317,7 +59315,7 @@ var _sfc_main150 = defineComponent({
     };
   }
 });
-var Anchor = _export_sfc(_sfc_main150, [["__file", "anchor.vue"]]);
+var Anchor = _export_sfc(_sfc_main152, [["__file", "anchor.vue"]]);
 
 // node_modules/element-plus/es/components/anchor/src/anchor-link.mjs
 var anchorLinkProps = buildProps({
@@ -58326,12 +59324,11 @@ var anchorLinkProps = buildProps({
 });
 
 // node_modules/element-plus/es/components/anchor/src/anchor-link2.mjs
-var _hoisted_174 = ["href"];
-var __default__109 = defineComponent({
+var __default__110 = defineComponent({
   name: "ElAnchorLink"
 });
-var _sfc_main151 = defineComponent({
-  ...__default__109,
+var _sfc_main153 = defineComponent({
+  ...__default__110,
   props: anchorLinkProps,
   setup(__props) {
     const props = __props;
@@ -58344,7 +59341,7 @@ var _sfc_main151 = defineComponent({
       removeLink,
       handleClick: contextHandleClick
     } = inject(anchorKey);
-    const cls = computed2(() => [
+    const cls = computed(() => [
       ns.e("link"),
       ns.is("active", currentAnchor.value === props.href)
     ]);
@@ -58392,7 +59389,7 @@ var _sfc_main151 = defineComponent({
           renderSlot(_ctx.$slots, "default", {}, () => [
             createTextVNode(toDisplayString(_ctx.title), 1)
           ])
-        ], 10, _hoisted_174),
+        ], 10, ["href"]),
         _ctx.$slots["sub-link"] && unref(direction2) === "vertical" ? (openBlock(), createElementBlock("div", {
           key: 0,
           class: normalizeClass(unref(ns).e("list"))
@@ -58403,13 +59400,838 @@ var _sfc_main151 = defineComponent({
     };
   }
 });
-var AnchorLink = _export_sfc(_sfc_main151, [["__file", "anchor-link.vue"]]);
+var AnchorLink = _export_sfc(_sfc_main153, [["__file", "anchor-link.vue"]]);
 
 // node_modules/element-plus/es/components/anchor/index.mjs
 var ElAnchor = withInstall(Anchor, {
   AnchorLink
 });
 var ElAnchorLink = withNoopInstall(AnchorLink);
+
+// node_modules/element-plus/es/components/segmented/src/segmented.mjs
+var segmentedProps = buildProps({
+  options: {
+    type: definePropType(Array),
+    default: () => []
+  },
+  modelValue: {
+    type: [String, Number, Boolean],
+    default: void 0
+  },
+  block: Boolean,
+  size: useSizeProp,
+  disabled: Boolean,
+  validateEvent: {
+    type: Boolean,
+    default: true
+  },
+  id: String,
+  name: String,
+  ...useAriaProps(["ariaLabel"])
+});
+var segmentedEmits = {
+  [UPDATE_MODEL_EVENT]: (val) => isString(val) || isNumber3(val) || isBoolean2(val),
+  [CHANGE_EVENT]: (val) => isString(val) || isNumber3(val) || isBoolean2(val)
+};
+
+// node_modules/element-plus/es/components/segmented/src/segmented2.mjs
+var __default__111 = defineComponent({
+  name: "ElSegmented"
+});
+var _sfc_main154 = defineComponent({
+  ...__default__111,
+  props: segmentedProps,
+  emits: segmentedEmits,
+  setup(__props, { emit }) {
+    const props = __props;
+    const ns = useNamespace("segmented");
+    const segmentedId = useId();
+    const segmentedSize = useFormSize();
+    const _disabled = useFormDisabled();
+    const { formItem } = useFormItem();
+    const { inputId, isLabeledByFormItem } = useFormItemInputId(props, {
+      formItemContext: formItem
+    });
+    const segmentedRef = ref(null);
+    const activeElement = useActiveElement();
+    const state = reactive({
+      isInit: false,
+      width: 0,
+      translateX: 0,
+      focusVisible: false
+    });
+    const handleChange = (item) => {
+      const value = getValue3(item);
+      emit(UPDATE_MODEL_EVENT, value);
+      emit(CHANGE_EVENT, value);
+    };
+    const getValue3 = (item) => {
+      return isObject(item) ? item.value : item;
+    };
+    const getLabel = (item) => {
+      return isObject(item) ? item.label : item;
+    };
+    const getDisabled = (item) => {
+      return !!(_disabled.value || (isObject(item) ? item.disabled : false));
+    };
+    const getSelected = (item) => {
+      return props.modelValue === getValue3(item);
+    };
+    const getOption = (value) => {
+      return props.options.find((item) => getValue3(item) === value);
+    };
+    const getItemCls = (item) => {
+      return [
+        ns.e("item"),
+        ns.is("selected", getSelected(item)),
+        ns.is("disabled", getDisabled(item))
+      ];
+    };
+    const updateSelect = () => {
+      if (!segmentedRef.value)
+        return;
+      const selectedItem = segmentedRef.value.querySelector(".is-selected");
+      const selectedItemInput = segmentedRef.value.querySelector(".is-selected input");
+      if (!selectedItem || !selectedItemInput) {
+        state.width = 0;
+        state.translateX = 0;
+        state.focusVisible = false;
+        return;
+      }
+      const rect = selectedItem.getBoundingClientRect();
+      state.isInit = true;
+      state.width = rect.width;
+      state.translateX = selectedItem.offsetLeft;
+      try {
+        state.focusVisible = selectedItemInput.matches(":focus-visible");
+      } catch (e) {
+      }
+    };
+    const segmentedCls = computed(() => [
+      ns.b(),
+      ns.m(segmentedSize.value),
+      ns.is("block", props.block)
+    ]);
+    const selectedStyle = computed(() => ({
+      width: `${state.width}px`,
+      transform: `translateX(${state.translateX}px)`,
+      display: state.isInit ? "block" : "none"
+    }));
+    const selectedCls = computed(() => [
+      ns.e("item-selected"),
+      ns.is("disabled", getDisabled(getOption(props.modelValue))),
+      ns.is("focus-visible", state.focusVisible)
+    ]);
+    const name = computed(() => {
+      return props.name || segmentedId.value;
+    });
+    useResizeObserver(segmentedRef, updateSelect);
+    watch(activeElement, updateSelect);
+    watch(() => props.modelValue, () => {
+      var _a2;
+      updateSelect();
+      if (props.validateEvent) {
+        (_a2 = formItem == null ? void 0 : formItem.validate) == null ? void 0 : _a2.call(formItem, "change").catch((err) => debugWarn(err));
+      }
+    }, {
+      flush: "post"
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        id: unref(inputId),
+        ref_key: "segmentedRef",
+        ref: segmentedRef,
+        class: normalizeClass(unref(segmentedCls)),
+        role: "radiogroup",
+        "aria-label": !unref(isLabeledByFormItem) ? _ctx.ariaLabel || "segmented" : void 0,
+        "aria-labelledby": unref(isLabeledByFormItem) ? unref(formItem).labelId : void 0
+      }, [
+        createBaseVNode("div", {
+          class: normalizeClass(unref(ns).e("group"))
+        }, [
+          createBaseVNode("div", {
+            style: normalizeStyle(unref(selectedStyle)),
+            class: normalizeClass(unref(selectedCls))
+          }, null, 6),
+          (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.options, (item, index) => {
+            return openBlock(), createElementBlock("label", {
+              key: index,
+              class: normalizeClass(getItemCls(item))
+            }, [
+              createBaseVNode("input", {
+                class: normalizeClass(unref(ns).e("item-input")),
+                type: "radio",
+                name: unref(name),
+                disabled: getDisabled(item),
+                checked: getSelected(item),
+                onChange: ($event) => handleChange(item)
+              }, null, 42, ["name", "disabled", "checked", "onChange"]),
+              createBaseVNode("div", {
+                class: normalizeClass(unref(ns).e("item-label"))
+              }, [
+                renderSlot(_ctx.$slots, "default", { item }, () => [
+                  createTextVNode(toDisplayString(getLabel(item)), 1)
+                ])
+              ], 2)
+            ], 2);
+          }), 128))
+        ], 2)
+      ], 10, ["id", "aria-label", "aria-labelledby"]);
+    };
+  }
+});
+var Segmented = _export_sfc(_sfc_main154, [["__file", "segmented.vue"]]);
+
+// node_modules/element-plus/es/components/segmented/index.mjs
+var ElSegmented = withInstall(Segmented);
+
+// node_modules/element-plus/es/components/mention/src/helper.mjs
+var filterOption = (pattern4, option) => {
+  const lowerCase2 = pattern4.toLowerCase();
+  const label = option.label || option.value;
+  return label.toLowerCase().includes(lowerCase2);
+};
+var getMentionCtx = (inputEl, prefix, split2) => {
+  const { selectionEnd } = inputEl;
+  if (selectionEnd === null)
+    return;
+  const inputValue = inputEl.value;
+  const prefixArray = castArray_default(prefix);
+  let splitIndex = -1;
+  let mentionCtx;
+  for (let i = selectionEnd - 1; i >= 0; --i) {
+    const char = inputValue[i];
+    if (char === split2 || char === "\n" || char === "\r") {
+      splitIndex = i;
+      continue;
+    }
+    if (prefixArray.includes(char)) {
+      const end2 = splitIndex === -1 ? selectionEnd : splitIndex;
+      const pattern4 = inputValue.slice(i + 1, end2);
+      mentionCtx = {
+        pattern: pattern4,
+        start: i + 1,
+        end: end2,
+        prefix: char,
+        prefixIndex: i,
+        splitIndex,
+        selectionEnd
+      };
+      break;
+    }
+  }
+  return mentionCtx;
+};
+var getCursorPosition = (element, options = {
+  debug: false,
+  useSelectionEnd: false
+}) => {
+  const selectionStart = element.selectionStart !== null ? element.selectionStart : 0;
+  const selectionEnd = element.selectionEnd !== null ? element.selectionEnd : 0;
+  const position = options.useSelectionEnd ? selectionEnd : selectionStart;
+  const properties = [
+    "direction",
+    "boxSizing",
+    "width",
+    "height",
+    "overflowX",
+    "overflowY",
+    "borderTopWidth",
+    "borderRightWidth",
+    "borderBottomWidth",
+    "borderLeftWidth",
+    "borderStyle",
+    "paddingTop",
+    "paddingRight",
+    "paddingBottom",
+    "paddingLeft",
+    "fontStyle",
+    "fontVariant",
+    "fontWeight",
+    "fontStretch",
+    "fontSize",
+    "fontSizeAdjust",
+    "lineHeight",
+    "fontFamily",
+    "textAlign",
+    "textTransform",
+    "textIndent",
+    "textDecoration",
+    "letterSpacing",
+    "wordSpacing",
+    "tabSize",
+    "MozTabSize"
+  ];
+  if (options.debug) {
+    const el = document.querySelector("#input-textarea-caret-position-mirror-div");
+    if (el == null ? void 0 : el.parentNode)
+      el.parentNode.removeChild(el);
+  }
+  const div = document.createElement("div");
+  div.id = "input-textarea-caret-position-mirror-div";
+  document.body.appendChild(div);
+  const style = div.style;
+  const computed2 = window.getComputedStyle(element);
+  const isInput = element.nodeName === "INPUT";
+  style.whiteSpace = isInput ? "nowrap" : "pre-wrap";
+  if (!isInput)
+    style.wordWrap = "break-word";
+  style.position = "absolute";
+  if (!options.debug)
+    style.visibility = "hidden";
+  properties.forEach((prop) => {
+    if (isInput && prop === "lineHeight") {
+      if (computed2.boxSizing === "border-box") {
+        const height = Number.parseInt(computed2.height);
+        const outerHeight = Number.parseInt(computed2.paddingTop) + Number.parseInt(computed2.paddingBottom) + Number.parseInt(computed2.borderTopWidth) + Number.parseInt(computed2.borderBottomWidth);
+        const targetHeight = outerHeight + Number.parseInt(computed2.lineHeight);
+        if (height > targetHeight) {
+          style.lineHeight = `${height - outerHeight}px`;
+        } else if (height === targetHeight) {
+          style.lineHeight = computed2.lineHeight;
+        } else {
+          style.lineHeight = "0";
+        }
+      } else {
+        style.lineHeight = computed2.height;
+      }
+    } else {
+      style[prop] = computed2[prop];
+    }
+  });
+  if (isFirefox()) {
+    if (element.scrollHeight > Number.parseInt(computed2.height)) {
+      style.overflowY = "scroll";
+    }
+  } else {
+    style.overflow = "hidden";
+  }
+  div.textContent = element.value.slice(0, Math.max(0, position));
+  if (isInput && div.textContent) {
+    div.textContent = div.textContent.replace(/\s/g, " ");
+  }
+  const span = document.createElement("span");
+  span.textContent = element.value.slice(Math.max(0, position)) || ".";
+  span.style.position = "relative";
+  span.style.left = `${-element.scrollLeft}px`;
+  span.style.top = `${-element.scrollTop}px`;
+  div.appendChild(span);
+  const relativePosition = {
+    top: span.offsetTop + Number.parseInt(computed2.borderTopWidth),
+    left: span.offsetLeft + Number.parseInt(computed2.borderLeftWidth),
+    height: Number.parseInt(computed2.fontSize) * 1.5
+  };
+  if (options.debug) {
+    span.style.backgroundColor = "#aaa";
+  } else {
+    document.body.removeChild(div);
+  }
+  if (relativePosition.left >= element.clientWidth) {
+    relativePosition.left = element.clientWidth;
+  }
+  return relativePosition;
+};
+
+// node_modules/element-plus/es/components/mention/src/mention.mjs
+var mentionProps = buildProps({
+  ...inputProps,
+  options: {
+    type: definePropType(Array),
+    default: () => []
+  },
+  prefix: {
+    type: definePropType([String, Array]),
+    default: "@",
+    validator: (val) => {
+      if (isString(val))
+        return val.length === 1;
+      return val.every((v2) => isString(v2) && v2.length === 1);
+    }
+  },
+  split: {
+    type: String,
+    default: " ",
+    validator: (val) => val.length === 1
+  },
+  filterOption: {
+    type: definePropType([Boolean, Function]),
+    default: () => filterOption,
+    validator: (val) => {
+      if (val === false)
+        return true;
+      return isFunction(val);
+    }
+  },
+  placement: {
+    type: definePropType(String),
+    default: "bottom"
+  },
+  showArrow: Boolean,
+  offset: {
+    type: Number,
+    default: 0
+  },
+  whole: Boolean,
+  checkIsWhole: {
+    type: definePropType(Function)
+  },
+  modelValue: String,
+  loading: Boolean,
+  popperClass: {
+    type: String,
+    default: ""
+  },
+  popperOptions: {
+    type: definePropType(Object),
+    default: () => ({})
+  }
+});
+var mentionEmits = {
+  [UPDATE_MODEL_EVENT]: (value) => isString(value),
+  search: (pattern4, prefix) => isString(pattern4) && isString(prefix),
+  select: (option, prefix) => isString(option.value) && isString(prefix),
+  focus: (evt) => evt instanceof FocusEvent,
+  blur: (evt) => evt instanceof FocusEvent
+};
+
+// node_modules/element-plus/es/components/mention/src/mention-dropdown.mjs
+var mentionDropdownProps = buildProps({
+  options: {
+    type: definePropType(Array),
+    default: () => []
+  },
+  loading: Boolean,
+  disabled: Boolean,
+  contentId: String,
+  ariaLabel: String
+});
+var mentionDropdownEmits = {
+  select: (option) => isString(option.value)
+};
+
+// node_modules/element-plus/es/components/mention/src/mention-dropdown2.mjs
+var __default__112 = defineComponent({
+  name: "ElMentionDropdown"
+});
+var _sfc_main155 = defineComponent({
+  ...__default__112,
+  props: mentionDropdownProps,
+  emits: mentionDropdownEmits,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const ns = useNamespace("mention");
+    const { t } = useLocale();
+    const hoveringIndex = ref(-1);
+    const scrollbarRef = ref();
+    const optionRefs = ref();
+    const dropdownRef = ref();
+    const optionkls = (item, index) => [
+      ns.be("dropdown", "item"),
+      ns.is("hovering", hoveringIndex.value === index),
+      ns.is("disabled", item.disabled || props.disabled)
+    ];
+    const handleSelect = (item) => {
+      if (item.disabled || props.disabled)
+        return;
+      emit("select", item);
+    };
+    const handleMouseEnter = (index) => {
+      hoveringIndex.value = index;
+    };
+    const filteredAllDisabled = computed(() => props.disabled || props.options.every((item) => item.disabled));
+    const hoverOption = computed(() => props.options[hoveringIndex.value]);
+    const selectHoverOption = () => {
+      if (!hoverOption.value)
+        return;
+      emit("select", hoverOption.value);
+    };
+    const navigateOptions = (direction2) => {
+      const { options } = props;
+      if (options.length === 0 || filteredAllDisabled.value)
+        return;
+      if (direction2 === "next") {
+        hoveringIndex.value++;
+        if (hoveringIndex.value === options.length) {
+          hoveringIndex.value = 0;
+        }
+      } else if (direction2 === "prev") {
+        hoveringIndex.value--;
+        if (hoveringIndex.value < 0) {
+          hoveringIndex.value = options.length - 1;
+        }
+      }
+      const option = options[hoveringIndex.value];
+      if (option.disabled) {
+        navigateOptions(direction2);
+        return;
+      }
+      nextTick(() => scrollToOption(option));
+    };
+    const scrollToOption = (option) => {
+      var _a2, _b, _c, _d;
+      const { options } = props;
+      const index = options.findIndex((item) => item.value === option.value);
+      const target2 = (_a2 = optionRefs.value) == null ? void 0 : _a2[index];
+      if (target2) {
+        const menu = (_c = (_b = dropdownRef.value) == null ? void 0 : _b.querySelector) == null ? void 0 : _c.call(_b, `.${ns.be("dropdown", "wrap")}`);
+        if (menu) {
+          scrollIntoView(menu, target2);
+        }
+      }
+      (_d = scrollbarRef.value) == null ? void 0 : _d.handleScroll();
+    };
+    const resetHoveringIndex = () => {
+      if (filteredAllDisabled.value || props.options.length === 0) {
+        hoveringIndex.value = -1;
+      } else {
+        hoveringIndex.value = 0;
+      }
+    };
+    watch(() => props.options, resetHoveringIndex, {
+      immediate: true
+    });
+    expose({
+      hoveringIndex,
+      navigateOptions,
+      selectHoverOption,
+      hoverOption
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        ref_key: "dropdownRef",
+        ref: dropdownRef,
+        class: normalizeClass(unref(ns).b("dropdown"))
+      }, [
+        _ctx.$slots.header ? (openBlock(), createElementBlock("div", {
+          key: 0,
+          class: normalizeClass(unref(ns).be("dropdown", "header"))
+        }, [
+          renderSlot(_ctx.$slots, "header")
+        ], 2)) : createCommentVNode("v-if", true),
+        withDirectives(createVNode(unref(ElScrollbar), {
+          id: _ctx.contentId,
+          ref_key: "scrollbarRef",
+          ref: scrollbarRef,
+          tag: "ul",
+          "wrap-class": unref(ns).be("dropdown", "wrap"),
+          "view-class": unref(ns).be("dropdown", "list"),
+          role: "listbox",
+          "aria-label": _ctx.ariaLabel,
+          "aria-orientation": "vertical"
+        }, {
+          default: withCtx(() => [
+            (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.options, (item, index) => {
+              return openBlock(), createElementBlock("li", {
+                id: `${_ctx.contentId}-${index}`,
+                ref_for: true,
+                ref_key: "optionRefs",
+                ref: optionRefs,
+                key: item.value,
+                class: normalizeClass(optionkls(item, index)),
+                role: "option",
+                "aria-disabled": item.disabled || _ctx.disabled || void 0,
+                "aria-selected": hoveringIndex.value === index,
+                onMouseenter: ($event) => handleMouseEnter(index),
+                onClick: withModifiers(($event) => handleSelect(item), ["stop"])
+              }, [
+                renderSlot(_ctx.$slots, "label", {
+                  item,
+                  index
+                }, () => {
+                  var _a2;
+                  return [
+                    createBaseVNode("span", null, toDisplayString((_a2 = item.label) != null ? _a2 : item.value), 1)
+                  ];
+                })
+              ], 42, ["id", "aria-disabled", "aria-selected", "onMouseenter", "onClick"]);
+            }), 128))
+          ]),
+          _: 3
+        }, 8, ["id", "wrap-class", "view-class", "aria-label"]), [
+          [vShow, _ctx.options.length > 0 && !_ctx.loading]
+        ]),
+        _ctx.loading ? (openBlock(), createElementBlock("div", {
+          key: 1,
+          class: normalizeClass(unref(ns).be("dropdown", "loading"))
+        }, [
+          renderSlot(_ctx.$slots, "loading", {}, () => [
+            createTextVNode(toDisplayString(unref(t)("el.mention.loading")), 1)
+          ])
+        ], 2)) : createCommentVNode("v-if", true),
+        _ctx.$slots.footer ? (openBlock(), createElementBlock("div", {
+          key: 2,
+          class: normalizeClass(unref(ns).be("dropdown", "footer"))
+        }, [
+          renderSlot(_ctx.$slots, "footer")
+        ], 2)) : createCommentVNode("v-if", true)
+      ], 2);
+    };
+  }
+});
+var ElMentionDropdown = _export_sfc(_sfc_main155, [["__file", "mention-dropdown.vue"]]);
+
+// node_modules/element-plus/es/components/mention/src/mention2.mjs
+var __default__113 = defineComponent({
+  name: "ElMention"
+});
+var _sfc_main156 = defineComponent({
+  ...__default__113,
+  props: mentionProps,
+  emits: mentionEmits,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const passInputProps = computed(() => pick_default(props, Object.keys(inputProps)));
+    const ns = useNamespace("mention");
+    const disabled = useFormDisabled();
+    const contentId = useId();
+    const elInputRef = ref();
+    const tooltipRef = ref();
+    const dropdownRef = ref();
+    const visible = ref(false);
+    const cursorStyle = ref();
+    const mentionCtx = ref();
+    const computedPlacement = computed(() => props.showArrow ? props.placement : `${props.placement}-start`);
+    const computedFallbackPlacements = computed(() => props.showArrow ? ["bottom", "top"] : ["bottom-start", "top-start"]);
+    const filteredOptions = computed(() => {
+      const { filterOption: filterOption2, options } = props;
+      if (!mentionCtx.value || !filterOption2)
+        return options;
+      return options.filter((option) => filterOption2(mentionCtx.value.pattern, option));
+    });
+    const dropdownVisible = computed(() => {
+      return visible.value && (!!filteredOptions.value.length || props.loading);
+    });
+    const hoveringId = computed(() => {
+      var _a2;
+      return `${contentId.value}-${(_a2 = dropdownRef.value) == null ? void 0 : _a2.hoveringIndex}`;
+    });
+    const handleInputChange = (value) => {
+      emit("update:modelValue", value);
+      syncAfterCursorMove();
+    };
+    const handleInputKeyDown = (e) => {
+      var _a2, _b, _c, _d;
+      if (!("key" in e))
+        return;
+      if ((_a2 = elInputRef.value) == null ? void 0 : _a2.isComposing)
+        return;
+      if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
+        syncAfterCursorMove();
+      } else if (["ArrowUp", "ArrowDown"].includes(e.key)) {
+        if (!visible.value)
+          return;
+        e.preventDefault();
+        const direction2 = e.key === "ArrowUp" ? "prev" : "next";
+        (_b = dropdownRef.value) == null ? void 0 : _b.navigateOptions(direction2);
+      } else if (["Enter"].includes(e.key)) {
+        if (!visible.value)
+          return;
+        e.preventDefault();
+        if ((_c = dropdownRef.value) == null ? void 0 : _c.hoverOption) {
+          (_d = dropdownRef.value) == null ? void 0 : _d.selectHoverOption();
+        } else {
+          visible.value = false;
+        }
+      } else if (["Escape"].includes(e.key)) {
+        if (!visible.value)
+          return;
+        e.preventDefault();
+        visible.value = false;
+      } else if (["Backspace"].includes(e.key)) {
+        if (props.whole && mentionCtx.value) {
+          const { splitIndex, selectionEnd, pattern: pattern4, prefixIndex, prefix } = mentionCtx.value;
+          const inputEl = getInputEl();
+          if (!inputEl)
+            return;
+          const inputValue = inputEl.value;
+          const matchOption = props.options.find((item) => item.value === pattern4);
+          const isWhole = isFunction(props.checkIsWhole) ? props.checkIsWhole(pattern4, prefix) : matchOption;
+          if (isWhole && splitIndex !== -1 && splitIndex + 1 === selectionEnd) {
+            e.preventDefault();
+            const newValue = inputValue.slice(0, prefixIndex) + inputValue.slice(splitIndex + 1);
+            emit(UPDATE_MODEL_EVENT, newValue);
+            const newSelectionEnd = prefixIndex;
+            nextTick(() => {
+              inputEl.selectionStart = newSelectionEnd;
+              inputEl.selectionEnd = newSelectionEnd;
+              syncDropdownVisible();
+            });
+          }
+        }
+      }
+    };
+    const { wrapperRef } = useFocusController(elInputRef, {
+      beforeFocus() {
+        return disabled.value;
+      },
+      afterFocus() {
+        syncAfterCursorMove();
+      },
+      beforeBlur(event) {
+        var _a2;
+        return (_a2 = tooltipRef.value) == null ? void 0 : _a2.isFocusInsideContent(event);
+      },
+      afterBlur() {
+        visible.value = false;
+      }
+    });
+    const handleInputMouseDown = () => {
+      syncAfterCursorMove();
+    };
+    const handleSelect = (item) => {
+      if (!mentionCtx.value)
+        return;
+      const inputEl = getInputEl();
+      if (!inputEl)
+        return;
+      const inputValue = inputEl.value;
+      const { split: split2 } = props;
+      const newEndPart = inputValue.slice(mentionCtx.value.end);
+      const alreadySeparated = newEndPart.startsWith(split2);
+      const newMiddlePart = `${item.value}${alreadySeparated ? "" : split2}`;
+      const newValue = inputValue.slice(0, mentionCtx.value.start) + newMiddlePart + newEndPart;
+      emit(UPDATE_MODEL_EVENT, newValue);
+      emit("select", item, mentionCtx.value.prefix);
+      const newSelectionEnd = mentionCtx.value.start + newMiddlePart.length + (alreadySeparated ? 1 : 0);
+      nextTick(() => {
+        inputEl.selectionStart = newSelectionEnd;
+        inputEl.selectionEnd = newSelectionEnd;
+        inputEl.focus();
+        syncDropdownVisible();
+      });
+    };
+    const getInputEl = () => {
+      var _a2, _b;
+      return props.type === "textarea" ? (_a2 = elInputRef.value) == null ? void 0 : _a2.textarea : (_b = elInputRef.value) == null ? void 0 : _b.input;
+    };
+    const syncAfterCursorMove = () => {
+      setTimeout(() => {
+        syncCursor();
+        syncDropdownVisible();
+        nextTick(() => {
+          var _a2;
+          return (_a2 = tooltipRef.value) == null ? void 0 : _a2.updatePopper();
+        });
+      }, 0);
+    };
+    const syncCursor = () => {
+      const inputEl = getInputEl();
+      if (!inputEl)
+        return;
+      const caretPosition = getCursorPosition(inputEl);
+      const inputRect = inputEl.getBoundingClientRect();
+      const elInputRect = elInputRef.value.$el.getBoundingClientRect();
+      cursorStyle.value = {
+        position: "absolute",
+        width: 0,
+        height: `${caretPosition.height}px`,
+        left: `${caretPosition.left + inputRect.left - elInputRect.left}px`,
+        top: `${caretPosition.top + inputRect.top - elInputRect.top}px`
+      };
+    };
+    const syncDropdownVisible = () => {
+      const inputEl = getInputEl();
+      if (document.activeElement !== inputEl) {
+        visible.value = false;
+        return;
+      }
+      const { prefix, split: split2 } = props;
+      mentionCtx.value = getMentionCtx(inputEl, prefix, split2);
+      if (mentionCtx.value && mentionCtx.value.splitIndex === -1) {
+        visible.value = true;
+        emit("search", mentionCtx.value.pattern, mentionCtx.value.prefix);
+        return;
+      }
+      visible.value = false;
+    };
+    expose({
+      input: elInputRef,
+      tooltip: tooltipRef
+    });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        ref_key: "wrapperRef",
+        ref: wrapperRef,
+        class: normalizeClass(unref(ns).b())
+      }, [
+        createVNode(unref(ElInput), mergeProps(mergeProps(unref(passInputProps), _ctx.$attrs), {
+          ref_key: "elInputRef",
+          ref: elInputRef,
+          "model-value": _ctx.modelValue,
+          disabled: unref(disabled),
+          role: unref(dropdownVisible) ? "combobox" : void 0,
+          "aria-activedescendant": unref(dropdownVisible) ? unref(hoveringId) || "" : void 0,
+          "aria-controls": unref(dropdownVisible) ? unref(contentId) : void 0,
+          "aria-expanded": unref(dropdownVisible) || void 0,
+          "aria-label": _ctx.ariaLabel,
+          "aria-autocomplete": unref(dropdownVisible) ? "none" : void 0,
+          "aria-haspopup": unref(dropdownVisible) ? "listbox" : void 0,
+          onInput: handleInputChange,
+          onKeydown: handleInputKeyDown,
+          onMousedown: handleInputMouseDown
+        }), createSlots({ _: 2 }, [
+          renderList(_ctx.$slots, (_2, name) => {
+            return {
+              name,
+              fn: withCtx((slotProps) => [
+                renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)))
+              ])
+            };
+          })
+        ]), 1040, ["model-value", "disabled", "role", "aria-activedescendant", "aria-controls", "aria-expanded", "aria-label", "aria-autocomplete", "aria-haspopup"]),
+        createVNode(unref(ElTooltip), {
+          ref_key: "tooltipRef",
+          ref: tooltipRef,
+          visible: unref(dropdownVisible),
+          "popper-class": [unref(ns).e("popper"), _ctx.popperClass],
+          "popper-options": _ctx.popperOptions,
+          placement: unref(computedPlacement),
+          "fallback-placements": unref(computedFallbackPlacements),
+          effect: "light",
+          pure: "",
+          offset: _ctx.offset,
+          "show-arrow": _ctx.showArrow
+        }, {
+          default: withCtx(() => [
+            createBaseVNode("div", {
+              style: normalizeStyle(cursorStyle.value)
+            }, null, 4)
+          ]),
+          content: withCtx(() => {
+            var _a2;
+            return [
+              createVNode(ElMentionDropdown, {
+                ref_key: "dropdownRef",
+                ref: dropdownRef,
+                options: unref(filteredOptions),
+                disabled: unref(disabled),
+                loading: _ctx.loading,
+                "content-id": unref(contentId),
+                "aria-label": _ctx.ariaLabel,
+                onSelect: handleSelect,
+                onClick: withModifiers((_a2 = elInputRef.value) == null ? void 0 : _a2.focus, ["stop"])
+              }, createSlots({ _: 2 }, [
+                renderList(_ctx.$slots, (_2, name) => {
+                  return {
+                    name,
+                    fn: withCtx((slotProps) => [
+                      renderSlot(_ctx.$slots, name, normalizeProps(guardReactiveProps(slotProps)))
+                    ])
+                  };
+                })
+              ]), 1032, ["options", "disabled", "loading", "content-id", "aria-label", "onClick"])
+            ];
+          }),
+          _: 3
+        }, 8, ["visible", "popper-class", "popper-options", "placement", "fallback-placements", "offset", "show-arrow"])
+      ], 2);
+    };
+  }
+});
+var Mention = _export_sfc(_sfc_main156, [["__file", "mention.vue"]]);
+
+// node_modules/element-plus/es/components/mention/index.mjs
+var ElMention = withInstall(Mention);
 
 // node_modules/element-plus/es/component.mjs
 var Components = [
@@ -58515,11 +60337,13 @@ var Components = [
   ElTour,
   ElTourStep,
   ElAnchor,
-  ElAnchorLink
+  ElAnchorLink,
+  ElSegmented,
+  ElMention
 ];
 
 // node_modules/element-plus/es/components/infinite-scroll/src/index.mjs
-var SCOPE9 = "ElInfiniteScroll";
+var SCOPE10 = "ElInfiniteScroll";
 var CHECK_INTERVAL = 50;
 var DEFAULT_DELAY = 200;
 var DEFAULT_DISTANCE = 0;
@@ -58554,18 +60378,18 @@ var getScrollOptions = (el, instance) => {
   }, {});
 };
 var destroyObserver = (el) => {
-  const { observer } = el[SCOPE9];
+  const { observer } = el[SCOPE10];
   if (observer) {
     observer.disconnect();
-    delete el[SCOPE9].observer;
+    delete el[SCOPE10].observer;
   }
 };
 var handleScroll = (el, cb) => {
-  const { container, containerEl, instance, observer, lastScrollTop } = el[SCOPE9];
+  const { container, containerEl, instance, observer, lastScrollTop } = el[SCOPE10];
   const { disabled, distance } = getScrollOptions(el, instance);
   const { clientHeight, scrollHeight, scrollTop } = containerEl;
   const delta = scrollTop - lastScrollTop;
-  el[SCOPE9].lastScrollTop = scrollTop;
+  el[SCOPE10].lastScrollTop = scrollTop;
   if (observer || disabled || delta < 0)
     return;
   let shouldTrigger = false;
@@ -58581,7 +60405,7 @@ var handleScroll = (el, cb) => {
   }
 };
 function checkFull(el, cb) {
-  const { containerEl, instance } = el[SCOPE9];
+  const { containerEl, instance } = el[SCOPE10];
   const { disabled } = getScrollOptions(el, instance);
   if (disabled || containerEl.clientHeight === 0)
     return;
@@ -58595,7 +60419,7 @@ var InfiniteScroll = {
   async mounted(el, binding) {
     const { instance, value: cb } = binding;
     if (!isFunction(cb)) {
-      throwError(SCOPE9, "'v-infinite-scroll' binding value must be a function");
+      throwError(SCOPE10, "'v-infinite-scroll' binding value must be a function");
     }
     await nextTick();
     const { delay: delay2, immediate } = getScrollOptions(el, instance);
@@ -58604,7 +60428,7 @@ var InfiniteScroll = {
     const onScroll = throttle_default(handleScroll.bind(null, el, cb), delay2);
     if (!container)
       return;
-    el[SCOPE9] = {
+    el[SCOPE10] = {
       instance,
       container,
       containerEl,
@@ -58615,22 +60439,24 @@ var InfiniteScroll = {
     };
     if (immediate) {
       const observer = new MutationObserver(throttle_default(checkFull.bind(null, el, cb), CHECK_INTERVAL));
-      el[SCOPE9].observer = observer;
+      el[SCOPE10].observer = observer;
       observer.observe(el, { childList: true, subtree: true });
       checkFull(el, cb);
     }
     container.addEventListener("scroll", onScroll);
   },
   unmounted(el) {
-    const { container, onScroll } = el[SCOPE9];
+    if (!el[SCOPE10])
+      return;
+    const { container, onScroll } = el[SCOPE10];
     container == null ? void 0 : container.removeEventListener("scroll", onScroll);
     destroyObserver(el);
   },
   async updated(el) {
-    if (!el[SCOPE9]) {
+    if (!el[SCOPE10]) {
       await nextTick();
     } else {
-      const { containerEl, cb, observer } = el[SCOPE9];
+      const { containerEl, cb, observer } = el[SCOPE10];
       if (containerEl.clientHeight && observer) {
         checkFull(el, cb);
       }
@@ -58685,7 +60511,7 @@ function createLoadingComponent(options) {
       return;
     afterLeaveFlag.value = true;
     clearTimeout(afterLeaveTimer);
-    afterLeaveTimer = window.setTimeout(handleAfterLeave, 400);
+    afterLeaveTimer = setTimeout(handleAfterLeave, 400);
     data.visible = false;
     (_a2 = options.closed) == null ? void 0 : _a2.call(options);
   }
@@ -58814,6 +60640,8 @@ var resolveOptions = (options) => {
     lock: (_c = options.lock) != null ? _c : false,
     customClass: options.customClass || "",
     visible: (_d = options.visible) != null ? _d : true,
+    beforeClose: options.beforeClose,
+    closed: options.closed,
     target: target2
   };
 };
@@ -58942,6 +60770,7 @@ var messageDefaults = mutable({
   onClose: void 0,
   showClose: false,
   type: "info",
+  plain: false,
   offset: 16,
   zIndex: 0,
   grouping: false,
@@ -58983,7 +60812,7 @@ var messageProps = buildProps({
   },
   onClose: {
     type: definePropType(Function),
-    required: false
+    default: messageDefaults.onClose
   },
   showClose: {
     type: Boolean,
@@ -58993,6 +60822,10 @@ var messageProps = buildProps({
     type: String,
     values: messageTypes,
     default: messageDefaults.type
+  },
+  plain: {
+    type: Boolean,
+    default: messageDefaults.plain
   },
   offset: {
     type: Number,
@@ -59038,13 +60871,11 @@ var getOffsetOrSpace = (id, offset2) => {
 };
 
 // node_modules/element-plus/es/components/message/src/message2.mjs
-var _hoisted_175 = ["id"];
-var _hoisted_245 = ["innerHTML"];
-var __default__110 = defineComponent({
+var __default__114 = defineComponent({
   name: "ElMessage"
 });
-var _sfc_main152 = defineComponent({
-  ...__default__110,
+var _sfc_main157 = defineComponent({
+  ...__default__114,
   props: messageProps,
   emits: messageEmits,
   setup(__props, { expose }) {
@@ -59056,16 +60887,16 @@ var _sfc_main152 = defineComponent({
     const visible = ref(false);
     const height = ref(0);
     let stopTimer = void 0;
-    const badgeType = computed2(() => props.type ? props.type === "error" ? "danger" : props.type : "info");
-    const typeClass = computed2(() => {
+    const badgeType = computed(() => props.type ? props.type === "error" ? "danger" : props.type : "info");
+    const typeClass = computed(() => {
       const type4 = props.type;
       return { [ns.bm("icon", type4)]: type4 && TypeComponentsMap[type4] };
     });
-    const iconComponent = computed2(() => props.icon || TypeComponentsMap[props.type] || "");
-    const lastOffset = computed2(() => getLastOffset(props.id));
-    const offset2 = computed2(() => getOffsetOrSpace(props.id, props.offset) + lastOffset.value);
-    const bottom = computed2(() => height.value + offset2.value);
-    const customStyle = computed2(() => ({
+    const iconComponent = computed(() => props.icon || TypeComponentsMap[props.type] || "");
+    const lastOffset = computed(() => getLastOffset(props.id));
+    const offset2 = computed(() => getOffsetOrSpace(props.id, props.offset) + lastOffset.value);
+    const bottom = computed(() => height.value + offset2.value);
+    const customStyle = computed(() => ({
       top: `${offset2.value}px`,
       zIndex: currentZIndex.value
     }));
@@ -59109,7 +60940,7 @@ var _sfc_main152 = defineComponent({
       return openBlock(), createBlock(Transition, {
         name: unref(ns).b("fade"),
         onBeforeLeave: _ctx.onClose,
-        onAfterLeave: _cache[0] || (_cache[0] = ($event) => _ctx.$emit("destroy")),
+        onAfterLeave: ($event) => _ctx.$emit("destroy"),
         persisted: ""
       }, {
         default: withCtx(() => [
@@ -59122,6 +60953,7 @@ var _sfc_main152 = defineComponent({
               { [unref(ns).m(_ctx.type)]: _ctx.type },
               unref(ns).is("center", _ctx.center),
               unref(ns).is("closable", _ctx.showClose),
+              unref(ns).is("plain", _ctx.plain),
               _ctx.customClass
             ]),
             style: normalizeStyle(unref(customStyle)),
@@ -59153,7 +60985,7 @@ var _sfc_main152 = defineComponent({
                 createBaseVNode("p", {
                   class: normalizeClass(unref(ns).e("content")),
                   innerHTML: _ctx.message
-                }, null, 10, _hoisted_245)
+                }, null, 10, ["innerHTML"])
               ], 2112))
             ]),
             _ctx.showClose ? (openBlock(), createBlock(unref(ElIcon), {
@@ -59166,16 +60998,16 @@ var _sfc_main152 = defineComponent({
               ]),
               _: 1
             }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
-          ], 46, _hoisted_175), [
+          ], 46, ["id"]), [
             [vShow, visible.value]
           ])
         ]),
         _: 3
-      }, 8, ["name", "onBeforeLeave"]);
+      }, 8, ["name", "onBeforeLeave", "onAfterLeave"]);
     };
   }
 });
-var MessageConstructor = _export_sfc(_sfc_main152, [["__file", "message.vue"]]);
+var MessageConstructor = _export_sfc(_sfc_main157, [["__file", "message.vue"]]);
 
 // node_modules/element-plus/es/components/message/src/method.mjs
 var seed = 1;
@@ -59194,6 +61026,18 @@ var normalizeOptions = (params) => {
       appendTo = document.body;
     }
     normalized.appendTo = appendTo;
+  }
+  if (isBoolean2(messageConfig.grouping) && !normalized.grouping) {
+    normalized.grouping = messageConfig.grouping;
+  }
+  if (isNumber3(messageConfig.duration) && normalized.duration === 3e3) {
+    normalized.duration = messageConfig.duration;
+  }
+  if (isNumber3(messageConfig.offset) && normalized.offset === 16) {
+    normalized.offset = messageConfig.offset;
+  }
+  if (isBoolean2(messageConfig.showClose) && !normalized.showClose) {
+    normalized.showClose = messageConfig.showClose;
   }
   return normalized;
 };
@@ -59244,9 +61088,6 @@ var createMessage = ({ appendTo, ...options }, context) => {
 var message = (options = {}, context) => {
   if (!isClient)
     return { close: () => void 0 };
-  if (isNumber3(messageConfig.max) && instances.length >= messageConfig.max) {
-    return { close: () => void 0 };
-  }
   const normalized = normalizeOptions(options);
   if (normalized.grouping && instances.length) {
     const instance2 = instances.find(({ vnode: vm }) => {
@@ -59258,6 +61099,9 @@ var message = (options = {}, context) => {
       instance2.props.type = normalized.type;
       return instance2.handler;
     }
+  }
+  if (isNumber3(messageConfig.max) && instances.length >= messageConfig.max) {
+    return { close: () => void 0 };
   }
   const instance = createMessage(normalized, context);
   instances.push(instance);
@@ -59283,7 +61127,7 @@ message._context = null;
 var ElMessage = withInstallFunction(message, "$message");
 
 // node_modules/element-plus/es/components/message-box/src/index.mjs
-var _sfc_main153 = defineComponent({
+var _sfc_main158 = defineComponent({
   name: "ElMessageBox",
   directives: {
     TrapFocus
@@ -59349,7 +61193,7 @@ var _sfc_main153 = defineComponent({
       zIndex: zIndex2,
       ns,
       size: btnSize
-    } = useGlobalComponentSettings("message-box", computed2(() => props.buttonSize));
+    } = useGlobalComponentSettings("message-box", computed(() => props.buttonSize));
     const { t } = locale;
     const { nextZIndex } = zIndex2;
     const visible = ref(false);
@@ -59383,25 +61227,27 @@ var _sfc_main153 = defineComponent({
       action: "",
       confirmButtonLoading: false,
       cancelButtonLoading: false,
+      confirmButtonLoadingIcon: markRaw(loading_default),
+      cancelButtonLoadingIcon: markRaw(loading_default),
       confirmButtonDisabled: false,
       editorErrorMessage: "",
       validateError: false,
       zIndex: nextZIndex()
     });
-    const typeClass = computed2(() => {
+    const typeClass = computed(() => {
       const type4 = state.type;
       return { [ns.bm("icon", type4)]: type4 && TypeComponentsMap[type4] };
     });
     const contentId = useId();
     const inputId = useId();
-    const iconComponent = computed2(() => state.icon || TypeComponentsMap[state.type] || "");
-    const hasMessage = computed2(() => !!state.message);
+    const iconComponent = computed(() => state.icon || TypeComponentsMap[state.type] || "");
+    const hasMessage = computed(() => !!state.message);
     const rootRef = ref();
     const headerRef = ref();
     const focusStartRef = ref();
     const inputRef = ref();
     const confirmRef = ref();
-    const confirmButtonClasses = computed2(() => state.confirmButtonClass);
+    const confirmButtonClasses = computed(() => state.confirmButtonClass);
     watch(() => state.inputValue, async (val) => {
       await nextTick();
       if (props.boxType === "prompt" && val !== null) {
@@ -59438,8 +61284,8 @@ var _sfc_main153 = defineComponent({
         state.validateError = false;
       }
     });
-    const draggable2 = computed2(() => props.draggable);
-    const overflow = computed2(() => props.overflow);
+    const draggable2 = computed(() => props.draggable);
+    const overflow = computed(() => props.overflow);
     useDraggable(rootRef, headerRef, draggable2, overflow);
     onMounted(async () => {
       await nextTick();
@@ -59554,9 +61400,6 @@ var _sfc_main153 = defineComponent({
     };
   }
 });
-var _hoisted_176 = ["aria-label", "aria-describedby"];
-var _hoisted_246 = ["aria-label"];
-var _hoisted_319 = ["id"];
 function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_icon = resolveComponent("el-icon");
   const _component_close = resolveComponent("close");
@@ -59566,7 +61409,7 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_el_overlay = resolveComponent("el-overlay");
   return openBlock(), createBlock(Transition, {
     name: "fade-in-linear",
-    onAfterLeave: _cache[11] || (_cache[11] = ($event) => _ctx.$emit("vanish")),
+    onAfterLeave: ($event) => _ctx.$emit("vanish"),
     persisted: ""
   }, {
     default: withCtx(() => [
@@ -59582,9 +61425,9 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
             "aria-modal": "true",
             "aria-describedby": !_ctx.showInput ? _ctx.contentId : void 0,
             class: normalizeClass(`${_ctx.ns.namespace.value}-overlay-message-box`),
-            onClick: _cache[8] || (_cache[8] = (...args) => _ctx.overlayEvent.onClick && _ctx.overlayEvent.onClick(...args)),
-            onMousedown: _cache[9] || (_cache[9] = (...args) => _ctx.overlayEvent.onMousedown && _ctx.overlayEvent.onMousedown(...args)),
-            onMouseup: _cache[10] || (_cache[10] = (...args) => _ctx.overlayEvent.onMouseup && _ctx.overlayEvent.onMouseup(...args))
+            onClick: _ctx.overlayEvent.onClick,
+            onMousedown: _ctx.overlayEvent.onMousedown,
+            onMouseup: _ctx.overlayEvent.onMouseup
           }, [
             createVNode(_component_el_focus_trap, {
               loop: "",
@@ -59604,8 +61447,8 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
                   ]),
                   style: normalizeStyle(_ctx.customStyle),
                   tabindex: "-1",
-                  onClick: _cache[7] || (_cache[7] = withModifiers(() => {
-                  }, ["stop"]))
+                  onClick: withModifiers(() => {
+                  }, ["stop"])
                 }, [
                   _ctx.title !== null && _ctx.title !== void 0 ? (openBlock(), createElementBlock("div", {
                     key: 0,
@@ -59631,8 +61474,8 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
                       type: "button",
                       class: normalizeClass(_ctx.ns.e("headerbtn")),
                       "aria-label": _ctx.t("el.messagebox.close"),
-                      onClick: _cache[0] || (_cache[0] = ($event) => _ctx.handleAction(_ctx.distinguishCancelAndClose ? "close" : "cancel")),
-                      onKeydown: _cache[1] || (_cache[1] = withKeys(withModifiers(($event) => _ctx.handleAction(_ctx.distinguishCancelAndClose ? "close" : "cancel"), ["prevent"]), ["enter"]))
+                      onClick: ($event) => _ctx.handleAction(_ctx.distinguishCancelAndClose ? "close" : "cancel"),
+                      onKeydown: withKeys(withModifiers(($event) => _ctx.handleAction(_ctx.distinguishCancelAndClose ? "close" : "cancel"), ["prevent"]), ["enter"])
                     }, [
                       createVNode(_component_el_icon, {
                         class: normalizeClass(_ctx.ns.e("close"))
@@ -59642,7 +61485,7 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
                         ]),
                         _: 1
                       }, 8, ["class"])
-                    ], 42, _hoisted_246)) : createCommentVNode("v-if", true)
+                    ], 42, ["aria-label", "onClick", "onKeydown"])) : createCommentVNode("v-if", true)
                   ], 2)) : createCommentVNode("v-if", true),
                   createBaseVNode("div", {
                     id: _ctx.contentId,
@@ -59688,13 +61531,13 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
                         id: _ctx.inputId,
                         ref: "inputRef",
                         modelValue: _ctx.inputValue,
-                        "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => _ctx.inputValue = $event),
+                        "onUpdate:modelValue": ($event) => _ctx.inputValue = $event,
                         type: _ctx.inputType,
                         placeholder: _ctx.inputPlaceholder,
                         "aria-invalid": _ctx.validateError,
                         class: normalizeClass({ invalid: _ctx.validateError }),
                         onKeydown: withKeys(_ctx.handleInputEnter, ["enter"])
-                      }, null, 8, ["id", "modelValue", "type", "placeholder", "aria-invalid", "class", "onKeydown"]),
+                      }, null, 8, ["id", "modelValue", "onUpdate:modelValue", "type", "placeholder", "aria-invalid", "class", "onKeydown"]),
                       createBaseVNode("div", {
                         class: normalizeClass(_ctx.ns.e("errormsg")),
                         style: normalizeStyle({
@@ -59704,48 +61547,50 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
                     ], 2), [
                       [vShow, _ctx.showInput]
                     ])
-                  ], 10, _hoisted_319),
+                  ], 10, ["id"]),
                   createBaseVNode("div", {
                     class: normalizeClass(_ctx.ns.e("btns"))
                   }, [
                     _ctx.showCancelButton ? (openBlock(), createBlock(_component_el_button, {
                       key: 0,
                       loading: _ctx.cancelButtonLoading,
+                      "loading-icon": _ctx.cancelButtonLoadingIcon,
                       class: normalizeClass([_ctx.cancelButtonClass]),
                       round: _ctx.roundButton,
                       size: _ctx.btnSize,
-                      onClick: _cache[3] || (_cache[3] = ($event) => _ctx.handleAction("cancel")),
-                      onKeydown: _cache[4] || (_cache[4] = withKeys(withModifiers(($event) => _ctx.handleAction("cancel"), ["prevent"]), ["enter"]))
+                      onClick: ($event) => _ctx.handleAction("cancel"),
+                      onKeydown: withKeys(withModifiers(($event) => _ctx.handleAction("cancel"), ["prevent"]), ["enter"])
                     }, {
                       default: withCtx(() => [
                         createTextVNode(toDisplayString(_ctx.cancelButtonText || _ctx.t("el.messagebox.cancel")), 1)
                       ]),
                       _: 1
-                    }, 8, ["loading", "class", "round", "size"])) : createCommentVNode("v-if", true),
+                    }, 8, ["loading", "loading-icon", "class", "round", "size", "onClick", "onKeydown"])) : createCommentVNode("v-if", true),
                     withDirectives(createVNode(_component_el_button, {
                       ref: "confirmRef",
                       type: "primary",
                       loading: _ctx.confirmButtonLoading,
+                      "loading-icon": _ctx.confirmButtonLoadingIcon,
                       class: normalizeClass([_ctx.confirmButtonClasses]),
                       round: _ctx.roundButton,
                       disabled: _ctx.confirmButtonDisabled,
                       size: _ctx.btnSize,
-                      onClick: _cache[5] || (_cache[5] = ($event) => _ctx.handleAction("confirm")),
-                      onKeydown: _cache[6] || (_cache[6] = withKeys(withModifiers(($event) => _ctx.handleAction("confirm"), ["prevent"]), ["enter"]))
+                      onClick: ($event) => _ctx.handleAction("confirm"),
+                      onKeydown: withKeys(withModifiers(($event) => _ctx.handleAction("confirm"), ["prevent"]), ["enter"])
                     }, {
                       default: withCtx(() => [
                         createTextVNode(toDisplayString(_ctx.confirmButtonText || _ctx.t("el.messagebox.confirm")), 1)
                       ]),
                       _: 1
-                    }, 8, ["loading", "class", "round", "disabled", "size"]), [
+                    }, 8, ["loading", "loading-icon", "class", "round", "disabled", "size", "onClick", "onKeydown"]), [
                       [vShow, _ctx.showConfirmButton]
                     ])
                   ], 2)
-                ], 6)
+                ], 14, ["onClick"])
               ]),
               _: 3
             }, 8, ["trapped", "focus-trap-el", "focus-start-el", "onReleaseRequested"])
-          ], 42, _hoisted_176)
+          ], 42, ["aria-label", "aria-describedby", "onClick", "onMousedown", "onMouseup"])
         ]),
         _: 3
       }, 8, ["z-index", "overlay-class", "mask"]), [
@@ -59753,9 +61598,9 @@ function _sfc_render31(_ctx, _cache, $props, $setup, $data, $options) {
       ])
     ]),
     _: 3
-  });
+  }, 8, ["onAfterLeave"]);
 }
-var MessageBoxConstructor = _export_sfc(_sfc_main153, [["render", _sfc_render31], ["__file", "index.vue"]]);
+var MessageBoxConstructor = _export_sfc(_sfc_main158, [["render", _sfc_render31], ["__file", "index.vue"]]);
 
 // node_modules/element-plus/es/components/message-box/src/messageBox.mjs
 var messageInstance = /* @__PURE__ */ new Map();
@@ -59909,10 +61754,7 @@ var notificationProps = buildProps({
     type: String,
     default: ""
   },
-  dangerouslyUseHTMLString: {
-    type: Boolean,
-    default: false
-  },
+  dangerouslyUseHTMLString: Boolean,
   duration: {
     type: Number,
     default: 4500
@@ -59965,15 +61807,11 @@ var notificationEmits = {
 };
 
 // node_modules/element-plus/es/components/notification/src/notification2.mjs
-var _hoisted_177 = ["id"];
-var _hoisted_247 = ["textContent"];
-var _hoisted_320 = { key: 0 };
-var _hoisted_412 = ["innerHTML"];
-var __default__111 = defineComponent({
+var __default__115 = defineComponent({
   name: "ElNotification"
 });
-var _sfc_main154 = defineComponent({
-  ...__default__111,
+var _sfc_main159 = defineComponent({
+  ...__default__115,
   props: notificationProps,
   emits: notificationEmits,
   setup(__props, { expose }) {
@@ -59983,18 +61821,18 @@ var _sfc_main154 = defineComponent({
     const { Close } = CloseComponents;
     const visible = ref(false);
     let timer = void 0;
-    const typeClass = computed2(() => {
+    const typeClass = computed(() => {
       const type4 = props.type;
       return type4 && TypeComponentsMap[props.type] ? ns.m(type4) : "";
     });
-    const iconComponent = computed2(() => {
+    const iconComponent = computed(() => {
       if (!props.type)
         return props.icon;
       return TypeComponentsMap[props.type] || props.icon;
     });
-    const horizontalClass = computed2(() => props.position.endsWith("right") ? "right" : "left");
-    const verticalProperty = computed2(() => props.position.startsWith("top") ? "top" : "bottom");
-    const positionStyle = computed2(() => {
+    const horizontalClass = computed(() => props.position.endsWith("right") ? "right" : "left");
+    const verticalProperty = computed(() => props.position.startsWith("top") ? "top" : "bottom");
+    const positionStyle = computed(() => {
       var _a2;
       return {
         [verticalProperty.value]: `${props.offset}px`,
@@ -60041,7 +61879,7 @@ var _sfc_main154 = defineComponent({
       return openBlock(), createBlock(Transition, {
         name: unref(ns).b("fade"),
         onBeforeLeave: _ctx.onClose,
-        onAfterLeave: _cache[1] || (_cache[1] = ($event) => _ctx.$emit("destroy")),
+        onAfterLeave: ($event) => _ctx.$emit("destroy"),
         persisted: ""
       }, {
         default: withCtx(() => [
@@ -60052,7 +61890,7 @@ var _sfc_main154 = defineComponent({
             role: "alert",
             onMouseenter: clearTimer,
             onMouseleave: startTimer,
-            onClick: _cache[0] || (_cache[0] = (...args) => _ctx.onClick && _ctx.onClick(...args))
+            onClick: _ctx.onClick
           }, [
             unref(iconComponent) ? (openBlock(), createBlock(unref(ElIcon), {
               key: 0,
@@ -60069,15 +61907,15 @@ var _sfc_main154 = defineComponent({
               createBaseVNode("h2", {
                 class: normalizeClass(unref(ns).e("title")),
                 textContent: toDisplayString(_ctx.title)
-              }, null, 10, _hoisted_247),
+              }, null, 10, ["textContent"]),
               withDirectives(createBaseVNode("div", {
                 class: normalizeClass(unref(ns).e("content")),
                 style: normalizeStyle(!!_ctx.title ? void 0 : { margin: 0 })
               }, [
                 renderSlot(_ctx.$slots, "default", {}, () => [
-                  !_ctx.dangerouslyUseHTMLString ? (openBlock(), createElementBlock("p", _hoisted_320, toDisplayString(_ctx.message), 1)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+                  !_ctx.dangerouslyUseHTMLString ? (openBlock(), createElementBlock("p", { key: 0 }, toDisplayString(_ctx.message), 1)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
                     createCommentVNode(" Caution here, message could've been compromised, never use user's input as message "),
-                    createBaseVNode("p", { innerHTML: _ctx.message }, null, 8, _hoisted_412)
+                    createBaseVNode("p", { innerHTML: _ctx.message }, null, 8, ["innerHTML"])
                   ], 2112))
                 ])
               ], 6), [
@@ -60094,16 +61932,16 @@ var _sfc_main154 = defineComponent({
                 _: 1
               }, 8, ["class", "onClick"])) : createCommentVNode("v-if", true)
             ], 2)
-          ], 46, _hoisted_177), [
+          ], 46, ["id", "onClick"]), [
             [vShow, visible.value]
           ])
         ]),
         _: 3
-      }, 8, ["name", "onBeforeLeave"]);
+      }, 8, ["name", "onBeforeLeave", "onAfterLeave"]);
     };
   }
 });
-var NotificationConstructor = _export_sfc(_sfc_main154, [["__file", "notification.vue"]]);
+var NotificationConstructor = _export_sfc(_sfc_main159, [["__file", "notification.vue"]]);
 
 // node_modules/element-plus/es/components/notification/src/notify.mjs
 var notifications = {
@@ -60230,20 +62068,23 @@ var Plugins = [
 var installer = makeInstaller([...Components, ...Plugins]);
 
 // node_modules/element-plus/es/index.mjs
-var import_dayjs17 = __toESM(require_dayjs_min(), 1);
+var import_dayjs18 = __toESM(require_dayjs_min(), 1);
 var install = installer.install;
 var version3 = installer.version;
-var export_dayjs = import_dayjs17.default;
+var export_dayjs = import_dayjs18.default;
 export {
   BAR_MAP,
+  CAROUSEL_ITEM_NAME,
   CASCADER_PANEL_INJECTION_KEY,
   CHANGE_EVENT,
   ClickOutside,
   CommonPicker,
   CommonProps,
+  DEFAULT_EMPTY_VALUES,
   DEFAULT_FORMATS_DATE,
   DEFAULT_FORMATS_DATEPICKER,
   DEFAULT_FORMATS_TIME,
+  DEFAULT_VALUE_ON_CLEAR,
   COLLECTION_INJECTION_KEY2 as DROPDOWN_COLLECTION_INJECTION_KEY,
   COLLECTION_ITEM_INJECTION_KEY2 as DROPDOWN_COLLECTION_ITEM_INJECTION_KEY,
   DROPDOWN_INJECTION_KEY,
@@ -60311,6 +62152,7 @@ export {
   vLoading as ElLoadingDirective,
   Loading as ElLoadingService,
   ElMain,
+  ElMention,
   ElMenu,
   ElMenuItem,
   ElMenuItemGroup,
@@ -60337,6 +62179,7 @@ export {
   ElResult,
   ElRow,
   ElScrollbar,
+  ElSegmented,
   ElSelect,
   ElSelectV2,
   ElSkeleton,
@@ -60388,6 +62231,7 @@ export {
   ROOT_PICKER_INJECTION_KEY,
   RowAlign,
   RowJustify,
+  SCOPE3 as SCOPE,
   SIZE_INJECTION_KEY,
   TOOLTIP_INJECTION_KEY,
   TableV2,
@@ -60407,6 +62251,7 @@ export {
   alertProps,
   anchorEmits,
   anchorProps,
+  ariaProps,
   arrowMiddleware,
   autoResizerProps,
   autocompleteEmits,
@@ -60465,6 +62310,7 @@ export {
   installer as default,
   defaultInitialZIndex,
   defaultNamespace,
+  descriptionItemProps,
   descriptionProps,
   dialogEmits,
   dialogInjectionKey,
@@ -60478,6 +62324,7 @@ export {
   elPaginationKey,
   emitChangeFn,
   emptyProps,
+  emptyValuesContextKey,
   extractDateFormat,
   extractTimeFormat,
   formContextKey,
@@ -60485,6 +62332,7 @@ export {
   formItemContextKey,
   formItemProps,
   formItemValidateStates,
+  formMetaProps,
   formProps,
   formatter,
   genFileId,
@@ -60504,6 +62352,8 @@ export {
   localeContextKey,
   makeInstaller,
   makeList,
+  mentionEmits,
+  mentionProps,
   menuEmits,
   menuItemEmits,
   menuItemGroupProps,
@@ -60555,6 +62405,8 @@ export {
   scrollbarContextKey,
   scrollbarEmits,
   scrollbarProps,
+  segmentedEmits,
+  segmentedProps,
   selectGroupKey,
   selectKey,
   selectV2InjectionKey,
@@ -60563,6 +62415,7 @@ export {
   sliderContextKey,
   sliderEmits,
   sliderProps,
+  spaceItemProps,
   spaceProps,
   statisticProps,
   stepProps,
@@ -60585,11 +62438,18 @@ export {
   textProps,
   thumbProps,
   timePickerDefaultProps,
+  timeSelectProps,
   timeUnits,
   timelineItemProps,
   tooltipEmits,
+  tourContentEmits,
+  tourContentProps,
   tourEmits,
+  tourPlacements,
   tourProps,
+  tourStepEmits,
+  tourStepProps,
+  tourStrategies,
   transferCheckedChangeFn,
   transferEmits,
   transferProps,
@@ -60603,8 +62463,10 @@ export {
   uploadListProps,
   uploadListTypes,
   uploadProps,
+  useAriaProps,
   useAttrs2 as useAttrs,
   useCascaderConfig,
+  useComposition,
   useCursor,
   useDelayedRender,
   useDelayedToggle,
@@ -60613,6 +62475,8 @@ export {
   useDialog,
   useDisabled,
   useDraggable,
+  useEmptyValues,
+  useEmptyValuesProps,
   useEscapeKeydown,
   useFloating,
   useFloatingProps,
